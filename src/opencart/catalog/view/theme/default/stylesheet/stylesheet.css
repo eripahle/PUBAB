@@ -691,7 +691,7 @@ h2.price {
 /* fixed colum left + content + right*/
 @media (min-width: 768px) {
     #column-left  .product-layout .col-md-3{
-       width: 100%;
+       width: 10%;//100%;
     }
     #column-left + #content .product-layout .col-md-3 {
        width: 50%;
