@@ -1,22 +1,22 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://localhost/Publisher/');
+define('HTTP_SERVER', 'http://localhost/pubapp/src/opencart/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://localhost/Publisher/');
+define('HTTPS_SERVER', 'http://localhost/pubapp/src/opencart/');
 
 // DIR
-define('DIR_APPLICATION', 'D:\program\xampp\htdocs\Publisher/catalog/');
-define('DIR_SYSTEM', 'D:\program\xampp\htdocs\Publisher/system/');
-define('DIR_LANGUAGE', 'D:\program\xampp\htdocs\Publisher/catalog/language/');
-define('DIR_TEMPLATE', 'D:\program\xampp\htdocs\Publisher/catalog/view/theme/');
-define('DIR_CONFIG', 'D:\program\xampp\htdocs\Publisher/system/config/');
-define('DIR_IMAGE', 'D:\program\xampp\htdocs\Publisher/image/');
-define('DIR_CACHE', 'D:\program\xampp\htdocs\Publisher/system/cache/');
-define('DIR_DOWNLOAD', 'D:\program\xampp\htdocs\Publisher/system/download/');
-define('DIR_UPLOAD', 'D:\program\xampp\htdocs\Publisher/system/upload/');
-define('DIR_MODIFICATION', 'D:\program\xampp\htdocs\Publisher/system/modification/');
-define('DIR_LOGS', 'D:\program\xampp\htdocs\Publisher/system/logs/');
+define('DIR_APPLICATION', 'C:\xampp\htdocs\pubapp\src\opencart/catalog/');
+define('DIR_SYSTEM', 'C:\xampp\htdocs\pubapp\src\opencart/system/');
+define('DIR_LANGUAGE', 'C:\xampp\htdocs\pubapp\src\opencart/catalog/language/');
+define('DIR_TEMPLATE', 'C:\xampp\htdocs\pubapp\src\opencart/catalog/view/theme/');
+define('DIR_CONFIG', 'C:\xampp\htdocs\pubapp\src\opencart/system/config/');
+define('DIR_IMAGE', 'C:\xampp\htdocs\pubapp\src\opencart/image/');
+define('DIR_CACHE', 'C:\xampp\htdocs\pubapp\src\opencart/system/cache/');
+define('DIR_DOWNLOAD', 'C:\xampp\htdocs\pubapp\src\opencart/system/download/');
+define('DIR_UPLOAD', 'C:\xampp\htdocs\pubapp\src\opencart/system/upload/');
+define('DIR_MODIFICATION', 'C:\xampp\htdocs\pubapp\src\opencart/system/modification/');
+define('DIR_LOGS', 'C:\xampp\htdocs\pubapp\src\opencart/system/logs/');
 
 // DB
 define('DB_DRIVER', 'mysqli');

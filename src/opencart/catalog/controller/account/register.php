@@ -86,7 +86,7 @@ class ControllerAccountRegister extends Controller {
 		$data['entry_newsletter'] = $this->language->get('entry_newsletter');
 		$data['entry_password'] = $this->language->get('entry_password');
 		$data['entry_confirm'] = $this->language->get('entry_confirm');
-
+		$data['entry_category']=$this->language->get('entry_category');
 		$data['button_continue'] = $this->language->get('button_continue');
 		$data['button_upload'] = $this->language->get('button_upload');
 
@@ -161,13 +161,21 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$data['error_password'] = '';
 		}
-
+		
+		if (isset($this->error['category'])) {
+			$data['error_category'] = $this->error['category'];
+		} else {
+			$data['error_category'] = '';
+		}
+		
 		if (isset($this->error['confirm'])) {
 			$data['error_confirm'] = $this->error['confirm'];
 		} else {
 			$data['error_confirm'] = '';
 		}
 
+		
+		
 		$data['action'] = $this->url->link('account/register', '', 'SSL');
 
 		$data['customer_groups'] = array();
@@ -260,6 +268,12 @@ class ControllerAccountRegister extends Controller {
 			$data['country_id'] = $this->config->get('config_country_id');
 		}
 
+		if (isset($this->request->post['category'])) {
+			$data['category'] = $this->request->post['category'];
+		} else {
+			$data['category'] = $this->config->get('config_category');
+		}
+		
 		if (isset($this->request->post['zone_id'])) {
 			$data['zone_id'] = $this->request->post['zone_id'];
 		} elseif (isset($this->session->data['shipping_address']['zone_id'])) {
@@ -272,6 +286,12 @@ class ControllerAccountRegister extends Controller {
 
 		$data['countries'] = $this->model_localisation_country->getCountries();
 
+		//sent category member to view
+		$this->load->model('account/customer_category');
+		$data['category']=$this->model_account_customer_category->getCustomerId();
+		
+		
+		
 		// Custom Fields
 		$this->load->model('account/custom_field');
 
@@ -391,6 +411,11 @@ class ControllerAccountRegister extends Controller {
 		if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
 			$this->error['zone'] = $this->language->get('error_zone');
 		}
+		
+		if (!isset($this->request->post['id_category']) || $this->request->post['id_category'] == '') {
+			$this->error['category'] = $this->language->get('error_category');
+		}
+		
 
 		// Customer Group
 		if (isset($this->request->post['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($this->request->post['customer_group_id'], $this->config->get('config_customer_group_display'))) {

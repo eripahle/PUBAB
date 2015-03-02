@@ -1,1 +1,73 @@
 2015-02-28 6:38:02 - PHP Notice:  Undefined variable: class in D:\program\xampp\htdocs\Publisher\catalog\view\theme\default\template\common\home.tpl on line 4
+2015-03-01 10:00:11 - PHP Notice:  Error: Could not load template C:\xampp\htdocs\pubapp\src\opencart/catalog/view/theme/Ultrashopdefault/template/common/column_left.tpl! in C:\xampp\htdocs\PUBAPP\src\opencart\system\modification\system\engine\loader.php on line 45
+2015-03-01 10:00:31 - PHP Notice:  Error: Could not load template C:\xampp\htdocs\pubapp\src\opencart/catalog/view/theme/Ultrashop/default/template/common/column_left.tpl! in C:\xampp\htdocs\PUBAPP\src\opencart\system\modification\system\engine\loader.php on line 45
+2015-03-01 10:02:28 - PHP Notice:  Error: Could not load template C:\xampp\htdocs\pubapp\src\opencart/catalog/view/theme/default/template/common/search.tpl! in C:\xampp\htdocs\PUBAPP\src\opencart\system\modification\system\engine\loader.php on line 45
+2015-03-01 13:06:54 - PHP Notice:  Undefined variable: entry_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 77
+2015-03-01 13:06:54 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 13:06:54 - PHP Notice:  Undefined variable: country in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 85
+2015-03-01 13:06:54 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 13:06:54 - PHP Notice:  Undefined variable: country in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 85
+2015-03-01 13:06:54 - PHP Notice:  Undefined variable: error_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 89
+2015-03-01 13:10:02 - PHP Notice:  Undefined variable: entry_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 77
+2015-03-01 13:10:02 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 13:10:02 - PHP Notice:  Undefined variable: country in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 85
+2015-03-01 13:10:02 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 13:10:02 - PHP Notice:  Undefined variable: country in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 85
+2015-03-01 13:11:53 - PHP Notice:  Undefined variable: entry_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 77
+2015-03-01 13:11:53 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 13:11:53 - PHP Notice:  Undefined variable: country in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 85
+2015-03-01 13:11:53 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 13:11:53 - PHP Notice:  Undefined variable: country in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 85
+2015-03-01 13:15:19 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 13:15:19 - PHP Notice:  Undefined variable: country in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 85
+2015-03-01 13:15:19 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 13:15:19 - PHP Notice:  Undefined variable: country in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 85
+2015-03-01 13:17:06 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 13:17:06 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:13:35 - PHP Warning:  Invalid argument supplied for foreach() in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 81
+2015-03-01 14:14:48 - PHP Warning:  Invalid argument supplied for foreach() in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 81
+2015-03-01 14:15:26 - PHP Warning:  Invalid argument supplied for foreach() in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 81
+2015-03-01 14:16:30 - PHP Warning:  Invalid argument supplied for foreach() in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 81
+2015-03-01 14:16:55 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:16:55 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:19:54 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:19:54 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:20:46 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:20:46 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:21:10 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:21:10 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:22:25 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:22:25 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:22:30 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:22:30 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:22:33 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:22:33 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:22:42 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:22:42 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:29:18 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:29:18 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:29:59 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:29:59 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:31:30 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:31:30 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:31:50 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:31:50 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:31:53 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:31:53 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:36:35 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:36:35 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:38:34 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:38:34 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:40:54 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:40:54 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:41:01 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:41:01 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:42:48 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:42:48 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:42:53 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:42:53 - PHP Notice:  Undefined variable: id_category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 82
+2015-03-01 14:50:22 - PHP Notice:  Undefined index: category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\account\register.php on line 415
+2015-03-01 14:50:30 - PHP Notice:  Undefined index: category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\account\register.php on line 415
+2015-03-01 14:50:39 - PHP Notice:  Undefined index: category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\account\register.php on line 415
+2015-03-01 14:50:45 - PHP Notice:  Undefined index: category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\account\register.php on line 415
+2015-03-01 14:50:52 - PHP Notice:  Undefined index: category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\account\register.php on line 415

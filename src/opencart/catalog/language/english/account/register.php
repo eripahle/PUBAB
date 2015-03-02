@@ -29,6 +29,7 @@ $_['entry_zone']           = 'Region / State';
 $_['entry_newsletter']     = 'Subscribe';
 $_['entry_password']       = 'Password';
 $_['entry_confirm']        = 'Password Confirm';
+$_['entry_category']       = 'Category';
 
 // Error
 $_['error_exists']         = 'Warning: E-Mail Address is already registered!';
@@ -40,6 +41,7 @@ $_['error_address_1']      = 'Address 1 must be between 3 and 128 characters!';
 $_['error_city']           = 'City must be between 2 and 128 characters!';
 $_['error_postcode']       = 'Postcode must be between 2 and 10 characters!';
 $_['error_country']        = 'Please select a country!';
+$_['error_category']       = 'Please select a category!';
 $_['error_zone']           = 'Please select a region / state!';
 $_['error_custom_field']   = '%s required!';
 $_['error_password']       = 'Password must be between 4 and 20 characters!';
