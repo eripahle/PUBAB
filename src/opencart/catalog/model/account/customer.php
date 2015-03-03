@@ -47,7 +47,7 @@ class ModelAccountCustomer extends Model {
 		$mail->setSubject($subject);
 		$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 		$mail->send();
-
+		//cara kirim email
 		// Send to main admin email if new account email is enabled
 		if ($this->config->get('config_account_mail')) {
 			$message  = $this->language->get('text_signup') . "\n\n";

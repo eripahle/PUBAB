@@ -71,8 +71,8 @@
             </div>
           </div>
 		  
-		  <!-- Code untuk Jenis Member -->
-		  
+		  <!-- Code untuk Jenis Member 
+		  -->
 		  <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-category"><?php echo $entry_category; ?></label>
             <div class="col-sm-10">

@@ -71,3 +71,15 @@
 2015-03-01 14:50:39 - PHP Notice:  Undefined index: category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\account\register.php on line 415
 2015-03-01 14:50:45 - PHP Notice:  Undefined index: category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\account\register.php on line 415
 2015-03-01 14:50:52 - PHP Notice:  Undefined index: category in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\account\register.php on line 415
+2015-03-02 15:15:28 - PHP Notice:  Error: Table 'opencart.oc_customer_category' doesn't exist<br />Error No: 1146<br />SELECT id_category,name_category FROM oc_customer_category WHERE status='1' in C:\xampp\htdocs\PUBAPP\src\opencart\system\library\db\mysqli.php on line 40
+2015-03-02 15:15:28 - PHP Notice:  Trying to get property of non-object in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\model\account\customer_category.php on line 6
+2015-03-02 15:15:29 - PHP Warning:  Invalid argument supplied for foreach() in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\account\register.tpl on line 81
+2015-03-03 10:37:37 - PHP Notice:  Undefined property: Loader::$customer in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\header.tpl on line 96
+2015-03-03 10:39:39 - PHP Notice:  Undefined variable: status_login in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\header.tpl on line 96
+2015-03-03 10:41:09 - PHP Notice:  Undefined variable: status_login in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\header.tpl on line 96
+2015-03-03 10:43:06 - PHP Notice:  Undefined variable: status_login in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\header.tpl on line 96
+2015-03-03 10:43:24 - PHP Notice:  Undefined variable: status_login in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\header.tpl on line 96
+2015-03-03 10:45:41 - PHP Notice:  Undefined property: Loader::$customer in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\header.tpl on line 96
+2015-03-03 10:47:35 - PHP Notice:  Undefined property: Loader::$customer in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\header.tpl on line 96
+2015-03-03 10:53:22 - PHP Notice:  Undefined index: status_login in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\header.tpl on line 96
+2015-03-03 10:54:48 - PHP Notice:  Undefined variable: text_requestDesign in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\header.tpl on line 97
