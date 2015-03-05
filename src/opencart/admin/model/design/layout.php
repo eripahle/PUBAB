@@ -1,121 +1,129 @@
 <?php
+
 class ModelDesignLayout extends Model {
-	public function addLayout($data) {
-		$this->event->trigger('pre.admin.layout.add', $data);
 
-		$this->db->query("INSERT INTO " . DB_PREFIX . "layout SET name = '" . $this->db->escape($data['name']) . "'");
+    public function addLayout($data) {
+        $this->event->trigger('pre.admin.layout.add', $data);
 
-		$layout_id = $this->db->getLastId();
+        $this->db->query("INSERT INTO " . DB_PREFIX . "layout SET name = '" . $this->db->escape($data['name']) . "'");
 
-		if (isset($data['layout_route'])) {
-			foreach ($data['layout_route'] as $layout_route) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int)$layout_id . "', store_id = '" . (int)$layout_route['store_id'] . "', route = '" . $this->db->escape($layout_route['route']) . "'");
-			}
-		}
-		
-		if (isset($data['layout_module'])) {
-			foreach ($data['layout_module'] as $layout_module) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_module SET layout_id = '" . (int)$layout_id . "', code = '" . $this->db->escape($layout_module['code']) . "', position = '" . $this->db->escape($layout_module['position']) . "', sort_order = '" . (int)$layout_module['sort_order'] . "'");
-			}
-		}
-		
-		$this->event->trigger('post.admin.layout.add', $layout_id);
+        $layout_id = $this->db->getLastId();
 
-		return $layout_id;
-	}
+        if (isset($data['layout_route'])) {
+            foreach ($data['layout_route'] as $layout_route) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int) $layout_id . "', store_id = '" . (int) $layout_route['store_id'] . "', route = '" . $this->db->escape($layout_route['route']) . "'");
+            }
+        }
 
-	public function editLayout($layout_id, $data) {
-		$this->event->trigger('pre.admin.layout.edit', $data);
+        if (isset($data['layout_module'])) {
+            foreach ($data['layout_module'] as $layout_module) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "layout_module SET layout_id = '" . (int) $layout_id . "', code = '" . $this->db->escape($layout_module['code']) . "', position = '" . $this->db->escape($layout_module['position']) . "', sort_order = '" . (int) $layout_module['sort_order'] . "'");
+            }
+        }
 
-		$this->db->query("UPDATE " . DB_PREFIX . "layout SET name = '" . $this->db->escape($data['name']) . "' WHERE layout_id = '" . (int)$layout_id . "'");
+        $this->event->trigger('post.admin.layout.add', $layout_id);
 
-		$this->db->query("DELETE FROM " . DB_PREFIX . "layout_route WHERE layout_id = '" . (int)$layout_id . "'");
+        return $layout_id;
+    }
 
-		if (isset($data['layout_route'])) {
-			foreach ($data['layout_route'] as $layout_route) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int)$layout_id . "', store_id = '" . (int)$layout_route['store_id'] . "', route = '" . $this->db->escape($layout_route['route']) . "'");
-			}
-		}
-		
-		$this->db->query("DELETE FROM " . DB_PREFIX . "layout_module WHERE layout_id = '" . (int)$layout_id . "'");
-		
-		if (isset($data['layout_module'])) {
-			foreach ($data['layout_module'] as $layout_module) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "layout_module SET layout_id = '" . (int)$layout_id . "', code = '" . $this->db->escape($layout_module['code']) . "', position = '" . $this->db->escape($layout_module['position']) . "', sort_order = '" . (int)$layout_module['sort_order'] . "'");
-			}
-		}
-		
-		$this->event->trigger('post.admin.layout.edit', $layout_id);
-	}
+    public function editLayout($layout_id, $data) {
+        $this->event->trigger('pre.admin.layout.edit', $data);
 
-	public function deleteLayout($layout_id) {
-		$this->event->trigger('pre.admin.layout.delete', $layout_id);
+        $this->db->query("UPDATE " . DB_PREFIX . "layout SET name = '" . $this->db->escape($data['name']) . "' WHERE layout_id = '" . (int) $layout_id . "'");
 
-		$this->db->query("DELETE FROM " . DB_PREFIX . "layout WHERE layout_id = '" . (int)$layout_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "layout_route WHERE layout_id = '" . (int)$layout_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "layout_module WHERE layout_id = '" . (int)$layout_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "category_to_layout WHERE layout_id = '" . (int)$layout_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_layout WHERE layout_id = '" . (int)$layout_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "information_to_layout WHERE layout_id = '" . (int)$layout_id . "'");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "layout_route WHERE layout_id = '" . (int) $layout_id . "'");
 
-		$this->event->trigger('post.admin.layout.delete', $layout_id);
-	}
+        if (isset($data['layout_route'])) {
+            foreach ($data['layout_route'] as $layout_route) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "layout_route SET layout_id = '" . (int) $layout_id . "', store_id = '" . (int) $layout_route['store_id'] . "', route = '" . $this->db->escape($layout_route['route']) . "'");
+            }
+        }
 
-	public function getLayout($layout_id) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "layout WHERE layout_id = '" . (int)$layout_id . "'");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "layout_module WHERE layout_id = '" . (int) $layout_id . "'");
 
-		return $query->row;
-	}
+        if (isset($data['layout_module'])) {
+            foreach ($data['layout_module'] as $layout_module) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "layout_module SET layout_id = '" . (int) $layout_id . "', code = '" . $this->db->escape($layout_module['code']) . "', position = '" . $this->db->escape($layout_module['position']) . "', sort_order = '" . (int) $layout_module['sort_order'] . "'");
+            }
+        }
 
-	public function getLayouts($data = array()) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "layout";
+        $this->event->trigger('post.admin.layout.edit', $layout_id);
+    }
 
-		$sort_data = array('name');
+    public function deleteLayout($layout_id) {
+        $this->event->trigger('pre.admin.layout.delete', $layout_id);
 
-		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
-			$sql .= " ORDER BY " . $data['sort'];
-		} else {
-			$sql .= " ORDER BY name";
-		}
+        $this->db->query("DELETE FROM " . DB_PREFIX . "layout WHERE layout_id = '" . (int) $layout_id . "'");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "layout_route WHERE layout_id = '" . (int) $layout_id . "'");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "layout_module WHERE layout_id = '" . (int) $layout_id . "'");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "category_to_layout WHERE layout_id = '" . (int) $layout_id . "'");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "product_to_layout WHERE layout_id = '" . (int) $layout_id . "'");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "information_to_layout WHERE layout_id = '" . (int) $layout_id . "'");
 
-		if (isset($data['order']) && ($data['order'] == 'DESC')) {
-			$sql .= " DESC";
-		} else {
-			$sql .= " ASC";
-		}
+        $this->event->trigger('post.admin.layout.delete', $layout_id);
+    }
 
-		if (isset($data['start']) || isset($data['limit'])) {
-			if ($data['start'] < 0) {
-				$data['start'] = 0;
-			}
+    public function getLayout($layout_id) {
+        $query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "layout WHERE layout_id = '" . (int) $layout_id . "'");
 
-			if ($data['limit'] < 1) {
-				$data['limit'] = 20;
-			}
+        return $query->row;
+    }
 
-			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
-		}
+    public function getLayouts($data = array()) {
+        $sql = "SELECT * FROM " . DB_PREFIX . "layout";
 
-		$query = $this->db->query($sql);
+        $sort_data = array('name');
 
-		return $query->rows;
-	}
+        if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+            $sql .= " ORDER BY " . $data['sort'];
+        } else {
+            $sql .= " ORDER BY name";
+        }
 
-	public function getLayoutRoutes($layout_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "layout_route WHERE layout_id = '" . (int)$layout_id . "'");
+        if (isset($data['order']) && ($data['order'] == 'DESC')) {
+            $sql .= " DESC";
+        } else {
+            $sql .= " ASC";
+        }
 
-		return $query->rows;
-	}
-	
-	public function getLayoutModules($layout_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "layout_module WHERE layout_id = '" . (int)$layout_id . "'");
+        if (isset($data['start']) || isset($data['limit'])) {
+            if ($data['start'] < 0) {
+                $data['start'] = 0;
+            }
 
-		return $query->rows;
-	}
-	
-	public function getTotalLayouts() {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "layout");
+            if ($data['limit'] < 1) {
+                $data['limit'] = 20;
+            }
 
-		return $query->row['total'];
-	}
+            $sql .= " LIMIT " . (int) $data['start'] . "," . (int) $data['limit'];
+        }
+
+        $query = $this->db->query($sql);
+
+        return $query->rows;
+    }
+
+    public function getLayoutRoutes($layout_id) {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "layout_route WHERE layout_id = '" . (int) $layout_id . "'");
+
+        return $query->rows;
+    }
+
+    public function getLayoutModules($layout_id) {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "layout_module WHERE layout_id = '" . (int) $layout_id . "'");
+
+        return $query->rows;
+    }
+
+    public function getTotalLayouts() {
+        $query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "layout");
+
+        return $query->row['total'];
+    }
+
+    public function addModuleToLayout($code, $layout_id, $data = array()) {
+        $layout_id = (int) $layout_id;
+        $this->db->query("INSERT INTO " . DB_PREFIX . "layout_module SET layout_id = '" . (int) $layout_id . "', code = '" . $this->db->escape($code) . "', position = '" . $this->db->escape($data['position']) . "', sort_order = '" . (int) $data['sort_order'] . "'");
+    }
+
 }

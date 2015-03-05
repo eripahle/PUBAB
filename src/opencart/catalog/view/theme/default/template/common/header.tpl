@@ -85,7 +85,13 @@
     </div>
   </div>
 </header>
-<?php if ($categories) { ?>
+<?php if(isset($zmenu) && $zmenu) { ?>
+            <?php if($is_oc2) { ?>
+              <div class="container"><?php echo $zmenu; ?></div>
+            <?php } else { ?>
+                <?php echo $zmenu; ?>
+              <?php } ?>
+          <?php } else if ($categories) { ?>
 <div class="container">
   <nav id="menu" class="navbar">
     <div class="navbar-header"><span id="category" class="visible-xs"><?php echo $text_category; ?></span>

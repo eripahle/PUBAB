@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>ZMENU</id>
+	<version>1</version>
+	<vqmver>0.0.1</vqmver>
+	<author>zebratratata@gmail.com</author>
+
+	<file path="catalog/controller/common/" name="content_top.php,column_left.php,content_bottom.php,column_right.php">
+		<operation error="skip">
+			<search position="replace"><![CDATA[$module['layout_id'] == $layout_id]]></search>
+			<add><![CDATA[($module['layout_id'] == $layout_id || $module['layout_id'] == 'zmenu_all_layout')]]></add>
+		</operation>
+	</file>
+
+	<file path="catalog/controller/common/" name="header.php">
+		<operation error="skip">
+			<search position="before" regex="true"><![CDATA[#(protected|public)\s*function\s*index#]]></search>
+			<add><![CDATA[
+			    private function getZMenu() {
+					$this->load->model('catalog/zmenu');
+					$module_data = $this->model_catalog_zmenu->getMainMenuModule();
+					if ($module_data) {
+						if($this->is_oc2) {
+							return $this->load->controller('module/zmenu', $module_data);
+						}
+						return $this->getChild('module/zmenu', $module_data);
+					}
+					return '';
+				}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="after" regex="true"><![CDATA[#(protected|public)\s*function\s*index#]]></search>
+			<add><![CDATA[
+				 $this->is_oc2 = VERSION >= 2;
+				if ($this->is_oc2) {
+					$data['zmenu'] = $this->getZMenu();
+					$data['is_oc2'] = $this->is_oc2;
+				} else {
+					$this->data['zmenu'] = $this->getZMenu();
+					$this->data['is_oc2'] = $this->is_oc2;
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<file path="catalog/view/theme/*/template/common/" name="header.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[<?php if ($categories)]]></search>
+			<add><![CDATA[
+			   <?php if(isset($zmenu) && $zmenu) { ?>
+			   		<?php if($is_oc2) { ?>
+			   			<div class="container"><?php echo $zmenu; ?></div>
+			   		<?php } else { ?>
+			       		<?php echo $zmenu; ?>
+			       	<?php } ?>
+			    <?php } else if ($categories)
+			]]></add>
+		</operation>
+	</file>
+
+	<file path="admin/controller/catalog/" name="category.php">
+		<operation>
+			<search position="before" ><![CDATA[public function autocomplete]]></search>
+			<add><![CDATA[
+				public function zmenu_autocomplete() {
+					 $furl = new Url("/", "/");
+					$json = array();
+
+					if (isset($this->request->get['filter_name'])) {
+						$this->load->model('catalog/category');
+
+						$limit = 20;
+
+						$filter_data = array(
+							'filter_name' => $this->request->get['filter_name'],
+							'start'       => 0,
+							'limit'       => 15
+						);
+
+						$results = $this->model_catalog_category->getCategories($filter_data);
+
+						foreach ($results as $result) {
+							$titles = $this->model_catalog_category->getCategoryDescriptions($result['category_id']);
+
+
+							$json[] = array(
+								'category_id' => $result['category_id'],
+								'name' => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8')),
+								'titles' => $titles,
+								'href' => $furl->link('product/category', 'path=' . $result['category_id'], 'SSL')
+							);
+						}
+					}
+
+					$this->response->setOutput(json_encode($json));
+				}
+				]]>
+			</add>
+		</operation>
+	</file>
+
+	<file path="admin/controller/catalog/" name="product.php">
+		<operation>
+			<search position="before" ><![CDATA[public function autocomplete]]></search>
+			<add><![CDATA[
+			public function zmenu_autocomplete() {
+				$furl = new Url("/", "/");
+				$json = array();
+
+				if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_model'])) {
+					$this->load->model('catalog/product');
+
+					if (isset($this->request->get['filter_name'])) {
+						$filter_name = $this->request->get['filter_name'];
+					} else {
+						$filter_name = '';
+					}
+
+					if (isset($this->request->get['filter_model'])) {
+						$filter_model = $this->request->get['filter_model'];
+					} else {
+						$filter_model = '';
+					}
+
+					if (isset($this->request->get['limit'])) {
+						$limit = $this->request->get['limit'];
+					} else {
+						$limit = 20;
+					}
+
+					$data = array(
+						'filter_name' => $filter_name,
+						'filter_model' => $filter_model,
+						'start' => 0,
+						'limit' => $limit
+					);
+
+					$results = $this->model_catalog_product->getProducts($data);
+
+					foreach ($results as $result) {
+						$titles = $this->model_catalog_product->getProductDescriptions($result['product_id']);
+
+
+						$json[] = array(
+							'product_id' => $result['product_id'],
+							'name' => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8')),
+							'model' => $result['model'],
+							'price' => $result['price'],
+							'titles' => $titles,
+							'href' => $furl->link('product/product', 'path=' . $result['product_id'], 'SSL')
+						);
+					}
+				}
+
+				$this->response->setOutput(json_encode($json));
+			}
+			]]></add>
+		</operation>
+	</file>
+
+	<!--- OC VERSION 2++++ -->
+	<file path="admin/model/design/" name="layout.php">
+		<operation error="skip">
+			<search position="before" ><![CDATA[public function deleteLayout]]></search>
+			<add><![CDATA[
+				public function addModuleToLayout($code, $layout_id, $data = array()) {
+					$layout_id = (int) $layout_id;
+					$this->db->query("INSERT INTO " . DB_PREFIX . "layout_module SET layout_id = '" . (int)$layout_id . "', code = '" . $this->db->escape($code) . "', position = '" . $this->db->escape($data['position']) . "', sort_order = '" . (int)$data['sort_order'] . "'");
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<file path="catalog/controller/common/" name="content_top.php,column_left.php,content_bottom.php,column_right.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[$modules = $this->model_design_layout->getLayoutModules($layout_id]]></search>
+			<add><![CDATA[
+					$zmodules = $this->config->get('zmenu_module');
+
+					if ($zmodules) {
+						$module_position = basename(__FILE__, '.php');
+						$arr = explode("controller_common_", $module_position); // if filename like vq2-catalog_controller_common_column_right
+						if(isset($arr[1])) {
+							$module_position = $arr[1];
+						}
+						foreach ($zmodules as $module) {
+							if ($module['layout_id'] == 'zmenu_all_layout' && $module['position'] == $module_position && $module['status']) {
+								$data['modules'][] = $this->load->controller('module/zmenu', $module);
+							}
+						}
+					}
+			]]></add>
+		</operation>
+	</file>
+
+
+
+
+
+</modification>

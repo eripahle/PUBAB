@@ -41,6 +41,21 @@ class ControllerCommonContentTop extends Controller {
 		
 		$data['modules'] = array();		
 		
+		$zmodules = $this->config->get('zmenu_module');
+
+			if ($zmodules) {
+					$module_position = basename(__FILE__, '.php');
+					$arr = explode("controller_common_", $module_position); // if filename like vq2-catalog_controller_common_column_right
+					if(isset($arr[1])) {
+						$module_position = $arr[1];
+					}
+					foreach ($zmodules as $module) {
+						if ($module['layout_id'] == 'zmenu_all_layout' && $module['position'] == $module_position && $module['status']) {
+							$data['modules'][] = $this->load->controller('module/zmenu', $module);
+						}
+					}
+			}
+			
 		$modules = $this->model_design_layout->getLayoutModules($layout_id, 'content_top');
 
 		foreach ($modules as $module) {

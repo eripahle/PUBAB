@@ -1,0 +1,5 @@
+.text-name { font-size: 13px; font-weight: normal; line-height: 3.5; margin: 0; text-align: start; }
+ul.dropdown-menu { left: 15px; top: 33px; }
+ul.dropdown-menu li h5{ float:left; }
+ul.dropdown-menu li img{ float:right; }
+ul.dropdown-menu li div.clear { clear:both; }

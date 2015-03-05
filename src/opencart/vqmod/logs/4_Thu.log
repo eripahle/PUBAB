@@ -1,0 +1,13 @@
+---------- Date: 2015-03-05 16:35:49 ~ IP : ::1 ----------
+REQUEST URI : /PUBAPP/src/opencart/index.php?route=account/logout
+MOD DETAILS:
+   modFile   : D:\program\xampp\htdocs\PUBAPP\src\opencart\vqmod/xml/kumarsuresh521_quick_login.xml
+   id        : Quick Login
+   version   : 1.0.1
+   vqmver    : 2.5
+   author    : kumarsuresh521-apps.blogspot.in KumarSuresh521@gmail.com
+VQModObject::parseMods - Could not resolve path for [catalog/language/de_DE/common/header.php] (SKIPPED)
+
+----------------------------------------------------------------------
+
+

@@ -13,8 +13,12 @@ if (!defined('DIR_APPLICATION')) {
 	exit;
 }
 
-// Startup
-require_once(DIR_SYSTEM . 'startup.php');
+// VirtualQMOD
+require_once('./vqmod/vqmod.php');
+VQMod::bootup();
+
+// VQMODDED Startup
+require_once(VQMod::modCheck(DIR_SYSTEM . 'startup.php'));
 
 // Registry
 $registry = new Registry();
@@ -69,7 +73,7 @@ if($config->get( 'config_store_id' ) == 0) {
 	$store = $config->get( 'config_store_id' );
 }
 
-require_once(DIR_SYSTEM . 'library/themeoptions.php');
+require_once(VQMod::modCheck(DIR_SYSTEM . 'library/themeoptions.php'));
 $theme_options = new ThemeOptions($config->get('config_template'), $store, $theme);
 $registry->set('theme_options', $theme_options);
 

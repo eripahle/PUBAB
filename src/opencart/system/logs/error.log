@@ -83,3 +83,46 @@
 2015-03-03 10:47:35 - PHP Notice:  Undefined property: Loader::$customer in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\header.tpl on line 96
 2015-03-03 10:53:22 - PHP Notice:  Undefined index: status_login in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\header.tpl on line 96
 2015-03-03 10:54:48 - PHP Notice:  Undefined variable: text_requestDesign in C:\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\header.tpl on line 97
+2015-03-04 16:18:59 - PHP Warning:  array_slice() expects parameter 1 to be array, string given in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 24
+2015-03-04 16:18:59 - PHP Warning:  Invalid argument supplied for foreach() in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 26
+2015-03-04 16:19:06 - PHP Warning:  array_slice() expects parameter 1 to be array, string given in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 24
+2015-03-04 16:19:06 - PHP Warning:  Invalid argument supplied for foreach() in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 26
+2015-03-04 16:19:32 - PHP Warning:  array_slice() expects parameter 1 to be array, string given in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 24
+2015-03-04 16:19:32 - PHP Warning:  Invalid argument supplied for foreach() in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 26
+2015-03-04 23:24:37 - PHP Warning:  array_slice() expects parameter 1 to be array, string given in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 24
+2015-03-04 23:24:37 - PHP Warning:  Invalid argument supplied for foreach() in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 26
+2015-03-04 23:31:09 - PHP Warning:  array_slice() expects parameter 1 to be array, string given in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 24
+2015-03-04 23:31:09 - PHP Warning:  Invalid argument supplied for foreach() in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 26
+2015-03-04 23:32:14 - PHP Warning:  array_slice() expects parameter 1 to be array, string given in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 24
+2015-03-04 23:32:14 - PHP Warning:  Invalid argument supplied for foreach() in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 26
+2015-03-04 23:33:01 - PHP Warning:  array_slice() expects parameter 1 to be array, string given in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 24
+2015-03-04 23:34:54 - PHP Warning:  array_slice() expects parameter 1 to be array, string given in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 24
+2015-03-04 23:34:54 - PHP Warning:  Invalid argument supplied for foreach() in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\controller\module\mostviewed.php on line 26
+2015-03-04 23:59:27 - PHP Notice:  Error: Could not load model D:\program\xampp\htdocs\PUBAPP\src\opencart/admin/model/catalog/zmenu.php! in D:\program\xampp\htdocs\PUBAPP\src\opencart\vqmod\vqcache\vq2-system_engine_loader.php on line 24
+2015-03-05 0:01:35 - PHP Notice:  Error: Could not load model D:\program\xampp\htdocs\PUBAPP\src\opencart/admin/model/catalog/zmenu.php! in D:\program\xampp\htdocs\PUBAPP\src\opencart\vqmod\vqcache\vq2-system_engine_loader.php on line 24
+2015-03-05 0:03:58 - PHP Notice:  Error: Could not load model D:\program\xampp\htdocs\PUBAPP\src\opencart/admin/model/catalog/zmenu.php! in D:\program\xampp\htdocs\PUBAPP\src\opencart\vqmod\vqcache\vq2-system_engine_loader.php on line 24
+2015-03-05 0:12:54 - PHP Notice:  Undefined index: zmenu_module in D:\program\xampp\htdocs\PUBAPP\src\opencart\admin\controller\module\zmenu.php on line 165
+2015-03-05 0:12:54 - PHP Warning:  Invalid argument supplied for foreach() in D:\program\xampp\htdocs\PUBAPP\src\opencart\admin\controller\module\zmenu.php on line 92
+2015-03-05 7:42:19 - PHP Notice:  Undefined index: zmenu_module in D:\program\xampp\htdocs\PUBAPP\src\opencart\admin\controller\module\zmenu.php on line 165
+2015-03-05 7:42:19 - PHP Warning:  Invalid argument supplied for foreach() in D:\program\xampp\htdocs\PUBAPP\src\opencart\admin\controller\module\zmenu.php on line 92
+2015-03-05 15:38:59 - PHP Notice:  Undefined index: status in D:\program\xampp\htdocs\PUBAPP\src\opencart\admin\controller\module\skincolor.php on line 140
+2015-03-05 16:44:09 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\footer.tpl on line 2
+2015-03-05 16:44:12 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\footer.tpl on line 2
+2015-03-05 16:46:10 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 27
+2015-03-05 16:46:13 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 27
+2015-03-05 16:46:54 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 27
+2015-03-05 16:46:57 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 27
+2015-03-05 16:47:19 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 27
+2015-03-05 16:47:28 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 27
+2015-03-05 16:47:31 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 27
+2015-03-05 16:47:34 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 27
+2015-03-05 16:48:31 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 27
+2015-03-05 16:48:43 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 27
+2015-03-05 16:48:54 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 27
+2015-03-05 16:49:16 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 27
+2015-03-05 16:49:58 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 27
+2015-03-05 16:51:41 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 26
+2015-03-05 16:51:50 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 26
+2015-03-05 16:54:03 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 26
+2015-03-05 16:54:31 - PHP Notice:  Undefined property: Loader::$config in D:\program\xampp\htdocs\PUBAPP\src\opencart\system\modification\catalog\view\theme\default\template\common\header.tpl on line 26
+2015-03-05 17:17:01 - PHP Notice:  Undefined variable: ttext_howtoselftpublish in D:\program\xampp\htdocs\PUBAPP\src\opencart\catalog\view\theme\default\template\common\footer.tpl on line 12
