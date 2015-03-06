@@ -71,23 +71,6 @@
             </div>
           </div>
 		  
-		  <!-- Code untuk Jenis Member 
-		  -->
-		  <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-category"><?php echo $entry_category; ?></label>
-            <div class="col-sm-10">
-              <select name="id_category" id="input-category" class="form-control">
-                <option value=""><?php echo $text_select; ?></option>
-                <?php foreach ($category as $categori) { ?>
-					<option value="<?php echo $categori['id_category'] ?>"><?php echo $categori['name_category']; ?></option>
-                <?php } ?>
-              </select>
-              <?php if ($error_category) { ?>
-              <div class="text-danger"><?php echo $error_category; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-		  
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-telephone"><?php echo $entry_telephone; ?></label>
             <div class="col-sm-10">

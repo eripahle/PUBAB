@@ -162,11 +162,7 @@ class ControllerAccountRegister extends Controller {
 			$data['error_password'] = '';
 		}
 		
-		if (isset($this->error['category'])) {
-			$data['error_category'] = $this->error['category'];
-		} else {
-			$data['error_category'] = '';
-		}
+		
 		
 		if (isset($this->error['confirm'])) {
 			$data['error_confirm'] = $this->error['confirm'];
@@ -268,11 +264,7 @@ class ControllerAccountRegister extends Controller {
 			$data['country_id'] = $this->config->get('config_country_id');
 		}
 
-		if (isset($this->request->post['category'])) {
-			$data['category'] = $this->request->post['category'];
-		} else {
-			$data['category'] = $this->config->get('config_category');
-		}
+		
 		
 		if (isset($this->request->post['zone_id'])) {
 			$data['zone_id'] = $this->request->post['zone_id'];
@@ -286,9 +278,7 @@ class ControllerAccountRegister extends Controller {
 
 		$data['countries'] = $this->model_localisation_country->getCountries();
 
-		//sent category member to view
-		$this->load->model('account/customer_category');
-		$data['category']=$this->model_account_customer_category->getCustomerId();
+
 		
 		
 		
@@ -412,9 +402,7 @@ class ControllerAccountRegister extends Controller {
 			$this->error['zone'] = $this->language->get('error_zone');
 		}
 		
-		if (!isset($this->request->post['id_category']) || $this->request->post['id_category'] == '') {
-			$this->error['category'] = $this->language->get('error_category');
-		}
+		
 		
 
 		// Customer Group
