@@ -17,6 +17,7 @@ define('DIR_DOWNLOAD', 'D:\program\xampp\htdocs\PUBAPP\src\opencart/system/downl
 define('DIR_UPLOAD', 'D:\program\xampp\htdocs\PUBAPP\src\opencart/system/upload/');
 define('DIR_MODIFICATION', 'D:\program\xampp\htdocs\PUBAPP\src\opencart/system/modification/');
 define('DIR_LOGS', 'D:\program\xampp\htdocs\PUBAPP\src\opencart/system/logs/');
+define('DIR_CALENDAR','D:\program\xampp\htdocs\PUBAPP\src\opencart/system/engine/calendar/');
 
 // DB
 define('DB_DRIVER', 'mysqli');
