@@ -45,7 +45,7 @@
     <?php echo $language; ?>
     <div id="top-links" class="nav pull-right">
       <ul class="list-inline">
-        <li><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a></li>
+        <li><a href="<?php echo $contact; ?>"><i class="fa fa-phone"></i></a> <span class="hidden-xs hidden-sm hidden-md"><?php echo $telephone; ?></span></li>
         <li class="dropdown"><a href="<?php echo $account; ?>" title="<?php echo $text_account; ?>" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $text_account; ?></span> <span class="caret"></span></a>
           <ul class="dropdown-menu dropdown-menu-right">
             <?php if ($logged) { ?>
@@ -85,13 +85,7 @@
     </div>
   </div>
 </header>
-<?php if(isset($zmenu) && $zmenu) { ?>
-            <?php if($is_oc2) { ?>
-              <div class="container"><?php echo $zmenu; ?></div>
-            <?php } else { ?>
-                <?php echo $zmenu; ?>
-              <?php } ?>
-          <?php } else if ($categories) { ?>
+<?php if ($categories) { ?>
 <div class="container">
   <nav id="menu" class="navbar">
     <div class="navbar-header"><span id="category" class="visible-xs"><?php echo $text_category; ?></span>
@@ -99,9 +93,6 @@
     </div>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
-	  <?php if($text_requestDesign!=null){ ?>
-		<li><a href="<?php echo $requestDesign; ?>"><?php echo $text_requestDesign; ?></a></li>
-	  <?php } ?>
         <?php foreach ($categories as $category) { ?>
         <?php if ($category['children']) { ?>
         <li class="dropdown"><a href="<?php echo $category['href']; ?>" class="dropdown-toggle" data-toggle="dropdown"><?php echo $category['name']; ?></a>
@@ -119,7 +110,6 @@
         </li>
         <?php } else { ?>
         <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
-		
         <?php } ?>
         <?php } ?>
       </ul>

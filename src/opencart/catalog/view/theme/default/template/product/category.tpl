@@ -5,11 +5,11 @@
     <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
     <?php } ?>
   </ul>
-  <div class="row"><?php echo $column_left; ?>
+  <div class="row">
     <?php if ($column_left && $column_right) { ?>
-    <?php $class = 'col-sm-6'; ?>
+    <?php $class = 'col-sm-6';/*6*/ ?>
     <?php } elseif ($column_left || $column_right) { ?>
-    <?php $class = 'col-sm-9'; ?>
+    <?php $class = 'col-sm-12'/*9*/; ?>
     <?php } else { ?>
     <?php $class = 'col-sm-12'; ?>
     <?php } ?>
@@ -26,34 +26,35 @@
       </div>
       <hr>
       <?php } ?>
-      <?php if ($categories) { ?>
-      <h3><?php echo $text_refine; ?></h3>
-      <?php if (count($categories) <= 5) { ?>
+    
+      <!--untuk menampilkan kategori di produk<?php //if ($categories) { ?>
+      <h3><?php //echo $text_refine; ?></h3>
+      <?php //if (count($categories) <= 5) { ?>
       <div class="row">
         <div class="col-sm-3">
           <ul>
-            <?php foreach ($categories as $category) { ?>
-            <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
-            <?php } ?>
+            <?php //foreach ($categories as $category) { ?>
+            <li><a href="<?php //echo $category['href']; ?>"><?php //echo $category['name']; ?></a></li>
+            <?php// } ?>
           </ul>
         </div>
       </div>
-      <?php } else { ?>
+      <?php// } else { ?>
       <div class="row">
-        <?php foreach (array_chunk($categories, ceil(count($categories) / 4)) as $categories) { ?>
+        <?php //foreach (array_chunk($categories, ceil(count($categories) / 4)) as $categories) { ?>
         <div class="col-sm-3">
           <ul>
-            <?php foreach ($categories as $category) { ?>
-            <li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
-            <?php } ?>
+            <?php //foreach ($categories as $category) { ?>
+            <li><a href="<?php //echo $category['href']; ?>"><?php //echo $category['name']; ?></a></li>
+            <?php //} ?>
           </ul>
         </div>
-        <?php } ?>
+        <?php //} ?>
       </div>
-      <?php } ?>
-      <?php } ?>
+      <?php //} ?>
+      <?php //} ?>-->
       <?php if ($products) { ?>
-      <p><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></p>
+     <!-- <p><a href="<?php //echo $compare; ?>" id="compare-total"><?php //echo $text_compare; ?></a></p>-->
       <div class="row">
         <div class="col-md-4">
           <div class="btn-group hidden-xs">
@@ -146,6 +147,6 @@
       </div>
       <?php } ?>
       <?php echo $content_bottom; ?></div>
-    <?php echo $column_right; ?></div>
+    </div>
 </div>
 <?php echo $footer; ?>

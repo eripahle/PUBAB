@@ -31,16 +31,8 @@ class ControllerCommonHeader extends Controller {
 		} else {
 			$data['logo'] = '';
 		}
+
 		$this->load->language('common/header');
-		if (!$this->customer->isLogged()) {
-			$data['text_requestDesign']=null;
-			$data['requestDesign']=null;
-		}else{
-			$data['status_login']=true;
-			$data['requestDesign']=$this->url->link('information/contact');
-			$data['text_requestDesign']=$this->language->get('text_requestDesign');
-		}
-		
 
 		$data['text_home'] = $this->language->get('text_home');
 		$data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));
