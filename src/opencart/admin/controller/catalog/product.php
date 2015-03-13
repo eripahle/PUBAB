@@ -11,8 +11,8 @@ class ControllerCatalogProduct extends Controller {
 
 		$this->getList();
 	}
-
-	public function add() {
+      
+        public function add() {
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -223,6 +223,7 @@ class ControllerCatalogProduct extends Controller {
 
 		$this->getList();
 	}
+              
 
 	protected function getList() {
 		if (isset($this->request->get['filter_name'])) {
@@ -338,7 +339,7 @@ class ControllerCatalogProduct extends Controller {
 		);
 
 		$this->load->model('tool/image');
-
+                
 		$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
 
 		$results = $this->model_catalog_product->getProducts($filter_data);
@@ -375,8 +376,7 @@ class ControllerCatalogProduct extends Controller {
 			);
 		}
 
-		$data['heading_title'] = $this->language->get('heading_title');
-		
+		$data['heading_title'] = $this->language->get('heading_title');		
 		$data['text_list'] = $this->language->get('text_list');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');

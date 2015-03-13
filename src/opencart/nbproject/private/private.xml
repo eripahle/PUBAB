@@ -2,18 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP/src/opencart/catalog/model/module/calendar_event.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP/src/opencart/catalog/model/module/mostreviewed.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP/src/opencart/catalog/controller/tool/events.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP/src/opencart/catalog/view/theme/default/template/module/calendar_event.tpl</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP/src/opencart/catalog/controller/tool/captcha.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP/src/opencart/catalog/controller/module/calendar_event.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP/src/opencart/catalog/controller/module/bestseller.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP/src/opencart/catalog/language/english/module/calendar_event.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP/src/opencart/catalog/controller/module/html.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP/src/opencart/catalog/controller/tool/calendar.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP/src/opencart/catalog/controller/module/category.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

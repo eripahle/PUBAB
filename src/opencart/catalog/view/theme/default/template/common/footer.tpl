@@ -9,8 +9,8 @@
                         <!-- <?php foreach ($informations as $information) { ?> 
                         <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
                         <?php } ?>-->          
-                        <li><a href="<?php echo $return; ?>"><?php echo $text_howtoselftpublish; ?></a></li>
-                        <li><a href="<?php echo $sitemap; ?>"><?php echo $text_howtobeeditor; ?></a></li>
+                        <li><a href="<?php echo $howtoselfpublish; ?>"><?php echo $text_howtoselftpublish; ?></a></li>
+                        <li><a href="<?php echo $howtobeeditor; ?>"><?php echo $text_howtobeeditor; ?></a></li>
                         <li><a href="<?php echo $return; ?>"><?php echo $text_howtoshop; ?></a></li>
                         <li><a href="<?php echo $sitemap; ?>"><?php echo $text_service; ?></a></li>
                     </ul>

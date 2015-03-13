@@ -65,9 +65,11 @@ class ControllerCommonFooter extends Controller {
             }
         }
 
-        $data['contact'] = $this->url->link('information/contact');
-        $data['return'] = $this->url->link('account/return/add', '', 'SSL');
-        $data['sitemap'] = $this->url->link('information/sitemap');
+        
+        $data['howtoselfpublish'] = $this->url->link('common/upload_draf_book', '' , 'SSL');
+        $data['return'] = $this->url->link('account/return/add', '' , 'SSL');
+        $data['sitemap'] = $this->url->link('common/upload_draf_book');
+        $data['howtobeeditor'] = $this->url->link('module/upload_draf_book','token = 40594b151b111b3596bb972317196c22','SSL');
         $data['manufacturer'] = $this->url->link('product/manufacturer');
         $data['voucher'] = $this->url->link('account/voucher', '', 'SSL');
         $data['affiliate'] = $this->url->link('affiliate/account', '', 'SSL');
