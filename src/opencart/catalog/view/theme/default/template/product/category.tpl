@@ -27,7 +27,7 @@
       <hr>
       <?php } ?>
     
-      <!--untuk menampilkan kategori di produk<?php //if ($categories) { ?>
+       <!--untuk menampilkan kategori di produk<?php //if ($categories) { ?>
       <h3><?php //echo $text_refine; ?></h3>
       <?php //if (count($categories) <= 5) { ?>
       <div class="row">

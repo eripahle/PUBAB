@@ -372,6 +372,9 @@ class ControllerCatalogProduct extends Controller {
 				'special'    => $special,
 				'quantity'   => $result['quantity'],
 				'status'     => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'status1'     => ($result['status1']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'status2'     => ($result['status2']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'status3'     => ($result['status3']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'edit'       => $this->url->link('catalog/product/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $result['product_id'] . $url, 'SSL')
 			);
 		}
@@ -389,6 +392,9 @@ class ControllerCatalogProduct extends Controller {
 		$data['column_price'] = $this->language->get('column_price');
 		$data['column_quantity'] = $this->language->get('column_quantity');
 		$data['column_status'] = $this->language->get('column_status');
+		$data['column_status_author'] = $this->language->get('column_status_author');
+		$data['column_status_management'] = $this->language->get('column_status_management');
+		$data['column_status_editor'] = $this->language->get('column_status_editor');
 		$data['column_action'] = $this->language->get('column_action');
 
 		$data['entry_name'] = $this->language->get('entry_name');
@@ -583,6 +589,9 @@ class ControllerCatalogProduct extends Controller {
 		$data['entry_required'] = $this->language->get('entry_required');
 		$data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		$data['entry_status'] = $this->language->get('entry_status');
+		$data['entry_status_editor'] = $this->language->get('entry_status_editor');
+		$data['entry_status_author'] = $this->language->get('entry_status_author');
+		$data['entry_status_management'] = $this->language->get('entry_status_management');
 		$data['entry_date_start'] = $this->language->get('entry_date_start');
 		$data['entry_date_end'] = $this->language->get('entry_date_end');
 		$data['entry_priority'] = $this->language->get('entry_priority');

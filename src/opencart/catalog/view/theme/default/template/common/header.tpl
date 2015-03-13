@@ -93,6 +93,9 @@
     </div>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
+        <?php if($logged){?>
+          <li><a href="<?php echo $mybooks ?>"><?php echo $text_mybooks; ?></a></li>
+        <?php } ?>
         <?php foreach ($categories as $category) { ?>
         <?php if ($category['children']) { ?>
         <li class="dropdown"><a href="<?php echo $category['href']; ?>" class="dropdown-toggle" data-toggle="dropdown"><?php echo $category['name']; ?></a>

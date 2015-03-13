@@ -1,12 +1,15 @@
 <?php
 class ModelSaleOrder extends Model {
 	public function getOrder($order_id) {
-		$order_query = $this->db->query("SELECT *, (SELECT CONCAT(c.firstname, ' ', c.lastname) FROM " . DB_PREFIX . "customer c WHERE c.customer_id = o.customer_id) AS customer FROM `" . DB_PREFIX . "order` o WHERE o.order_id = '" . (int)$order_id . "'");
+		$order_query = $this->db->query("SELECT *, (SELECT CONCAT(c.firstname, ' ', c.lastname) FROM " . DB_PREFIX . 
+			"customer c WHERE c.customer_id = o.customer_id) AS customer FROM `" . DB_PREFIX . "order` o WHERE o.order_id = '" .
+			 (int)$order_id . "'");
 
 		if ($order_query->num_rows) {
 			$reward = 0;
 
-			$order_product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
+			$order_product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . 
+				(int)$order_id . "'");
 
 			foreach ($order_product_query->rows as $product) {
 				$reward += $product['reward'];
@@ -387,7 +390,9 @@ class ModelSaleOrder extends Model {
 				$invoice_no = 1;
 			}
 
-			$this->db->query("UPDATE `" . DB_PREFIX . "order` SET invoice_no = '" . (int)$invoice_no . "', invoice_prefix = '" . $this->db->escape($order_info['invoice_prefix']) . "' WHERE order_id = '" . (int)$order_id . "'");
+			$this->db->query("UPDATE `" . DB_PREFIX . "order` SET invoice_no = '" . (int)$invoice_no . "',
+						 invoice_prefix = '" . $this->db->escape($order_info['invoice_prefix']) . "' 
+						 WHERE order_id = '" . (int)$order_id . "'");
 
 			return $order_info['invoice_prefix'] . $invoice_no;
 		}

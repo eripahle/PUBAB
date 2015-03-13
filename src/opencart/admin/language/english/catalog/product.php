@@ -21,7 +21,10 @@ $_['column_model']           = 'Model';
 $_['column_image']           = 'Image';
 $_['column_price']           = 'Price';
 $_['column_quantity']        = 'Quantity';
-$_['column_status']          = 'Status';
+$_['column_status']          = 'Status Jual';
+$_['column_status_author']   = 'Status Author';
+$_['column_status_editor']   = 'Status Editor';
+$_['column_status_management']  = 'Status Management';
 $_['column_action']          = 'Action';
 
 // Entry
@@ -69,7 +72,10 @@ $_['entry_text']             = 'Text';
 $_['entry_option']           = 'Option';
 $_['entry_option_value']     = 'Option Value';
 $_['entry_required']         = 'Required';
-$_['entry_status']           = 'Status';
+$_['entry_status']           = 'Status Jual';
+$_['entry_status_editor']    = 'Status Editor';
+$_['entry_status_author']    = 'Status Author';
+$_['entry_status_management']           = 'Status Management';
 $_['entry_sort_order']       = 'Sort Order';
 $_['entry_category']         = 'Categories';
 $_['entry_filter']           = 'Filters';
