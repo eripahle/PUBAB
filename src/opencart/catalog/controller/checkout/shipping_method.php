@@ -18,7 +18,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 					$quote = $this->{'model_shipping_' . $result['code']}->getQuote($this->session->data['shipping_address']);
 
 					if ($quote) {
-						$method_data[$result['code']] = array(
+						$data['code'] = array(
 							'title'      => $quote['title'],
 							'quote'      => $quote['quote'],
 							'sort_order' => $quote['sort_order'],
