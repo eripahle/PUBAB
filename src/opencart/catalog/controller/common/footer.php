@@ -4,22 +4,7 @@ class ControllerCommonFooter extends Controller {
 
     public function index() {
         $this->load->language('common/footer');
-
-        $data['text_information'] = $this->language->get('text_information');
-        $data['text_service'] = $this->language->get('text_service');
-        $data['text_extra'] = $this->language->get('text_extra');
-        $data['text_contact'] = $this->language->get('text_contact');
-        $data['text_return'] = $this->language->get('text_return');
-        $data['text_sitemap'] = $this->language->get('text_sitemap');
-        $data['text_manufacturer'] = $this->language->get('text_manufacturer');
-        $data['text_voucher'] = $this->language->get('text_voucher');
-        $data['text_affiliate'] = $this->language->get('text_affiliate');
-        $data['text_special'] = $this->language->get('text_special');
-        $data['text_account'] = $this->language->get('text_account');
-        $data['text_order'] = $this->language->get('text_order');
-        $data['text_wishlist'] = $this->language->get('text_wishlist');
-        $data['text_newsletter'] = $this->language->get('text_newsletter');
-
+        
         $data['text_publisher'] = $this->language->get('text_publisher');
         $data['text_howtoselftpublish'] = $this->language->get('text_howtoselftpublish');
         $data['text_howtobeeditor'] = $this->language->get('text_howtobeeditor');
@@ -66,19 +51,52 @@ class ControllerCommonFooter extends Controller {
         }
 
         
-        $data['howtoselfpublish'] = $this->url->link('common/upload_draf_book', '' , 'SSL');
-        $data['return'] = $this->url->link('account/return/add', '' , 'SSL');
-        $data['sitemap'] = $this->url->link('common/upload_draf_book');
-        $data['howtobeeditor'] = $this->url->link('module/upload_draf_book','token = 40594b151b111b3596bb972317196c22','SSL');
-        $data['manufacturer'] = $this->url->link('product/manufacturer');
-        $data['voucher'] = $this->url->link('account/voucher', '', 'SSL');
-        $data['affiliate'] = $this->url->link('affiliate/account', '', 'SSL');
-        $data['special'] = $this->url->link('product/special');
-        $data['account'] = $this->url->link('account/account', '', 'SSL');
-        $data['order'] = $this->url->link('account/order', '', 'SSL');
-        $data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
-        $data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
+        $data['howtoselfpublish'] = $this->url->link('information/howtoselfpublish', '' , 'SSL');
+        $data['howtobeeditor'] = $this->url->link('information/howtobeeditor', '' , 'SSL');
+        $data['howtoshop'] = $this->url->link('information/howtoshop','','SSL');        
+        $data['services'] = $this->url->link('information/services','','SSL');
+                
+        $data['bestseller'] = $this->url->link('information/bestseller', '', 'SSL');
+        $data['popularbooks'] = $this->url->link('information/popularbooks', '', 'SSL');
+        $data['newbooks'] = $this->url->link('information/newbook','','SSL');
+        $data['catalogbooks'] = $this->url->link('account/account', '', 'SSL');
+        
+        $data['bookpricingandroyalty'] = $this->url->link('account/order', '', 'SSL');
+        $data['orderbooks'] = $this->url->link('account/wishlist', '', 'SSL');
+        
+        $data['faq'] = $this->url->link('account/voucher', '', 'SSL');
+        $data['abouteditor'] = $this->url->link('affiliate/account', '', 'SSL');
+        $data['comunity'] = $this->url->link('product/special');
+        $data['videochatadmin'] = $this->url->link('account/account', '', 'SSL');        
+                
+        
+//        $data['text_books'] = $this->language->get('text_books');
+//        $data['text_bestseller'] = $this->language->get('text_bestseller');
+//        $data['text_popularbooks'] = $this->language->get('text_popularbooks');
+//        $data['text_newbooks'] = $this->language->get('text_newbooks');
+//        $data['text_catalogbooks'] = $this->language->get('text_catalogbooks');
+//
+//        $data['text_termandcondition'] = $this->language->get('text_termandcondition');
+//        $data['text_bookpricingandroyalty'] = $this->language->get('text_bookpricingandroyalty');
+//        $data['text_orderbooks'] = $this->language->get('text_orderbooks');
 
+//        $data['text_quickhelp'] = $this->language->get('text_quickhelp');
+//        $data['text_faq'] = $this->language->get('text_faq');
+//        $data['text_abouteditor'] = $this->language->get('text_abouteditor');
+//        $data['text_comunity'] = $this->language->get('text_comunity');
+//        $data['text_videochatadmin'] = $this->language->get('text_videochatadmin');
+
+//        $data['text_linkedin'] = $this->language->get('text_linkedin');
+//        $data['text_facebook'] = $this->language->get('text_facebook');
+//        $data['text_twitter'] = $this->language->get('text_twitter');
+//        $data['text_followus'] = $this->language->get('text_followus');
+//
+//        $data['text_home'] = $this->language->get('text_home');
+//        $data['text_about'] = $this->language->get('text_about');
+//        $data['text_contact'] = $this->language->get('text_contact');
+//        $data['text_ourgalleryevent'] = $this->language->get('text_ourgalleryevent');
+//
+//        
         $data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
 
         // Whos Online

@@ -11,18 +11,18 @@
                         <?php } ?>-->          
                         <li><a href="<?php echo $howtoselfpublish; ?>"><?php echo $text_howtoselftpublish; ?></a></li>
                         <li><a href="<?php echo $howtobeeditor; ?>"><?php echo $text_howtobeeditor; ?></a></li>
-                        <li><a href="<?php echo $return; ?>"><?php echo $text_howtoshop; ?></a></li>
-                        <li><a href="<?php echo $sitemap; ?>"><?php echo $text_service; ?></a></li>
+                        <li><a href="<?php echo $howtoshop; ?>"><?php echo $text_howtoshop; ?></a></li>
+                        <li><a href="<?php echo $services; ?>"><?php echo $text_service; ?></a></li>
                     </ul>
                 </div>
                 <?php } ?>
                 <div class="col-sm-3">
                     <h5><?php echo $text_books; ?></h5>
                     <ul class="list-unstyled">
-                        <li><a href="<?php echo $contact; ?>"><?php echo $text_bestseller; ?></a></li>
-                        <li><a href="<?php echo $return; ?>"><?php echo $text_popularbooks; ?></a></li>
-                        <li><a href="<?php echo $sitemap; ?>"><?php echo $text_newbooks; ?></a></li>
-                        <li><a href="<?php echo $sitemap; ?>"><?php echo $text_catalogbooks; ?></a></li>
+                        <li><a href="<?php echo $bestseller; ?>"><?php echo $text_bestseller; ?></a></li>
+                        <li><a href="<?php echo $popularbooks; ?>"><?php echo $text_popularbooks; ?></a></li>
+                        <li><a href="<?php echo $newbooks; ?>"><?php echo $text_newbooks; ?></a></li>
+                        <li><a href="<?php echo $catalogbooks; ?>"><?php echo $text_catalogbooks; ?></a></li>
                     </ul>
                 </div>      
                 <div class="col-sm-3">
