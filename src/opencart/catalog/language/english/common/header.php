@@ -15,3 +15,4 @@ $_['text_checkout']      = 'Checkout';
 $_['text_search']        = 'Search';
 $_['text_all']           = 'See All';
 $_['text_mybooks'] 		 = 'My Books';
+$_['text_publishbook'] 		 = 'Publish Book';
