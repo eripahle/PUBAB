@@ -50,10 +50,10 @@ class ControllerCommonHeader extends Controller {
 		$data['text_category'] = $this->language->get('text_category');
 		$data['text_all'] = $this->language->get('text_all');
 		$data['text_mybooks']=$this->language->get('text_mybooks');
-                $data['text_publishbook']=$this->language->get('text_publishbook');
+        $data['text_publishbook']=$this->language->get('text_publishbook');
 
-                $data['publishbook']=$this->url->link('common/upload_draf_book','', 'SSL');
-		$data['mybooks']=$this->url->link('product/mybooks','', 'SSL');
+        $data['publishbook']=$this->url->link('common/upload_draf_book','', 'SSL');
+		$data['mybooks']=$this->url->link('common/mybooks','', 'SSL');
 		$data['home'] = $this->url->link('common/home');
 		$data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
 		$data['logged'] = $this->customer->isLogged();
