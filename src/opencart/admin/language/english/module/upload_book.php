@@ -1,11 +1,11 @@
 <?php
 // Heading
-$_['heading_title']    = 'Most Reviewed';
+$_['heading_title']    = 'Upload Draf Book';
 
 // Text
 $_['text_module']      = 'Modules';
-$_['text_success']     = 'Success: You have modified Most Reviewed module!';
-$_['text_edit']        = 'Edit Most Reviewed Module';
+$_['text_success']     = 'Success: You have modified Upload Draf Book module!';
+$_['text_edit']        = 'Edit Upload Draf Book Module';
 $_['text_row_view'] = "Horizontal (Row)";
 $_['text_col_view'] = "Vertical (Column)";
 
@@ -20,7 +20,7 @@ $_['entry_display_mode']     = 'Display Mode';
 $_['entry_status']     = 'Status';
 
 // Error
-$_['error_permission'] = 'Warning: You do not have permission to modify Most Reviewed module!';
+$_['error_permission'] = 'Warning: You do not have permission to modify Upload Draf Book module!';
 $_['error_name']       = 'Module Name must be between 3 and 64 characters!';
 $_['error_width']      = 'Width required!';
 $_['error_height']     = 'Height required!';

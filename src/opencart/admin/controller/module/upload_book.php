@@ -1,9 +1,9 @@
 <?php
-class ControllerModuleMostReviewed extends Controller {
+class ControllerModuleUploadBook extends Controller {
 	private $error = array();
 
 	public function index() {
-		$this->load->language('module/mostreviewed');
+		$this->load->language('module/upload_book');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
@@ -11,7 +11,7 @@ class ControllerModuleMostReviewed extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {			
 			if (!isset($this->request->get['module_id'])) {
-				$this->model_extension_module->addModule('mostreviewed', $this->request->post);
+				$this->model_extension_module->addModule('upload_book', $this->request->post);
 			} else {
 				$this->model_extension_module->editModule($this->request->get['module_id'], $this->request->post);
 			}
@@ -85,14 +85,14 @@ class ControllerModuleMostReviewed extends Controller {
 		} else {
 			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('heading_title'),
-				'href' => $this->url->link('module/mostreviewed', 'token=' . $this->session->data['token'] . '&module_id=' . $this->request->get['module_id'], 'SSL')
+				'href' => $this->url->link('module/upload_book', 'token=' . $this->session->data['token'] . '&module_id=' . $this->request->get['module_id'], 'SSL')
 			);			
 		}
 
 		if (!isset($this->request->get['module_id'])) {
-			$data['action'] = $this->url->link('module/mostreviewed', 'token=' . $this->session->data['token'], 'SSL');
+			$data['action'] = $this->url->link('module/upload_book', 'token=' . $this->session->data['token'], 'SSL');
 		} else {
-			$data['action'] = $this->url->link('module/mostreviewed', 'token=' . $this->session->data['token'] . '&module_id=' . $this->request->get['module_id'], 'SSL');
+			$data['action'] = $this->url->link('module/upload_book', 'token=' . $this->session->data['token'] . '&module_id=' . $this->request->get['module_id'], 'SSL');
 		}
 		
 		$data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
@@ -161,11 +161,11 @@ class ControllerModuleMostReviewed extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
-		$this->response->setOutput($this->load->view('module/mostreviewed.tpl', $data));
+		$this->response->setOutput($this->load->view('module/upload_book.tpl', $data));
 	}
 
 	protected function validate() {
-		if (!$this->user->hasPermission('modify', 'module/mostreviewed')) {
+		if (!$this->user->hasPermission('modify', 'module/upload_book')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		

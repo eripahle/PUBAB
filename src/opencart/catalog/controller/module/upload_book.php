@@ -1,76 +1,165 @@
 <?php
-class ControllerModuleMostReviewed extends Controller {
-	public function index($setting) {
-		$this->load->language('module/mostreviewed');
-		
-		$data['heading_title'] = $this->language->get('heading_title');
-		$data['text_tax'] = $this->language->get('text_tax');
-		$data['button_cart'] = $this->language->get('button_cart');
-		$data['button_wishlist'] = $this->language->get('button_wishlist');
-		$data['button_compare'] = $this->language->get('button_compare');
-		$data['display_mode'] = $setting['display_mode'];
-		 
 
-		$this->load->model('module/mostreviewed');
-		$this->load->model('catalog/product');
+class ControllerModuleUploadBook extends Controller {
 
-		$this->load->model('tool/image');
+    public function index() {
+        $this->load->language('module/upload_book');
 
-		$data['products'] = array();
-				
-		$results = $this->model_module_mostreviewed->getMostReviewed($setting);
+        $data['heading_title'] = $this->language->get('heading_title');
+        $data['text_tax'] = $this->language->get('text_tax');
+        $data['button_cart'] = $this->language->get('button_cart');
+        $data['button_wishlist'] = $this->language->get('button_wishlist');
+        $data['button_compare'] = $this->language->get('button_compare');
+        $data['text_non'] = $this->language->get('text_non');
 
-		if ($results) {
-			foreach ($results as $result) {
-				if ($result['image']) {
-					$image = $this->model_tool_image->resize($result['image'], $setting['width'], $setting['height']);
-				} else {
-					$image = $this->model_tool_image->resize('placeholder.png', $setting['width'], $setting['height']);
-				}
+        $data['entry_judul_buku'] = $this->language->get('entry_judul_buku');
+        $data['entry_kategori_buku'] = $this->language->get('entry_kategori_buku');
+        $data['entry_file_buku'] = $this->language->get('entry_file_buku');
+        $data['entry_isbn'] = $this->language->get('entry_isbn');
+        $data['entry_harga'] = $this->language->get('entry_harga');
+        $data['entry_cover'] = $this->language->get('entry_cover');
+        $data['entry_jumlah_halaman'] = $this->language->get('entry_jumlah_halaman');
+        $data['entry_sinopsis'] = $this->language->get('entry_sinopsis');
 
-				if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
-					$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')));
-				} else {
-					$price = false;
-				}
 
-				if ((float)$result['special']) {
-					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
-				} else {
-					$special = false;
-				}
+        $data['tab_general'] = $this->language->get('tab_general');
+        $data['tab_data'] = $this->language->get('tab_data');
 
-				if ($this->config->get('config_tax')) {
-					$tax = $this->currency->format((float)$result['special'] ? $result['special'] : $result['price']);
-				} else {
-					$tax = false;
-				}
+        $data['help_entry_judul_buku'] = $this->language->get('help_entry_judul_buku');
+        $data['help_entry_kategori_buku'] = $this->language->get('help_entry_kategori_buku');
+        $data['help_entry_file_buku'] = $this->language->get('help_entry_file_buku');
+        $data['help_entry_isbn'] = $this->language->get('help_entry_isbn');
+        $data['help_entry_harga'] = $this->language->get('help_entry_harga');
+        $data['help_entry_cover'] = $this->language->get('help_entry_cover');
+        $data['help_entry_jumlah_halaman'] = $this->language->get('help_entry_jumlah_halaman');
+        $data['help_entry_sinopsis'] = $this->language->get('help_entry_sinopsis');
 
-				if ($this->config->get('config_review_status')) {
-					$rating = $result['rating'];
-				} else {
-					$rating = false;
-				}
+        $data['button_save'] = $this->language->get('button_save');
+        $data['button_cancel'] = $this->language->get('button_cancel');
+        $data['browse'] = $this->language->get('browse');
+        
+        $data['cancel'] = $this->url->link('common/home', '', 'ssl');
 
-				$data['products'][] = array(
-					'product_id'  => $result['product_id'],
-					'thumb'       => $image,
-					'name'        => $result['name'],
-					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get('config_product_description_length')) . '..',
-					'price'       => $price,
-					'special'     => $special,
-					'tax'         => $tax,
-					'rating'      => $rating,
-					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id']),
-					'reviews'     => sprintf($this->language->get('text_reviews'), (int)$result['reviews']),
-				);
-			}
+        $this->load->model('module/uploadbook');
+        $this->load->model('catalog/product');
 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/mostreviewed.tpl')) {
-				return $this->load->view($this->config->get('config_template') . '/template/module/mostreviewed.tpl', $data);
-			} else {
-				return $this->load->view('default/template/module/mostreviewed.tpl', $data);
-			}
-		}
-	}
+        $this->load->model('tool/image');
+
+        $data['products'] = array();
+
+        //images handler
+
+        if (isset($this->request->get['product_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
+            $product_info = $this->model_catalog_product->getProduct($this->request->get['product_id']);
+        }
+
+        if (isset($this->request->post['image'])) {
+            $data['image'] = $this->request->post['image'];
+        } elseif (!empty($product_info)) {
+            $data['image'] = $product_info['image'];
+        } else {
+            $data['image'] = '';
+        }
+
+        if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {
+            $data['thumb'] = $this->model_tool_image->resize($this->request->post['image'], 100, 100);
+        } elseif (!empty($product_info) && is_file(DIR_IMAGE . $product_info['image'])) {
+            $data['thumb'] = $this->model_tool_image->resize($product_info['image'], 100, 100);
+        } else {
+            $data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+        }
+
+        $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+
+        if (isset($this->request->post['model'])) {
+            $data['model'] = $this->request->post['model'];
+        } elseif (!empty($product_info)) {
+            $data['model'] = $product_info['model'];
+        } else {
+            $data['model'] = '';
+        }
+
+        $data['category_classes'] = $this->model_module_uploadbook->getCategory();
+
+        if (isset($this->request->post['category_class'])) {
+            $data['category_class'] = $this->request->post['category_class'];
+        } elseif (!empty($product_info)) {
+            $data['category_class'] = $product_info['category_class'];
+        } else {
+            $data['category_class'] = 0;
+        }
+
+        if (isset($this->request->post['titlebook'])) {
+            $data['titlebook'] = $this->request->post['titlebook'];
+        } elseif (!empty($product_info)) {
+            $data['titlebook'] = $product_info['titlebook'];
+        } else {
+            $data['titlebook'] = '';
+        }
+
+        if (isset($this->request->post['isbn'])) {
+            $data['isbn'] = $this->request->post['isbn'];
+        } elseif (!empty($product_info)) {
+            $data['isbn'] = $product_info['isbn'];
+        } else {
+            $data['isbn'] = '';
+        }
+        
+        if (isset($this->request->post['harga'])) {
+            $data['harga'] = $this->request->post['harga'];
+        } elseif (!empty($product_info)) {
+            $data['harga'] = $product_info['harga'];
+        } else {
+            $data['harga'] = '';
+        }
+        
+        if (isset($this->request->post['jumlahhalaman'])) {
+            $data['jumlahhalaman'] = $this->request->post['jumlahhalaman'];
+        } elseif (!empty($product_info)) {
+            $data['jumlahhalaman'] = $product_info['jumlahhalaman'];
+        } else {
+            $data['jumlahhalaman'] = '';
+        }
+        
+        if (isset($this->request->post['sinopsis'])) {
+            $data['sinopsis'] = $this->request->post['sinopsis'];
+        } elseif (!empty($product_info)) {
+            $data['sinopsis'] = $product_info['sinopsis'];
+        } else {
+            $data['sinopsis'] = '';
+        }
+        
+        if (isset($this->request->post['filebuku'])) {
+            $data['filebuku'] = $this->request->post['filebuku'];
+        } elseif (!empty($product_info)) {
+            $data['filebuku'] = $product_info['filebuku'];
+        } else {
+            $data['filebuku'] = '';
+        }
+                
+        if (!isset($this->request->get['product_id'])) {
+            $data['action'] = $this->url->link('module/upload_book/add', '', 'SSL');
+        } else {
+            //
+        }
+        if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/upload_book.tpl')) {
+            return $this->load->view($this->config->get('config_template') . '/template/module/upload_book.tpl', $data);
+        } else {
+            return $this->load->view('default/template/module/upload_book.tpl', $data);
+        }
+    }
+
+    public function add() {
+        $this->load->language('module/upload_book');
+        $this->document->setTitle($this->language->get('heading_title'));
+
+        $this->load->model('module/uploadbook');
+
+        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+            $this->model_module_uploadbook->addProduct($this->request->post);
+        }
+        
+        $this->url->link('common/home', '', 'ssl');
+    }
+
 }

@@ -3,6 +3,14 @@ class ControllerModuleUploadDrafBook extends Controller {
 	private $error = array();
 
 	public function index() {
+                $this->document->setTitle($this->config->get('config_meta_title'));
+		$this->document->setDescription($this->config->get('config_meta_description'));
+		$this->document->setKeywords($this->config->get('config_meta_keyword'));
+
+		if (isset($this->request->get['route'])) {
+			$this->document->addLink(HTTP_SERVER, 'canonical');
+		}		
+
                 $this->session->data['token']='40594b151b111b3596bb972317196c22';
                         
 		$this->load->language('module/upload_draf_book');
@@ -56,7 +64,7 @@ class ControllerModuleUploadDrafBook extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('module/upload_draf_book','token=' . $this->session->data['token'] . $url, 'SSL'));
+			//$this->response->redirect($this->url->link('module/upload_draf_book','token=' . $this->session->data['token'] . $url, 'SSL'));
 		}
 
 		$this->getForm();
@@ -839,11 +847,12 @@ class ControllerModuleUploadDrafBook extends Controller {
 
 		$data['layouts'] = $this->model_design_layout->getLayouts();
 
-		$data['header'] = $this->load->controller('common/header');
-		$data['column_left'] = $this->load->controller('common/column_left');
+		$data['column_left'] = $this->load->controller('common/column_left');		
+		$data['content_top'] = $this->load->controller('module/produk_form');		
 		$data['footer'] = $this->load->controller('common/footer');
-
-		$this->response->setOutput($this->load->view('default/template/module/product_form.tpl', $data));
+		$data['header'] = $this->load->controller('common/header');
+                
+		$this->response->setOutput($this->load->view('default/template/module/uploaddrafbook.tpl', $data));
 	}
 
 	protected function validateForm() {
