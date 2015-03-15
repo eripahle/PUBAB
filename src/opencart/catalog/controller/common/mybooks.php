@@ -12,7 +12,7 @@ class ControllerCommonMybooks extends Controller {
 		$this->getList();
 	}
       
-        public function add() {
+    public function add() {
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -62,6 +62,22 @@ class ControllerCommonMybooks extends Controller {
 		}
 
 		$this->getForm();
+	}
+
+	public function downloadBooks(){
+		$this->load->model('catalog/productbooks');
+		$books=$this->model_catalog_productbooks->getBooks($this->request->get['product_id']);
+		$data['book']=array();
+
+		foreach ($books as $books) {
+			$buku='system/engine/upload'.$books['draf'];
+
+			$data['book'][]=array(
+				'book' => $buku
+			);
+		}
+
+		$this->response->redirect($this->load->view('common/mybooks.tpl',' ','SSL'));
 	}
 
 	public function edit() {
@@ -312,7 +328,7 @@ class ControllerCommonMybooks extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+			'href' => $this->url->link('common/dashboard', '', 'SSL')
 		);
 
 		$data['breadcrumbs'][] = array(
@@ -363,6 +379,19 @@ class ControllerCommonMybooks extends Controller {
 				}
 			}
 
+			$this->load->model('catalog/productbooks');
+			$books=$this->model_catalog_productbooks->getBooks($result['product_id']);
+			/*$data['book']=array();
+
+			foreach ($books as $books) {
+				$buku='system/engine/upload'.$books['draf'];
+
+				$data['book'][]=array(
+					'book' => $buku
+				);
+			}*/
+			//$data['book']=array();
+
 			$data['products'][] = array(
 				'product_id' => $result['product_id'],
 				'image'      => $image,
@@ -372,10 +401,12 @@ class ControllerCommonMybooks extends Controller {
 				'special'    => $special,
 				'quantity'   => $result['quantity'],
 				'status'     => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-				'status1'     => ($result['status1']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-				'status2'     => ($result['status2']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-				'status3'     => ($result['status3']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-				'edit'       => $this->url->link('catalog/product/edit', '&product_id=' . $result['product_id'] . $url, 'SSL')
+				'status1'    => ($result['status1']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'status2'    => ($result['status2']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'status3'    => ($result['status3']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'edit'       => $this->url->link('catalog/product/edit', '&product_id=' . $result['product_id'] . $url, 'SSL'),
+				//'download'   => $this->url->link('catalog/product/downloadBooks', '&product_id=' . $result['product_id'] . $url, 'SSL')
+				'download'   => $books['draf']['draf']
 			);
 		}
 
@@ -410,7 +441,7 @@ class ControllerCommonMybooks extends Controller {
 		$data['button_delete'] = $this->language->get('button_delete');
 		$data['button_filter'] = $this->language->get('button_filter');
 
-		$data['token'] = $this->session->data['token'];
+		//$data['token'] = $this->session->data['token'];
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -717,7 +748,7 @@ class ControllerCommonMybooks extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+			'href' => $this->url->link('common/dashboard', '', 'SSL')
 		);
 
 		$data['breadcrumbs'][] = array(
@@ -728,7 +759,7 @@ class ControllerCommonMybooks extends Controller {
 		if (!isset($this->request->get['product_id'])) {
 			$data['action'] = $this->url->link('catalog/product/add', ' ', 'SSL');
 		} else {
-			$data['action'] = $this->url->link('catalog/product/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $this->request->get['product_id'] . $url, 'SSL');
+			$data['action'] = $this->url->link('catalog/product/edit',  '&product_id=' . $this->request->get['product_id'] . $url, 'SSL');
 		}
 
 		$data['cancel'] = $this->url->link('catalog/product', ' ', 'SSL');
@@ -737,7 +768,7 @@ class ControllerCommonMybooks extends Controller {
 			$product_info = $this->model_catalog_product->getProduct($this->request->get['product_id']);
 		}
 
-		$data['token'] = $this->session->data['token'];
+		//$data['token'] = $this->session->data['token'];
 
 		$this->load->model('localisation/language');
 

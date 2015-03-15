@@ -699,4 +699,16 @@ class ModelCatalogProductbooks extends Model {
 
 		return $query->rows;
 	}
+
+	public function getBooks($product_id) {
+		$query = $this->db->query("SELECT draf FROM " . DB_PREFIX . "draf WHERE product_id = '" . (int)$product_id . "' ");
+		foreach ($query->rows as $result) {
+			$book['draf'] = array(
+				'draf'             => $result['draf']
+			);
+		}
+
+		return $book;
+		//return $query->rows;
+	}
 }

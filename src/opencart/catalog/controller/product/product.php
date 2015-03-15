@@ -252,11 +252,14 @@ class ControllerProductProduct extends Controller {
 			$data['entry_captcha'] = $this->language->get('entry_captcha');
 
 			$data['button_cart'] = $this->language->get('button_cart');
+			$data['button_edit_editor'] = $this->language->get('button_edit_editor');
 			$data['button_wishlist'] = $this->language->get('button_wishlist');
 			$data['button_compare'] = $this->language->get('button_compare');
 			$data['button_upload'] = $this->language->get('button_upload');
 			$data['button_continue'] = $this->language->get('button_continue');
 
+			$data['logged'] = $this->customer->isLogged();
+			$data['customer_group']=$this->customer->getGroupId();
 			$this->load->model('catalog/review');
 
 			$data['tab_description'] = $this->language->get('tab_description');

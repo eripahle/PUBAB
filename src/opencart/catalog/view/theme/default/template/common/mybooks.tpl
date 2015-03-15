@@ -86,7 +86,7 @@
                   <td class="text-left"><?php echo $product['status']; ?></td>
                   <td class="text-right">
                     <a href="<?php echo $product['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                    <a href="<?php echo $product['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_download; ?>" class="btn btn-primary"><i class="fa fa-download"></i></a>
+                    <a href="<?php echo 'system/engine/upload/'.$product['download']; ?>" target="_blak" data-toggle="tooltip" title="<?php echo $button_download; ?>" class="btn btn-primary"><i class="fa fa-download"></i></a>
                   </td>
                 </tr>
                 <?php } ?>
