@@ -30,8 +30,8 @@ function loadpage(page_request, containerid){
 }
 
 
-function LoadMonth(month, year) {
-	ajaxpage("calendar.php?month="+month+"&year="+year, "Calendar")        
+function LoadMonth(month, year) {        
+	ajaxpage("calendar.php?month="+month+"&year="+year, "Calendar")                
 }
 
 function LoadEvents(date) {

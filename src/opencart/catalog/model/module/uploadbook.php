@@ -43,33 +43,43 @@ class ModelModuleUploadbook extends Model {
             return $category_class_data;
         }
     }
-    
+
     public function addProduct($data) {
-		$this->event->trigger('pre.admin.product.add', $data);
-                echo $this->db->escape($data['harga']);
-		$this->db->query("INSERT INTO " . DB_PREFIX 
+      //  $this->insertFile($data);
+      //print_r($data);
+
+        $this->event->trigger('pre.admin.product.add', $data);
+        //echo $this->db->escape($data['harga']);
+
+//        echo 'data0';
+//        if (isset($data['category_classes2'])) {
+//            echo 'data1';
+//            foreach ($data['category_classes2'] as $category_id) {
+//                echo 'data2';
+//                echo $category_id['nama'];
+//            }
+//        }
+                $this->db->query("INSERT INTO " . DB_PREFIX 
                         . "product SET model = 'buku' "// . $this->db->escape($data['model']) 
                         . ", isbn = " . $this->db->escape($data['isbn']) 
                         . ", price = " . $this->db->escape($data['harga']) 
                         . ""
                         );
-                        //. "', points = '0'"// . (int)$data['points'] 
-                        //. "', weight = '0'"// . (float)$data['weight'] 
-                        //. "', weight_class_id = '0'"// . (int)$data['weight_class_id'] 
-                        //. "', length = '0'"// . (float)$data['length'] 
-                        //. "', width = '0'"// . (float)$data['width'] 
-                        //. "', height = '0'"// . (float)$data['height'] 
-                        //. "', length_class_id = '0'"// . (int)$data['length_class_id'] 
-                        //. "', status = '0'"// . (int)$data['status'] 
-                        //. "', tax_class_id = '0'"// . $this->db->escape($data['tax_class_id']) 
-                        //. "', sort_order = '0'"// . (int)$data['sort_order'] . "', date_added = NOW()");
-
-		$product_id = $this->db->getLastId();
-
+//                
+        //. "', points = '0'"// . (int)$data['points'] 
+        //. "', weight = '0'"// . (float)$data['weight'] 
+        //. "', weight_class_id = '0'"// . (int)$data['weight_class_id'] 
+        //. "', length = '0'"// . (float)$data['length'] 
+        //. "', width = '0'"// . (float)$data['width'] 
+        //. "', height = '0'"// . (float)$data['height'] 
+        //. "', length_class_id = '0'"// . (int)$data['length_class_id'] 
+        //. "', status = '0'"// . (int)$data['status'] 
+        //. "', tax_class_id = '0'"// . $this->db->escape($data['tax_class_id']) 
+        //. "', sort_order = '0'"// . (int)$data['sort_order'] . "', date_added = NOW()");
+        $product_id = $this->db->getLastId();
 //		if (isset($data['image'])) {
 //			$this->db->query("UPDATE " . DB_PREFIX . "product SET image = '" . $this->db->escape($data['image']) . "' WHERE product_id = '" . (int)$product_id . "'");
 //		}
-
 //		foreach ($data['product_description'] as $language_id => $value) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description "
                         . "SET product_id = '" . (int)$product_id 
@@ -77,7 +87,7 @@ class ModelModuleUploadbook extends Model {
                         . ", name = '" . $this->db->escape($data['titlebook']) 
                         . "', number_of_page = ". $this->db->escape($data['jumlahhalaman'])         
                         . ", description = '" . $this->db->escape($data['sinopsis'])."'");
-                        //. "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
+//        . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
 //		}
 //
 //		if (isset($data['product_store'])) {
@@ -140,11 +150,13 @@ class ModelModuleUploadbook extends Model {
 //			}
 //		}
 //
-		//if (isset($data['category_class_id'])) {
-			//foreach ($data['category_class_id'] as $category_id) {
-				//$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_category SET product_id = '" . (int)$product_id . "', category_id = '" . (int)$category_class['category_class_id'] . "'");
-			//}
-//		}
+//
+//        //        if (isset($data['category_class_id'])) {
+//            foreach ($data['category_class_id'] as $category_id) {
+                $this->db->query("INSERT INTO " . DB_PREFIX . "product_to_category SET product_id = " . (int) $product_id . ", category_id = " . $this->db->escape($data['category_class_id']) . "");
+//            }
+//        }
+//        
 //
 //		if (isset($data['product_filter'])) {
 //			foreach ($data['product_filter'] as $filter_id) {
@@ -183,11 +195,41 @@ class ModelModuleUploadbook extends Model {
 //			}
 //		}
 
-		$this->cache->delete('product');
+        $this->cache->delete('product');
 
-		$this->event->trigger('post.admin.product.add', $product_id);
+        $this->event->trigger('post.admin.product.add', $product_id);
 
-		return $product_id;
-	}
+        return $product_id;
+    }
+
+    public function insertFile($data,$product_id) {
+          //print_r($data);
+            $allowed_ext = array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'rar', 'zip');
+            $file_name = $data['filebuku']['name'];
+            $dot = '.';
+            $file_ext = strtolower(end(explode($dot, $file_name)));
+            $file_size = $data['filebuku']['size'];
+            $file_tmp = $data['filebuku']['tmp_name'];
+
+            $nama = date("smhymd").'_'.$file_name;
+            $tgl = date("Y-m-d");
+
+            if (in_array($file_ext, $allowed_ext) === true) {
+                if ($file_size < 1044070000) {
+                    $lokasi = 'files/' . $nama . '.' . $file_ext;                    
+                    $sql = "INSERT INTO oc_draf VALUES(NULL, $product_id,'$lokasi','$tgl', '$nama', '$file_ext', '$file_size')";
+                    $query = $this->db->query($sql);
+                    if ($query) {
+                        
+                    } else {
+                        echo '<div class="error">ERROR: Gagal upload file!</div>';
+                    }
+                } else {
+                    echo '<div class="error">ERROR: Besar ukuran file (file size) maksimal 1 Mb!</div>';
+                }
+            } else {
+                echo '<div class="error">ERROR: Ekstensi file tidak di izinkan!</div>';
+            }        
+    }
 
 }

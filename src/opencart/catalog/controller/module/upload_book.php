@@ -37,21 +37,22 @@ class ControllerModuleUploadBook extends Controller {
         $data['button_save'] = $this->language->get('button_save');
         $data['button_cancel'] = $this->language->get('button_cancel');
         $data['browse'] = $this->language->get('browse');
-        
+
         $data['cancel'] = $this->url->link('common/home', '', 'ssl');
 
         $this->load->model('module/uploadbook');
         $this->load->model('catalog/product');
-
         $this->load->model('tool/image');
 
-        $data['products'] = array();
 
-        //images handler
+        $data['category_classes'] = $this->model_module_uploadbook->getCategory();
 
-        if (isset($this->request->get['product_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-            $product_info = $this->model_catalog_product->getProduct($this->request->get['product_id']);
+        if (!isset($this->request->get['product_id'])) {
+            $data['action'] = $this->url->link('module/upload_book/add', '', 'SSL');
+        } else {
+            //
         }
+        $data['filebuku'] = $this->request->files;
 
         if (isset($this->request->post['image'])) {
             $data['image'] = $this->request->post['image'];
@@ -59,7 +60,7 @@ class ControllerModuleUploadBook extends Controller {
             $data['image'] = $product_info['image'];
         } else {
             $data['image'] = '';
-        }
+        }       
 
         if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {
             $data['thumb'] = $this->model_tool_image->resize($this->request->post['image'], 100, 100);
@@ -71,80 +72,11 @@ class ControllerModuleUploadBook extends Controller {
 
         $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
-        if (isset($this->request->post['model'])) {
-            $data['model'] = $this->request->post['model'];
-        } elseif (!empty($product_info)) {
-            $data['model'] = $product_info['model'];
-        } else {
-            $data['model'] = '';
-        }
 
-        $data['category_classes'] = $this->model_module_uploadbook->getCategory();
-
-        if (isset($this->request->post['category_class'])) {
-            $data['category_class'] = $this->request->post['category_class'];
-        } elseif (!empty($product_info)) {
-            $data['category_class'] = $product_info['category_class'];
-        } else {
-            $data['category_class'] = 0;
-        }
-
-        if (isset($this->request->post['titlebook'])) {
-            $data['titlebook'] = $this->request->post['titlebook'];
-        } elseif (!empty($product_info)) {
-            $data['titlebook'] = $product_info['titlebook'];
-        } else {
-            $data['titlebook'] = '';
-        }
-
-        if (isset($this->request->post['isbn'])) {
-            $data['isbn'] = $this->request->post['isbn'];
-        } elseif (!empty($product_info)) {
-            $data['isbn'] = $product_info['isbn'];
-        } else {
-            $data['isbn'] = '';
-        }
-        
-        if (isset($this->request->post['harga'])) {
-            $data['harga'] = $this->request->post['harga'];
-        } elseif (!empty($product_info)) {
-            $data['harga'] = $product_info['harga'];
-        } else {
-            $data['harga'] = '';
-        }
-        
-        if (isset($this->request->post['jumlahhalaman'])) {
-            $data['jumlahhalaman'] = $this->request->post['jumlahhalaman'];
-        } elseif (!empty($product_info)) {
-            $data['jumlahhalaman'] = $product_info['jumlahhalaman'];
-        } else {
-            $data['jumlahhalaman'] = '';
-        }
-        
-        if (isset($this->request->post['sinopsis'])) {
-            $data['sinopsis'] = $this->request->post['sinopsis'];
-        } elseif (!empty($product_info)) {
-            $data['sinopsis'] = $product_info['sinopsis'];
-        } else {
-            $data['sinopsis'] = '';
-        }
-        
-        if (isset($this->request->post['filebuku'])) {
-            $data['filebuku'] = $this->request->post['filebuku'];
-        } elseif (!empty($product_info)) {
-            $data['filebuku'] = $product_info['filebuku'];
-        } else {
-            $data['filebuku'] = '';
-        }
-                
-        if (!isset($this->request->get['product_id'])) {
-            $data['action'] = $this->url->link('module/upload_book/add', '', 'SSL');
-        } else {
-            //
-        }
         if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/upload_book.tpl')) {
             return $this->load->view($this->config->get('config_template') . '/template/module/upload_book.tpl', $data);
-        } else {
+        }
+        else {
             return $this->load->view('default/template/module/upload_book.tpl', $data);
         }
     }
@@ -156,10 +88,12 @@ class ControllerModuleUploadBook extends Controller {
         $this->load->model('module/uploadbook');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
-            $this->model_module_uploadbook->addProduct($this->request->post);
+            $product_id = $this->model_module_uploadbook->addProduct($this->request->post);
+            $this->model_module_uploadbook->insertFile($this->request->files,$product);
         }
-        
-        $this->url->link('common/home', '', 'ssl');
+
+        $link=$this->url->link('common/home', '', 'ssl');
+        header('location:index.php/route?common/home');
     }
 
 }

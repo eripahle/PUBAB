@@ -28,6 +28,8 @@ Released: 2013-09-07
 ###########################################################
 
 error_reporting(0);
+header("Refresh:0");
+
 include("config.php");
 
 /// get current month and year and store them in $cMonth and $cYear variables

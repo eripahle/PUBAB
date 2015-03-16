@@ -8,6 +8,7 @@ define('HTTPS_SERVER', 'http://localhost/PUBAPP1/src/opencart/');
 // DIR
 define('DIR_APPLICATION', 'D:\program\xampp\htdocs\PUBAPP1\src\opencart/catalog/');
 define('DIR_SYSTEM', 'D:\program\xampp\htdocs\PUBAPP1\src\opencart/system/');
+define('DIR_FILE', 'D:\program\xampp\htdocs\PUBAPP1\src\opencart/system/engine/upload/');
 define('DIR_LANGUAGE', 'D:\program\xampp\htdocs\PUBAPP1\src\opencart/catalog/language/');
 define('DIR_TEMPLATE', 'D:\program\xampp\htdocs\PUBAPP1\src\opencart/catalog/view/theme/');
 define('DIR_CONFIG', 'D:\program\xampp\htdocs\PUBAPP1\src\opencart/system/config/');
