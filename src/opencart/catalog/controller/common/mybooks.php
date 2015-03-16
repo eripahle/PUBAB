@@ -355,10 +355,10 @@ class ControllerCommonMybooks extends Controller {
 		);
 
 		$this->load->model('tool/image');
-                
-		$product_total = $this->model_catalog_productbooks->getTotalProducts($filter_data);
+        $customer_id=$this->customer->getId();
+		$product_total = $this->model_catalog_productbooks->getTotalProducts($filter_data,$customer_id);
 
-		$results = $this->model_catalog_productbooks->getProducts($filter_data);
+		$results = $this->model_catalog_productbooks->getProducts($filter_data,$customer_id);
 
 		foreach ($results as $result) {
 			if (is_file(DIR_IMAGE . $result['image'])) {
@@ -381,17 +381,6 @@ class ControllerCommonMybooks extends Controller {
 
 			$this->load->model('catalog/productbooks');
 			$books=$this->model_catalog_productbooks->getBooks($result['product_id']);
-			/*$data['book']=array();
-
-			foreach ($books as $books) {
-				$buku='system/engine/upload'.$books['draf'];
-
-				$data['book'][]=array(
-					'book' => $buku
-				);
-			}*/
-			//$data['book']=array();
-
 			$data['products'][] = array(
 				'product_id' => $result['product_id'],
 				'image'      => $image,
@@ -407,6 +396,7 @@ class ControllerCommonMybooks extends Controller {
 				'edit'       => $this->url->link('catalog/product/edit', '&product_id=' . $result['product_id'] . $url, 'SSL'),
 				//'download'   => $this->url->link('catalog/product/downloadBooks', '&product_id=' . $result['product_id'] . $url, 'SSL')
 				'download'   => $books['draf']['draf']
+				//'href'       => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
 			);
 		}
 
@@ -416,6 +406,7 @@ class ControllerCommonMybooks extends Controller {
 		$data['text_disabled'] = $this->language->get('text_disabled');
 		$data['text_no_results'] = $this->language->get('text_no_results');
 		$data['text_confirm'] = $this->language->get('text_confirm');
+		$data['text_no_results']=$this->language->get('text_no_results');
 
 		$data['column_image'] = $this->language->get('column_image');
 		$data['column_name'] = $this->language->get('column_name');

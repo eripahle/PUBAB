@@ -345,8 +345,8 @@ class ModelCatalogProductbooks extends Model {
 		return $query->row;
 	}
 
-	public function getProducts($data = array()) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE p.customer_id='2' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+	public function getProducts($data = array(),$customer_id) {
+		$sql = "SELECT * FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE p.customer_id='".(int)$customer_id."' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
 			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
@@ -603,10 +603,10 @@ class ModelCatalogProductbooks extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalProducts($data = array()) {
+	public function getTotalProducts($data = array(),$customer_id) {
 		$sql = "SELECT COUNT(DISTINCT p.product_id) AS total FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id)";
 
-		$sql .= " WHERE p.customer_id='2' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+		$sql .= " WHERE p.customer_id='".(int)$customer_id."' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
 			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
@@ -701,7 +701,7 @@ class ModelCatalogProductbooks extends Model {
 	}
 
 	public function getBooks($product_id) {
-		$query = $this->db->query("SELECT draf FROM " . DB_PREFIX . "draf WHERE product_id = '" . (int)$product_id . "' ");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "draf WHERE product_id = '" . (int)$product_id . "' ");
 		foreach ($query->rows as $result) {
 			$book['draf'] = array(
 				'draf'             => $result['draf']

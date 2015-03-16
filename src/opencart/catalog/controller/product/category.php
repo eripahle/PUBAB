@@ -73,8 +73,12 @@ class ControllerProductCategory extends Controller {
 				} else {
 					$path .= '_' . (int)$path_id;
 				}
-
-				$category_info = $this->model_catalog_category->getCategory($path_id);
+				if($this->customer->isLogged() && $this->customer->getGroupId()==2){
+					$category_info = $this->model_catalog_category->getCategory($path_id);
+				}else{
+					$category_info = $this->model_catalog_category->getCategory($path_id);
+				}
+				
 
 				if ($category_info) {
 					$data['breadcrumbs'][] = array(
@@ -86,8 +90,12 @@ class ControllerProductCategory extends Controller {
 		} else {
 			$category_id = 0;
 		}
-
-		$category_info = $this->model_catalog_category->getCategory($category_id);
+				if($this->customer->isLogged() && $this->customer->getGroupId()==2){
+					$category_info = $this->model_catalog_category->getCategory($category_id);
+				}else{
+					$category_info = $this->model_catalog_category->getCategory($category_id);
+				}
+		
 
 		if ($category_info) {
 			$this->document->setTitle($category_info['meta_title']);
@@ -151,7 +159,12 @@ class ControllerProductCategory extends Controller {
 
 			$data['categories'] = array();
 
-			$results = $this->model_catalog_category->getCategories($category_id);
+			if($this->customer->isLogged() && $this->customer->getGroupId()==2){
+					$results = $this->model_catalog_category->getCategories($category_id);
+				}else{
+					$results = $this->model_catalog_category->getCategories($category_id);
+				}
+			
 
 			foreach ($results as $result) {
 				$filter_data = array(
@@ -159,10 +172,13 @@ class ControllerProductCategory extends Controller {
 					'filter_sub_category' => true
 				);
 
-				$data['categories'][] = array(
+				
+					$data['categories'][] = array(
 					'name'  => $result['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : ''),
 					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '_' . $result['category_id'] . $url)
-				);
+					);
+				
+				
 			}
 
 			$data['products'] = array();
@@ -175,10 +191,11 @@ class ControllerProductCategory extends Controller {
 				'start'              => ($page - 1) * $limit,
 				'limit'              => $limit
 			);
-
-			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
- 
-			$results = $this->model_catalog_product->getProducts($filter_data);
+			//$status=0;
+				$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
+				$results = $this->model_catalog_product->getProducts($filter_data);
+			
+			
 
 			foreach ($results as $result) {
 				if ($result['image']) {

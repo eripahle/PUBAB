@@ -15,6 +15,7 @@ $_['text_percent']           = 'Percentage';
 $_['text_amount']            = 'Fixed Amount';
 $_['text_disabled']			 = 'Disabled';
 $_['text_enabled']			 = 'Enabled';
+$_['text_no_results']		 = 'You do not have a book';
 
 // Column
 $_['column_name']            = 'Product Name';
