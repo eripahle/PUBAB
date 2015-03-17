@@ -93,6 +93,13 @@
     </div>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
+        <li><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a></li>
+        <?php if(!$logged){ ?>
+            <li><a href="<?php echo $howtoselfpublish; ?>"><?php echo $text_howtoselftpublish; ?></a></li>
+            <li><a href="<?php echo $howtobeeditor; ?>"><?php echo $text_howtobeeditor; ?></a></li>
+            <li><a href="<?php echo $howtoshop; ?>"><?php echo $text_howtoshop; ?></a></li>
+            <li><a href="<?php echo $services; ?>"><?php echo $text_service; ?></a></li>
+          <?php } ?>
         <?php if($logged){?>
           <li><a href="<?php echo $mybooks ?>"><?php echo $text_mybooks; ?></a></li>
           <li><a href="<?php echo $publishbook ?>"><?php echo $text_publishbook; ?></a></li>

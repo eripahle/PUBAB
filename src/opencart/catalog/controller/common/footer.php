@@ -64,7 +64,7 @@ class ControllerCommonFooter extends Controller {
         $data['bookpricingandroyalty'] = $this->url->link('account/order', '', 'SSL');
         $data['orderbooks'] = $this->url->link('account/wishlist', '', 'SSL');
         
-        $data['faq'] = $this->url->link('account/voucher', '', 'SSL');
+        $data['faq'] = $this->url->link('information/faq', '', 'SSL');
         $data['abouteditor'] = $this->url->link('affiliate/account', '', 'SSL');
         $data['comunity'] = $this->url->link('product/special');
         $data['videochatadmin'] = $this->url->link('account/account', '', 'SSL');        

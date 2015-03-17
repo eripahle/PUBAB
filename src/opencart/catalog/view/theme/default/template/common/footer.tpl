@@ -35,7 +35,7 @@
                 <div class="col-sm-3">
                     <h5><?php echo $text_quickhelp; ?></h5>
                     <ul class="list-unstyled">
-                        <li><a href="<?php echo $manufacturer; ?>"><?php echo $text_faq; ?></a></li>
+                        <li><a href="<?php echo $faq; ?>"><?php echo $text_faq; ?></a></li>
                         <li><a href="<?php echo $voucher; ?>"><?php echo $text_abouteditor; ?></a></li>
                         <li><a href="<?php echo $affiliate; ?>"><?php echo $text_comunity; ?></a></li>
                         <li><a href="<?php echo $special; ?>"><?php echo $text_videochatadmin; ?></a></li>

@@ -51,6 +51,11 @@ class ControllerCommonHeader extends Controller {
 		$data['text_all'] = $this->language->get('text_all');
 		$data['text_mybooks']=$this->language->get('text_mybooks');
         $data['text_publishbook']=$this->language->get('text_publishbook');
+        $data['text_home']=$this->language->get('text_home');
+		$data['text_howtoselftpublish']=$this->language->get('text_howtoselftpublish');
+        $data['text_howtobeeditor']=$this->language->get('text_howtobeeditor');
+        $data['text_howtoshop']=$this->language->get('text_howtoshop');
+        $data['text_service']=$this->language->get('text_service');
 
         $data['publishbook']=$this->url->link('common/upload_draf_book','', 'SSL');
 		$data['mybooks']=$this->url->link('common/mybooks','', 'SSL');
@@ -68,6 +73,11 @@ class ControllerCommonHeader extends Controller {
 		$data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');
 		$data['contact'] = $this->url->link('information/contact');
 		$data['telephone'] = $this->config->get('config_telephone');
+		$data['howtoselfpublish'] = $this->url->link('information/howtoselfpublish', '' , 'SSL');
+        $data['howtobeeditor'] = $this->url->link('information/howtobeeditor', '' , 'SSL');
+        $data['howtoshop'] = $this->url->link('information/howtoshop','','SSL');        
+        $data['services'] = $this->url->link('information/services','','SSL');
+                
 
 		$status = true;
 

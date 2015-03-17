@@ -16,3 +16,9 @@ $_['text_search']        = 'Search';
 $_['text_all']           = 'See All';
 $_['text_mybooks'] 		 = 'My Books';
 $_['text_publishbook'] 		 = 'Publish Book';
+$_['texy_home']			='Home';
+$_['text_howtoselftpublish']   = 'How to Self Publish';
+$_['text_howtobeeditor']   = 'How to be Editor';
+$_['text_howtoshop']   = 'How to Shop';
+$_['text_service']   = 'Services';
+
