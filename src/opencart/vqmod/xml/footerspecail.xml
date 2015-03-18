@@ -1,0 +1,47 @@
+<modification>
+	<id>Footer Special </id>
+	<version>2.1.0</version>
+	<author>Ravi Raj</author>
+
+	<file name="admin/view/template/design/layout_form.tpl">
+		<operation error="skip">
+			<search position="after" index="1" offset="1" ><![CDATA[<option value="column_right"><?php echo $text_column_right; ?></option>]]></search>
+			<add><![CDATA[<?php if ($layout_module['position'] == 'column_footer') { ?>
+                    <option value="column_footer" selected="selected"><?php echo $text_column_footer; ?></option>
+                    <?php } else { ?>
+                    <option value="column_footer"><?php echo $text_column_footer; ?></option>
+                    <?php } ?>]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="after"><![CDATA[html += '    <option value="column_right"><?php echo $text_column_right; ?></option>';]]></search>
+			<add><![CDATA[html += '    <option value="column_footer"><?php echo $text_column_footer; ?></option>';]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/controller/design/layout.php">
+		<operation error="skip">
+			<search position="after" ><![CDATA[$data['text_column_right'] = $this->language->get('text_column_right');]]></search>
+			<add><![CDATA[$data['text_column_footer'] = $this->language->get('text_column_footer');]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/language/english/design/layout.php">
+		<operation error="skip">
+			<search position="after" ><![CDATA[$_['text_column_right']   = 'Column Right';]]></search>
+			<add><![CDATA[$_['text_column_footer']   = 'Column Footer';]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/common/footer.php">
+		<operation error="skip">
+			<search position="before" ><![CDATA[if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/footer.tpl')) {]]></search>
+			<add><![CDATA[$data['column_footer'] = $this->load->controller('common/column_footer');]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/*/template/common/footer.tpl">
+		<operation error="skip">
+			<search position="before"><![CDATA[<p><?php echo $powered; ?></p>]]></search>
+			<add><![CDATA[<?php echo $column_footer; ?>]]></add>
+		</operation>
+	</file>
+</modification>

@@ -3,17 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/controller/common/upload_draf_book.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/admin/view/template/shipping/jne.tpl</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/model/catalog/category.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/controller/account/download.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/admin/controller/shipping/item.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/admin/controller/shipping/jne.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/controller/account/edit.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/view/theme/default/template/checkout/shipping_method.tpl</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/controller/checkout/shipping_method.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/controller/common/header.php</file>
-            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/controller/account/account.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/view/theme/default/template/module/upload_book.tpl</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/view/theme/default/template/module/gallery.tpl</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/model/tool/image.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/admin/view/template/catalog/product_list.tpl</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/admin/view/template/design/banner_list.tpl</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/language/english/module/gallery.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/admin/controller/catalog/product.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/admin/view/template/catalog/product_form.tpl</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/admin/view/template/design/banner_form.tpl</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/config.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/admin/index.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/admin/config.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/admin/controller/common/menu.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/admin/model/design/banner.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/controller/module/TRIAL_comunity.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/controller/module/TRIAL_abouteditor.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/system/engine/galleryview/gallery.html</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/admin/controller/design/banner.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/controller/module/upload_book.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/controller/module/TRIAL_testimony.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/catalog/controller/module/gallery.php</file>
+            <file>file:/D:/program/xampp/htdocs/PUBAPP1/src/opencart/admin/model/tool/image.php</file>
         </group>
     </open-files>
 </project-private>
