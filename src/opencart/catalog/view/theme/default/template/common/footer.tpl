@@ -37,7 +37,7 @@
                     <ul class="list-unstyled">
                         <li><a href="<?php echo $faq; ?>"><?php echo $text_faq; ?></a></li>
                         <li><a href="<?php echo $voucher; ?>"><?php echo $text_abouteditor; ?></a></li>
-                        <li><a href="<?php echo $affiliate; ?>"><?php echo $text_comunity; ?></a></li>
+                        <li><a href="<?php echo $comunity; ?>"><?php echo $text_comunity; ?></a></li>
                         <li><a href="<?php echo $special; ?>"><?php echo $text_videochatadmin; ?></a></li>
                     </ul>
                 </div>

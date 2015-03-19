@@ -53,6 +53,7 @@ class ControllerModuleUploadBook extends Controller {
             //
         }
         $data['filebuku'] = $this->request->files;
+        $data['fileimage'] = $this->request->files;
 
         if (isset($this->request->post['image'])) {
             $data['image'] = $this->request->post['image'];
@@ -89,11 +90,10 @@ class ControllerModuleUploadBook extends Controller {
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
             $product_id = $this->model_module_uploadbook->addProduct($this->request->post);
-            $this->model_module_uploadbook->insertFile($this->request->files,$product);
+            $this->model_module_uploadbook->insertFile($this->request->files,$product_id);
         }
-
-        $link=$this->url->link('common/home', '', 'ssl');
-        header('location:index.php/route?common/home');
+        //$link=$this->url->link('common/home', '', 'ssl');
+        //header('location:index.php/route?common/home');
     }
 
 }

@@ -66,7 +66,7 @@ class ControllerCommonFooter extends Controller {
         
         $data['faq'] = $this->url->link('information/faq', '', 'SSL');
         $data['abouteditor'] = $this->url->link('affiliate/account', '', 'SSL');
-        $data['comunity'] = $this->url->link('product/special');
+        $data['comunity'] = $this->url->link('common/comunity');
         $data['videochatadmin'] = $this->url->link('account/account', '', 'SSL');        
                 
         

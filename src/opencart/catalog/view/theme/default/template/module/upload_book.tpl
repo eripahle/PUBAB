@@ -32,31 +32,31 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_isbn; ?></label>
                             <div class="col-sm-10">
-                                <input type="number" name="isbn" placeholder="<?php echo $help_entry_isbn; ?>" id="input-titlebook" class="form-control" />
+                                <input type="number" readonly="yes" name="isbn" placeholder="ISBN anda akan ditentukan oleh Pihak PUBAPP" value="1234567890" id="input-titlebook" class="form-control" />
                             </div>
                         </div>                                
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_harga; ?></label>
                             <div class="col-sm-10">
-                                <input type="number" name="harga" placeholder="<?php echo $help_entry_harga; ?>" id="input-titlebook" class="form-control" />
+                                <input type="number" name="harga" required placeholder="<?php echo $help_entry_harga; ?>" id="input-titlebook" class="form-control" />
                             </div>
                         </div>                                      
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_jumlah_halaman; ?></label>
                             <div class="col-sm-10">
-                                <input type="text" name="jumlahhalaman" placeholder="<?php echo $help_entry_jumlah_halaman; ?>" id="input-titlebook" class="form-control" />
+                                <input type="text" name="jumlahhalaman" required placeholder="<?php echo $help_entry_jumlah_halaman; ?>" id="input-titlebook" class="form-control" />
                             </div>
                         </div>                                
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_sinopsis; ?></label>
                             <div class="col-sm-10">
-                                <input type="text" name="sinopsis" placeholder="<?php echo $help_entry_sinopsis; ?>" id="input-titlebook" class="form-control" />
+                                <input type="text" name="sinopsis" required placeholder="<?php echo $help_entry_sinopsis; ?>" id="input-titlebook" class="form-control" />
                             </div>
                         </div>                                                                                                             
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_cover; ?></label>                            
                             <div class="col-sm-10">                                
-                                <input type="file" name="fileimage" required value="<?php echo $browse; ?>" class="btn btn-primary" >
+                                <input type="file" name="fileimage" value="<?php echo $browse; ?>" class="btn btn-primary" >
                             </div>                                
                         </div>            
                         <div class="form-group">
