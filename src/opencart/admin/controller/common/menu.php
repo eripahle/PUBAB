@@ -148,9 +148,11 @@ class ControllerCommonMenu extends Controller {
                 
 		$data['product'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'], 'SSL');
                 
-                $data['comunity'] = $this->url->link('common/comunity', 'token=' . $this->session->data['token'], 'SSL');
-                $data['gallery'] = $this->url->link('common/gallery', 'token=' . $this->session->data['token'], 'SSL');
-                $data['calendar'] = $this->url->link('common/calendar', 'token=' . $this->session->data['token'], 'SSL');
+                
+                // modul link menu buatan sendiri
+                $data['comunity'] = $this->url->link('module/comunity', 'token=' . $this->session->data['token'], 'SSL');
+                $data['gallery'] = $this->url->link('module/gallery', 'token=' . $this->session->data['token'], 'SSL');
+                $data['calendar'] = $this->url->link('module/calendar', 'token=' . $this->session->data['token'], 'SSL');
                 
 		$data['report_sale_order'] = $this->url->link('report/sale_order', 'token=' . $this->session->data['token'], 'SSL');
 		$data['report_sale_tax'] = $this->url->link('report/sale_tax', 'token=' . $this->session->data['token'], 'SSL');
