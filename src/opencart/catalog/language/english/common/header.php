@@ -21,4 +21,5 @@ $_['text_howtoselftpublish']   = 'How to Self Publish';
 $_['text_howtobeeditor']   = 'How to be Editor';
 $_['text_howtoshop']   = 'How to Shop';
 $_['text_service']   = 'Services';
+$_['text_editing_book']   = 'Editing Book';
 

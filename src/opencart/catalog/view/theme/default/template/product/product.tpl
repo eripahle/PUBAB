@@ -130,6 +130,7 @@
         <?php } else { ?>
         <?php $class = 'col-sm-4'; ?>
         <?php } ?>
+        <?php if($statusProduct==true){ ?>
         <div class="<?php echo $class; ?>">
           <div class="btn-group">
             <button type="button" data-toggle="tooltip" class="btn btn-default" title="<?php echo $button_wishlist; ?>" onclick="wishlist.add('<?php echo $product_id; ?>');"><i class="fa fa-heart"></i></button>
@@ -312,7 +313,7 @@
               <div class="help-block" id="recurring-description"></div>
             </div>
             <?php } ?>
-            <!-- penambahan button add for editing for editor -->
+           
             <div class="form-group">
               <label class="control-label" for="input-quantity"><?php echo $entry_qty; ?></label>
               <input type="text" name="quantity" value="<?php echo $minimum; ?>" size="2" id="input-quantity" class="form-control" />
@@ -320,9 +321,8 @@
               <br />
               <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $button_cart; ?></button>
               <br />
-             <?php if($logged && $customer_group==2){ ?>
-               <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $button_edit_editor; ?></button>
-             <?php } ?>
+             <!-- penambahan button add for editing for editor -->
+             
             </div>
             <?php if ($minimum > 1) { ?>
             <div class="alert alert-info"><i class="fa fa-info-circle"></i> <?php echo $text_minimum; ?></div>
@@ -347,6 +347,14 @@
           </div>
           <?php } ?>
         </div>
+        <?php } else{ ?>
+             <?php if($logged && $customer_group==2){ ?>
+             <div class="<?php echo $class; ?>">
+                  <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $button_edit_editor; ?></button>
+              </div>
+             <?php } ?>
+        <?php } ?>
+        
       </div>
       <?php if ($products) { ?>
       <h3><?php echo $text_related; ?></h3>

@@ -13,48 +13,11 @@
     <?php } else { ?>
     <?php $class = 'col-sm-12'; ?>
     <?php } ?>
-    <div id="content" class="<?php echo $class; ?>"><?php echo $content_top; ?>
+    <div id="content" class="<?php echo $class; ?>">
       <h2><?php echo $heading_title; ?></h2>
-      <?php if ($thumb || $description) { ?>
-      <div class="row">
-        <?php if ($thumb) { ?>
-        <div class="col-sm-2"><img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" title="<?php echo $heading_title; ?>" class="img-thumbnail" /></div>
-        <?php } ?>
-        <?php if ($description) { ?>
-        <div class="col-sm-10"><?php echo $description; ?></div>
-        <?php } ?>
-      </div>
-      <hr>
-      <?php } ?>
-    
-       <!--untuk menampilkan kategori di produk<?php //if ($categories) { ?>
-      <h3><?php //echo $text_refine; ?></h3>
-      <?php //if (count($categories) <= 5) { ?>
-      <div class="row">
-        <div class="col-sm-3">
-          <ul>
-            <?php //foreach ($categories as $category) { ?>
-            <li><a href="<?php //echo $category['href']; ?>"><?php //echo $category['name']; ?></a></li>
-            <?php// } ?>
-          </ul>
-        </div>
-      </div>
-      <?php// } else { ?>
-      <div class="row">
-        <?php //foreach (array_chunk($categories, ceil(count($categories) / 4)) as $categories) { ?>
-        <div class="col-sm-3">
-          <ul>
-            <?php //foreach ($categories as $category) { ?>
-            <li><a href="<?php //echo $category['href']; ?>"><?php //echo $category['name']; ?></a></li>
-            <?php //} ?>
-          </ul>
-        </div>
-        <?php //} ?>
-      </div>
-      <?php //} ?>
-      <?php //} ?>-->
+      
       <?php if ($products) { ?>
-     <!-- <p><a href="<?php //echo $compare; ?>" id="compare-total"><?php //echo $text_compare; ?></a></p>-->
+    
       <div class="row">
         <div class="col-md-4">
           <div class="btn-group hidden-xs">

@@ -155,8 +155,13 @@ class ControllerProductProduct extends Controller {
 		}
 
 		$this->load->model('catalog/product');
-
-		$product_info = $this->model_catalog_product->getProduct($product_id);
+		$status='1';
+		if($this->customer->getGroupId()==2){
+			$status='0';
+		}
+		$product_info = $this->model_catalog_product->getProductEdit($product_id,$status);
+		//status untuk mengetahui salah satu product apakah sudah ada editor atau belum
+		$data['statusProduct']=$this->model_catalog_product->cekBookHasBeenEdit($product_id);
 
 		if ($product_info) {
 			$url = '';
@@ -429,7 +434,7 @@ class ControllerProductProduct extends Controller {
 				} else {
 					$rating = false;
 				}
-
+				//$statusEdit = $this->model_catalog_product->cekBookHasBeenEdit($this->request->get['product_id']);
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,

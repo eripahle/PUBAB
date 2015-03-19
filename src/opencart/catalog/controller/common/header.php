@@ -56,12 +56,14 @@ class ControllerCommonHeader extends Controller {
         $data['text_howtobeeditor']=$this->language->get('text_howtobeeditor');
         $data['text_howtoshop']=$this->language->get('text_howtoshop');
         $data['text_service']=$this->language->get('text_service');
+        $data['text_editing_book']=$this->language->get('text_editing_book');
 
         $data['publishbook']=$this->url->link('common/upload_draf_book','', 'SSL');
 		$data['mybooks']=$this->url->link('common/mybooks','', 'SSL');
 		$data['home'] = $this->url->link('common/home');
 		$data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
 		$data['logged'] = $this->customer->isLogged();
+		$data['customer_group'] = $this->customer->getGroupId();
 		$data['account'] = $this->url->link('account/account', '', 'SSL');
 		$data['register'] = $this->url->link('account/register', '', 'SSL');
 		$data['login'] = $this->url->link('account/login', '', 'SSL');
@@ -77,7 +79,7 @@ class ControllerCommonHeader extends Controller {
         $data['howtobeeditor'] = $this->url->link('information/howtobeeditor', '' , 'SSL');
         $data['howtoshop'] = $this->url->link('information/howtoshop','','SSL');        
         $data['services'] = $this->url->link('information/services','','SSL');
-                
+        $data['editing_book'] = $this->url->link('information/listeditbook','','SSL');
 
 		$status = true;
 

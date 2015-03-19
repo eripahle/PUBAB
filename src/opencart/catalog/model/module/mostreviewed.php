@@ -3,7 +3,7 @@ class ModelModuleMostReviewed extends Model {
 	
 	public function getMostReviewed($settings) {		
 		
-		$limit = $settings['limit'];		
+		$limit = 5;		
 		$product_data = array();
 		
 		if(!isset($limit) || $limit<0) return $product_data;
