@@ -195,7 +195,6 @@ class ModelModuleUploadbook extends Model {
 //		}
 
         $this->cache->delete('product');
-
         $this->event->trigger('post.admin.product.add', $product_id);
 
         return $product_id;
