@@ -16,9 +16,9 @@ $_['text_percent']           = 'Percentage';
 $_['text_amount']            = 'Fixed Amount';
 
 // Column
-$_['column_name']            = 'Product Name';
+$_['column_name']            = 'Book Title';
 $_['column_model']           = 'Model';
-$_['column_image']           = 'Image';
+$_['column_image']           = 'Cover';
 $_['column_price']           = 'Price';
 $_['column_quantity']        = 'Quantity';
 $_['column_status']          = 'Status Jual';
@@ -28,7 +28,7 @@ $_['column_status_management']  = 'Status Management';
 $_['column_action']          = 'Action';
 
 // Entry
-$_['entry_name']             = 'Product Name';
+$_['entry_name']             = 'Book Title';
 $_['entry_description']      = 'Description';
 $_['entry_meta_title'] 	     = 'Meta Tag Title';
 $_['entry_meta_keyword'] 	 = 'Meta Tag Keywords';
@@ -61,7 +61,7 @@ $_['entry_length_class']     = 'Length Class';
 $_['entry_length']           = 'Length';
 $_['entry_width']            = 'Width';
 $_['entry_height']           = 'Height';
-$_['entry_image']            = 'Image';
+$_['entry_image']            = 'Cover';
 $_['entry_customer_group']   = 'Customer Group';
 $_['entry_date_start']       = 'Date Start';
 $_['entry_date_end']         = 'Date End';

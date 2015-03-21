@@ -13,20 +13,20 @@ $_['text_option']            = 'Option';
 $_['text_option_value']      = 'Option Value';
 $_['text_percent']           = 'Percentage';
 $_['text_amount']            = 'Fixed Amount';
-$_['text_disabled']			 = 'Disabled';
-$_['text_enabled']			 = 'Enabled';
+$_['text_disabled']			 = 'Process';
+$_['text_enabled']			 = 'Done';
 $_['text_no_results']		 = 'You do not have a book';
 
 // Column
 $_['column_name']            = 'Product Name';
 $_['column_model']           = 'Model';
-$_['column_image']           = 'Image';
+$_['column_image']           = 'Cover';
 $_['column_price']           = 'Price';
 $_['column_quantity']        = 'Quantity';
-$_['column_status']          = 'Status Jual';
-$_['column_status_author']   = 'Status Author';
-$_['column_status_editor']   = 'Status Editor';
-$_['column_status_management']  = 'Status Management';
+$_['column_status']          = 'Approval For Sale';
+$_['column_status_author']   = 'Approval By Author';
+$_['column_status_editor']   = 'Approval By Editor';
+$_['column_status_management']  = 'Approval By Management';
 $_['column_action']          = 'Action';
 
 // Entry

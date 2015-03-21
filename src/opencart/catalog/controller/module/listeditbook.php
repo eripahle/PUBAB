@@ -1,6 +1,11 @@
 <?php
 class ControllerModuleListeditbook extends Controller {
 	public function index($setting) {
+
+		if(!$this->customer->isLogged()){
+			$this->response->redirect($this->url->link('account/login', ' ', 'SSL'));
+		}
+		
 		$this->load->language('module/listeditbook');
 
 		$data['heading_title'] = $this->language->get('heading_title');

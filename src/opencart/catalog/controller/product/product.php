@@ -159,6 +159,7 @@ class ControllerProductProduct extends Controller {
 		if($this->customer->getGroupId()==2){
 			$status='0';
 		}
+		
 		$product_info = $this->model_catalog_product->getProductEdit($product_id,$status);
 		//status untuk mengetahui salah satu product apakah sudah ada editor atau belum
 		$data['statusProduct']=$this->model_catalog_product->cekBookHasBeenEdit($product_id);

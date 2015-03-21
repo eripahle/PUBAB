@@ -3,6 +3,9 @@ class ControllerCommonMybooks extends Controller {
 	private $error = array();
 
 	public function index() {
+		if(!$this->customer->isLogged()){
+			$this->response->redirect($this->url->link('account/login', ' ', 'SSL'));
+		}
 		$this->load->language('product/mybooks');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -81,7 +84,7 @@ class ControllerCommonMybooks extends Controller {
 	}
 
 	public function editBook(){
-		$this->load->language('common/editmybook');
+		//$this->load->language('common/editmybook');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
@@ -98,7 +101,10 @@ class ControllerCommonMybooks extends Controller {
 		$this->getFormEdit();
 	}
 	public function edit() {
-		$this->load->language('common/editmybook');
+		if(!$this->customer->isLogged()){
+			$this->response->redirect($this->url->link('account/login', ' ', 'SSL'));
+		}
+		$this->load->language('product/mybooks');
 		
 		$this->document->setTitle($this->language->get('heading_title'));
 
@@ -259,6 +265,9 @@ class ControllerCommonMybooks extends Controller {
               
 
 	protected function getList() {
+		if(!$this->customer->isLogged()){
+			$this->response->redirect($this->url->link('account/login', ' ', 'SSL'));
+		}
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
