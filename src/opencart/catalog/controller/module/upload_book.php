@@ -92,8 +92,8 @@ class ControllerModuleUploadBook extends Controller {
             $product_id = $this->model_module_uploadbook->addProduct($this->request->post);
             $this->model_module_uploadbook->insertFile($this->request->files,$product_id);
         }
-        //$link=$this->url->link('common/home', '', 'ssl');
-        //header('location:index.php/route?common/home');
+        $link=$this->url->link('common/home', '', 'ssl');
+        header('location:index.php/route?common/home');
     }
 
 }

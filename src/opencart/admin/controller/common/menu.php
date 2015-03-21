@@ -154,6 +154,7 @@ class ControllerCommonMenu extends Controller {
                 $data['gallery'] = $this->url->link('module/gallery', 'token=' . $this->session->data['token'], 'SSL');
                 $data['calendar'] = $this->url->link('module/calendar', 'token=' . $this->session->data['token'], 'SSL');
                 
+                
 		$data['report_sale_order'] = $this->url->link('report/sale_order', 'token=' . $this->session->data['token'], 'SSL');
 		$data['report_sale_tax'] = $this->url->link('report/sale_tax', 'token=' . $this->session->data['token'], 'SSL');
 		$data['report_sale_shipping'] = $this->url->link('report/sale_shipping', 'token=' . $this->session->data['token'], 'SSL');
@@ -191,7 +192,6 @@ class ControllerCommonMenu extends Controller {
 		$data['recurring'] = $this->url->link('catalog/recurring', 'token=' . $this->session->data['token'], 'SSL');
 		$data['order_recurring'] = $this->url->link('sale/recurring', 'token=' . $this->session->data['token'], 'SSL');
                 
-
 		$data['openbay_show_menu'] = $this->config->get('openbaypro_menu');
 		$data['openbay_link_extension'] = $this->url->link('extension/openbay', 'token=' . $this->session->data['token'], 'SSL');
 		$data['openbay_link_orders'] = $this->url->link('extension/openbay/orderlist', 'token=' . $this->session->data['token'], 'SSL');
