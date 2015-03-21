@@ -50,7 +50,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_sinopsis; ?></label>
                             <div class="col-sm-10">
-                                <input type="text" name="sinopsis" required placeholder="<?php echo $help_entry_sinopsis; ?>" id="input-titlebook" class="form-control" />
+                                <textarea  rows="5" name="sinopsis" required placeholder="<?php echo $help_entry_sinopsis; ?>" id="input-titlebook" class="form-control" ></textarea>
                             </div>
                         </div>                                                                                                             
                         <div class="form-group">

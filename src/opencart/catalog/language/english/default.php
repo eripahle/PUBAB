@@ -58,6 +58,44 @@ $_['button_list']           = 'List';
 $_['button_grid']           = 'Grid';
 $_['button_map']            = 'View Google Map';
 
+// Tab
+$_['tab_address']                   = 'Address';
+$_['tab_admin']                     = 'Admin';
+$_['tab_attribute']                 = 'Attribute';
+$_['tab_customer']                  = 'Customer Details';
+$_['tab_data']                      = 'Data';
+$_['tab_design']                    = 'Design';
+$_['tab_discount']                  = 'Discount';
+$_['tab_general']                   = 'General';
+$_['tab_history']                   = 'History';
+$_['tab_fraud']                     = 'Fraud';
+$_['tab_ftp']                       = 'FTP';
+$_['tab_ip']                        = 'IP Addresses';
+$_['tab_links']                     = 'Links';
+$_['tab_log']                       = 'Log';
+$_['tab_image']                     = 'Image';
+$_['tab_option']                    = 'Option';
+$_['tab_server']                    = 'Server';
+$_['tab_store']                     = 'Store';
+$_['tab_special']                   = 'Special';
+$_['tab_local']                     = 'Local';
+$_['tab_mail']                      = 'Mail';
+$_['tab_module']                    = 'Module';
+$_['tab_order']                     = 'Order Details';
+$_['tab_payment']                   = 'Payment Details';
+$_['tab_product']                   = 'Products';
+$_['tab_reward']                    = 'Reward Points';
+$_['tab_shipping']                  = 'Shipping Details';
+$_['tab_total']                     = 'Totals';
+$_['tab_transaction']               = 'Transactions';
+$_['tab_voucher']                   = 'Vouchers';
+$_['tab_sale']                      = 'Sales';
+$_['tab_marketing']                 = 'Marketing';
+$_['tab_online']                    = 'People Online';
+$_['tab_activity']                  = 'Recent Activity';
+$_['tab_recurring']                 = 'Recurring';
+$_['tab_action']                    = 'Action';
+
 // Error
 $_['error_exception']       = 'Error Code(%s): %s in %s on line %s';
 $_['error_upload_1']        = 'Warning: The uploaded file exceeds the upload_max_filesize directive in php.ini!';
