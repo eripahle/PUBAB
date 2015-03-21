@@ -3,7 +3,11 @@
 class ControllerModuleUploadBook extends Controller {
 
     public function index() {
+
+
         $this->load->language('module/upload_book');
+
+        $data['logged'] = $this->customer->isLogged();
 
         $data['heading_title'] = $this->language->get('heading_title');
         $data['text_tax'] = $this->language->get('text_tax');
@@ -40,12 +44,12 @@ class ControllerModuleUploadBook extends Controller {
 
         $data['cancel'] = $this->url->link('common/home', '', 'ssl');
 
-        $this->load->model('module/uploadbook');
+        $this->load->model('module/upload_draf');
         $this->load->model('catalog/product');
         $this->load->model('tool/image');
 
 
-        $data['category_classes'] = $this->model_module_uploadbook->getCategory();
+        $data['category_classes'] = $this->model_module_upload_draf->getCategory();
 
         if (!isset($this->request->get['product_id'])) {
             $data['action'] = $this->url->link('module/upload_book/add', '', 'SSL');
@@ -61,7 +65,7 @@ class ControllerModuleUploadBook extends Controller {
             $data['image'] = $product_info['image'];
         } else {
             $data['image'] = '';
-        }       
+        }
 
         if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {
             $data['thumb'] = $this->model_tool_image->resize($this->request->post['image'], 100, 100);
@@ -73,27 +77,71 @@ class ControllerModuleUploadBook extends Controller {
 
         $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
-
-        if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/upload_book.tpl')) {
-            return $this->load->view($this->config->get('config_template') . '/template/module/upload_book.tpl', $data);
-        }
-        else {
-            return $this->load->view('default/template/module/upload_book.tpl', $data);
+        if ($data['logged']) {
+            if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/upload_book.tpl')) {
+                return $this->load->view($this->config->get('config_template') . '/template/module/upload_book.tpl', $data);
+            } else {
+                return $this->load->view('default/template/module/upload_book.tpl', $data);
+            }
         }
     }
 
     public function add() {
+
         $this->load->language('module/upload_book');
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('module/uploadbook');
+        $this->load->model('module/upload_draf');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
-            $product_id = $this->model_module_uploadbook->addProduct($this->request->post);
-            $this->model_module_uploadbook->insertFile($this->request->files,$product_id);
+            if ($this->checkValidRequestDrafBook($this->request->files) &&
+                $this->checkValidRequestDrafImage($this->request->files)) {                
+                    $stat = $product_id = $this->model_module_upload_draf->addProduct($this->request->post, $this->request->files,true);
+                    //$this->model_module_uploadbook->insertFile($this->request->files,$product_id);
+                if($stat){
+                        header('location:index.php/route?common/upload_draf_book');
+                }                
+            } else {
+                echo " gagal";
+            }
+        }        
+        
+    }
+
+    public function checkValidRequestDrafBook($data) {
+        $dot = '.';
+        $allowed_ext_buku = array('doc', 'docx');
+        $file_name_buku = $data['filebuku']['name'];
+        $file_ext_buku = strtolower(end(explode($dot, $file_name_buku)));
+        $file_size_buku = $data['filebuku']['size'];
+
+        if (in_array($file_ext_buku, $allowed_ext_buku) === true) {
+            if ($file_size_buku < 1044070000) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
         }
-        $link=$this->url->link('common/home', '', 'ssl');
-        header('location:index.php/route?common/home');
+    }
+
+    public function checkValidRequestDrafimage($data) {
+        $dot = '.';
+        $allowed_ext_image = array('png', 'jpeg', 'jpg');
+        $file_name_image = $data['fileimage']['name'];
+        $file_ext_image = strtolower(end(explode($dot, $file_name_image)));
+        $file_size_image = $data['fileimage']['size'];
+
+        if (in_array($file_ext_image, $allowed_ext_image) === true) {
+            if ($file_size_image < 1044070000) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
     }
 
 }

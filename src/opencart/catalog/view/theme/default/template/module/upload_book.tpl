@@ -11,7 +11,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_judul_buku; ?></label>
                             <div class="col-sm-10">
-                                <input type="text" name="titlebook" placeholder="<?php echo $help_entry_judul_buku; ?>" id="input-titlebook" class="form-control" />
+                                <input type="text" name="titlebook" required placeholder="<?php echo $help_entry_judul_buku; ?>" id="input-titlebook" class="form-control" />
                             </div>
                         </div>                                                    
                         <div class="form-group">
@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_isbn; ?></label>
                             <div class="col-sm-10">
-                                <input type="number" readonly="yes" name="isbn" placeholder="ISBN anda akan ditentukan oleh Pihak PUBAPP" value="1234567890" id="input-titlebook" class="form-control" />
+                                <input type="number" readonly="yes" required name="isbn" placeholder="ISBN anda akan ditentukan oleh Pihak PUBAPP" value="1234567890" id="input-titlebook" class="form-control" />
                             </div>
                         </div>                                
                         <div class="form-group">
