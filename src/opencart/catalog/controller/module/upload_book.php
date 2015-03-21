@@ -4,7 +4,6 @@ class ControllerModuleUploadBook extends Controller {
 
     public function index() {
 
-
         $this->load->language('module/upload_book');
 
         $data['logged'] = $this->customer->isLogged();
@@ -15,7 +14,7 @@ class ControllerModuleUploadBook extends Controller {
         $data['button_wishlist'] = $this->language->get('button_wishlist');
         $data['button_compare'] = $this->language->get('button_compare');
         $data['text_non'] = $this->language->get('text_non');
-
+        $data['entry_request_design'] = $this->language->get('entry_request_design');
         $data['entry_judul_buku'] = $this->language->get('entry_judul_buku');
         $data['entry_kategori_buku'] = $this->language->get('entry_kategori_buku');
         $data['entry_file_buku'] = $this->language->get('entry_file_buku');
@@ -90,22 +89,34 @@ class ControllerModuleUploadBook extends Controller {
 
         $this->load->language('module/upload_book');
         $this->document->setTitle($this->language->get('heading_title'));
-
         $this->load->model('module/upload_draf');
 
-        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
-            if ($this->checkValidRequestDrafBook($this->request->files) &&
-                $this->checkValidRequestDrafImage($this->request->files)) {                
-                    $stat = $product_id = $this->model_module_upload_draf->addProduct($this->request->post, $this->request->files,true);
-                    //$this->model_module_uploadbook->insertFile($this->request->files,$product_id);
-                if($stat){
-                        header('location:index.php/route?common/upload_draf_book');
-                }                
-            } else {
-                echo " gagal";
+        if (isset($this->request->post['requestdesign'])) {
+            if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+                if ($this->checkValidRequestDrafBook($this->request->files) &&                    
+                    $this->checkValidNumber($this->request->post)) {
+                    $stat = $product_id = $this->model_module_upload_draf->addProductWithRequestDesign($this->request->post, $this->request->files, $this->customer->getID(), true);
+                    if ($stat) {
+                        header('location:index.php/index.php?route=common/upload_draf_book');
+                    }
+                } else {
+                    echo " gagal";
+                }
             }
-        }        
-        
+        }else{
+            if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+                if ($this->checkValidRequestDrafBook($this->request->files) &&
+                        $this->checkValidRequestDrafImage($this->request->files) &&
+                        $this->checkValidNumber($this->request->post)) {
+                    $stat = $product_id = $this->model_module_upload_draf->addProduct($this->request->post, $this->request->files, $this->customer->getID(), true);
+                    if ($stat) {
+                        header('location:index.php/route?common/upload_draf_book');
+                    }
+                } else {
+                    echo " gagal";
+                }
+            }
+        }
     }
 
     public function checkValidRequestDrafBook($data) {
@@ -139,6 +150,15 @@ class ControllerModuleUploadBook extends Controller {
             } else {
                 return FALSE;
             }
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function checkValidNumber($data) {
+        print_r($data);
+        if ($data['harga'] > 0 && $data['jumlahhalaman'] > 0) {
+            return TRUE;
         } else {
             return FALSE;
         }

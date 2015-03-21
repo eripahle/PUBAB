@@ -56,9 +56,17 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_cover; ?></label>                            
                             <div class="col-sm-10">                                
-                                <input type="file" name="fileimage" value="<?php echo $browse; ?>" class="btn btn-primary" >
-                            </div>                                
+                                <input  type="file" name="fileimage" value="<?php echo $browse; ?>" class="btn btn-primary" >
+                            </div>                                                                       
                         </div>            
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_request_design; ?></label>                            
+                            <div class="col-sm-10">                                
+                                <input type="checkbox" name="requestdesign"/>                                                                
+                            </div>                                                                       
+                        </div>            
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_file_buku; ?></label>
                             <div class="col-sm-10">                                
