@@ -760,12 +760,24 @@ class ModelCatalogProduct extends Model {
 	}
 
 	public function editProduct($product_id, $data) {
-		//$this->event->trigger('pre.admin.product.edit', $data);
+		$this->event->trigger('pre.admin.product.editProduct', $data);
 
-		$this->db->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "',status1 = '" . (int)$data['status1'] . "',status2 = '" . (int)$data['status2'] . "',status3 = '" . (int)$data['status3'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "product SET  price = '" . (float)$data['price'] . "' WHERE product_id = '" . (int)$product_id . "'");
 
-		if (isset($data['image'])) {
-			$this->db->query("UPDATE " . DB_PREFIX . "product SET image = '" . $this->db->escape($data['image']) . "' WHERE product_id = '" . (int)$product_id . "'");
+		if (!isset($data['fileimage'])) {
+			$dot = '.';
+			$result = $this->db->query("SELECT image FROM ".DB_PREFIX. "product WHERE product_id=".$product_id)->row;
+			if(is_file(DIR_IMAGE."/".$result['image'])){
+				unlink(DIR_IMAGE."/".$result['image']);
+			}
+
+				$sumber= $_FILES['fileimage']['tmp_name'];
+				$target=$_FILES['fileimage']['name'];
+	            $lokasi_cover="cover/".date("smhymd")."_".$target;
+	            move_uploaded_file($sumber, DIR_IMAGE."/".$lokasi_cover);
+
+				$this->db->query("UPDATE " . DB_PREFIX . "product SET image = '".$lokasi_cover."' WHERE product_id = '" . (int)$product_id . "'");
+		
 		}
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_description WHERE product_id = '" . (int)$product_id . "'");
@@ -907,8 +919,8 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		//$this->cache->delete('product');
+		$this->cache->delete('product');
 
-		//$this->event->trigger('post.admin.product.edit', $product_id);
+		$this->event->trigger('post.admin.product.editProduct', $product_id);
 	}
 }

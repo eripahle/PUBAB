@@ -416,7 +416,7 @@ class ControllerCommonMybooks extends Controller {
 				'special'    => $special,
 				'quantity'   => $result['quantity'],
 				'status'     => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-				'status1'    => ($result['status1']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'status1'    => ($result['status1']) ? $this->language->get('text_agree') : $this->language->get('text_disagree'),
 				'status2'    => ($result['status2']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'status3'    => ($result['status3']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'edit'       => $this->url->link('common/mybooks/edit', '&product_id=' . $result['product_id'] . $url, 'SSL'),
@@ -654,6 +654,8 @@ class ControllerCommonMybooks extends Controller {
 		$data['text_form'] = !isset($this->request->get['product_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
+		$data['text_agree'] = $this->language->get('text_agree');
+		$data['text_disagree'] = $this->language->get('text_disagree');
 		$data['text_none'] = $this->language->get('text_none');
 		$data['text_yes'] = $this->language->get('text_yes');
 		$data['text_no'] = $this->language->get('text_no');
@@ -698,6 +700,7 @@ class ControllerCommonMybooks extends Controller {
 		$data['entry_width'] = $this->language->get('entry_width');
 		$data['entry_height'] = $this->language->get('entry_height');
 		$data['entry_image'] = $this->language->get('entry_image');
+		$data['entry_new_image'] = $this->language->get('entry_new_image');
 		$data['entry_store'] = $this->language->get('entry_store');
 		$data['entry_manufacturer'] = $this->language->get('entry_manufacturer');
 		$data['entry_download'] = $this->language->get('entry_download');

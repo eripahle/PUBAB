@@ -66,8 +66,8 @@ class ModelModuleUploadDraf extends Model {
             $file_tmp_caver = $file['fileimage']['tmp_name'];
 
             // handel upload db
-            $lokasi_caver = 'system/engine/upload/cavers/' . $nama_buku . '.' . $file_ext_caver;
-            move_uploaded_file($file_tmp_caver, $lokasi_caver);
+            $lokasi_caver = "cover/". $nama_buku . '.' . $file_ext_caver;
+            move_uploaded_file($file_tmp_caver, DIR_IMAGE."/".$lokasi_caver);
 
 
             $stat = $this->db->query("INSERT INTO " . DB_PREFIX
