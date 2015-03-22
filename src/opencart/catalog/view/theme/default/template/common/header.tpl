@@ -105,6 +105,7 @@
           <li><a href="<?php echo $publishbook ?>"><?php echo $text_publishbook; ?></a></li>
           <?php if($customer_group=='2'){ ?>
                 <li><a href="<?php echo $editing_book ?>"><?php echo $text_editing_book; ?></a></li>
+                 <li><a href="<?php echo $list_edit_book ?>"><?php echo $text_list_edit_book; ?></a></li>
           <?php }?>
         <?php } ?>
         <?php foreach ($categories as $category) { ?>

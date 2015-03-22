@@ -22,4 +22,5 @@ $_['text_howtobeeditor']   = 'How to be Editor';
 $_['text_howtoshop']   = 'How to Shop';
 $_['text_service']   = 'Services';
 $_['text_editing_book']   = 'Editing Book';
+$_['text_list_edit_book'] = "List My Editing";
 

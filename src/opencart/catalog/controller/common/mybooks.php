@@ -67,39 +67,6 @@ class ControllerCommonMybooks extends Controller {
 		$this->getForm();
 	}
 
-	public function downloadBooks(){
-		$this->load->model('catalog/productbooks');
-		$books=$this->model_catalog_productbooks->getBooks($this->request->get['product_id']);
-		$data['book']=array();
-
-		foreach ($books as $books) {
-			$buku='system/engine/upload'.$books['draf'];
-
-			$data['book'][]=array(
-				'book' => $buku
-			);
-		}
-
-		$this->response->redirect($this->load->view('common/mybooks.tpl',' ','SSL'));
-	}
-
-	public function editBook(){
-		//$this->load->language('common/editmybook');
-
-		$this->document->setTitle($this->language->get('heading_title'));
-
-		$this->load->model('catalog/product');
-
-		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
-			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
-
-			$this->session->data['success'] = $this->language->get('text_success');
-
-			$this->response->redirect($this->url->link('common/mybooks', ' ', 'SSL'));
-		}
-
-		$this->getFormEdit();
-	}
 	public function edit() {
 		if(!$this->customer->isLogged()){
 			$this->response->redirect($this->url->link('account/login', ' ', 'SSL'));
@@ -153,6 +120,22 @@ class ControllerCommonMybooks extends Controller {
 		}
 
 		$this->getForm();
+	}
+
+	public function downloadBooks(){
+		$this->load->model('catalog/productbooks');
+		$books=$this->model_catalog_productbooks->getBooks($this->request->get['product_id']);
+		$data['book']=array();
+
+		foreach ($books as $books) {
+			$buku='system/engine/upload'.$books['draf'];
+
+			$data['book'][]=array(
+				'book' => $buku
+			);
+		}
+
+		$this->response->redirect($this->load->view('common/mybooks.tpl',' ','SSL'));
 	}
 
 	public function delete() {
@@ -268,6 +251,11 @@ class ControllerCommonMybooks extends Controller {
 		if(!$this->customer->isLogged()){
 			$this->response->redirect($this->url->link('account/login', ' ', 'SSL'));
 		}
+		$this->load->language('product/mybooks');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+
+		$this->load->model('catalog/productbooks');
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
@@ -575,76 +563,321 @@ class ControllerCommonMybooks extends Controller {
 		$this->response->setOutput($this->load->view('default/template/common/mybooks.tpl', $data));
 	}
 
-	protected function getFormEdit() {
-		$this->load->language('module/upload_book');
+	public function getEditingList() {
+		if(!$this->customer->isLogged()){
+			$this->response->redirect($this->url->link('account/login', ' ', 'SSL'));
+		}
+		$this->load->language('product/mybooks');
 
-        $data['heading_title'] = $this->language->get('heading_title');
-        $data['text_tax'] = $this->language->get('text_tax');
-        $data['button_cart'] = $this->language->get('button_cart');
-        $data['button_wishlist'] = $this->language->get('button_wishlist');
-        $data['button_compare'] = $this->language->get('button_compare');
-        $data['text_non'] = $this->language->get('text_non');
+		$this->document->setTitle($this->language->get('heading_title'));
 
-        $data['entry_judul_buku'] = $this->language->get('entry_judul_buku');
-        $data['entry_kategori_buku'] = $this->language->get('entry_kategori_buku');
-        $data['entry_file_buku'] = $this->language->get('entry_file_buku');
-        $data['entry_isbn'] = $this->language->get('entry_isbn');
-        $data['entry_harga'] = $this->language->get('entry_harga');
-        $data['entry_cover'] = $this->language->get('entry_cover');
-        $data['entry_jumlah_halaman'] = $this->language->get('entry_jumlah_halaman');
-        $data['entry_sinopsis'] = $this->language->get('entry_sinopsis');
+		$this->load->model('catalog/productbooks');
+		if (isset($this->request->get['filter_name'])) {
+			$filter_name = $this->request->get['filter_name'];
+		} else {
+			$filter_name = null;
+		}
 
+		if (isset($this->request->get['filter_model'])) {
+			$filter_model = $this->request->get['filter_model'];
+		} else {
+			$filter_model = null;
+		}
 
-        $data['tab_general'] = $this->language->get('tab_general');
-        $data['tab_data'] = $this->language->get('tab_data');
+		if (isset($this->request->get['filter_price'])) {
+			$filter_price = $this->request->get['filter_price'];
+		} else {
+			$filter_price = null;
+		}
 
-        $data['help_entry_judul_buku'] = $this->language->get('help_entry_judul_buku');
-        $data['help_entry_kategori_buku'] = $this->language->get('help_entry_kategori_buku');
-        $data['help_entry_file_buku'] = $this->language->get('help_entry_file_buku');
-        $data['help_entry_isbn'] = $this->language->get('help_entry_isbn');
-        $data['help_entry_harga'] = $this->language->get('help_entry_harga');
-        $data['help_entry_cover'] = $this->language->get('help_entry_cover');
-        $data['help_entry_jumlah_halaman'] = $this->language->get('help_entry_jumlah_halaman');
-        $data['help_entry_sinopsis'] = $this->language->get('help_entry_sinopsis');
+		if (isset($this->request->get['filter_quantity'])) {
+			$filter_quantity = $this->request->get['filter_quantity'];
+		} else {
+			$filter_quantity = null;
+		}
 
-        $data['button_save'] = $this->language->get('button_save');
-        $data['button_cancel'] = $this->language->get('button_cancel');
-        $data['browse'] = $this->language->get('browse');
+		if (isset($this->request->get['filter_status'])) {
+			$filter_status = $this->request->get['filter_status'];
+		} else {
+			$filter_status = null;
+		}
 
-        $data['cancel'] = $this->url->link('common/home', '', 'ssl');
+		if (isset($this->request->get['sort'])) {
+			$sort = $this->request->get['sort'];
+		} else {
+			$sort = 'pd.name';
+		}
 
-		//$this->load->model('module/uploadbook');
-        $this->load->model('catalog/draf');
-        $this->load->model('catalog/product');
-        $this->load->model('tool/image');
+		if (isset($this->request->get['order'])) {
+			$order = $this->request->get['order'];
+		} else {
+			$order = 'ASC';
+		}
 
-		/*$data['reviews'] = array();
+		if (isset($this->request->get['page'])) {
+			$page = $this->request->get['page'];
+		} else {
+			$page = 1;
+		}
 
-		$review_total = $this->model_catalog_review->getTotalReviewsByProductId($this->request->get['product_id']);
+		$url = '';
 
-		$results = $this->model_catalog_review->getReviewsByProductId($this->request->get['product_id'], ($page - 1) * 5, 5);
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_model'])) {
+			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_price'])) {
+			$url .= '&filter_price=' . $this->request->get['filter_price'];
+		}
+
+		if (isset($this->request->get['filter_quantity'])) {
+			$url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
+		}
+
+		if (isset($this->request->get['sort'])) {
+			$url .= '&sort=' . $this->request->get['sort'];
+		}
+
+		if (isset($this->request->get['order'])) {
+			$url .= '&order=' . $this->request->get['order'];
+		}
+
+		if (isset($this->request->get['page'])) {
+			$url .= '&page=' . $this->request->get['page'];
+		}
+
+		$data['breadcrumbs'] = array();
+
+		$data['breadcrumbs'][] = array(
+			'text' => $this->language->get('text_home'),
+			'href' => $this->url->link('common/dashboard', '', 'SSL')
+		);
+
+		$data['breadcrumbs'][] = array(
+			'text' => $this->language->get('heading_title'),
+			'href' => $this->url->link('catalog/product', ' ', 'SSL')
+		);
+
+		$data['add'] = $this->url->link('catalog/product/add', ' ', 'SSL');
+		$data['copy'] = $this->url->link('catalog/product/copy', ' ', 'SSL');
+		$data['delete'] = $this->url->link('catalog/product/delete', ' ', 'SSL');
+
+		$data['products'] = array();
+
+		$filter_data = array(
+			'filter_name'	  => $filter_name,
+			'filter_model'	  => $filter_model,
+			'filter_price'	  => $filter_price,
+			'filter_quantity' => $filter_quantity,
+			'filter_status'   => $filter_status,
+			'sort'            => $sort,
+			'order'           => $order,
+			'start'           => ($page - 1) * $this->config->get('config_limit_admin'),
+			'limit'           => $this->config->get('config_limit_admin')
+		);
+
+		$this->load->model('tool/image');
+        $customer_id=$this->customer->getId();
+        $editor_id=$this->customer->getEditorId();
+		$product_total = $this->model_catalog_productbooks->getTotalProductsEditor($filter_data,$customer_id,$editor_id);
+
+		$results = $this->model_catalog_productbooks->getProductsEditor($filter_data,$customer_id,$editor_id);
 
 		foreach ($results as $result) {
-			$data['reviews'][] = array(
-				'author'     => $result['author'],
-				'text'       => nl2br($result['text']),
-				'rating'     => (int)$result['rating'],
-				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
+			if (is_file(DIR_IMAGE . $result['image'])) {
+				$image = $this->model_tool_image->resize($result['image'], 40, 40);
+			} else {
+				$image = $this->model_tool_image->resize('no_image.png', 40, 40);
+			}
+
+			$special = false;
+
+			$product_specials = $this->model_catalog_productbooks->getProductSpecials($result['product_id']);
+
+			foreach ($product_specials  as $product_special) {
+				if (($product_special['date_start'] == '0000-00-00' || strtotime($product_special['date_start']) < time()) && ($product_special['date_end'] == '0000-00-00' || strtotime($product_special['date_end']) > time())) {
+					$special = $product_special['price'];
+
+					break;
+				}
+			}
+
+			$this->load->model('catalog/productbooks');
+			$books=$this->model_catalog_productbooks->getBooks($result['product_id']);
+			$data['products'][] = array(
+				'product_id' => $result['product_id'],
+				'image'      => $image,
+				'name'       => $result['name'],
+				'model'      => $result['model'],
+				'price'      => $result['price'],
+				'special'    => $special,
+				'quantity'   => $result['quantity'],
+				'status'     => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'status1'    => ($result['status1']) ? $this->language->get('text_agree') : $this->language->get('text_disagree'),
+				'status2'    => ($result['status2']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'status3'    => ($result['status3']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'edit'       => $this->url->link('common/mybooks/edit', '&product_id=' . $result['product_id'] . $url, 'SSL'),
+				//'download'   => $this->url->link('catalog/product/downloadBooks', '&product_id=' . $result['product_id'] . $url, 'SSL')
+				'download'   => $books['draf']['draf']
+				//'href'       => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
 			);
-		}*/
-		//$products= $this->model_catalog_product->getProduct($this->request->get['product_id']);
-        $data['product'] =$this->model_catalog_product->getProductEdit($this->request->get['product_id'],'0');
-        /*foreach ($products as $product) {
-        	$data['product'][] = array(
-        		'name' => $product['name']
-        	);
-        }*/
-       	$data['image'] =  $this->model_catalog_product->getProductImages($this->request->get['product_id']);
-       	$data['category'] =  $this->model_catalog_product->getCategories($this->request->get['product_id']);
-       	$data['draf'] = $this->model_catalog_draf->getDraf($this->request->get['product_id']);
-       	$data['footer'] = $this->load->controller('common/footer');
+		}
+
+		$data['heading_title'] = $this->language->get('heading_title');		
+		$data['text_list'] = $this->language->get('text_list');
+		$data['text_enabled'] = $this->language->get('text_enabled');
+		$data['text_disabled'] = $this->language->get('text_disabled');
+		$data['text_no_results'] = $this->language->get('text_no_results');
+		$data['text_confirm'] = $this->language->get('text_confirm');
+		$data['text_no_results']=$this->language->get('text_no_results');
+
+		$data['column_image'] = $this->language->get('column_image');
+		$data['column_name'] = $this->language->get('column_name');
+		$data['column_model'] = $this->language->get('column_model');
+		$data['column_price'] = $this->language->get('column_price');
+		$data['column_quantity'] = $this->language->get('column_quantity');
+		$data['column_status'] = $this->language->get('column_status');
+		$data['column_status_author'] = $this->language->get('column_status_author');
+		$data['column_status_management'] = $this->language->get('column_status_management');
+		$data['column_status_editor'] = $this->language->get('column_status_editor');
+		$data['column_action'] = $this->language->get('column_action');
+
+		$data['entry_name'] = $this->language->get('entry_name');
+		$data['entry_model'] = $this->language->get('entry_model');
+		$data['entry_price'] = $this->language->get('entry_price');
+		$data['entry_quantity'] = $this->language->get('entry_quantity');
+		$data['entry_status'] = $this->language->get('entry_status');
+
+		$data['button_copy'] = $this->language->get('button_copy');
+		$data['button_add'] = $this->language->get('button_add');
+		$data['button_edit'] = $this->language->get('button_edit');
+		$data['button_download']=$this->language->get('button_download');
+		$data['button_delete'] = $this->language->get('button_delete');
+		$data['button_filter'] = $this->language->get('button_filter');
+
+		//$data['token'] = $this->session->data['token'];
+
+		if (isset($this->error['warning'])) {
+			$data['error_warning'] = $this->error['warning'];
+		} else {
+			$data['error_warning'] = '';
+		}
+
+		if (isset($this->session->data['success'])) {
+			$data['success'] = $this->session->data['success'];
+
+			unset($this->session->data['success']);
+		} else {
+			$data['success'] = '';
+		}
+
+		if (isset($this->request->post['selected'])) {
+			$data['selected'] = (array)$this->request->post['selected'];
+		} else {
+			$data['selected'] = array();
+		}
+
+		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_model'])) {
+			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_price'])) {
+			$url .= '&filter_price=' . $this->request->get['filter_price'];
+		}
+
+		if (isset($this->request->get['filter_quantity'])) {
+			$url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
+		}
+
+		if ($order == 'ASC') {
+			$url .= '&order=DESC';
+		} else {
+			$url .= '&order=ASC';
+		}
+
+		if (isset($this->request->get['page'])) {
+			$url .= '&page=' . $this->request->get['page'];
+		}
+
+		$data['sort_name'] = $this->url->link('common/mybooks/getEditingList',  '&sort=pd.name' . $url, 'SSL');
+		$data['sort_model'] = $this->url->link('common/mybooks/getEditingList', '&sort=p.model' . $url, 'SSL');
+		$data['sort_price'] = $this->url->link('common/mybooks/getEditingList',  '&sort=p.price' . $url, 'SSL');
+		$data['sort_quantity'] = $this->url->link('common/mybooks/getEditingList', '&sort=p.quantity' . $url, 'SSL');
+		$data['sort_status'] = $this->url->link('common/mybooks/getEditingList',  '&sort=p.status' . $url, 'SSL');
+		$data['sort_order'] = $this->url->link('common/mybooks/getEditingList',  '&sort=p.sort_order' . $url, 'SSL');
+
+		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_model'])) {
+			$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_price'])) {
+			$url .= '&filter_price=' . $this->request->get['filter_price'];
+		}
+
+		if (isset($this->request->get['filter_quantity'])) {
+			$url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
+		}
+
+		if (isset($this->request->get['sort'])) {
+			$url .= '&sort=' . $this->request->get['sort'];
+		}
+
+		if (isset($this->request->get['order'])) {
+			$url .= '&order=' . $this->request->get['order'];
+		}
+
+		$pagination = new Pagination();
+		$pagination->total = $product_total;
+		$pagination->page = $page;
+		$pagination->limit = $this->config->get('config_limit_admin');
+		$pagination->url = $this->url->link('common/mybooks', ' ' . '&page={page}', 'SSL');
+
+		$data['pagination'] = $pagination->render();
+
+		$data['results'] = sprintf($this->language->get('text_pagination'), ($product_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($product_total - $this->config->get('config_limit_admin'))) ? $product_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $product_total, ceil($product_total / $this->config->get('config_limit_admin')));
+
+		$data['filter_name'] = $filter_name;
+		$data['filter_model'] = $filter_model;
+		$data['filter_price'] = $filter_price;
+		$data['filter_quantity'] = $filter_quantity;
+		$data['filter_status'] = $filter_status;
+
+		$data['sort'] = $sort;
+		$data['order'] = $order;
+
 		$data['header'] = $this->load->controller('common/header');
-		$this->response->setOutput($this->load->view('default/template/common/form_editbooks.tpl', $data));
+		$data['column_left'] = $this->load->controller('common/column_left');
+		$data['footer'] = $this->load->controller('common/footer');
+
+		$this->response->setOutput($this->load->view('default/template/common/mybooks.tpl', $data));
 	}
 
 	protected function getForm() {
