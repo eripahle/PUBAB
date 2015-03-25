@@ -59,7 +59,7 @@ class ControllerCommonHeader extends Controller {
         $data['text_service']=$this->language->get('text_service');
         $data['text_editing_book']=$this->language->get('text_editing_book');
 
-        $data['publishbook']=$this->url->link('common/upload_draf_book','', 'SSL');
+        $data['publishbook']=$this->url->link('common/mybooks/add','', 'SSL');
 		$data['mybooks']=$this->url->link('common/mybooks','', 'SSL');
 		$data['list_edit_book']=$this->url->link('common/mybooks/getEditingList','', 'SSL');
 		$data['home'] = $this->url->link('common/home');

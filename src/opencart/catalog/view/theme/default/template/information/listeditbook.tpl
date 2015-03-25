@@ -12,8 +12,13 @@
 
         
         <div id="content" class="<?php echo $class; ?>">
-            <?php echo $content_top; ?>
-            <?php echo $content_bottom; ?>
+            <?php if($content_top!=null){
+                echo $content_top;
+            } else { ?>
+                <h1 align="center">Sory, Not list Book for Edit</h1>
+            <?php }
+             ?>
+           
         </div>
         
         <?php echo $column_right; ?>

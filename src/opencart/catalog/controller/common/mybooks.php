@@ -1,3 +1,4 @@
+
 <?php
 class ControllerCommonMybooks extends Controller {
 	private $error = array();
@@ -10,20 +11,24 @@ class ControllerCommonMybooks extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('catalog/productbooks');
+		//$this->load->model('catalog/productbooks');
 
 		$this->getList();
 	}
       
     public function add() {
-		$this->load->language('catalog/product');
+    	if(!$this->customer->isLogged()){
+			$this->response->redirect($this->url->link('account/login', ' ', 'SSL'));
+		}
+		$customer_id=$this->customer->getId();
+		$this->load->language('product/mybooks');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('catalog/product');
 
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_product->addProduct($this->request->post);
+		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+			$this->model_catalog_product->addProduct($this->request->post,$customer_id);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -61,7 +66,7 @@ class ControllerCommonMybooks extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('catalog/product','', 'SSL'));
+			$this->response->redirect($this->url->link('common/mybooks','', 'SSL'));
 		}
 
 		$this->getForm();
@@ -78,6 +83,7 @@ class ControllerCommonMybooks extends Controller {
 		$this->load->model('catalog/product');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+			
 			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -136,116 +142,7 @@ class ControllerCommonMybooks extends Controller {
 		}
 
 		$this->response->redirect($this->load->view('common/mybooks.tpl',' ','SSL'));
-	}
-
-	public function delete() {
-		$this->load->language('catalog/product');
-
-		$this->document->setTitle($this->language->get('heading_title'));
-
-		$this->load->model('catalog/product');
-
-		if (isset($this->request->post['selected']) && $this->validateDelete()) {
-			foreach ($this->request->post['selected'] as $product_id) {
-				$this->model_catalog_product->deleteProduct($product_id);
-			}
-
-			$this->session->data['success'] = $this->language->get('text_success');
-
-			$url = '';
-
-			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
-			}
-
-			if (isset($this->request->get['filter_model'])) {
-				$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
-			}
-
-			if (isset($this->request->get['filter_price'])) {
-				$url .= '&filter_price=' . $this->request->get['filter_price'];
-			}
-
-			if (isset($this->request->get['filter_quantity'])) {
-				$url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
-			}
-
-			if (isset($this->request->get['filter_status'])) {
-				$url .= '&filter_status=' . $this->request->get['filter_status'];
-			}
-
-			if (isset($this->request->get['sort'])) {
-				$url .= '&sort=' . $this->request->get['sort'];
-			}
-
-			if (isset($this->request->get['order'])) {
-				$url .= '&order=' . $this->request->get['order'];
-			}
-
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-
-			$this->response->redirect($this->url->link('catalog/product', ' ', 'SSL'));
-		}
-
-		$this->getList();
-	}
-
-	public function copy() {
-		$this->load->language('catalog/product');
-
-		$this->document->setTitle($this->language->get('heading_title'));
-
-		$this->load->model('catalog/product');
-
-		if (isset($this->request->post['selected']) && $this->validateCopy()) {
-			foreach ($this->request->post['selected'] as $product_id) {
-				$this->model_catalog_product->copyProduct($product_id);
-			}
-
-			$this->session->data['success'] = $this->language->get('text_success');
-
-			$url = '';
-
-			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
-			}
-
-			if (isset($this->request->get['filter_model'])) {
-				$url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
-			}
-
-			if (isset($this->request->get['filter_price'])) {
-				$url .= '&filter_price=' . $this->request->get['filter_price'];
-			}
-
-			if (isset($this->request->get['filter_quantity'])) {
-				$url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
-			}
-
-			if (isset($this->request->get['filter_status'])) {
-				$url .= '&filter_status=' . $this->request->get['filter_status'];
-			}
-
-			if (isset($this->request->get['sort'])) {
-				$url .= '&sort=' . $this->request->get['sort'];
-			}
-
-			if (isset($this->request->get['order'])) {
-				$url .= '&order=' . $this->request->get['order'];
-			}
-
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-
-			$this->response->redirect($this->url->link('catalog/product', ' ', 'SSL'));
-		}
-
-		$this->getList();
-	}
-              
+	}          
 
 	protected function getList() {
 		if(!$this->customer->isLogged()){
@@ -446,7 +343,7 @@ class ControllerCommonMybooks extends Controller {
 		$data['button_delete'] = $this->language->get('button_delete');
 		$data['button_filter'] = $this->language->get('button_filter');
 
-		//$data['token'] = $this->session->data['token'];
+		
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -763,7 +660,7 @@ class ControllerCommonMybooks extends Controller {
 		$data['button_delete'] = $this->language->get('button_delete');
 		$data['button_filter'] = $this->language->get('button_filter');
 
-		//$data['token'] = $this->session->data['token'];
+		
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -901,6 +798,8 @@ class ControllerCommonMybooks extends Controller {
 		$data['text_percent'] = $this->language->get('text_percent');
 		$data['text_amount'] = $this->language->get('text_amount');
 
+		$data['entry_book'] = $this->language->get('entry_book');
+		$data['entry_author'] = $this->language->get('entry_author');
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_description'] = $this->language->get('entry_description');
 		$data['entry_meta_title'] = $this->language->get('entry_meta_title');
@@ -958,6 +857,8 @@ class ControllerCommonMybooks extends Controller {
 		$data['entry_reward'] = $this->language->get('entry_reward');
 		$data['entry_layout'] = $this->language->get('entry_layout');
 		$data['entry_recurring'] = $this->language->get('entry_recurring');
+		$data['entry_color_page'] = $this->language->get('entry_color_page');
+		$data['entry_bw_page'] = $this->language->get('entry_bw_page');
 
 		$data['help_keyword'] = $this->language->get('help_keyword');
 		$data['help_sku'] = $this->language->get('help_sku');
@@ -986,6 +887,7 @@ class ControllerCommonMybooks extends Controller {
 		$data['button_image_add'] = $this->language->get('button_image_add');
 		$data['button_remove'] = $this->language->get('button_remove');
 		$data['button_recurring_add'] = $this->language->get('button_recurring_add');
+		$data['button_upload']=$this->language->get('button_upload');
 
 		$data['tab_general'] = $this->language->get('tab_general');
 		$data['tab_data'] = $this->language->get('tab_data');
@@ -1000,10 +902,18 @@ class ControllerCommonMybooks extends Controller {
 		$data['tab_design'] = $this->language->get('tab_design');
 		$data['tab_openbay'] = $this->language->get('tab_openbay');
 
+		
+		
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
 			$data['error_warning'] = '';
+		} 
+
+		if (isset($this->error['image'])) {
+			$data['error_image'] = $this->error['image'];
+		} else {
+			$data['error_image'] = '';
 		}
 
 		if (isset($this->error['name'])) {
@@ -1034,6 +944,12 @@ class ControllerCommonMybooks extends Controller {
 			$data['error_keyword'] = $this->error['keyword'];
 		} else {
 			$data['error_keyword'] = '';
+		}
+
+		if (isset($this->error['author'])) {
+			$data['error_author'] = $this->error['author'];
+		} else {
+			$data['error_author'] = '';
 		}
 		
 		$url = '';
@@ -1083,8 +999,10 @@ class ControllerCommonMybooks extends Controller {
 		);
 
 		if (!isset($this->request->get['product_id'])) {
+			$data['get_product_id']=false;
 			$data['action'] = $this->url->link('common/mybooks/add', ' ', 'SSL');
 		} else {
+			$data['get_product_id']=true;
 			$data['action'] = $this->url->link('common/mybooks/edit',  '&product_id=' . $this->request->get['product_id'] . $url, 'SSL');
 		}
 
@@ -1094,8 +1012,7 @@ class ControllerCommonMybooks extends Controller {
 			$product_info = $this->model_catalog_product->getProductForEdit($this->request->get['product_id']);
 		}
 
-		//$data['token'] = $this->session->data['token'];
-
+		
 		$this->load->model('localisation/language');
 
 		$data['languages'] = $this->model_localisation_language->getLanguages();
@@ -1108,10 +1025,19 @@ class ControllerCommonMybooks extends Controller {
 			$data['product_description'] = array();
 		}
 
-		if (isset($this->request->post['image'])) {
+		/*if (isset($this->request->post['image'])) {
 			$data['image'] = $this->request->post['image'];
 		} elseif (!empty($product_info)) {
 			$data['image'] = $product_info['image'];
+		} else {
+			$data['image'] = '';
+		}*/
+
+		if (isset($this->request->files['image'])) {
+			$fileimage = basename(html_entity_decode($this->request->files['image']['name'], ENT_QUOTES, 'UTF-8'));
+			$file_image = "cover/".$fileimage . '.' . md5(mt_rand());
+			move_uploaded_file($this->request->files['image']['tmp_name'], DIR_IMAGE . $file_image);
+			$data['image'] = $file_image;
 		} else {
 			$data['image'] = '';
 		}
@@ -1134,6 +1060,39 @@ class ControllerCommonMybooks extends Controller {
 			$data['model'] = $product_info['model'];
 		} else {
 			$data['model'] = '';
+		}
+
+		if (isset($this->request->files['book'])) {
+			$filebook = basename(html_entity_decode($this->request->files['book']['name'], ENT_QUOTES, 'UTF-8'));
+			$file = "file/".$filebook . '.' . md5(mt_rand());
+			move_uploaded_file($this->request->files['book']['tmp_name'], DIR_BOOK. $file);
+			$data['book']=$file;
+		} else {
+			$data['book'] = '';
+		}
+
+		if (isset($this->request->post['author'])) {
+			$data['author'] = $this->request->post['author'];
+		} elseif (!empty($product_info)) {
+			$data['author'] = $product_info['author'];
+		} else {
+			$data['author'] = '';
+		}
+
+		if (isset($this->request->post['color_page'])) {
+			$data['color_page'] = $this->request->post['color_page'];
+		} elseif (!empty($product_info)) {
+			$data['color_page'] = $product_info['color_page'];
+		} else {
+			$data['color_page'] = '';
+		}
+
+		if (isset($this->request->post['bw_page'])) {
+			$data['bw_page'] = $this->request->post['bw_page'];
+		} elseif (!empty($product_info)) {
+			$data['bw_page'] = $product_info['bw_page'];
+		} else {
+			$data['bw_page'] = '';
 		}
 
 		if (isset($this->request->post['sku'])) {
@@ -1309,7 +1268,7 @@ class ControllerCommonMybooks extends Controller {
 		} elseif (!empty($product_info)) {
 			$data['status'] = $product_info['status'];
 		} else {
-			$data['status'] = true;
+			$data['status'] = false;
 		}
 
 		if (isset($this->request->post['weight'])) {
@@ -1659,7 +1618,7 @@ class ControllerCommonMybooks extends Controller {
 		} else {
 			$data['product_layout'] = array();
 		}
-
+		
 		$this->load->model('design/layout');
 
 		$data['layouts'] = $this->model_design_layout->getLayouts();
@@ -1668,7 +1627,7 @@ class ControllerCommonMybooks extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
-		$this->response->setOutput($this->load->view('default/template/common/form_edit.tpl', $data));
+		$this->response->setOutput($this->load->view('default/template/common/form_mybooks.tpl', $data));
 	}
 
 	protected function validateForm() {
@@ -1681,15 +1640,25 @@ class ControllerCommonMybooks extends Controller {
 				$this->error['name'][$language_id] = $this->language->get('error_name');
 			}
 
-			if ((utf8_strlen($value['meta_title']) < 3) || (utf8_strlen($value['meta_title']) > 255)) {
+			/*if ((utf8_strlen($value['meta_title']) < 3) || (utf8_strlen($value['meta_title']) > 255)) {
 				$this->error['meta_title'][$language_id] = $this->language->get('error_meta_title');
-			}
+			}*/
 		}
 
-		if ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64)) {
+		/*if ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64)) {
 			$this->error['model'] = $this->language->get('error_model');
-		}
+		}*/
 		
+		if ($this->request->post['price']< 0 ){
+			$this->error['price'] = $this->language->get('error_price');
+		}
+		if ($this->request->post['color_page']< 0 ){
+			$this->error['color_page'] = $this->language->get('error_color_page');
+		}
+		if ($this->request->post['bw_page']< 0 ){
+			$this->error['bw_page'] = $this->language->get('error_bw_page');
+		}
+
 		/*if (utf8_strlen($this->request->post['keyword']) > 0) {
 			$this->load->model('catalog/url_alias');
 
@@ -1806,6 +1775,87 @@ class ControllerCommonMybooks extends Controller {
 					'price'      => $result['price']
 				);
 			}
+		}
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
+	}
+
+	public function upload() {
+		$this->load->language('catalog/download');
+
+		$json = array();
+
+		// Check user has permission
+		/*if (!$this->user->hasPermission('modify', 'catalog/download')) {
+			$json['error'] = $this->language->get('error_permission');
+		}*/
+
+		if (!$json) {
+			if (!empty($this->request->files['file']['name']) && is_file($this->request->files['file']['tmp_name'])) {
+				// Sanitize the filename
+				$filename = basename(html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8'));
+
+				// Validate the filename length
+				if ((utf8_strlen($filename) < 3) || (utf8_strlen($filename) > 128)) {
+					$json['error'] = $this->language->get('error_filename');
+				}
+
+				// Allowed file extension types
+				$allowed = array();
+
+				$extension_allowed = preg_replace('~\r?\n~', "\n", $this->config->get('config_file_ext_allowed'));
+
+				$filetypes = explode("\n", $extension_allowed);
+
+				foreach ($filetypes as $filetype) {
+					$allowed[] = trim($filetype);
+				}
+
+				if (!in_array(strtolower(substr(strrchr($filename, '.'), 1)), $allowed)) {
+					$json['error'] = $this->language->get('error_filetype');
+				}
+
+				// Allowed file mime types
+				$allowed = array();
+
+				$mime_allowed = preg_replace('~\r?\n~', "\n", $this->config->get('config_file_mime_allowed'));
+
+				$filetypes = explode("\n", $mime_allowed);
+
+				foreach ($filetypes as $filetype) {
+					$allowed[] = trim($filetype);
+				}
+
+				if (!in_array($this->request->files['file']['type'], $allowed)) {
+					$json['error'] = $this->language->get('error_filetype');
+				}
+
+				// Check to see if any PHP files are trying to be uploaded
+				$content = file_get_contents($this->request->files['file']['tmp_name']);
+
+				if (preg_match('/\<\?php/i', $content)) {
+					$json['error'] = $this->language->get('error_filetype');
+				}
+
+				// Return any upload error
+				if ($this->request->files['file']['error'] != UPLOAD_ERR_OK) {
+					$json['error'] = $this->language->get('error_upload_' . $this->request->files['file']['error']);
+				}
+			} else {
+				$json['error'] = $this->language->get('error_upload');
+			}
+		}
+
+		if (!$json) {
+			$file = $filename . '.' . md5(mt_rand());
+
+			move_uploaded_file($this->request->files['file']['tmp_name'], DIR_DOWNLOAD . $file);
+
+			$json['filename'] = $file;
+			$json['mask'] = $filename;
+
+			$json['success'] = $this->language->get('text_upload');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

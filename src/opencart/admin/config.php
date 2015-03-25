@@ -14,6 +14,7 @@ define('DIR_LANGUAGE', 'C:\xampp\htdocs\PUBAPP\src\opencart/admin/language/');
 define('DIR_TEMPLATE', 'C:\xampp\htdocs\PUBAPP\src\opencart/admin/view/template/');
 define('DIR_CONFIG', 'C:\xampp\htdocs\PUBAPP\src\opencart/system/config/');
 define('DIR_IMAGE', 'C:\xampp\htdocs\PUBAPP\src\opencart/image/');
+define('DIR_BOOK', 'C:\xampp\htdocs\PUBAPP\src\opencart/book/');
 define('DIR_CACHE', 'C:\xampp\htdocs\PUBAPP\src\opencart/system/cache/');
 define('DIR_DOWNLOAD', 'C:\xampp\htdocs\PUBAPP\src\opencart/system/download/');
 define('DIR_UPLOAD', 'C:\xampp\htdocs\PUBAPP\src\opencart/system/upload/');
