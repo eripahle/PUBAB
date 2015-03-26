@@ -157,7 +157,11 @@
                   <td class="text-left"><?php echo $product['status2']; ?></td>
                   <td class="text-left"><?php echo $product['status3']; ?></td>
                   <td class="text-left"><?php echo $product['status']; ?></td>
-                  <td class="text-right"><a href="<?php echo $product['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                  <td class="text-right"><a href="<?php echo $product['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                    <a href="<?php echo "../book/".$product['download_book']; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_download_book; ?>" class="btn btn-primary"><i class="fa fa-download"></i></a>
+                    <a href="<?php echo "../image/".$product['download_image']; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_download_image; ?>" class="btn btn-primary"><i class="fa fa-download"></i></a>
+                  </td>
+
                 </tr>
                 <?php } ?>
                 <?php } else { ?>

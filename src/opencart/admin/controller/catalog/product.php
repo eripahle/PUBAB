@@ -362,6 +362,10 @@ class ControllerCatalogProduct extends Controller {
 					break;
 				}
 			}
+			$data['button_download_book']=$this->language->get('button_download_book');
+			$data['button_download_image']=$this->language->get('button_download_image');
+			$this->load->model('catalog/product');
+			$books=$this->model_catalog_product->getBooks($result['product_id']);
 
 			$data['products'][] = array(
 				'product_id' => $result['product_id'],
@@ -375,7 +379,9 @@ class ControllerCatalogProduct extends Controller {
 				'status1'     => ($result['status1']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'status2'     => ($result['status2']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'status3'     => ($result['status3']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-				'edit'       => $this->url->link('catalog/product/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $result['product_id'] . $url, 'SSL')
+				'edit'       => $this->url->link('catalog/product/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $result['product_id'] . $url, 'SSL'),
+				'download_book'   => $books['draf'],
+				'download_image'   => $result['image']
 			);
 		}
 
