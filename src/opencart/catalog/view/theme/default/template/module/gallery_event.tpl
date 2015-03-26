@@ -18,24 +18,23 @@
                 <br>                			
                 <!-- Start Advanced Gallery Html Containers -->
                 <div id="gallery" class="content">
-                    <div id="controls" class="controls">
+                    <div id="controls" class="controls"></div>
                     <div class="slideshow-container">
                         <div id="loading" class="loader"></div>
                         <div id="slideshow" class="slideshow"></div>
                     </div>
                     <div id="caption" class="caption-container"></div>
-                    </div>
-                </div>            
-                <div id="thumbs">
+                </div>        
+                <div id="thumbs" class="navigation">
                     <ul class="thumbs noscript">                    
                         <?php foreach ($gallerys as $gallerysingle) { ?>
                         <li>
-                            <a class="thumb" name="" href="Title #0">                                
-                                <img widht="200" height="200" src="<?php echo $gallerysingle['image'];?>" alt="Title #0">                                
+                            <a class="thumb" name="" href="<?php echo $gallerysingle['image'];?>">                                
+                                <img widht="100" height="100" src="<?php echo $gallerysingle['image'];?>">                                                                
                             </a>
                             <div class="caption">
                                 <div class="download">
-                                    <a href="">Download Original</a>
+                                    <a href="<?php echo $gallerysingle['image'];?>">Download</a>
                                 </div>
                                 <div class="image-title"><?php echo $gallerysingle['title'];?></div>
                                 <div class="image-desc"><?php echo $gallerysingle['description'];?></div>
@@ -51,7 +50,7 @@
         <script type="text/javascript">
             jQuery(document).ready(function($) {
                 // We only want these styles applied when javascript is enabled
-                $('div.navigation').css({'width' : '200px', 'float' : 'left'});
+                $('div.navigation').css({'width' : '300px', 'float' : 'left'});
                 $('div.content').css('display', 'block');
 
                 // Initially set opacity on thumbs and add
@@ -104,3 +103,4 @@
             });
         </script>
     </body>
+</html>   

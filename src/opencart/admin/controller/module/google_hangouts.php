@@ -1,9 +1,9 @@
 <?php
-class ControllerModuleGoogleHangouts extends Controller {
+class ControllerModuleGalleryEvent extends Controller {
 	private $error = array();
 
 	public function index() {
-		$this->load->language('module/google_hangouts');
+		$this->load->language('module/gallery_event');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 

@@ -26,8 +26,9 @@ class ModelDesignGallery extends Model {
 
         if (in_array($file_ext, $allowed_ext) === true) {
             if ($file_size < 1044070000) {
-                $lokasi = 'system/engine/upload/files/' . $nama . '.' . $file_ext;
-                move_uploaded_file($file_tmp, $lokasi);
+                $lokasi = 'image/gallery/' . $nama . '.' . $file_ext;
+                $lokasisimpan = '../image/gallery/' . $nama . '.' . $file_ext;
+                move_uploaded_file($file_tmp, $lokasisimpan);
                 $sql = $sql . "image = '".$lokasi."'";
                 echo $sql;
                 $query = $this->db->query($sql);
