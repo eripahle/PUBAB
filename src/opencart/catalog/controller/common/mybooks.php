@@ -27,7 +27,7 @@ class ControllerCommonMybooks extends Controller {
 
 		$this->load->model('catalog/product');
 
-		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+		if (($this->request->server['REQUEST_METHOD'] == 'POST'&& $this->validateForm())) {
 			$this->model_catalog_product->addProduct($this->request->post,$customer_id);
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -306,7 +306,7 @@ class ControllerCommonMybooks extends Controller {
 				'status3'    => ($result['status3']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'edit'       => $this->url->link('common/mybooks/edit', '&product_id=' . $result['product_id'] . $url, 'SSL'),
 				//'download'   => $this->url->link('catalog/product/downloadBooks', '&product_id=' . $result['product_id'] . $url, 'SSL')
-				'download'   => $books['draf']['draf']
+				'download'   => $books['draf']
 				//'href'       => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
 			);
 		}
@@ -859,6 +859,9 @@ class ControllerCommonMybooks extends Controller {
 		$data['entry_recurring'] = $this->language->get('entry_recurring');
 		$data['entry_color_page'] = $this->language->get('entry_color_page');
 		$data['entry_bw_page'] = $this->language->get('entry_bw_page');
+		$data['entry_paper_size'] = $this->language->get('entry_paper_size');
+		$data['entry_paper_type'] = $this->language->get('entry_paper_type');
+		$data['text_none'] = $this->language->get('text_none');
 
 		$data['help_keyword'] = $this->language->get('help_keyword');
 		$data['help_sku'] = $this->language->get('help_sku');
@@ -914,6 +917,24 @@ class ControllerCommonMybooks extends Controller {
 			$data['error_image'] = $this->error['image'];
 		} else {
 			$data['error_image'] = '';
+		}
+
+		if (isset($this->error['image'])) {
+			$data['error_extension_image'] = $this->error['image'];
+		} else {
+			$data['error_extension_image'] = '';
+		}
+
+		if (isset($this->error['book'])) {
+			$data['error_book'] = $this->error['book'];
+		} else {
+			$data['error_book'] = '';
+		}
+
+		if (isset($this->error['book'])) {
+			$data['error_extension_book'] = $this->error['book'];
+		} else {
+			$data['error_extension_book'] = '';
 		}
 
 		if (isset($this->error['name'])) {
@@ -1618,9 +1639,45 @@ class ControllerCommonMybooks extends Controller {
 		} else {
 			$data['product_layout'] = array();
 		}
+
+		if (isset($this->request->post['paper_size'])) {
+			$data['paper_size'] = $this->request->post['paper_size'];
+		} else {
+			$data['paper_size'] = 0;
+		}
+
+		if (isset($this->request->post['paper_type'])) {
+			$data['paper_type'] = $this->request->post['paper_type'];
+		} else {
+			$data['paper_type'] = 0;
+		}
+
+		if ($this->config->get('config_account_id')) {
+			$this->load->model('catalog/information');
+
+			$information_info = $this->model_catalog_information->getInformation($this->config->get('config_account_id'));
+
+			if ($information_info) {
+				$data['text_agreement'] = sprintf($this->language->get('text_agreement'), $this->url->link('information/information/agree', 'information_id=' . $this->config->get('config_account_id'), 'SSL'), $information_info['title'], $information_info['title']);
+			} else {
+				$data['text_agreement'] = '';
+			}
+		} else {
+			$data['text_agreement'] = '';
+		}
+
+		if (isset($this->request->post['agreement'])) {
+			$data['agreement'] = $this->request->post['agreement'];
+		} else {
+			$data['agreement'] = false;
+		}
+
 		
 		$this->load->model('design/layout');
+		$this->load->model('catalog/papersize');
 
+		$data['paper_size'] = $this->model_catalog_papersize->getSize();
+		$data['paper_type'] = $this->model_catalog_papersize->getType();
 		$data['layouts'] = $this->model_design_layout->getLayouts();
 
 		$data['header'] = $this->load->controller('common/header');
@@ -1630,52 +1687,102 @@ class ControllerCommonMybooks extends Controller {
 		$this->response->setOutput($this->load->view('default/template/common/form_mybooks.tpl', $data));
 	}
 
+	public function checkValidRequestDrafBook() {
+	    $dot = '.';
+	    $allowed_ext_buku = array('doc', 'docx');
+	    $file_name_buku = $this->request->files['book']['name'];
+	    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
+	    $file_size_buku = $this->request->files['book']['size'];
+
+
+	    if (in_array(strtolower(substr(strrchr($file_name_buku, '.'), 1)), $allowed_ext_buku)){
+	   		// if (in_array($file_ext_buku, $allowed_ext_buku) === true) {
+	        if ($file_size_buku < 1044070000) {
+	            return TRUE;
+	        } else {
+	            return FALSE;
+	        }
+	    } else {
+	        return FALSE;
+	    }
+	}
+
+	public function checkValidRequestDrafimage() {
+	        $dot = '.';
+	        $allowed_ext_image = array('png', 'jpeg', 'jpg');
+	        $file_name_image = $this->request->files['image']['name'];
+	        //$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
+	        $file_size_image = $this->request->files['image']['size'];
+
+	        if (in_array(strtolower(substr(strrchr($file_name_image, '.'), 1)), $allowed_ext_image)){
+	        //if (in_array($file_ext_image, $allowed_ext_image) === true) {
+	            if ($file_size_image < 1044070000) {
+	                return TRUE;
+	            } else {
+	                return FALSE;
+	            }
+	        } else {
+	            return FALSE;
+	        }
+	}
+
 	protected function validateForm() {
-		/*if (!$this->user->hasPermission('modify', 'common/mybooks')) {
-			$this->error['warning'] = $this->language->get('error_permission');
-		}*/
 
 		foreach ($this->request->post['product_description'] as $language_id => $value) {
 			if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 255)) {
 				$this->error['name'][$language_id] = $this->language->get('error_name');
 			}
-
-			/*if ((utf8_strlen($value['meta_title']) < 3) || (utf8_strlen($value['meta_title']) > 255)) {
-				$this->error['meta_title'][$language_id] = $this->language->get('error_meta_title');
-			}*/
 		}
 
-		/*if ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64)) {
-			$this->error['model'] = $this->language->get('error_model');
-		}*/
-		
+		if(!$this->checkValidRequestDrafimage()){
+			$this->error['image']=$this->language->get('error_extension_image');
+		}
+
+		if(!$this->checkValidRequestDrafBook()){
+			$this->error['book']=$this->language->get('error_extension_book');
+		}
+
+		if(empty($this->request->files['image']['name'])){
+			$this->error['image']=$this->language->get('error_image');
+		}
+
+		if(empty($this->request->files['book']['name'])){
+			$this->error['book']=$this->language->get('error_book');
+		}
+
 		if ($this->request->post['price']< 0 ){
 			$this->error['price'] = $this->language->get('error_price');
 		}
+
+		if ($this->request->post['author']==null ){
+			$this->error['author'] = $this->language->get('error_author');
+		}
+
 		if ($this->request->post['color_page']< 0 ){
 			$this->error['color_page'] = $this->language->get('error_color_page');
 		}
 		if ($this->request->post['bw_page']< 0 ){
 			$this->error['bw_page'] = $this->language->get('error_bw_page');
 		}
-
-		/*if (utf8_strlen($this->request->post['keyword']) > 0) {
-			$this->load->model('catalog/url_alias');
-
-			$url_alias_info = $this->model_catalog_url_alias->getUrlAlias($this->request->post['keyword']);
-
-			if ($url_alias_info && isset($this->request->get['product_id']) && $url_alias_info['query'] != 'product_id=' . $this->request->get['product_id']) {
-				$this->error['keyword'] = sprintf($this->language->get('error_keyword'));
-			}
-
-			if ($url_alias_info && !isset($this->request->get['product_id'])) {
-				$this->error['keyword'] = sprintf($this->language->get('error_keyword'));
-			}
+		/*if (!isset($this->request->post['agreement'])){
+			$this->error['warning'] = $this->language->get('error_agree');
 		}*/
 
+
+		/*if ($this->config->get('config_account_id')) {
+			$this->load->model('catalog/information');
+
+			$information_info = $this->model_catalog_information->getInformation($this->config->get('config_account_id'));
+
+			if (!isset($this->request->post['agreement'])) {
+				$this->error['warning'] = sprintf($this->language->get('error_agree'));
+			}
+		}*/
 		if ($this->error && !isset($this->error['warning'])) {
-			$this->error['warning'] = $this->language->get('error_warning');
+				$this->error['warning'] = $this->language->get('error_warning');
 		}
+
+		
 
 		return !$this->error;
 	}

@@ -796,9 +796,9 @@ class ModelCatalogProductbooks extends Model {
 	public function getBooks($product_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "draf WHERE product_id = '" . (int)$product_id . "' ");
 		$book=array();
-		if(!isset($query)){
+		if(isset($query)){
 			foreach ($query->rows as $result) {
-				return $book['draf'] = array(
+				return $book= array(
 					'draf'             => $result['draf']
 				);
 			}

@@ -30,11 +30,14 @@ $_['column_status_author']   = 'Agreement Editing Book';
 $_['column_status_editor']   = 'Approval By Editor';
 $_['column_status_management']  = 'Approval By Management';
 $_['column_action']          = 'Action';
+$_['text_none']				 = 'None';
 
 // Entry
-$_['entry_book']       = 'Book';
+$_['entry_paper_size']      		 = 'Size';
+$_['entry_paper_type']       = 'Paper Type';
+$_['entry_book']       		 = 'Book';
 $_['entry_color_page']       = 'Color Page';
-$_['entry_bw_page']       = 'Black & White Page';
+$_['entry_bw_page']       	 = 'Black & White Page';
 $_['entry_name']             = 'Title';
 $_['entry_author']           = 'Author';
 $_['entry_description']      = 'Description';
@@ -94,6 +97,8 @@ $_['entry_tag']          	 = 'Product Tags';
 $_['entry_reward']           = 'Reward Points';
 $_['entry_layout']           = 'Layout Override';
 $_['entry_recurring']        = 'Recurring Profile';
+$_['text_agreement']           = 'I have read and agree to the <a href="%s" class="agree"><b>%s</b></a>';
+
 
 // Help
 $_['help_keyword']           = 'Do not use spaces, instead replace spaces with - and make sure the keyword is globally unique.';
@@ -123,4 +128,9 @@ $_['error_author']           = 'Please Input Author!';
 $_['error_keyword']          = 'SEO keyword already in use!';
 $_['error_price']          	 = 'Price must be more than 0!';
 $_['error_color_page']       = 'Color Page must be more than 0!';
-$_['error_bw_page']       = 'Black and White Page must be more than 0!';
+$_['error_bw_page']          = 'Black and White Page must be more than 0!';
+$_['error_image']            = 'Please Upload Your Cover';
+$_['error_book']            = 'Please Upload Your Book';
+$_['error_extension_image']  = 'Extenseion Cover Must be .jpg/jpeg/png ';
+$_['error_extension_book']   = 'Extenseion Book Must be .doc/docx ';
+$_['error_agree']			 = 'You must agree to the Privacy Policy!';

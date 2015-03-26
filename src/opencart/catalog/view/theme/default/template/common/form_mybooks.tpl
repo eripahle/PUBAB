@@ -81,6 +81,9 @@
                         <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_image; ?></label>             
                         <div class="col-sm-10">                                
                             <input  type="file" name="image" value="<?php echo $image; ?>" class="btn btn-primary" >
+	                 		 <?php if ($error_extension_image) { ?>
+	                  			<div class="text-danger"><?php echo $error_extension_image; ?></div>
+	                 		 <?php } ?>
                         </div>                                                                       
                    </div>  
 
@@ -88,6 +91,9 @@
                         <label class="col-sm-2 control-label" for="input-book"><?php echo $entry_book; ?></label>             
                         <div class="col-sm-10">                                
                             <input  type="file" name="book" value="<?php echo $book; ?>" class="btn btn-primary" >
+	                 		 <?php if ($error_extension_book) { ?>
+	                  			<div class="text-danger"><?php echo $error_extension_book; ?></div>
+	                 		 <?php } ?>
                         </div>                                                                       
                    </div>  
 
@@ -105,6 +111,39 @@
                       <input type="text" name="price" value="<?php echo $price; ?>" placeholder="<?php echo $entry_price; ?>" id="input-price" class="form-control" />
                     </div>
                   </div>
+
+                   <div class="form-group required">
+                            <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_paper_size; ?></label>
+                            <div class="col-sm-10">
+                                <select name="paper_size" id="input-category-class" class="form-control">
+                                    <option value="0"><?php echo $text_none; ?></option>
+                                    <?php foreach ($paper_size as $paper_size) { ?>
+                                    <?php if ($paper_size['paper_size_id'] == $paper_size) { ?>
+                                    <option value="<?php echo $paper_size['paper_size_id']; ?>" selected="selected"><?php echo $paper_size['size']; ?></option>
+                                    <?php } else { ?>
+                                    <option value="<?php echo $paper_size['paper_size_id']; ?>"><?php echo $paper_size['size']; ?></option>
+                                    <?php } ?>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                    </div>
+
+                    <div class="form-group required">
+                            <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_paper_type; ?></label>
+                            <div class="col-sm-10">
+                                <select name="paper_type" id="input-category-class" class="form-control">
+                                    <option value="0"><?php echo $text_none; ?></option>
+                                    <?php foreach ($paper_type as $paper_type) { ?>
+                                    <?php if ($paper_type['paper_type_id'] == $paper_type) { ?>
+                                    <option value="<?php echo $paper_type['paper_type_id']; ?>" selected="selected"><?php echo $paper_type['type']; ?></option>
+                                    <?php } else { ?>
+                                    <option value="<?php echo $paper_type['paper_type_id']; ?>"><?php echo $paper_type['type']; ?></option>
+                                    <?php } ?>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                    </div>  
+
                   <?php if($get_product_id){ ?>
                   		<div class="form-group">
 		                    <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status_author; ?></label>
@@ -126,10 +165,28 @@
                
            </div>
       </form>
+      <?php if ($text_agreement) { ?>
+        <div class="buttons">
+          <div class="pull-right"><?php echo $text_agreement; ?>
+            <?php if ($agreement) { ?>
+            <input type="checkbox" name="agreement" value="1" checked="checked" />
+            <?php } else { ?>
+            <input type="checkbox" name="agreement" value="1" />
+            <?php } ?>
+            &nbsp;
+            <button type="submit" form="form-product" data-toggle="tooltip" title="<?php echo $button_save; ?>" class="btn btn-primary"><i class="fa fa-save"></i></button>
+            <a href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn btn-default"><i class="fa fa-reply"></i></a>
+          </div>
+        </div>
+        <?php } else { ?>
+        <div class="buttons">
           <div class="pull-right">
             <button type="submit" form="form-product" data-toggle="tooltip" title="<?php echo $button_save; ?>" class="btn btn-primary"><i class="fa fa-save"></i></button>
             <a href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn btn-default"><i class="fa fa-reply"></i></a>
+          </div>
         </div>
+        <?php } ?>
+          
       </div>
 
     </div>
