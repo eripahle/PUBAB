@@ -764,14 +764,9 @@ class ModelCatalogProduct extends Model {
 
 			$sumber= $_FILES['image']['tmp_name'];
 			$target=$_FILES['image']['name'];
-		    $lokasi_cover="cover/".$target;
+		    $lokasi_cover="cover/".date("smhymd")."_".$target;
 		    move_uploaded_file($sumber, DIR_IMAGE."/".$lokasi_cover);
 			
-			//$this->db->query("INSERT INTO " . DB_PREFIX . "product SET customer_id='".$data['customer_id2']."'' , image = '".$lokasi_cover."' , quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW()");
-			//$this->db->query("INSERT INTO " . DB_PREFIX . "product SET customer_id='".$customer_id2."'' , image2 = '".$lokasi_cover."' , price = " .(float)$data['price']. ", date_added = NOW()");
-			//$this->db->query("INSERT INTO ".DB_PREFIX."pro d   uct (customer_id,image,price,date_added) VALUES (".$data['customer_id'].",".$lokasi_book.",".(int)$data['price'].",NOW()");
-			//$product_id = $this->db->getLastId();
-
 		    $this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = 'book', sku = '" . $this->db->escape($data['sku']) . "', 
 		    					upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', 
 		    					jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', 
