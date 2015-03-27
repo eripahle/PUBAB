@@ -38,6 +38,7 @@
     <div class="clear"></div>
     <hr>
     <?php } ?>
-    <a href="<?php echo $viewAll; ?>" >View All Testimony</a>
+    
+     <div id=paging align=left><?php echo $linkHalaman?></div> 
     </div>
 </body>

@@ -1,6 +1,6 @@
 <?php
 
-class ModelModuleTestimony extends Model {    
+class ModelModuleAboutEditor extends Model {    
     private $batas;
     public function getAllTestimony($p) {           
         $this->batas = 3;
