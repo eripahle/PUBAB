@@ -2,7 +2,7 @@
 <?php
 class ControllerCommonMybooks extends Controller {
 	private $error = array();
-
+	
 	public function index() {
 		if(!$this->customer->isLogged()){
 			$this->response->redirect($this->url->link('account/login', ' ', 'SSL'));
@@ -623,7 +623,7 @@ class ControllerCommonMybooks extends Controller {
 				'status3'    => ($result['status3']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'edit'       => $this->url->link('common/mybooks/edit', '&product_id=' . $result['product_id'] . $url, 'SSL'),
 				//'download'   => $this->url->link('catalog/product/downloadBooks', '&product_id=' . $result['product_id'] . $url, 'SSL')
-				'download'   => $books['draf']['draf']
+				'download'   => $books['draf']
 				//'href'       => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
 			);
 		}
@@ -775,6 +775,18 @@ class ControllerCommonMybooks extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('default/template/common/mybooks.tpl', $data));
+	}
+
+	public function getListBooks(){
+		$this->load->model('catalog/product');
+		$editor_id=$this->customer->getEditorId();
+		$query=$this->model_catalog_product->updateEditor($editor_id,$this->request->get['product_id']);
+		//$this->response->redirect($this->url->link('common/mybooks', ' ', 'SSL'));
+		if($query){
+			$this->response->redirect($this->url->link('common/mybooks/getEditingList','', 'SSL'));
+		}
+		
+		//$this->response->setOutput($this->load->view('default/template/common/mybooks/get.tpl', $data));
 	}
 
 	protected function getForm() {
@@ -1080,7 +1092,7 @@ class ControllerCommonMybooks extends Controller {
 		} elseif (!empty($product_info)) {
 			$data['model'] = $product_info['model'];
 		} else {
-			$data['model'] = '';
+			$data['model'] = 'buku';
 		}
 
 		if (isset($this->request->files['book'])) {
@@ -1181,7 +1193,7 @@ class ControllerCommonMybooks extends Controller {
 		} elseif (isset($this->request->get['product_id'])) {
 			$data['product_store'] = $this->model_catalog_product->getProductStores($this->request->get['product_id']);
 		} else {
-			$data['product_store'] = array(0);
+			$data['product_store'] = 0;
 		}
 
 		if (isset($this->request->post['keyword'])) {
@@ -1693,11 +1705,13 @@ class ControllerCommonMybooks extends Controller {
 	    $file_name_buku = $this->request->files['book']['name'];
 	    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
 	    $file_size_buku = $this->request->files['book']['size'];
-
+	      
+		$lokasi_book="file/".date("smhymd")."_".$file_name_buku;
 
 	    if (in_array(strtolower(substr(strrchr($file_name_buku, '.'), 1)), $allowed_ext_buku)){
 	   		// if (in_array($file_ext_buku, $allowed_ext_buku) === true) {
 	        if ($file_size_buku < 1044070000) {
+	        	move_uploaded_file($this->request->files['book']['tmp_name'], DIR_BOOK."/".$lokasi_book);
 	            return TRUE;
 	        } else {
 	            return FALSE;
@@ -1713,10 +1727,13 @@ class ControllerCommonMybooks extends Controller {
 	        $file_name_image = $this->request->files['image']['name'];
 	        //$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
 	        $file_size_image = $this->request->files['image']['size'];
+	        $lokasi_cover="cover/".date("smhymd")."_".$file_name_image;
 
 	        if (in_array(strtolower(substr(strrchr($file_name_image, '.'), 1)), $allowed_ext_image)){
 	        //if (in_array($file_ext_image, $allowed_ext_image) === true) {
 	            if ($file_size_image < 1044070000) {
+	            	$this->data['lokasi_cover']=$lokasi_cover;
+	            	move_uploaded_file($this->request->files['image']['tmp_name'], DIR_IMAGE."/".$lokasi_cover);
 	                return TRUE;
 	            } else {
 	                return FALSE;

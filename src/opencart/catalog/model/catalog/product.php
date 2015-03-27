@@ -4,6 +4,13 @@ class ModelCatalogProduct extends Model {
 		$this->db->query("UPDATE " . DB_PREFIX . "product SET viewed = (viewed + 1) WHERE product_id = '" . (int)$product_id . "'");
 	}
 
+	public function updateEditor($editor_id,$product_id){
+		$query=$this->db->query("UPDATE " . DB_PREFIX . "product SET editor_id = ".(int)$editor_id." WHERE product_id = '" . (int)$product_id . "'");
+		if($query){
+			return true;
+		}
+	}
+
 	public function getListEdit() {
 		$product_data = array();
 		$query =$this->db->query("SELECT * FROM ".DB_PREFIX."product p,".DB_PREFIX."product_description pd  WHERE p.product_id=pd.product_id AND p.editor_id='0' ORDER BY p.product_id ASC");
@@ -188,8 +195,8 @@ class ModelCatalogProduct extends Model {
 				'status'           => $query->row['status'],
 				'date_added'       => $query->row['date_added'],
 				'date_modified'    => $query->row['date_modified'],
-				'viewed'           => $query->row['viewed'],
-				'number_of_page'   => $query->row['number_of_page']
+				'viewed'           => $query->row['viewed']
+				
 			);
 		} else {
 			return false;
@@ -765,7 +772,7 @@ class ModelCatalogProduct extends Model {
 			$sumber= $_FILES['image']['tmp_name'];
 			$target=$_FILES['image']['name'];
 		    $lokasi_cover="cover/".date("smhymd")."_".$target;
-		    move_uploaded_file($sumber, DIR_IMAGE."/".$lokasi_cover);
+		    //move_uploaded_file($sumber, DIR_IMAGE."/".$lokasi_cover);
 			
 		    $this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = 'book', sku = '" . $this->db->escape($data['sku']) . "', 
 		    					upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', 
@@ -788,7 +795,7 @@ class ModelCatalogProduct extends Model {
 		    $sumber_book= $_FILES['book']['tmp_name'];
 			$target_book=$_FILES['book']['name'];
 		    $lokasi_book="file/".date("smhymd")."_".$target_book;
-		    move_uploaded_file($sumber_book, DIR_BOOK."/".$lokasi_book);
+		    //move_uploaded_file($sumber_book, DIR_BOOK."/".$lokasi_book);
 
 			$this->db->query("INSERT INTO " . DB_PREFIX ."draf SET product_id='".(int)$product_id."' , draf='".$lokasi_book."', tanggal_upload= '".date("Y-m-d")."'" );
 
@@ -797,11 +804,11 @@ class ModelCatalogProduct extends Model {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET paper_size_id=".(int)$data['paper_size']." , paper_type_id=".(int)$data['paper_type']." , product_id = '" . (int)$product_id . "', author='".$this->db->escape($data['author'])."', color_page=".(int)$data['color_page'].", bw_page=".(int)$data['bw_page']." , language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = 'book', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
 		}
 
-		if (isset($data['product_store'])) {
-			foreach ($data['product_store'] as $store_id) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_store SET product_id = '" . (int)$product_id . "', store_id = '" . (int)$store_id . "'");
-			}
-		}
+		//if (isset($data['product_store'])) {
+			//foreach ($data['product_store'] as $store_id) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_store SET product_id = '" . (int)$product_id . "', store_id = '0'");
+		//	}
+		//}
 
 		if (isset($data['product_attribute'])) {
 			foreach ($data['product_attribute'] as $product_attribute) {
