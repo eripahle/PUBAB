@@ -3,7 +3,7 @@
 class ModelModuleTestimony extends Model {    
     private $batas;
     public function getAllTestimony($p) {           
-        $this->batas = 3;
+        $this->batas = 4;
 	$posisi = $p->cariPosisi($this->batas);	
 	
         $sql = "SELECT * FROM " . DB_PREFIX . "review limit $posisi,$this->batas";

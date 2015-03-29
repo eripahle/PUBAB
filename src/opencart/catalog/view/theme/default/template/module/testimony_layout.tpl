@@ -5,7 +5,7 @@
     .clear{clear: both;}
 
     #list{
-        width: 600px;
+        width: 800px;
     }
 
     #list img{

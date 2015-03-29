@@ -9,9 +9,7 @@ class ControllerModuleUploadDrafBook extends Controller {
 
 		if (isset($this->request->get['route'])) {
 			$this->document->addLink(HTTP_SERVER, 'canonical');
-		}		
-
-                $this->session->data['token']='40594b151b111b3596bb972317196c22';
+		}		               
                         
 		$this->load->language('module/upload_draf_book');
 
