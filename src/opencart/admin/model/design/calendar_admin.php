@@ -1,48 +1,15 @@
 <?php
 
-class ModelDesignGallery extends Model {
+class ModelDesignCalendarAdmin extends Model {
 
-    public function addGallery($data, $file) {
-        $this->event->trigger('pre.admin.product.add', $data);
-        if($data['status'] == 'Enable' ){
-            $data['status'] = 1;
-        }else{
-            $data['status'] = 0;
-        }
-                
+    public function addCalendarevent($data) {
+        $this->event->trigger('pre.admin.product.add', $data);                
         $sql = "INSERT INTO " . DB_PREFIX .
-                "gallery_event SET title = '" . $this->db->escape($data['title'])
-                . "', description = '" . $this->db->escape($data['desc'])
-                . "', status = " . $this->db->escape($data['status'].", ");
-                
-        $allowed_ext = array('png', 'jpg', 'jpeg');
-        $file_name = $file['image']['name'];
-        $dot = '.';
-        $file_ext = strtolower(end(explode($dot, $file_name)));
-        $file_size = $file['image']['size'];
-        $file_tmp = $file['image']['tmp_name'];
-
-        $nama = date("smhymd") . '_' . $file_name;        
-
-        if (in_array($file_ext, $allowed_ext) === true) {
-            if ($file_size < 1044070000) {
-                $lokasi = 'image/gallery/' . $nama . '.' . $file_ext;
-                $lokasisimpan = '../image/gallery/' . $nama . '.' . $file_ext;
-                move_uploaded_file($file_tmp, $lokasisimpan);
-                $sql = $sql . "image = '".$lokasi."'";
-                echo $sql;
-                $query = $this->db->query($sql);
-                if ($query) {
-                    echo '<div class="error">Sukses!</div>';
-                } else {
-                    echo '<div class="error">ERROR: Gagal upload file!</div>';
-                }
-            } else {
-                echo '<div class="error">ERROR: Besar ukuran file (file size) maksimal 1 Mb!</div>';
-            }
-        } else {
-            echo '<div class="error">ERROR: Ekstensi file tidak di izinkan!</div>';
-        }
+                "calendar_event SET title = '" . $this->db->escape($data['title'])
+                . "', description = '" . $this->db->escape($data['description'])
+                . "', event_date = '" . substr($this->db->escape($data['date_available']."' "), 0, 10) . "'";
+        
+        $this->db->query($sql);
     }
 
     public function editProduct($product_id, $data) {
@@ -241,8 +208,8 @@ class ModelDesignGallery extends Model {
         return $query->row;
     }
 
-    public function getGallerys() {
-        $sql = "SELECT * FROM " . DB_PREFIX . "gallery_event";
+    public function getCalendarEvents() {
+        $sql = "SELECT * FROM " . DB_PREFIX . "calendar_event";
 
         $query = $this->db->query($sql);
 

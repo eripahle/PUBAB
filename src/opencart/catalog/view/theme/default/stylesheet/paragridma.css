@@ -159,7 +159,7 @@ img, object { max-width: 100%; } /* http://unstoppablerobotninja.com/entry/fluid
 	blockquote cite:before { content: "\2014 \0020"; }
 	blockquote cite a, blockquote cite a:visited {  }
 	
-	hr { border: solid #ddd; border-width: 1px 0 0; clear: both; margin: 0px 0 18px; height: 0; }
+	hr { border: solid #ddd; border-width: 1px 0 0; clear: both; margin: 12px 0 18px; height: 0; }
 	
 	abbr, acronym { text-transform: uppercase; font-size: 90%;  border-bottom: 1px solid #ddd; cursor: help; }
 	abbr { text-transform: none; }

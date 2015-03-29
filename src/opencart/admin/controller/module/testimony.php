@@ -182,5 +182,6 @@ class ControllerModuleTestimony extends Controller {
 		}		
 
 		return !$this->error;
+                
 	}
 }
