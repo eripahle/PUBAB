@@ -304,23 +304,10 @@ class ModelCheckoutOrder extends Model {
 					$order_status_id = $this->config->get('config_order_status_id');
 				}
 			}
-			//perubahan agar auto ganerate invoice
-		  //$this->db->query("UPDATE `" . DB_PREFIX . "order` SET order_status_id = '" . (int)$order_status_id . "', date_modified = NOW() WHERE order_id = '" . (int)$order_id . "'");
-		   $query = $this->db->query("SELECT MAX(invoice_no) AS invoice_no FROM `" . DB_PREFIX . 
-		   			"order` WHERE invoice_prefix = '" . $this->db->escape($order_info['invoice_prefix']) . "'");
 
-           if ($query->row['invoice_no']) {
-           		$invoice_no = (int)$query->row['invoice_no'] + 1;
-           } else {
-                   $invoice_no = 1;
-           }	
-           $this->db->query("UPDATE `" . DB_PREFIX . "order` SET order_status_id = '" . (int)$order_status_id . "', 
-           					date_modified = NOW(), invoice_no = '" . (int)$invoice_no . "',
-						    invoice_prefix = '" . $this->db->escape($order_info['invoice_prefix']) . "' 
-           					WHERE order_id = '" . (int)$order_id . "'");
-		    
-           
-            $this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$order_status_id . "', notify = '" . (int)$notify . "', comment = '" . $this->db->escape($comment) . "', date_added = NOW()");
+			$this->db->query("UPDATE `" . DB_PREFIX . "order` SET order_status_id = '" . (int)$order_status_id . "', date_modified = NOW() WHERE order_id = '" . (int)$order_id . "'");
+
+			$this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$order_status_id . "', notify = '" . (int)$notify . "', comment = '" . $this->db->escape($comment) . "', date_added = NOW()");
 
 			// If current order status is not processing or complete but new status is processing or complete then commence completing the order
 			if (!in_array($order_info['order_status_id'], array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status'))) && in_array($order_status_id, array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status')))) {
@@ -435,9 +422,6 @@ class ModelCheckoutOrder extends Model {
 				$data['text_download'] = $language->get('text_new_download');
 				$data['text_order_detail'] = $language->get('text_new_order_detail');
 				$data['text_instruction'] = $language->get('text_new_instruction');
-				//two rows for automatic generate
-				$data['invoice_no'] =$invoice_no;
-				$data['text_invoice_no'] =$language->get('text_invoice_no');
 				$data['text_order_id'] = $language->get('text_new_order_id');
 				$data['text_date_added'] = $language->get('text_new_date_added');
 				$data['text_payment_method'] = $language->get('text_new_payment_method');

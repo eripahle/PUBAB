@@ -62,7 +62,7 @@
                       </div>
                     </div>
                   </div>
-
+                  <?php if(!$get_product_id){ ?>
                   <div class="form-group required">
                     <label class="col-sm-2 control-label" for="input-color-page"><?php echo $entry_color_page; ?></label>
                     <div class="col-sm-10">
@@ -76,7 +76,7 @@
                       <input type="text" name="bw_page" value="<?php echo $bw_page; ?>" placeholder="<?php echo $entry_bw_page; ?>" id="input-bw-page" class="form-control" />
                     </div>
                   </div>
-
+                   
                   <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_image; ?></label>             
                         <div class="col-sm-10">                                
@@ -96,7 +96,7 @@
 	                 		 <?php } ?>
                         </div>                                                                       
                    </div>  
-
+                   <?php }?>
                   <div class="form-group">
                    <label class="col-sm-2 control-label" for="input-description<?php echo $language['language_id']; ?>"><?php echo $entry_description; ?></label>
                     <div class="col-sm-10">
@@ -104,12 +104,12 @@
                     </div>
                   </div>
 
-                  
+                  <?php if(!$get_product_id){ ?>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label" for="input-price"><?php echo $entry_price; ?></label>
-                    <div class="col-sm-10">
-                      <input type="text" name="price" value="<?php echo $price; ?>" placeholder="<?php echo $entry_price; ?>" id="input-price" class="form-control" />
-                    </div>
+	            		<label class="col-sm-2 control-label" for="input-price"><?php echo $entry_price; ?></label>
+	                    <div class="col-sm-10">
+	                      <input type="text" name="price" value="<?php echo $price; ?>" placeholder="<?php echo $entry_price; ?>" id="input-price" class="form-control" />
+	                    </div>        
                   </div>
 
                    <div class="form-group required">
@@ -143,7 +143,7 @@
                                 </select>
                             </div>
                     </div>  
-
+                   <?php }?>
                   <?php if($get_product_id){ ?>
                   		<div class="form-group">
 		                    <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status_author; ?></label>

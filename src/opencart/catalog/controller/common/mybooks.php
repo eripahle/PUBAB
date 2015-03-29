@@ -82,7 +82,7 @@ class ControllerCommonMybooks extends Controller {
 
 		$this->load->model('catalog/product');
 
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
 			
 			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
 
@@ -292,6 +292,8 @@ class ControllerCommonMybooks extends Controller {
 
 			$this->load->model('catalog/productbooks');
 			$books=$this->model_catalog_productbooks->getBooks($result['product_id']);
+			$this->load->model('sale/order');
+			$totalSelling=$this->model_sale_order->getTotalByProduct($result['product_id']);
 			$data['products'][] = array(
 				'product_id' => $result['product_id'],
 				'image'      => $image,
@@ -306,8 +308,8 @@ class ControllerCommonMybooks extends Controller {
 				'status3'    => ($result['status3']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'edit'       => $this->url->link('common/mybooks/edit', '&product_id=' . $result['product_id'] . $url, 'SSL'),
 				//'download'   => $this->url->link('catalog/product/downloadBooks', '&product_id=' . $result['product_id'] . $url, 'SSL')
-				'download'   => $books['draf']
-				//'href'       => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
+				'download'   => $books['draf'],
+				'totalSelling' =>$totalSelling
 			);
 		}
 
@@ -329,6 +331,7 @@ class ControllerCommonMybooks extends Controller {
 		$data['column_status_management'] = $this->language->get('column_status_management');
 		$data['column_status_editor'] = $this->language->get('column_status_editor');
 		$data['column_action'] = $this->language->get('column_action');
+		$data['column_total_selling'] = $this->language->get('column_total_selling');
 
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_model'] = $this->language->get('entry_model');
@@ -403,6 +406,7 @@ class ControllerCommonMybooks extends Controller {
 		$data['sort_quantity'] = $this->url->link('common/mybooks', '&sort=p.quantity' . $url, 'SSL');
 		$data['sort_status'] = $this->url->link('common/mybooks',  '&sort=p.status' . $url, 'SSL');
 		$data['sort_order'] = $this->url->link('common/mybooks',  '&sort=p.sort_order' . $url, 'SSL');
+		$data['sort_total'] = $this->url->link('common/mybooks',  '&sort=p.price' . $url, 'SSL');
 
 		$url = '';
 
@@ -609,6 +613,8 @@ class ControllerCommonMybooks extends Controller {
 
 			$this->load->model('catalog/productbooks');
 			$books=$this->model_catalog_productbooks->getBooks($result['product_id']);
+			$this->load->model('sale/order');
+			$totalSelling=$this->model_sale_order->getTotalByProduct($result['product_id']);
 			$data['products'][] = array(
 				'product_id' => $result['product_id'],
 				'image'      => $image,
@@ -623,7 +629,8 @@ class ControllerCommonMybooks extends Controller {
 				'status3'    => ($result['status3']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'edit'       => $this->url->link('common/mybooks/edit', '&product_id=' . $result['product_id'] . $url, 'SSL'),
 				//'download'   => $this->url->link('catalog/product/downloadBooks', '&product_id=' . $result['product_id'] . $url, 'SSL')
-				'download'   => $books['draf']
+				'download'   => $books['draf'],
+				'totalSelling'=>$totalSelling
 				//'href'       => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
 			);
 		}
@@ -646,6 +653,7 @@ class ControllerCommonMybooks extends Controller {
 		$data['column_status_management'] = $this->language->get('column_status_management');
 		$data['column_status_editor'] = $this->language->get('column_status_editor');
 		$data['column_action'] = $this->language->get('column_action');
+		$data['column_total_selling'] = $this->language->get('column_total_selling');
 
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_model'] = $this->language->get('entry_model');
