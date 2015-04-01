@@ -703,7 +703,7 @@ $('select[name=\'country_id\']').on('change', function() {
 
 $('select[name=\'country_id\']').trigger('change');
 
-$('select[name=\'zone_id\']').on('change', function() {
+/*$('select[name=\'zone_id\']').on('change', function() {
   $.ajax({
     url: 'index.php?route=account/account/city&zone_id=' + this.value,
     dataType: 'json',
@@ -745,7 +745,7 @@ $('select[name=\'zone_id\']').on('change', function() {
 });
 
 $('select[name=\'zone_id\']').trigger('change');
-
+*/
 //--></script>
 
 <?php echo $footer; ?>

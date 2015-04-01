@@ -22,6 +22,7 @@ $_['text_loading']          = 'Loading...';
 // Buttons
 $_['button_address_add']    = 'Add Address';
 $_['button_back']           = 'Back';
+$_['button_save']           = 'Save';
 $_['button_continue']       = 'Continue';
 $_['button_cart']           = 'Add to Cart';
 $_['button_edit_editor']    = 'Take for Editing';

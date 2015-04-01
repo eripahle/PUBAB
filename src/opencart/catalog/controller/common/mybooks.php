@@ -28,7 +28,22 @@ class ControllerCommonMybooks extends Controller {
 		$this->load->model('catalog/product');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST'&& $this->validateForm())) {
-			$this->model_catalog_product->addProduct($this->request->post,$customer_id);
+
+			 $dot = '.';
+		    $file_name_buku = $this->request->files['book']['name'];
+		    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
+		    $file_size_buku = $this->request->files['book']['size'];
+		      
+			$lokasi_book="file/".date("smhymd")."_".$file_name_buku;
+			move_uploaded_file($this->request->files['book']['tmp_name'], DIR_BOOK."/".$lokasi_book);
+
+			$file_name_image = $this->request->files['image']['name'];
+	        //$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
+	        $file_size_image = $this->request->files['image']['size'];
+	        $lokasi_cover="cover/".date("smhymd")."_".$file_name_image;
+	        move_uploaded_file($this->request->files['image']['tmp_name'], DIR_IMAGE."/".$lokasi_cover);
+
+			$this->model_catalog_product->addProduct($this->request->post,$customer_id,$lokasi_cover,$lokasi_book);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -84,7 +99,21 @@ class ControllerCommonMybooks extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
 			
-			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
+			if(!empty($this->request->files['book']['name'])){
+				if($this->checkValidRequestDrafBook()){
+					$dot = '.';
+				    $file_name_buku = $this->request->files['book']['name'];
+				    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
+				    $file_size_buku = $this->request->files['book']['size'];
+				      
+					$lokasi_book="file/".date("smhymd")."_".$file_name_buku;
+					move_uploaded_file($this->request->files['book']['tmp_name'], DIR_BOOK."/".$lokasi_book);
+				}
+
+			}else{
+				$lokasi_book=null;
+			}
+			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post,$lokasi_book);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -121,8 +150,12 @@ class ControllerCommonMybooks extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
-
-			$this->response->redirect($this->url->link('common/mybooks', ' ', 'SSL'));
+			if(!isset($this->request->files['book']['name'])){
+				$this->response->redirect($this->url->link('common/mybooks', ' ', 'SSL'));
+			}else{
+				$this->response->redirect($this->url->link('common/mybooks/getEditingList', ' ', 'SSL'));
+			}
+			
 		}
 
 		$this->getForm();
@@ -1042,8 +1075,10 @@ class ControllerCommonMybooks extends Controller {
 		if (!isset($this->request->get['product_id'])) {
 			$data['get_product_id']=false;
 			$data['action'] = $this->url->link('common/mybooks/add', ' ', 'SSL');
+			$data['group_id'] =0;
 		} else {
 			$data['get_product_id']=true;
+			$data['group_id'] =$this->customer->getGroupId();
 			$data['action'] = $this->url->link('common/mybooks/edit',  '&product_id=' . $this->request->get['product_id'] . $url, 'SSL');
 		}
 
@@ -1709,7 +1744,7 @@ class ControllerCommonMybooks extends Controller {
 
 	public function checkValidRequestDrafBook() {
 	    $dot = '.';
-	    $allowed_ext_buku = array('doc', 'docx');
+	    $allowed_ext_buku = array('doc', 'docx', 'pdf');
 	    $file_name_buku = $this->request->files['book']['name'];
 	    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
 	    $file_size_buku = $this->request->files['book']['size'];
@@ -1719,7 +1754,6 @@ class ControllerCommonMybooks extends Controller {
 	    if (in_array(strtolower(substr(strrchr($file_name_buku, '.'), 1)), $allowed_ext_buku)){
 	   		// if (in_array($file_ext_buku, $allowed_ext_buku) === true) {
 	        if ($file_size_buku < 1044070000) {
-	        	move_uploaded_file($this->request->files['book']['tmp_name'], DIR_BOOK."/".$lokasi_book);
 	            return TRUE;
 	        } else {
 	            return FALSE;
@@ -1740,9 +1774,7 @@ class ControllerCommonMybooks extends Controller {
 	        if (in_array(strtolower(substr(strrchr($file_name_image, '.'), 1)), $allowed_ext_image)){
 	        //if (in_array($file_ext_image, $allowed_ext_image) === true) {
 	            if ($file_size_image < 1044070000) {
-	            	$this->data['lokasi_cover']=$lokasi_cover;
-	            	move_uploaded_file($this->request->files['image']['tmp_name'], DIR_IMAGE."/".$lokasi_cover);
-	                return TRUE;
+	   	                return TRUE;
 	            } else {
 	                return FALSE;
 	            }

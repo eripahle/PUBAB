@@ -766,19 +766,19 @@ class ModelCatalogProduct extends Model {
 		return $query->rows;
 	}
 
-	public function addProduct($data,$customer_id) {
+	public function addProduct($data,$customer_id,$lokasi_cover,$lokasi_book) {
 		$this->event->trigger('pre.admin.product.add', $data);
 
-			$sumber= $_FILES['image']['tmp_name'];
-			$target=$_FILES['image']['name'];
-		    $lokasi_cover="cover/".date("smhymd")."_".$target;
+			//$sumber= $_FILES['image']['tmp_name'];
+			//$target=$_FILES['image']['name'];
+		    //$lokasi_cover="cover/".date("smhymd")."_".$target;
 		    //move_uploaded_file($sumber, DIR_IMAGE."/".$lokasi_cover);
 			
 		    $this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = 'book', sku = '" . $this->db->escape($data['sku']) . "', 
 		    					upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', 
 		    					jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', 
 		    					mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', 
-		    					quantity = '1', minimum = '1', 
+		    					quantity = '999', minimum = '1', 
 		    					subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', 
 		    					date_available = '" . $this->db->escape($data['date_available']) . "', 
 		    					manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '1', 
@@ -792,9 +792,9 @@ class ModelCatalogProduct extends Model {
 
 			$product_id = $this->db->getLastId();
 		//	$this->db->query("UPDATE ". DB_PREFIX ."product SET image='".$lokasi_cover."',customer_id=".(int)$data['customer_id']." WHERE product_id=".(int)$product_id."");
-		    $sumber_book= $_FILES['book']['tmp_name'];
-			$target_book=$_FILES['book']['name'];
-		    $lokasi_book="file/".date("smhymd")."_".$target_book;
+		    //$sumber_book= $_FILES['book']['tmp_name'];
+			//$target_book=$_FILES['book']['name'];
+		    //$lokasi_book="file/".date("smhymd")."_".$target_book;
 		    //move_uploaded_file($sumber_book, DIR_BOOK."/".$lokasi_book);
 
 			$this->db->query("INSERT INTO " . DB_PREFIX ."draf SET product_id='".(int)$product_id."' , draf='".$lokasi_book."', tanggal_upload= '".date("Y-m-d")."'" );
@@ -914,49 +914,36 @@ class ModelCatalogProduct extends Model {
 		return $product_id;
 	}
 
-	public function editProduct($product_id, $data) {
+	public function editProduct($product_id, $data,$lokasi_book) {
 		$this->event->trigger('pre.admin.product.edit', $data);
 
-		//$this->db->query("UPDATE " . DB_PREFIX . "product SET  price = '" . (float)$data['price'] . "' WHERE product_id = '" . (int)$product_id . "'");
+		if(isset($data['status1'])){
+			$this->db->query("UPDATE " . DB_PREFIX . "product SET  status1 = '" . (float)$data['status1'] . "' WHERE product_id = '" . (int)$product_id . "'");			
+		}
 
-		/*if (!isset($data['image'])) {
-			$dot = '.';
-			$result = $this->db->query("SELECT image FROM ".DB_PREFIX. "product WHERE product_id=".$product_id)->row;
-			if(is_file(DIR_IMAGE."/".$result['image'])){
-				unlink(DIR_IMAGE."/".$result['image']);
+		if(isset($data['status2'])){
+			$this->db->query("UPDATE " . DB_PREFIX . "product SET  status2 = '" . (float)$data['status2'] . "' WHERE product_id = '" . (int)$product_id . "'");			
+		}
+
+		if($lokasi_book!=null){
+			$this->db->query("UPDATE " . DB_PREFIX ."draf SET draf='".$lokasi_book."', tanggal_upload= '".date("Y-m-d")."' WHERE product_id=".(int)$product_id."" );
+		}
+		if(isset($data['product_description'])){
+			$this->db->query("DELETE FROM " . DB_PREFIX . "product_description WHERE product_id = '" . (int)$product_id . "'");
+
+			foreach ($data['product_description'] as $language_id => $value) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', author='".$this->db->escape($data['author'])."' , language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = 'book', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
 			}
-
-				$sumber= $_FILES['image']['tmp_name'];
-				$target=$_FILES['image']['name'];
-	            $lokasi_cover="cover/".date("smhymd")."_".$target;
-	            move_uploaded_file($sumber, DIR_IMAGE."/".$lokasi_cover);
-			
-				$this->db->query("UPDATE " . DB_PREFIX . "product SET image = '".$lokasi_cover."' WHERE product_id = '" . (int)$product_id . "'");
-			//$this->db->query("UPDATE " . DB_PREFIX . "product SET image = '".$data['image']."' WHERE product_id = '" . (int)$product_id . "'");
+		}
 		
-		}
-		 	$sumber_book= $_FILES['book']['tmp_name'];
-			$target_book=$_FILES['book']['name'];
-		    $lokasi_book="file/".date("smhymd")."_".$target_book;
-		    move_uploaded_file($sumber_book, DIR_BOOK."/".$lokasi_book);
-
-			$this->db->query("INSERT INTO " . DB_PREFIX ."draf SET product_id='".(int)$product_id."' , draf='".$lokasi_book."', tanggal_upload= '".date("Y-m-d")."'" );
-		*/
-
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_description WHERE product_id = '" . (int)$product_id . "'");
-
-		foreach ($data['product_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', author='".$this->db->escape($data['author'])."' , language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = 'book', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
-		}
-
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_store WHERE product_id = '" . (int)$product_id . "'");
-
-		if (isset($data['product_store'])) {
-			foreach ($data['product_store'] as $store_id) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_store SET product_id = '" . (int)$product_id . "', store_id = '" . (int)$store_id . "'");
+		if (isset($data['product_category'])) {
+			$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$product_id . "'");
+			foreach ($data['product_category'] as $category_id) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_category SET product_id = '" . (int)$product_id . "', category_id = '" . (int)$category_id . "'");
 			}
 		}
 
+		/*
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_attribute WHERE product_id = '" . (int)$product_id . "'");
 
 		if (!empty($data['product_attribute'])) {
@@ -1024,13 +1011,7 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$product_id . "'");
-
-		if (isset($data['product_category'])) {
-			foreach ($data['product_category'] as $category_id) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "product_to_category SET product_id = '" . (int)$product_id . "', category_id = '" . (int)$category_id . "'");
-			}
-		}
+		
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_filter WHERE product_id = '" . (int)$product_id . "'");
 
@@ -1081,7 +1062,7 @@ class ModelCatalogProduct extends Model {
 				$this->db->query("INSERT INTO `" . DB_PREFIX . "product_recurring` SET `product_id` = " . (int)$product_id . ", customer_group_id = " . (int)$recurring['customer_group_id'] . ", `recurring_id` = " . (int)$recurring['recurring_id']);
 			}
 		}
-
+		*/
 		$this->cache->delete('product');
 
 		$this->event->trigger('post.admin.product.editProduct', $product_id);

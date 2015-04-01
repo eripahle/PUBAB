@@ -26,42 +26,44 @@
             </ul>
           <div class="tab-content">
                 <?php foreach ($languages as $language) { ?>
-                
-                  <div class="form-group required">
-                    <label class="col-sm-2 control-label" for="input-name<?php echo $language['language_id']; ?>"><?php echo $entry_name; ?>
-                    </label>
-                    <div class="col-sm-10">
-                      <input type="text" name="product_description[<?php echo $language['language_id']; ?>][name]" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['name'] : ''; ?>" placeholder="<?php echo $entry_name; ?>" id="input-name<?php echo $language['language_id']; ?>" class="form-control" />
-                      <?php if (isset($error_name[$language['language_id']])) { ?>
-                      <div class="text-danger"><?php echo $error_name[$language['language_id']]; ?></div>
-                      <?php } ?>
-                    </div>
-                  </div>
-                <?php } ?>
-
-                  <div class="form-group required">
-	                <label class="col-sm-2 control-label" for="input-author"><?php echo $entry_author; ?></label>
-	                <div class="col-sm-10">
-	                  <input type="text" name="author" value="<?php echo $author; ?>" placeholder="<?php echo $entry_author; ?>" id="input-author" class="form-control" />
-	                  <?php if ($error_author) { ?>
-	                  <div class="text-danger"><?php echo $error_author; ?></div>
-	                  <?php } ?>
-	                </div>
-              	 </div> 
-
-                  <div class="form-group">
-                    <label class="col-sm-2 control-label" for="input-category"><span data-toggle="tooltip" title="<?php echo $help_category; ?>"><?php echo $entry_category; ?></span></label>
-                    <div class="col-sm-10">
-                      <input type="text" name="category" value="" placeholder="<?php echo $entry_category; ?>" id="input-category" class="form-control" />
-                      <div id="product-category" class="well well-sm" style="height: 150px; overflow: auto;">
-                        <?php foreach ($product_categories as $product_category) { ?>
-                        <div id="product-category<?php echo $product_category['category_id']; ?>"><i class="fa fa-minus-circle"></i> <?php echo $product_category['name']; ?>
-                          <input type="hidden" name="product_category[]" value="<?php echo $product_category['category_id']; ?>" />
-                        </div>
-                        <?php } ?>
-                      </div>
-                    </div>
-                  </div>
+                	<?php if($group_id!=2) { ?>
+                     	 <div class="form-group required">
+	                    <label class="col-sm-2 control-label" for="input-name<?php echo $language['language_id']; ?>"><?php echo $entry_name; ?>
+	                    </label>
+	                    <div class="col-sm-10">
+	                      <input type="text" name="product_description[<?php echo $language['language_id']; ?>][name]" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['name'] : ''; ?>" placeholder="<?php echo $entry_name; ?>" id="input-name<?php echo $language['language_id']; ?>" class="form-control" />
+	                      <?php if (isset($error_name[$language['language_id']])) { ?>
+	                      <div class="text-danger"><?php echo $error_name[$language['language_id']]; ?></div>
+	                      <?php } ?>
+	                    </div>
+	                  </div>
+	                <?php } ?>
+	            <?php } ?>
+	                <?php if($group_id!=2) { ?>
+	                  <div class="form-group required">
+		                <label class="col-sm-2 control-label" for="input-author"><?php echo $entry_author; ?></label>
+		                <div class="col-sm-10">
+		                  <input type="text" name="author" value="<?php echo $author; ?>" placeholder="<?php echo $entry_author; ?>" id="input-author" class="form-control" />
+		                  <?php if ($error_author) { ?>
+		                  <div class="text-danger"><?php echo $error_author; ?></div>
+		                  <?php } ?>
+		                </div>
+	              	 </div> 
+	              	 
+	                  <div class="form-group">
+	                    <label class="col-sm-2 control-label" for="input-category"><span data-toggle="tooltip" title="<?php echo $help_category; ?>"><?php echo $entry_category; ?></span></label>
+	                    <div class="col-sm-10">
+	                      <input type="text" name="category" value="" placeholder="<?php echo $entry_category; ?>" id="input-category" class="form-control" />
+	                      <div id="product-category" class="well well-sm" style="height: 150px; overflow: auto;">
+	                        <?php foreach ($product_categories as $product_category) { ?>
+	                        <div id="product-category<?php echo $product_category['category_id']; ?>"><i class="fa fa-minus-circle"></i> <?php echo $product_category['name']; ?>
+	                          <input type="hidden" name="product_category[]" value="<?php echo $product_category['category_id']; ?>" />
+	                        </div>
+	                        <?php } ?>
+	                      </div>
+	                    </div>
+	                  </div>
+                 	<?php } ?>
                   <?php if(!$get_product_id){ ?>
                   <div class="form-group required">
                     <label class="col-sm-2 control-label" for="input-color-page"><?php echo $entry_color_page; ?></label>
@@ -97,13 +99,14 @@
                         </div>                                                                       
                    </div>  
                    <?php }?>
-                  <div class="form-group">
-                   <label class="col-sm-2 control-label" for="input-description<?php echo $language['language_id']; ?>"><?php echo $entry_description; ?></label>
-                    <div class="col-sm-10">
-                      <textarea name="product_description[<?php echo $language['language_id']; ?>][description]" rows="10" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>
-                    </div>
-                  </div>
-
+                   <?php if($group_id!=2) { ?>
+	                  <div class="form-group">
+	                   <label class="col-sm-2 control-label" for="input-description<?php echo $language['language_id']; ?>"><?php echo $entry_description; ?></label>
+	                    <div class="col-sm-10">
+	                      <textarea name="product_description[<?php echo $language['language_id']; ?>][description]" rows="10" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>
+	                    </div>
+	                  </div>
+	                <?php }?>
                   <?php if(!$get_product_id){ ?>
                   <div class="form-group">
 	            		<label class="col-sm-2 control-label" for="input-price"><?php echo $entry_price; ?></label>
@@ -144,7 +147,7 @@
                             </div>
                     </div>  
                    <?php }?>
-                  <?php if($get_product_id){ ?>
+                  <?php if($get_product_id && $group_id!=2){ ?>
                   		<div class="form-group">
 		                    <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status_author; ?></label>
 		                    <div class="col-sm-10">
@@ -155,6 +158,31 @@
 		                        <?php } else { ?>
 		                        <option value="1"><?php echo $text_agree; ?></option>
 		                        <option value="0" selected="selected"><?php echo $text_disagree; ?></option>
+		                        <?php } ?>
+		                      </select>
+		                    </div>
+		                </div>
+                  <?php } ?>
+                  <?php if($group_id==2) {?>
+	                  <div class="form-group">
+	                        <label class="col-sm-2 control-label" for="input-book"><?php echo $entry_book; ?></label>             
+	                        <div class="col-sm-10">                                
+	                            <input  type="file" name="book" value="<?php echo $book; ?>" class="btn btn-primary" >
+		                 		 <?php if ($error_extension_book) { ?>
+		                  			<div class="text-danger"><?php echo $error_extension_book; ?></div>
+		                 		 <?php } ?>
+	                        </div>                                                                       
+	                   </div> 
+                  		<div class="form-group">
+		                    <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status_editor; ?></label>
+		                    <div class="col-sm-10">
+		                      <select name="status2" id="input-status1" class="form-control">
+		                        <?php if ($status1) { ?>
+		                        <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+		                        <option value="0"><?php echo $text_disabled; ?></option>
+		                        <?php } else { ?>
+		                        <option value="1"><?php echo $text_enabled; ?></option>
+		                        <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
 		                        <?php } ?>
 		                      </select>
 		                    </div>
