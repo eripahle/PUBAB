@@ -28,7 +28,7 @@
                             </div>                            
                         </li>
                         <?php } ?>                   
-
+                        <br><br>
                     </ul>
                 </div>  
             </div>
