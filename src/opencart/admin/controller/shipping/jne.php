@@ -14,7 +14,7 @@ class ControllerShippingjne extends Controller {
 					
 			$this->session->data['success'] = $this->language->get('text_success');
 						
-			$this->url->link('extension/shipping', 'token=' . $this->session->data['token'], 'SSL');
+			$this->response->redirect($this->url->link('extension/shipping', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 				
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -103,10 +103,10 @@ class ControllerShippingjne extends Controller {
 		
 		$data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
 								
-                $data['header'] = $this->load->controller('common/header');
+		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
-				
+
 		$this->response->setOutput($this->load->view('shipping/jne.tpl', $data));
 	}
 	

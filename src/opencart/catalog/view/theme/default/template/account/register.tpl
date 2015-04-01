@@ -263,24 +263,7 @@
               <input type="text" name="address_2" value="<?php echo $address_2; ?>" placeholder="<?php echo $entry_address_2; ?>" id="input-address-2" class="form-control" />
             </div>
           </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-city"><?php echo $entry_city; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="city" value="<?php echo $city; ?>" placeholder="<?php echo $entry_city; ?>" id="input-city" class="form-control" />
-              <?php if ($error_city) { ?>
-              <div class="text-danger"><?php echo $error_city; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-postcode"><?php echo $entry_postcode; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-postcode" class="form-control" />
-              <?php if ($error_postcode) { ?>
-              <div class="text-danger"><?php echo $error_postcode; ?></div>
-              <?php } ?>
-            </div>
-          </div>
+          
 		  <!--
 			View Untuk Negara
 		  !-->
@@ -313,6 +296,26 @@
               <?php } ?>
             </div>
           </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-city"><?php echo $entry_city; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="city" value="<?php echo $city; ?>" placeholder="<?php echo $entry_city; ?>" id="input-city" class="form-control" />
+              <?php if ($error_city) { ?>
+              <div class="text-danger"><?php echo $error_city; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-postcode"><?php echo $entry_postcode; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-postcode" class="form-control" />
+              <?php if ($error_postcode) { ?>
+              <div class="text-danger"><?php echo $error_postcode; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+          
           <?php foreach ($custom_fields as $custom_field) { ?>
           <?php if ($custom_field['location'] == 'address') { ?>
           <?php if ($custom_field['type'] == 'select') { ?>
@@ -699,5 +702,50 @@ $('select[name=\'country_id\']').on('change', function() {
 });
 
 $('select[name=\'country_id\']').trigger('change');
+
+$('select[name=\'zone_id\']').on('change', function() {
+  $.ajax({
+    url: 'index.php?route=account/account/city&zone_id=' + this.value,
+    dataType: 'json',
+    beforeSend: function() {
+      $('select[name=\'zone_id\']').after(' <i class="fa fa-circle-o-notch fa-spin"></i>');
+    },
+    complete: function() {
+      $('.fa-spin').remove();
+    },
+    success: function(json) {
+      if (json['postcode_required'] == '1') {
+        $('input[name=\'postcode\']').parent().parent().addClass('required');
+      } else {
+        $('input[name=\'postcode\']').parent().parent().removeClass('required');
+      }
+      
+      html = '<option value=""><?php echo $text_select; ?></option>';
+      
+      if (json['city'] != '') {
+        for (i = 0; i < json['city'].length; i++) {
+          html += '<option value="' + json['city'][i]['city_id'] + '"';
+          
+          if (json['city'][i]['city_id'] == '<?php echo $city_id; ?>') {
+            html += ' selected="selected"';
+          }
+        
+          html += '>' + json['city'][i]['name'] + '</option>';
+        }
+      } else {
+        html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
+      }
+      
+      $('select[name=\'city_id\']').html(html);
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+    }
+  });
+});
+
+$('select[name=\'zone_id\']').trigger('change');
+
 //--></script>
+
 <?php echo $footer; ?>

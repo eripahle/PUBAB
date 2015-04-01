@@ -104,4 +104,27 @@ class ControllerAccountAccount extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
+
+	public function city() {
+		$json = array();
+
+		$this->load->model('localisation/zone');
+
+		$city_info = $this->model_localisation_zone->getZonesByCountryId($this->request->get['zone_id']);
+
+		if ($city_info) {
+			$this->load->model('localisation/city');
+
+			$json = array(
+				'zone_id'        	=> $city_info['zone_id'],
+				'name'              => $city_info['name'],
+				'city'              => $this->model_localisation_city->getCitiesByZoneId($this->request->get['zone_id'])
+			);
+		}
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
+	}
+
+	
 }

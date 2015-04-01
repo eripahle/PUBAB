@@ -783,7 +783,7 @@ class ModelCatalogProduct extends Model {
 		    					date_available = '" . $this->db->escape($data['date_available']) . "', 
 		    					manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '1', 
 		    					price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', 
-		    					weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', 
+		    					weight = '0.25', weight_class_id = '1', 
 		    					length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', 
 		    					height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', 
 		    					status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', 

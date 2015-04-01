@@ -1,4 +1,4 @@
-<?php echo $header; ?>
+<?php echo $header; ?><?php echo $column_left; ?>
 <div id="content">
   <div class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -62,7 +62,9 @@
             <td><?php echo $entry_sort_order; ?></td>
             <td><input type="text" name="jne_sort_order" value="<?php echo $jne_sort_order; ?>" size="1" /></td>
           </tr>
-		  <tr>            
+		  <tr>
+            <td>Pengembang</td>
+            <td><a href="http://www.pijaronline.com">www.PijarOnline.com</a></td>
           </tr>
         </table>
       </form>
