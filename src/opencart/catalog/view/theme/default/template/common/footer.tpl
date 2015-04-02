@@ -28,17 +28,17 @@
                 <div class="col-sm-3">
                     <h5><?php echo $text_termandcondition; ?></h5>
                     <ul class="list-unstyled">
-                        <li><a href="<?php echo $account; ?>"><?php echo $text_bookpricingandroyalty; ?></a></li>
-                        <li><a href="<?php echo $order; ?>"><?php echo $text_orderbooks; ?></a></li>          
+                        <li><a href="#"><?php echo $text_bookpricingandroyalty; ?></a></li>
+                        <li><a href="#"><?php echo $text_orderbooks; ?></a></li>          
                     </ul>
                 </div>
                 <div class="col-sm-3">
                     <h5><?php echo $text_quickhelp; ?></h5>
                     <ul class="list-unstyled">
                         <li><a href="<?php echo $faq; ?>"><?php echo $text_faq; ?></a></li>
-                        <li><a href="<?php echo $voucher; ?>"><?php echo $text_abouteditor; ?></a></li>
+                        <li><a href="#"><?php echo $text_abouteditor; ?></a></li>
                         <li><a href="<?php echo $comunity; ?>"><?php echo $text_comunity; ?></a></li>
-                        <li><a href="<?php echo $special; ?>"><?php echo $text_videochatadmin; ?></a></li>
+                        <li><a href="#"><?php echo $text_videochatadmin; ?></a></li>
                     </ul>
                 </div>
         </center>
