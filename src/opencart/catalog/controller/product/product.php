@@ -235,6 +235,7 @@ class ControllerProductProduct extends Controller {
 			$type_info = $this->model_catalog_product->getProductType($product_info['paper_type_id']);
 			$size_info = $this->model_catalog_product->getProductSize($product_info['paper_type_id']);
 
+			$data['text_download']=$this->language->get('text_download');
 			$data['text_type'] = sprintf($this->language->get('text_type'), $type_info['type']);
 			$data['text_size'] = sprintf($this->language->get('text_size'), $size_info['size']);
 			$data['text_author'] = sprintf($this->language->get('text_author'), $product_info['author']);
@@ -410,7 +411,9 @@ class ControllerProductProduct extends Controller {
 			$data['products'] = array();
 
 			$results = $this->model_catalog_product->getProductRelated($this->request->get['product_id']);
-
+			$this->load->model('catalog/productbooks');
+			$books=$this->model_catalog_productbooks->getSampleScript($this->request->get['product_id']);
+			$data['download']=$books['sample_script'];
 			foreach ($results as $result) {
 				if ($result['image']) {
 					$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_related_width'), $this->config->get('config_image_related_height'));
@@ -441,7 +444,7 @@ class ControllerProductProduct extends Controller {
 				} else {
 					$rating = false;
 				}
-				//$statusEdit = $this->model_catalog_product->cekBookHasBeenEdit($this->request->get['product_id']);
+					//$statusEdit = $this->model_catalog_product->cekBookHasBeenEdit($this->request->get['product_id']);
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,

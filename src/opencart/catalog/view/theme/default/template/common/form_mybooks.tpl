@@ -77,12 +77,25 @@
                     <div class="col-sm-10">
                       <input type="text" name="bw_page" value="<?php echo $bw_page; ?>" placeholder="<?php echo $entry_bw_page; ?>" id="input-bw-page" class="form-control" />
                     </div>
+
                   </div>
+
+                  <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_design_cover; ?></label>        
+                        <div class="col-sm-10">                                
+                            <input  type="file" name="design_cover" value="<?php echo $design_cover; ?>" class="btn btn-primary" >
+                            <div class="text-danger">* Silahkan Download Cover Template Terlebih dahulu,hanya menerima format png,jpg,dan jpeg</div>
+	                 		 <?php if ($error_design_cover) { ?>
+	                  			<div class="text-danger"><?php echo $error_design_cover; ?></div>
+	                 		 <?php } ?>
+                        </div>                                                                       
+                   </div>
                    
                   <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_image; ?></label>             
                         <div class="col-sm-10">                                
                             <input  type="file" name="image" value="<?php echo $image; ?>" class="btn btn-primary" >
+                            <div class="text-danger">* HANYA SAMPUL DEPAN SAJA,hanya menerima format png,jpg,dan jpeg</div>
 	                 		 <?php if ($error_extension_image) { ?>
 	                  			<div class="text-danger"><?php echo $error_extension_image; ?></div>
 	                 		 <?php } ?>
@@ -93,11 +106,23 @@
                         <label class="col-sm-2 control-label" for="input-book"><?php echo $entry_book; ?></label>             
                         <div class="col-sm-10">                                
                             <input  type="file" name="book" value="<?php echo $book; ?>" class="btn btn-primary" >
+                            <div class="text-danger">* Silahkan Download file template naskah terlebih dahulu, hanya menerima format PDF saja</div>
 	                 		 <?php if ($error_extension_book) { ?>
 	                  			<div class="text-danger"><?php echo $error_extension_book; ?></div>
 	                 		 <?php } ?>
                         </div>                                                                       
                    </div>  
+
+                   <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-book"><?php echo $entry_sample_book; ?></label>            <div class="col-sm-10">                                
+                            <input  type="file" name="sample_script" value="<?php echo $sample_script; ?>" class="btn btn-primary">
+                            <div class="text-danger">* 5-10 halaman pertama naskah,fungsi sebagai 'tester' untuk calon pembeli, hanya menerima format PDF saja</div>
+	                 		 <?php if ($error_sample_book) { ?>
+	                  			<div class="text-danger"><?php echo $error_sample_book; ?></div>
+	                 		 <?php } ?>
+                        </div>                                                                       
+                   </div>  
+
                    <?php }?>
                    <?php if($group_id!=2) { ?>
 	                  <div class="form-group">

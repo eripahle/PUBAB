@@ -102,6 +102,16 @@
                   <a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="<?php echo $thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
                   <input type="hidden" name="image" value="<?php echo $image; ?>" id="input-image" />
                 </div>
+              </div>
+              <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_design_cover; ?></label>        
+                        <div class="col-sm-10">                                
+                            <input  type="file" name="design_cover" value="<?php echo $design_cover; ?>" class="btn btn-primary" >
+                            <div class="text-danger">* Silahkan Download Cover Template Terlebih dahulu,hanya menerima format png,jpg,dan jpeg</div>
+                       <?php if ($error_design_cover) { ?>
+                          <div class="text-danger"><?php echo $error_design_cover; ?></div>
+                       <?php } ?>
+                        </div>                                                                       
               </div> 
               <div class="form-group required">
                   <label class="col-sm-2 control-label" for="input-book"><?php echo $entry_book; ?></label>             
@@ -111,6 +121,16 @@
                     <div class="text-danger"><?php echo $error_extension_book; ?></div>
                  <?php } ?>
                   </div>                                                                       
+              </div>
+              <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-book"><?php echo $entry_sample_book; ?></label>           <div class="col-sm-10">                                
+                            <input  type="file" name="sample_script" value="<?php echo $sample_script; ?>" class="btn btn-primary">
+                            <div class="text-danger">* 5-10 halaman pertama naskah,fungsi sebagai 'tester' untuk calon pembeli,   hanya menerima format PDF saja
+                            </div>
+                           <?php if ($error_sample_book) { ?>
+                              <div class="text-danger"><?php echo $error_sample_book; ?></div>
+                           <?php } ?>
+                        </div>                                                                       
               </div>            
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-model"><?php echo $entry_model; ?></label>
@@ -140,6 +160,21 @@
                           <option value="<?php echo $editor['editor_id']; ?>" selected="selected"><?php echo $editor['firstname']." ".$editor['lastname']; ?></option>
                           <?php } else { ?>
                           <option value="<?php echo $editor['editor_id']; ?>"><?php echo $editor['firstname']." ".$editor['lastname']; ?></option>
+                          <?php } ?>
+                          <?php } ?>
+                      </select>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_customer; ?></label>
+                  <div class="col-sm-10">
+                      <select name="customer_id" id="input-category-class" class="form-control">
+                          <option value="0"><?php echo $text_none; ?></option>
+                          <?php foreach ($customer as $customer) { ?>
+                          <?php if ($customer['customer_id'] == $customer_id) { ?>
+                          <option value="<?php echo $customer['customer_id']; ?>" selected="selected"><?php echo $customer['firstname']." ".$customer['lastname']; ?></option>
+                          <?php } else { ?>
+                          <option value="<?php echo $customer['customer_id']; ?>"><?php echo $customer['firstname']." ".$customer['lastname']; ?></option>
                           <?php } ?>
                           <?php } ?>
                       </select>

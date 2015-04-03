@@ -19,17 +19,36 @@ class ControllerCatalogProduct extends Controller {
 
 		$this->load->model('catalog/product');
 
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm() && $this->checkValidRequestDrafBook()) {
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm() 
+			&& $this->checkValidRequestDrafBook() && $this->checkValidRequestDrafimage()) {
 
 			$dot = '.';
 		    $file_name_buku = $this->request->files['book']['name'];
 		    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
 		    $file_size_buku = $this->request->files['book']['size'];
-		      
 			$lokasi_book="file/".md5(mt_rand())."_".$file_name_buku;
 			move_uploaded_file($this->request->files['book']['tmp_name'], DIR_BOOK."/".$lokasi_book);
 
-			$this->model_catalog_product->addProduct($this->request->post,$lokasi_book);
+			$file_name_sample = $this->request->files['sample_script']['name'];
+		    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
+		    $file_size_sample = $this->request->files['sample_script']['size'];
+			$lokasi_sample="file/".md5(mt_rand())."_".$file_name_sample;
+			move_uploaded_file($this->request->files['sample_script']['tmp_name'], DIR_BOOK."/".$lokasi_sample);
+
+	        $file_name_design_cover = $this->request->files['design_cover']['name'];
+	        //$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
+	        $file_size_design_cover = $this->request->files['design_cover']['size'];
+	        $lokasi_design_cover="cover/".md5(mt_rand())."_".$file_name_design_cover;
+	        move_uploaded_file($this->request->files['design_cover']['tmp_name'], DIR_IMAGE."/".$lokasi_design_cover);
+
+	        $data2 = array(
+				'lokasi_book'	  		=> $lokasi_book,
+				'lokasi_design_cover'	=> $lokasi_design_cover,
+				'lokasi_sample'			=> $lokasi_sample
+				
+			);
+
+			$this->model_catalog_product->addProduct($this->request->post,$data2);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -559,6 +578,9 @@ class ControllerCatalogProduct extends Controller {
 		$data['text_percent'] = $this->language->get('text_percent');
 		$data['text_amount'] = $this->language->get('text_amount');	
 
+		$data['entry_customer']=$this->language->get('entry_customer');
+		$data['entry_design_cover'] = $this->language->get('entry_design_cover');
+		$data['entry_sample_book']=$this->language->get('entry_sample_book');
 		$data['entry_book'] = $this->language->get('entry_book');
 		$data['entry_author'] = $this->language->get('entry_author');
 		$data['entry_name'] = $this->language->get('entry_name');
@@ -686,6 +708,18 @@ class ControllerCatalogProduct extends Controller {
 			$data['error_model'] = $this->error['model'];
 		} else {
 			$data['error_model'] = '';
+		}
+
+		if (isset($this->error['design_cover'])) {
+			$data['error_design_cover'] = $this->error['image'];
+		} else {
+			$data['error_design_cover'] = '';
+		}
+
+		if (isset($this->error['book'])) {
+			$data['error_sample_book'] = $this->error['book'];
+		} else {
+			$data['error_sample_book'] = '';
 		}
 
 		if (isset($this->error['date_available'])) {
@@ -1009,6 +1043,14 @@ class ControllerCatalogProduct extends Controller {
 			$data['paper_type_id'] = $product_info['paper_type_id'];
 		} else {
 			$data['paper_type_id'] = 0;
+		}
+
+		if (isset($this->request->post['customer_id'])) {
+			$data['customer_id'] = $this->request->post['customer_id'];
+		} elseif (!empty($product_info)) {
+			$data['customer_id'] = $product_info['customer_id'];
+		} else {
+			$data['customer_id'] = 0;
 		}
 
 		if (isset($this->request->post['paper_size_id'])) {
@@ -1424,6 +1466,7 @@ class ControllerCatalogProduct extends Controller {
 		$data['paper_type'] = $this->model_catalog_papersize->getType();
 		$data['layouts'] = $this->model_design_layout->getLayouts();
 		$data['editor']=$this->model_user_editor->getEditor();
+		$data['customer']=$this->model_user_editor->getCustomer();
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
@@ -1437,9 +1480,6 @@ class ControllerCatalogProduct extends Controller {
 	    $file_name_buku = $this->request->files['book']['name'];
 	    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
 	    $file_size_buku = $this->request->files['book']['size'];
-	      
-		$lokasi_book="file/".date("smhymd")."_".$file_name_buku;
-
 	    if (in_array(strtolower(substr(strrchr($file_name_buku, '.'), 1)), $allowed_ext_buku)){
 	   		// if (in_array($file_ext_buku, $allowed_ext_buku) === true) {
 	        if ($file_size_buku < 1044070000) {
@@ -1452,6 +1492,24 @@ class ControllerCatalogProduct extends Controller {
 	    }
 	}
 
+	public function checkValidRequestDrafimage() {
+	        $dot = '.';
+	        $allowed_ext_image = array('png', 'jpeg', 'jpg');
+	        $file_name_image = $this->request->files['design_cover']['name'];
+	        //$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
+	        $file_size_image = $this->request->files['design_cover']['size'];
+	        
+	        if (in_array(strtolower(substr(strrchr($file_name_image, '.'), 1)), $allowed_ext_image)){
+	        //if (in_array($file_ext_image, $allowed_ext_image) === true) {
+	            if ($file_size_image < 1044070000) {
+	   	                return TRUE;
+	            } else {
+	                return FALSE;
+	            }
+	        } else {
+	            return FALSE;
+	        }
+	}
 
 	protected function validateForm() {
 		if (!$this->user->hasPermission('modify', 'catalog/product')) {

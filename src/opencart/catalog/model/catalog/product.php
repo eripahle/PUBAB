@@ -792,7 +792,7 @@ class ModelCatalogProduct extends Model {
 		return $query->rows;
 	}
 
-	public function addProduct($data,$customer_id,$lokasi_cover,$lokasi_book) {
+	public function addProduct($data,$customer_id,$data2 = array ()) {
 		$this->event->trigger('pre.admin.product.add', $data);
 
 			//$sumber= $_FILES['image']['tmp_name'];
@@ -814,7 +814,7 @@ class ModelCatalogProduct extends Model {
 		    					height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', 
 		    					status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', 
 		    					sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW(), 
-		    					image='".$lokasi_cover."', customer_id=".$customer_id."");
+		    					image='".$this->db->escape($data2['lokasi_cover'])."', design_cover='".$this->db->escape($data2['lokasi_design_cover'])."' , customer_id=".$customer_id."");
 
 			$product_id = $this->db->getLastId();
 		//	$this->db->query("UPDATE ". DB_PREFIX ."product SET image='".$lokasi_cover."',customer_id=".(int)$data['customer_id']." WHERE product_id=".(int)$product_id."");
@@ -823,7 +823,8 @@ class ModelCatalogProduct extends Model {
 		    //$lokasi_book="file/".date("smhymd")."_".$target_book;
 		    //move_uploaded_file($sumber_book, DIR_BOOK."/".$lokasi_book);
 
-			$this->db->query("INSERT INTO " . DB_PREFIX ."draf SET product_id='".(int)$product_id."' , draf='".$lokasi_book."', tanggal_upload= '".date("Y-m-d")."'" );
+			$this->db->query("INSERT INTO " . DB_PREFIX ."draf SET product_id='".(int)$product_id."' , 
+							draf='".$this->db->escape($data2['lokasi_book'])."', sample_script='".$this->db->escape($data2['lokasi_sample'])."' , tanggal_upload= '".date("Y-m-d")."'" );
 
 		foreach ($data['product_description'] as $language_id => $value) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET paper_size_id=".(int)$data['paper_size']." , paper_type_id=".(int)$data['paper_type']." , product_id = '" . (int)$product_id . "', author='".$this->db->escape($data['author'])."', color_page=".(int)$data['color_page'].", bw_page=".(int)$data['bw_page']." , language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = 'book', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");

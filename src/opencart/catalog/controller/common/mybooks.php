@@ -29,13 +29,18 @@ class ControllerCommonMybooks extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST'&& $this->validateForm())) {
 
-			 $dot = '.';
+			$dot = '.';
 		    $file_name_buku = $this->request->files['book']['name'];
 		    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
 		    $file_size_buku = $this->request->files['book']['size'];
-		      
 			$lokasi_book="file/".md5(mt_rand())."_".$file_name_buku;
 			move_uploaded_file($this->request->files['book']['tmp_name'], DIR_BOOK."/".$lokasi_book);
+
+			$file_name_sample = $this->request->files['sample_script']['name'];
+		    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
+		    $file_size_sample = $this->request->files['sample_script']['size'];
+			$lokasi_sample="file/".md5(mt_rand())."_".$file_name_sample;
+			move_uploaded_file($this->request->files['sample_script']['tmp_name'], DIR_BOOK."/".$lokasi_sample);
 
 			$file_name_image = $this->request->files['image']['name'];
 	        //$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
@@ -43,7 +48,21 @@ class ControllerCommonMybooks extends Controller {
 	        $lokasi_cover="cover/".md5(mt_rand())."_".$file_name_image;
 	        move_uploaded_file($this->request->files['image']['tmp_name'], DIR_IMAGE."/".$lokasi_cover);
 
-			$this->model_catalog_product->addProduct($this->request->post,$customer_id,$lokasi_cover,$lokasi_book);
+	        $file_name_design_cover = $this->request->files['design_cover']['name'];
+	        //$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
+	        $file_size_design_cover = $this->request->files['design_cover']['size'];
+	        $lokasi_design_cover="cover/".md5(mt_rand())."_".$file_name_design_cover;
+	        move_uploaded_file($this->request->files['design_cover']['tmp_name'], DIR_IMAGE."/".$lokasi_design_cover);
+	        
+	        $data2 = array(
+				'lokasi_cover'	 		=> $lokasi_cover,
+				'lokasi_book'	  		=> $lokasi_book,
+				'lokasi_design_cover'	=> $lokasi_design_cover,
+				'lokasi_sample'			=> $lokasi_sample
+				
+			);
+
+			$this->model_catalog_product->addProduct($this->request->post,$customer_id,$data2);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -851,6 +870,8 @@ class ControllerCommonMybooks extends Controller {
 		$data['text_percent'] = $this->language->get('text_percent');
 		$data['text_amount'] = $this->language->get('text_amount');
 
+		
+		$data['entry_sample_book']=$this->language->get('entry_sample_book');
 		$data['entry_book'] = $this->language->get('entry_book');
 		$data['entry_author'] = $this->language->get('entry_author');
 		$data['entry_name'] = $this->language->get('entry_name');
@@ -885,6 +906,7 @@ class ControllerCommonMybooks extends Controller {
 		$data['entry_width'] = $this->language->get('entry_width');
 		$data['entry_height'] = $this->language->get('entry_height');
 		$data['entry_image'] = $this->language->get('entry_image');
+		$data['entry_design_cover'] = $this->language->get('entry_design_cover');
 		$data['entry_new_image'] = $this->language->get('entry_new_image');
 		$data['entry_store'] = $this->language->get('entry_store');
 		$data['entry_manufacturer'] = $this->language->get('entry_manufacturer');
@@ -978,10 +1000,22 @@ class ControllerCommonMybooks extends Controller {
 			$data['error_extension_image'] = '';
 		}
 
+		if (isset($this->error['design_cover'])) {
+			$data['error_design_cover'] = $this->error['image'];
+		} else {
+			$data['error_design_cover'] = '';
+		}
+
 		if (isset($this->error['book'])) {
 			$data['error_book'] = $this->error['book'];
 		} else {
 			$data['error_book'] = '';
+		}
+
+		if (isset($this->error['book'])) {
+			$data['error_sample_book'] = $this->error['book'];
+		} else {
+			$data['error_sample_book'] = '';
 		}
 
 		if (isset($this->error['book'])) {
@@ -1109,14 +1143,14 @@ class ControllerCommonMybooks extends Controller {
 			$data['image'] = '';
 		}*/
 
-		if (isset($this->request->files['image'])) {
+		/*if (isset($this->request->files['image'])) {
 			$fileimage = basename(html_entity_decode($this->request->files['image']['name'], ENT_QUOTES, 'UTF-8'));
 			$file_image = "cover/".$fileimage . '.' . md5(mt_rand());
 			move_uploaded_file($this->request->files['image']['tmp_name'], DIR_IMAGE . $file_image);
 			$data['image'] = $file_image;
 		} else {
 			$data['image'] = '';
-		}
+		}*/
 
 		$this->load->model('tool/image');
 
@@ -1746,12 +1780,14 @@ class ControllerCommonMybooks extends Controller {
 	    $dot = '.';
 	    $allowed_ext_buku = array('doc', 'docx', 'pdf');
 	    $file_name_buku = $this->request->files['book']['name'];
+	    $file_name_sample = $this->request->files['sample_script']['name'];
 	    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
 	    $file_size_buku = $this->request->files['book']['size'];
 	      
 		$lokasi_book="file/".date("smhymd")."_".$file_name_buku;
 
-	    if (in_array(strtolower(substr(strrchr($file_name_buku, '.'), 1)), $allowed_ext_buku)){
+	    if (in_array(strtolower(substr(strrchr($file_name_buku, '.'), 1)), $allowed_ext_buku)
+	    	&& in_array(strtolower(substr(strrchr($file_name_sample, '.'), 1)), $allowed_ext_buku)){
 	   		// if (in_array($file_ext_buku, $allowed_ext_buku) === true) {
 	        if ($file_size_buku < 1044070000) {
 	            return TRUE;
@@ -1767,11 +1803,13 @@ class ControllerCommonMybooks extends Controller {
 	        $dot = '.';
 	        $allowed_ext_image = array('png', 'jpeg', 'jpg');
 	        $file_name_image = $this->request->files['image']['name'];
+	        $file_name_cover = $this->request->files['design_cover']['name'];
 	        //$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
 	        $file_size_image = $this->request->files['image']['size'];
 	        $lokasi_cover="cover/".date("smhymd")."_".$file_name_image;
 
-	        if (in_array(strtolower(substr(strrchr($file_name_image, '.'), 1)), $allowed_ext_image)){
+	        if (in_array(strtolower(substr(strrchr($file_name_image, '.'), 1)), $allowed_ext_image)
+	        	&& in_array(strtolower(substr(strrchr($file_name_cover, '.'), 1)), $allowed_ext_image)){
 	        //if (in_array($file_ext_image, $allowed_ext_image) === true) {
 	            if ($file_size_image < 1044070000) {
 	   	                return TRUE;

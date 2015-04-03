@@ -324,8 +324,11 @@
               <input type="text" name="quantity" value="<?php echo $minimum; ?>" size="2" id="input-quantity" class="form-control" />
               <input type="hidden" name="product_id" value="<?php echo $product_id; ?>" />
               <br />
+              <a href="<?php echo "book/".$download; ?>" target="_blank"><button type="button" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $text_download; ?></button></a>
+              <br/>
               <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $button_cart; ?></button>
-              <br />
+              <br/>
+              
              <!-- penambahan button add for editing for editor -->
              
             </div>

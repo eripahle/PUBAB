@@ -28,6 +28,7 @@ $_['column_status_management']  = 'Status Management';
 $_['column_action']          = 'Action';
 
 // Entry
+$_['entry_customer']       	 = 'Customer';
 $_['entry_paper_size']       = 'Size';
 $_['entry_paper_type']       = 'Paper Type';
 $_['entry_book']       		 = 'Book';
@@ -36,7 +37,8 @@ $_['entry_bw_page']       	 = 'Black & White Page';
 $_['entry_name']             = 'Title';
 $_['entry_author']           = 'Author';
 $_['entry_editor']           = 'Editor';
-
+$_['entry_sample_book']      = 'Sample Script';
+$_['entry_design_cover']     = 'Upload Design Cover';
 $_['entry_description']      = 'Description';
 $_['entry_meta_title'] 	     = 'Meta Tag Title';
 $_['entry_meta_keyword'] 	 = 'Meta Tag Keywords';
@@ -69,7 +71,7 @@ $_['entry_length_class']     = 'Length Class';
 $_['entry_length']           = 'Length';
 $_['entry_width']            = 'Width';
 $_['entry_height']           = 'Height';
-$_['entry_image']            = 'Image';
+$_['entry_image']            = 'Thumbnail Cover';
 $_['entry_customer_group']   = 'Customer Group';
 $_['entry_date_start']       = 'Date Start';
 $_['entry_date_end']         = 'Date End';
