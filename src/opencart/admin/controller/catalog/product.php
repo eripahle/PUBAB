@@ -19,8 +19,17 @@ class ControllerCatalogProduct extends Controller {
 
 		$this->load->model('catalog/product');
 
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_product->addProduct($this->request->post);
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm() && $this->checkValidRequestDrafBook()) {
+
+			$dot = '.';
+		    $file_name_buku = $this->request->files['book']['name'];
+		    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
+		    $file_size_buku = $this->request->files['book']['size'];
+		      
+			$lokasi_book="file/".md5(mt_rand())."_".$file_name_buku;
+			move_uploaded_file($this->request->files['book']['tmp_name'], DIR_BOOK."/".$lokasi_book);
+
+			$this->model_catalog_product->addProduct($this->request->post,$lokasi_book);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -548,8 +557,10 @@ class ControllerCatalogProduct extends Controller {
 		$data['text_option_value'] = $this->language->get('text_option_value');
 		$data['text_select'] = $this->language->get('text_select');
 		$data['text_percent'] = $this->language->get('text_percent');
-		$data['text_amount'] = $this->language->get('text_amount');
+		$data['text_amount'] = $this->language->get('text_amount');	
 
+		$data['entry_book'] = $this->language->get('entry_book');
+		$data['entry_author'] = $this->language->get('entry_author');
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_description'] = $this->language->get('entry_description');
 		$data['entry_meta_title'] = $this->language->get('entry_meta_title');
@@ -606,6 +617,11 @@ class ControllerCatalogProduct extends Controller {
 		$data['entry_reward'] = $this->language->get('entry_reward');
 		$data['entry_layout'] = $this->language->get('entry_layout');
 		$data['entry_recurring'] = $this->language->get('entry_recurring');
+		$data['entry_color_page'] = $this->language->get('entry_color_page');
+		$data['entry_bw_page'] = $this->language->get('entry_bw_page');
+		$data['entry_paper_size'] = $this->language->get('entry_paper_size');
+		$data['entry_paper_type'] = $this->language->get('entry_paper_type');
+		$data['entry_editor'] = $this->language->get('entry_editor');
 
 		$data['help_keyword'] = $this->language->get('help_keyword');
 		$data['help_sku'] = $this->language->get('help_sku');
@@ -682,6 +698,17 @@ class ControllerCatalogProduct extends Controller {
 			$data['error_keyword'] = $this->error['keyword'];
 		} else {
 			$data['error_keyword'] = '';
+		}
+		if (isset($this->error['author'])) {
+			$data['error_author'] = $this->error['author'];
+		} else {
+			$data['error_author'] = '';
+		}
+
+		if (isset($this->error['book'])) {
+			$data['error_extension_book'] = $this->error['book'];
+		} else {
+			$data['error_extension_book'] = '';
 		}
 		
 		$url = '';
@@ -782,6 +809,30 @@ class ControllerCatalogProduct extends Controller {
 			$data['model'] = $product_info['model'];
 		} else {
 			$data['model'] = '';
+		}
+
+		if (isset($this->request->post['author'])) {
+			$data['author'] = $this->request->post['author'];
+		} elseif (!empty($product_info)) {
+			$data['author'] = $product_info['author'];
+		} else {
+			$data['author'] = '';
+		}
+
+		if (isset($this->request->post['color_page'])) {
+			$data['color_page'] = $this->request->post['color_page'];
+		} elseif (!empty($product_info)) {
+			$data['color_page'] = $product_info['color_page'];
+		} else {
+			$data['color_page'] = '';
+		}
+
+		if (isset($this->request->post['bw_page'])) {
+			$data['bw_page'] = $this->request->post['bw_page'];
+		} elseif (!empty($product_info)) {
+			$data['bw_page'] = $product_info['bw_page'];
+		} else {
+			$data['bw_page'] = '';
 		}
 
 		if (isset($this->request->post['sku'])) {
@@ -952,12 +1003,68 @@ class ControllerCatalogProduct extends Controller {
 			$data['stock_status_id'] = 0;
 		}
 
+		if (isset($this->request->post['paper_type_id'])) {
+			$data['paper_type_id'] = $this->request->post['paper_type_id'];
+		} elseif (!empty($product_info)) {
+			$data['paper_type_id'] = $product_info['paper_type_id'];
+		} else {
+			$data['paper_type_id'] = 0;
+		}
+
+		if (isset($this->request->post['paper_size_id'])) {
+			$data['paper_size_id'] = $this->request->post['paper_size_id'];
+		} elseif (!empty($product_info)) {
+			$data['paper_size_id'] = $product_info['paper_size_id'];
+		} else {
+			$data['paper_size_id'] = 0;
+		}
+
+		if (isset($this->request->post['editor_id'])) {
+			$data['editor_id'] = $this->request->post['editor_id'];
+		} elseif (!empty($product_info)) {
+			$data['editor_id'] = $product_info['editor_id'];
+		} else {
+			$data['editor_id'] = 0;
+		}
+
 		if (isset($this->request->post['status'])) {
 			$data['status'] = $this->request->post['status'];
 		} elseif (!empty($product_info)) {
 			$data['status'] = $product_info['status'];
 		} else {
 			$data['status'] = true;
+		}
+
+		if (isset($this->request->post['status'])) {
+			$data['status'] = $this->request->post['status'];
+		} elseif (!empty($product_info)) {
+			$data['status'] = $product_info['status'];
+		} else {
+			$data['status'] = true;
+		}
+
+		if (isset($this->request->post['status1'])) {
+			$data['status1'] = $this->request->post['status1'];
+		} elseif (!empty($product_info)) {
+			$data['status1'] = $product_info['status1'];
+		} else {
+			$data['status1'] = true;
+		}
+
+		if (isset($this->request->post['status2'])) {
+			$data['status2'] = $this->request->post['status2'];
+		} elseif (!empty($product_info)) {
+			$data['status2'] = $product_info['status2'];
+		} else {
+			$data['status2'] = true;
+		}
+
+		if (isset($this->request->post['status3'])) {
+			$data['status3'] = $this->request->post['status3'];
+		} elseif (!empty($product_info)) {
+			$data['status3'] = $product_info['status3'];
+		} else {
+			$data['status3'] = true;
 		}
 
 		if (isset($this->request->post['weight'])) {
@@ -1309,15 +1416,42 @@ class ControllerCatalogProduct extends Controller {
 		}
 
 		$this->load->model('design/layout');
+		$this->load->model('design/layout');
+		$this->load->model('catalog/papersize');
+		$this->load->model('user/editor');
 
+		$data['paper_size'] = $this->model_catalog_papersize->getSize();
+		$data['paper_type'] = $this->model_catalog_papersize->getType();
 		$data['layouts'] = $this->model_design_layout->getLayouts();
-
+		$data['editor']=$this->model_user_editor->getEditor();
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('catalog/product_form.tpl', $data));
 	}
+
+	public function checkValidRequestDrafBook() {
+	    $dot = '.';
+	    $allowed_ext_buku = array('doc', 'docx', 'pdf');
+	    $file_name_buku = $this->request->files['book']['name'];
+	    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
+	    $file_size_buku = $this->request->files['book']['size'];
+	      
+		$lokasi_book="file/".date("smhymd")."_".$file_name_buku;
+
+	    if (in_array(strtolower(substr(strrchr($file_name_buku, '.'), 1)), $allowed_ext_buku)){
+	   		// if (in_array($file_ext_buku, $allowed_ext_buku) === true) {
+	        if ($file_size_buku < 1044070000) {
+	            return TRUE;
+	        } else {
+	            return FALSE;
+	        }
+	    } else {
+	        return FALSE;
+	    }
+	}
+
 
 	protected function validateForm() {
 		if (!$this->user->hasPermission('modify', 'catalog/product')) {
@@ -1336,6 +1470,17 @@ class ControllerCatalogProduct extends Controller {
 
 		if ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64)) {
 			$this->error['model'] = $this->language->get('error_model');
+		}
+
+		if ($this->request->post['author']==null ){
+			$this->error['author'] = $this->language->get('error_author');
+		}
+
+		if ($this->request->post['color_page']< 0 ){
+			$this->error['color_page'] = $this->language->get('error_color_page');
+		}
+		if ($this->request->post['bw_page']< 0 ){
+			$this->error['bw_page'] = $this->language->get('error_bw_page');
 		}
 		
 		if (utf8_strlen($this->request->post['keyword']) > 0) {

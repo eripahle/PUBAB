@@ -157,6 +157,9 @@ class ModelCatalogProduct extends Model {
 			return array(
 				'product_id'       => $query->row['product_id'],
 				'name'             => $query->row['name'],
+				'paper_size_id'    => $query->row['paper_size_id'],
+				'paper_type_id'    => $query->row['paper_type_id'],
+				'author'		   => $query->row['author'],
 				'description'      => $query->row['description'],
 				'meta_title'       => $query->row['meta_title'],
 				'meta_description' => $query->row['meta_description'],
@@ -203,6 +206,29 @@ class ModelCatalogProduct extends Model {
 		}
 	}
 
+	public function getProductType($paper_type_id){
+		$query= $this->db->query("SELECT * FROM ".DB_PREFIX."paper_type WHERE paper_type_id=".(int)$paper_type_id."");
+		if($query->num_rows){
+			return array(
+				'paper_type_id'	=> $query->row['paper_type_id'],
+				'type'       	=> $query->row['type']
+			);
+		}else{
+			return false;
+		}
+	}
+
+	public function getProductSize($paper_size_id){
+		$query= $this->db->query("SELECT * FROM ".DB_PREFIX."paper_size WHERE paper_size_id=".(int)$paper_size_id."");
+		if($query->num_rows){
+			return array(
+				'paper_size_id'	=> $query->row['paper_size_id'],
+				'size'       	=> $query->row['size']
+			);
+		}else{
+			return false;
+		}
+	}
 	
 
 	public function getProducts($data = array()) {
@@ -800,7 +826,6 @@ class ModelCatalogProduct extends Model {
 			$this->db->query("INSERT INTO " . DB_PREFIX ."draf SET product_id='".(int)$product_id."' , draf='".$lokasi_book."', tanggal_upload= '".date("Y-m-d")."'" );
 
 		foreach ($data['product_description'] as $language_id => $value) {
-			
 			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET paper_size_id=".(int)$data['paper_size']." , paper_type_id=".(int)$data['paper_type']." , product_id = '" . (int)$product_id . "', author='".$this->db->escape($data['author'])."', color_page=".(int)$data['color_page'].", bw_page=".(int)$data['bw_page']." , language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = 'book', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
 		}
 

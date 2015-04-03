@@ -28,7 +28,15 @@ $_['column_status_management']  = 'Status Management';
 $_['column_action']          = 'Action';
 
 // Entry
-$_['entry_name']             = 'Product Name';
+$_['entry_paper_size']       = 'Size';
+$_['entry_paper_type']       = 'Paper Type';
+$_['entry_book']       		 = 'Book';
+$_['entry_color_page']       = 'Color Page';
+$_['entry_bw_page']       	 = 'Black & White Page';
+$_['entry_name']             = 'Title';
+$_['entry_author']           = 'Author';
+$_['entry_editor']           = 'Editor';
+
 $_['entry_description']      = 'Description';
 $_['entry_meta_title'] 	     = 'Meta Tag Title';
 $_['entry_meta_keyword'] 	 = 'Meta Tag Keywords';

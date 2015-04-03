@@ -174,4 +174,6 @@ class Customer {
 
 		return $query->row['total'];
 	}
+
+	
 }

@@ -232,6 +232,12 @@ class ControllerProductProduct extends Controller {
 
 			$data['heading_title'] = $product_info['name'];
 
+			$type_info = $this->model_catalog_product->getProductType($product_info['paper_type_id']);
+			$size_info = $this->model_catalog_product->getProductSize($product_info['paper_type_id']);
+
+			$data['text_type'] = sprintf($this->language->get('text_type'), $type_info['type']);
+			$data['text_size'] = sprintf($this->language->get('text_size'), $size_info['size']);
+			$data['text_author'] = sprintf($this->language->get('text_author'), $product_info['author']);
 			$data['text_select'] = $this->language->get('text_select');
 			$data['text_manufacturer'] = $this->language->get('text_manufacturer');
 			$data['text_model'] = $this->language->get('text_model');

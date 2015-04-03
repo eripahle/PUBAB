@@ -59,7 +59,7 @@ class ControllerCommonFooter extends Controller {
         $data['bestseller'] = $this->url->link('information/bestseller', '', 'SSL');
         $data['popularbooks'] = $this->url->link('information/popularbooks', '', 'SSL');
         $data['newbooks'] = $this->url->link('information/newbook','','SSL');
-        $data['catalogbooks'] = $this->url->link('account/account', '', 'SSL');
+        $data['catalogbooks'] = $this->url->link('product/category&path=64', '', 'SSL');
         
         $data['bookpricingandroyalty'] = $this->url->link('account/order', '', 'SSL');
         $data['orderbooks'] = $this->url->link('account/wishlist', '', 'SSL');

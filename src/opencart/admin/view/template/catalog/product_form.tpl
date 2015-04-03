@@ -102,6 +102,15 @@
                   <a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="<?php echo $thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
                   <input type="hidden" name="image" value="<?php echo $image; ?>" id="input-image" />
                 </div>
+              </div> 
+              <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-book"><?php echo $entry_book; ?></label>             
+                  <div class="col-sm-10">                                
+                      <input  type="file" name="book" value="<?php echo $book; ?>" class="btn btn-primary" >
+                 <?php if ($error_extension_book) { ?>
+                    <div class="text-danger"><?php echo $error_extension_book; ?></div>
+                 <?php } ?>
+                  </div>                                                                       
               </div>            
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-model"><?php echo $entry_model; ?></label>
@@ -112,6 +121,75 @@
                   <?php } ?>
                 </div>
               </div>
+              <div class="form-group required">
+                    <label class="col-sm-2 control-label" for="input-author"><?php echo $entry_author; ?></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="author" value="<?php echo $author; ?>" placeholder="<?php echo $entry_author; ?>" id="input-author" class="form-control" />
+                      <?php if ($error_author) { ?>
+                      <div class="text-danger"><?php echo $error_author; ?></div>
+                      <?php } ?>
+                    </div>
+              </div>
+              <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_editor; ?></label>
+                  <div class="col-sm-10">
+                      <select name="editor_id" id="input-category-class" class="form-control">
+                          <option value="0"><?php echo $text_none; ?></option>
+                          <?php foreach ($editor as $editor) { ?>
+                          <?php if ($editor['editor_id'] == $editor_id) { ?>
+                          <option value="<?php echo $editor['editor_id']; ?>" selected="selected"><?php echo $editor['firstname']." ".$editor['lastname']; ?></option>
+                          <?php } else { ?>
+                          <option value="<?php echo $editor['editor_id']; ?>"><?php echo $editor['firstname']." ".$editor['lastname']; ?></option>
+                          <?php } ?>
+                          <?php } ?>
+                      </select>
+                  </div>
+              </div>
+              <div class="form-group required">
+                    <label class="col-sm-2 control-label" for="input-color-page"><?php echo $entry_color_page; ?></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="color_page" value="<?php echo $color_page; ?>" placeholder="<?php echo $entry_color_page; ?>" id="input-color-page" class="form-control" />
+                    </div>
+              </div>
+
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-bw-page"><?php echo $entry_bw_page; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="bw_page" value="<?php echo $bw_page; ?>" placeholder="<?php echo $entry_bw_page; ?>" id="input-bw-page" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_paper_size; ?></label>
+                  <div class="col-sm-10">
+                      <select name="paper_size_id" id="input-category-class" class="form-control">
+                          <option value="0"><?php echo $text_none; ?></option>
+                          <?php foreach ($paper_size as $paper_size) { ?>
+                          <?php if ($paper_size['paper_size_id'] == $paper_size_id) { ?>
+                          <option value="<?php echo $paper_size_id['paper_size_id']; ?>" selected="selected"><?php echo $paper_size['size']; ?></option>
+                          <?php } else { ?>
+                          <option value="<?php echo $paper_size['paper_size_id']; ?>"><?php echo $paper_size['size']; ?></option>
+                          <?php } ?>
+                          <?php } ?>
+                      </select>
+                  </div>
+              </div>
+
+              <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_paper_type; ?></label>
+                  <div class="col-sm-10">
+                      <select name="paper_type_id" id="input-category-class" class="form-control">
+                          <option value="0"><?php echo $text_none; ?></option>
+                          <?php foreach ($paper_type as $paper_type) { ?>
+                          <?php if ($paper_type['paper_type_id'] == $paper_type_id) { ?>
+                          <option value="<?php echo $paper_type_id['paper_type_id']; ?>" selected="selected"><?php echo $paper_type['type']; ?></option>
+                          <?php } else { ?>
+                          <option value="<?php echo $paper_type['paper_type_id']; ?>"><?php echo $paper_type['type']; ?></option>
+                          <?php } ?>
+                          <?php } ?>
+                      </select>
+                  </div>
+              </div>  
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-sku"><span data-toggle="tooltip" title="<?php echo $help_sku; ?>"><?php echo $entry_sku; ?></span></label>
                 <div class="col-sm-10">

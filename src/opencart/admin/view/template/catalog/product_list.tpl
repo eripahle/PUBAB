@@ -79,7 +79,8 @@
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                  <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
+                  </td>
                   <td class="text-center"><?php echo $column_image; ?></td>
                   <td class="text-left"><?php if ($sort == 'pd.name') { ?>
                     <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
@@ -100,27 +101,32 @@
                     <a href="<?php echo $sort_quantity; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_quantity; ?></a>
                     <?php } else { ?>
                     <a href="<?php echo $sort_quantity; ?>"><?php echo $column_quantity; ?></a>
-                    <?php } ?></td>
+                    <?php } ?>
+                  </td>
                   <td class="text-left"><?php if ($sort == 'p.status') { ?>
                     <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status_author; ?></a>
                     <?php } else { ?>
                     <a href="<?php echo $sort_status; ?>"><?php echo $column_status_author; ?></a>
-                    <?php } ?></td>
-                     <td class="text-left"><?php if ($sort == 'p.status') { ?>
+                    <?php } ?>
+                  </td>
+                  <td class="text-left"><?php if ($sort == 'p.status') { ?>
                     <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status_editor; ?></a>
                     <?php } else { ?>
                     <a href="<?php echo $sort_status; ?>"><?php echo $column_status_editor; ?></a>
-                    <?php } ?></td>
-                    <td class="text-left"><?php if ($sort == 'p.status') { ?>
+                    <?php } ?>
+                  </td>
+                  <td class="text-left"><?php if ($sort == 'p.status') { ?>
                     <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status_management; ?></a>
                     <?php } else { ?>
                     <a href="<?php echo $sort_status; ?>"><?php echo $column_status_management; ?></a>
-                    <?php } ?></td>
-                    <td class="text-left"><?php if ($sort == 'p.status') { ?>
+                    <?php } ?>
+                  </td>
+                  <td class="text-left"><?php if ($sort == 'p.status') { ?>
                     <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
                     <?php } else { ?>
                     <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
-                    <?php } ?></td>
+                    <?php } ?>
+                  </td>
                   <td class="text-right"><?php echo $column_action; ?></td>
                 </tr>
               </thead>
@@ -157,12 +163,12 @@
                   <td class="text-left"><?php echo $product['status2']; ?></td>
                   <td class="text-left"><?php echo $product['status3']; ?></td>
                   <td class="text-left"><?php echo $product['status']; ?></td>
-                  <td class="text-right"><a href="<?php echo $product['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                  <td class="text-right">
+                    <a href="<?php echo $product['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                     <a href="<?php echo "../book/".$product['download_book']; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_download_book; ?>" class="btn btn-primary"><i class="fa fa-download"></i></a>
                     <a href="<?php echo "../image/".$product['download_image']; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_download_image; ?>" class="btn btn-primary"><i class="fa fa-download"></i></a>
-                  </td>
-
-                </tr>
+                 </td>
+               </tr>
                 <?php } ?>
                 <?php } else { ?>
                 <tr>

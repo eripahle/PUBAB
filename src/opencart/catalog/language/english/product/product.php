@@ -1,6 +1,9 @@
 <?php
 // Text
+$_['text_size']                = 'Size Book : %s';
+$_['text_type']                = 'Paper Type : %s';
 $_['text_search']              = 'Search';
+$_['text_author']              = 'Author : %s ';
 $_['text_brand']               = 'Brand';
 $_['text_manufacturer']        = 'Brand:';
 $_['text_model']               = 'Product Code:';

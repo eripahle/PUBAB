@@ -34,13 +34,13 @@ class ControllerCommonMybooks extends Controller {
 		    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
 		    $file_size_buku = $this->request->files['book']['size'];
 		      
-			$lokasi_book="file/".date("smhymd")."_".$file_name_buku;
+			$lokasi_book="file/".md5(mt_rand())."_".$file_name_buku;
 			move_uploaded_file($this->request->files['book']['tmp_name'], DIR_BOOK."/".$lokasi_book);
 
 			$file_name_image = $this->request->files['image']['name'];
 	        //$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
 	        $file_size_image = $this->request->files['image']['size'];
-	        $lokasi_cover="cover/".date("smhymd")."_".$file_name_image;
+	        $lokasi_cover="cover/".md5(mt_rand())."_".$file_name_image;
 	        move_uploaded_file($this->request->files['image']['tmp_name'], DIR_IMAGE."/".$lokasi_cover);
 
 			$this->model_catalog_product->addProduct($this->request->post,$customer_id,$lokasi_cover,$lokasi_book);
