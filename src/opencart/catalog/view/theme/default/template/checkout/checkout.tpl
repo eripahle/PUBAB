@@ -1,3 +1,8 @@
+<script language="Javascript" type="text/javascript">
+    $(document).ready(function(){
+        $('#button-payment').trigger('click');
+    });
+</script>
 <?php echo $header; ?>
 <div class="container">
   <ul class="breadcrumb">
@@ -38,16 +43,7 @@
             <div class="panel-body"></div>
           </div>
         </div>
-        <?php } else { ?>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title"><?php echo $text_checkout_payment_address; ?></h4>
-          </div>
-          <div class="panel-collapse collapse" id="collapse-payment-address">
-            <div class="panel-body"></div>
-          </div>
-        </div>
-        <?php } ?>
+        <?php }  ?>
         <?php if ($shipping_required) { ?>
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -122,20 +118,24 @@ $(document).ready(function() {
 });     
 <?php } else { ?>
 $(document).ready(function() {
-    $.ajax({
-        url: 'index.php?route=checkout/payment_address',
+     $.ajax({
+        url: 'index.php?route=checkout/shipping_address',
         dataType: 'html',
         success: function(html) {
-            $('#collapse-payment-address .panel-body').html(html);
+            $('#collapse-shipping-address .panel-body').html(html);
             
-			$('#collapse-payment-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_payment_address; ?> <i class="fa fa-caret-down"></i></a>');
+            $('#collapse-shipping-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-shipping-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_shipping_address; ?> <i class="fa fa-caret-down"></i></a>');
 
-			$('a[href=\'#collapse-payment-address\']').trigger('click');
+            $('a[href=\'#collapse-shipping-address\']').trigger('click');
+            
+            $('#collapse-shipping-method').parent().find('.panel-heading .panel-title').html('<?php echo $text_checkout_shipping_method; ?>');
+            $('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('<?php echo $text_checkout_payment_method; ?>');                            
+            $('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('<?php echo $text_checkout_confirm; ?>'); 
         },
         error: function(xhr, ajaxOptions, thrownError) {
             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
         }
-    });
+    }); 
 });
 <?php } ?>
 

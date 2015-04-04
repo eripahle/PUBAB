@@ -128,7 +128,7 @@
 	                  <div class="form-group">
 	                   <label class="col-sm-2 control-label" for="input-description<?php echo $language['language_id']; ?>"><?php echo $entry_description; ?></label>
 	                    <div class="col-sm-10">
-	                      <textarea name="product_description[<?php echo $language['language_id']; ?>][description]" rows="10" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>
+	                      <textarea name="product_description[<?php echo $language['language_id']; ?>][description]" rows="10"placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>
 	                    </div>
 	                  </div>
 	                <?php }?>
@@ -228,9 +228,38 @@
 
     </div>
   </div>
-  <script type="text/javascript src=admin/view/javascript">
-      $('#input-description').summernote({height: 300});
-  </script> 
+  <script type="text/javascript" src="catalog/view/javascript/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+			tinymce.init({
+			        selector: "textarea",
+			        plugins: [
+			                "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
+			                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+			                "table contextmenu directionality emoticons template textcolor paste fullpage textcolor"
+			        ],
+			
+			        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+			        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | inserttime preview | forecolor backcolor",
+			        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+			        menubar: false,
+			        toolbar_items_size: 'small',
+			
+			        style_formats: [
+			                {title: 'Bold text', inline: 'b'},
+			                {title: 'Red text', inline: 'td', styles: {color: '#ff0000'}},
+			                {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+			                {title: 'Example 1', inline: 'td', classes: 'example1'},
+			                {title: 'Example 2', inline: 'td', classes: 'example2'},
+			                {title: 'Table styles'},
+			                {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+			        ],
+			
+			        templates: [
+			                {title: 'Test template 1', content: 'Test 1'},
+			                {title: 'Test template 2', content: 'Test 2'}
+			        ]
+			});
+</script>
   <script type="text/javascript"><!--
 // Manufacturer
 $('input[name=\'manufacturer\']').autocomplete({
