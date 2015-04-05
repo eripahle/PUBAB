@@ -202,6 +202,7 @@
             <li><a href="<?php echo $comunity; ?>"><?php echo $text_comunity; ?></a></li>
             <li><a href="<?php echo $gallery; ?>"><?php echo $text_gallery; ?></a></li>
             <li><a href="<?php echo $calendar; ?>"><?php echo $text_calendar; ?></a></li>            
+            <li><a href="<?php ?>"><?php echo $text_editor; ?></a></li>            
         </ul>
     </li>
 

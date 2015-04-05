@@ -96,8 +96,10 @@ $_['text_openbay_report_price']        = 'Pricing report';
 $_['text_openbay_order_import']        = 'Order import';
 $_['text_paypal_manage']               = 'PayPal';
 $_['text_paypal_search']               = 'Search';
+
 $_['text_managment']                   = 'PUBAPP - Managment';
 $_['text_comunity']                    = 'Comunity managment';
 $_['text_gallery']                     = 'Gallery event managment';
 $_['text_calendar']                   = 'Calendar event managment';
+$_['text_editor']                   = 'Editor managment';
 
