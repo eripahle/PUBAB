@@ -21,10 +21,7 @@
                         <li>
                             <a class="thumb" name="" href="<?php echo $gallerysingle['image'];?>">                                
                                 <img widht="100" height="100" src="<?php echo $gallerysingle['image'];?>">                                                                
-                            </a>                          
-                            <div class="download">
-                                    <a href="<?php echo $gallerysingle['image'];?>">Download</a>
-                            </div>                            
+                            </a>                                                     
                         </li>
                         <?php } ?>                                           
                     </ul>
