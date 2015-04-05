@@ -198,8 +198,8 @@ class ModelDesignCalendarAdmin extends Model {
         }
     }
 
-    public function deleteGallery($gellery_id) {               
-        $this->db->query("DELETE FROM " . DB_PREFIX . "gallery_event WHERE gallery_id = " . $gallery_id . "");       
+    public function deleteCalendar($calendar_event_id) {               
+        $this->db->query("DELETE FROM " . DB_PREFIX . "calendar_event WHERE calendar_event_id = " . $calendar_event_id . "");       
     }
 
     public function getProduct($product_id) {

@@ -4,7 +4,7 @@ class ControllerModuleGalleryEventSimple extends Controller {
 		$this->load->language('module/gallery_event_simple');
                 $this->load->model('module/gallery_event_simple');
                 
-                $data['gallerys']= $this->model_module_gallery_event_simple->getAllGallery();
+                $data['gallerys']= $this->model_module_gallery_event_simple->getAllGallerySimple();
                 
 		$data['heading_title'] = $this->language->get('heading_title');				 						
                 $data['view_all_gallery'] = $this->url->link('common/gallery');

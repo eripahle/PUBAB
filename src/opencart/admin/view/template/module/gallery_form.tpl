@@ -40,8 +40,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-width"><?php echo $entry_desc; ?></label>
             <div class="col-sm-10">
-               <textarea name="desc" placeholder="<?php echo $entry_desc;?>" class="form-control">
-               </textarea>
+               <textarea name="desc" placeholder="<?php echo $entry_desc;?>" class="form-control"></textarea>
             </div> 
           </div>                    
           <div class="form-group">

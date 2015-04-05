@@ -28,7 +28,7 @@
         <?php foreach ($comunitys as $comunity) { ?>		
         <p>
         <div class="float_l">
-            <img src="image/gallery/himakom.jpg" width="140px" />
+            <img src="<?php echo $comunity['image'];?>" width="140px" />
         </div>
         <div class="content">
             Name : <?php echo $comunity['name'];?><br>
