@@ -1,12 +1,12 @@
 <?php
 // Heading
-$_['heading_title']    = 'Calendar Event';
-$_['heading_title_sub']    = 'Calendar Event view Managment';
+$_['heading_title']    = 'Calendar Admin';
+$_['heading_title_sub']    = 'Calendar Admin view Managment';
 
 // Text
 $_['text_module']      = 'Gallery event view managment';
-$_['text_success']     = 'Success: You have modified Calendar Event view module!';
-$_['text_edit']        = 'Edit Calendar Event view Module';
+$_['text_success']     = 'Success: You have modified Calendar Admin view module!';
+$_['text_edit']        = 'Edit Calendar Admin view Module';
 $_['text_row_view']    = "Horizontal (Row)";
 $_['text_col_view']    = "Vertical (Column)";
 

@@ -15,7 +15,7 @@ class ModelDesignGallery extends Model {
                 . "', description = '" . $this->db->escape($data['desc'])
                 . "', status = " . $this->db->escape($data['status'].", ");
                 
-        $allowed_ext = array('png', 'jpg', 'jpeg');
+        $allowed_ext = array('png', 'jpg', 'jpeg','PNG', 'JPG', 'JPEG');
         $file_name = $file['image']['name'];
         $dot = '.';
         $file_ext = strtolower(end(explode($dot, $file_name)));
@@ -231,7 +231,7 @@ class ModelDesignGallery extends Model {
         }
     }
 
-    public function deleteGallery($gellery_id) {               
+    public function deleteGallery($gallery_id) {               
         $this->db->query("DELETE FROM " . DB_PREFIX . "gallery_event WHERE gallery_id = " . $gallery_id . "");       
     }
 

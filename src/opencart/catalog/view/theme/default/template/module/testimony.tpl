@@ -31,7 +31,7 @@
             <img src="image/gallery/event1.jpg" width="70px" />
         </div>
         <div class="content">
-            Author : <?php echo $testimony['author'];?><br>
+            <b>Author : <?php echo $testimony['author'];?></b><br>
             Testimony : <?php echo $testimony['text'];?><br>
         </div>
     </p>

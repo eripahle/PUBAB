@@ -1,4 +1,5 @@
 <h3><?php echo $heading_title; ?></h3>
+<br>
 <style type="text/css">
     .float_l{float:left;}
     .float_r{float: right;}
@@ -28,10 +29,10 @@
         <?php foreach ($testimonys as $testimony) { ?>		
         <p>
         <div class="float_l">
-            <img src="image/gallery/event1.jpg" width="70px" />
+             <img src="image/<?php echo $testimony['image'];?>" width="70px" />
         </div>
         <div class="content">
-            Author : <?php echo $testimony['author'];?><br>
+            <b>Author : <?php echo $testimony['author'];?></b><br>
             Testimony : <?php echo $testimony['text'];?><br>
         </div>
     </p>

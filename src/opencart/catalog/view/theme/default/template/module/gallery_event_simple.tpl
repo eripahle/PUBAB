@@ -14,8 +14,7 @@
         <h2><?php echo $heading_title ?></h2>
         <a href="<?php echo $view_all_gallery; ?>" ><?php echo $entry_view_all_gallery; ?></a>
         <div id="page">
-            <div id="container">		                                
-                <!-- Start Advanced Gallery Html Containers -->                                        
+            <div id="container">		                                                
                 <div id="thumbs" class="navigation">
                     <ul class="thumbs noscript">                    
                         <?php foreach ($gallerys as $gallerysingle) { ?>
@@ -27,12 +26,14 @@
                                     <a href="<?php echo $gallerysingle['image'];?>">Download</a>
                             </div>                            
                         </li>
-                        <?php } ?>                   
-                        <br><br>
+                        <?php } ?>                                           
                     </ul>
                 </div>  
             </div>
         </div>              
+        <br>
+        <br>
+        <br>
         <script type="text/javascript">
             jQuery(document).ready(function($) {
                 // We only want these styles applied when javascript is enabled

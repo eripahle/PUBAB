@@ -6,5 +6,11 @@ class ModelModuleGalleryEventSimple extends Model {
         $query = $this->db->query($sql);
         $gallerys = $query->rows;
         return $gallerys;
+    }
+    public function getAllGallerySimple() {
+        $sql = "SELECT * FROM " . DB_PREFIX . "gallery_event" ." limit 4";
+        $query = $this->db->query($sql);
+        $gallerys = $query->rows;
+        return $gallerys;
     }  
 }

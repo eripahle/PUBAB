@@ -104,10 +104,12 @@ class ControllerCommonMenu extends Controller {
 		$data['text_openbay_links'] = $this->language->get('text_openbay_links');
 		$data['text_openbay_report_price'] = $this->language->get('text_openbay_report_price');
 		$data['text_openbay_order_import'] = $this->language->get('text_openbay_order_import');
+                
                 $data['text_comunity'] = $this->language->get('text_comunity');
                 $data['text_gallery'] = $this->language->get('text_gallery');
                 $data['text_calendar'] = $this->language->get('text_calendar');
                 $data['text_managment'] = $this->language->get('text_managment');
+                $data['text_editor'] = $this->language->get('text_editor');
 
 		$data['home'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL');
 		$data['affiliate'] = $this->url->link('marketing/affiliate', 'token=' . $this->session->data['token'], 'SSL');
@@ -150,7 +152,7 @@ class ControllerCommonMenu extends Controller {
                 
                 
                 // modul link menu buatan sendiri
-                $data['comunity'] = $this->url->link('module/comunity', 'token=' . $this->session->data['token'], 'SSL');
+                $data['comunity'] = $this->url->link('module/comunity_admin', 'token=' . $this->session->data['token'], 'SSL');
                 $data['gallery'] = $this->url->link('module/gallery', 'token=' . $this->session->data['token'], 'SSL');
                 $data['calendar'] = $this->url->link('module/calendar_admin', 'token=' . $this->session->data['token'], 'SSL');
                 

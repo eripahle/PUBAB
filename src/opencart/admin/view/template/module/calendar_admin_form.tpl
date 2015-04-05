@@ -35,7 +35,7 @@
             <label class="col-sm-2 control-label" for="input-limit"><?php echo $entry_date; ?></label>            
                 <div class="col-sm-3">
                   <div class="input-group date">
-                      <input type="text" name="date_available" value="<?php echo $entry_date; ?>" placeholder="<?php echo $entry_date; ?>" 
+                      <input type="text" name="date_available" placeholder="YYYY-MM-DD" 
                            data-date-format="YYYY-MM-DD" id="input-date-available" class="form-control" />                    
                            <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
@@ -47,8 +47,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-width"><?php echo $entry_description; ?></label>
             <div class="col-sm-10">
-               <textarea name="description" placeholder="<?php echo $entry_description;?>" class="form-control">
-               </textarea>
+               <textarea name="description" placeholder="<?php echo $entry_description;?>" class="form-control"></textarea>
             </div> 
           </div>                              
         </form>

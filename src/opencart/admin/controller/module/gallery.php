@@ -43,58 +43,25 @@ class ControllerModuleGallery extends Controller {
             $this->model_design_gallery->addGallery($this->request->post, $this->request->files);
             $this->session->data['success'] = $this->language->get('text_success');
             $url = '';
-            $this->response->redirect($this->url->link('module/gallery', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            //$this->response->redirect($this->url->link('module/gallery', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
         $this->getForm();
     }
 
     public function edit() {
-        $this->load->language('catalog/product');
+        $this->load->language('module/gallery');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('catalog/product');
+        $this->load->model('design/gallery');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
+            $this->model_design_galleru->editGallery($this->request->get['gallery_id'], $this->request->post);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
             $url = '';
-
-            if (isset($this->request->get['filter_name'])) {
-                $url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
-            }
-
-            if (isset($this->request->get['filter_model'])) {
-                $url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
-            }
-
-            if (isset($this->request->get['filter_price'])) {
-                $url .= '&filter_price=' . $this->request->get['filter_price'];
-            }
-
-            if (isset($this->request->get['filter_quantity'])) {
-                $url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
-            }
-
-            if (isset($this->request->get['filter_status'])) {
-                $url .= '&filter_status=' . $this->request->get['filter_status'];
-            }
-
-            if (isset($this->request->get['sort'])) {
-                $url .= '&sort=' . $this->request->get['sort'];
-            }
-
-            if (isset($this->request->get['order'])) {
-                $url .= '&order=' . $this->request->get['order'];
-            }
-
-            if (isset($this->request->get['page'])) {
-                $url .= '&page=' . $this->request->get['page'];
-            }
-
-            $this->response->redirect($this->url->link('catalog/product', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('module/gallery', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
 
         $this->getForm();
@@ -307,7 +274,7 @@ class ControllerModuleGallery extends Controller {
         if (!isset($this->request->get['module_id'])) {
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('heading_title'),
-                'href' => $this->url->link('module/banner', 'token=' . $this->session->data['token'], 'SSL')
+                'href' => $this->url->link('module/gallery', 'token=' . $this->session->data['token'], 'SSL')
             );
         } else {
             $data['breadcrumbs'][] = array(

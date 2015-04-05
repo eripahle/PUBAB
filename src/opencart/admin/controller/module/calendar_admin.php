@@ -43,17 +43,17 @@ class ControllerModuleCalendarAdmin extends Controller {
             $this->model_design_calendar_admin->addCalendarevent($this->request->post);
             $this->session->data['success'] = $this->language->get('text_success');
             $url = '';
-            //$this->response->redirect($this->url->link('module/calendar_admin', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+           $this->response->redirect($this->url->link('module/calendar_admin', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
         $this->getForm();
     }
 
     public function edit() {
-        $this->load->language('catalog/product');
+        $this->load->language('module/calendar_admin');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('catalog/product');
+        $this->load->model('design/calendar_admin');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
             $this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
@@ -105,11 +105,11 @@ class ControllerModuleCalendarAdmin extends Controller {
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('design/gallery');
+        $this->load->model('design/calendar_admin');
 
         if (isset($this->request->post['selected'])) { //&& $this->validateDelete()) {
-            foreach ($this->request->post['selected'] as $galerry_id) {
-                $this->model_design_gallery->deleteGallery($galerry_id);
+            foreach ($this->request->post['selected'] as $calendar_event_id) {
+                $this->model_design_calendar_admin->deleteCalendar($calendar_event_id);
             }
 
             $this->session->data['success'] = $this->language->get('text_success');
@@ -305,7 +305,7 @@ class ControllerModuleCalendarAdmin extends Controller {
         if (!isset($this->request->get['module_id'])) {
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('heading_title'),
-                'href' => $this->url->link('module/banner', 'token=' . $this->session->data['token'], 'SSL')
+                'href' => $this->url->link('module/calendar_admin', 'token=' . $this->session->data['token'], 'SSL')
             );
         } else {
             $data['breadcrumbs'][] = array(
