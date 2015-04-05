@@ -20,7 +20,7 @@
                         <?php foreach ($gallerys as $gallerysingle) { ?>
                         <li>
                             <a class="thumb" name="" href="<?php echo $gallerysingle['image'];?>">                                
-                                <img widht="100" height="100" src="<?php echo $gallerysingle['image'];?>">                                                                
+                                <img widht="75" height="75" src="<?php echo $gallerysingle['image'];?>">                                                                
                             </a>                                                     
                         </li>
                         <?php } ?>                                           

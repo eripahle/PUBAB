@@ -215,7 +215,7 @@
 
                     <li>
                         <a class="fancybox-effects-b" href="<?php echo $gallerysingle['image'];?>"
-                           title="<?php echo $gallerysingle['title'];?> - <?php echo $gallerysingle['description'];?>"><img src="<?php echo $gallerysingle['image'];?>" width="300"/></a>                
+                           title="<?php echo $gallerysingle['title'];?> - <?php echo $gallerysingle['description'];?>"><img src="<?php echo $gallerysingle['image'];?>" width="150" height="150"/></a>                
                     </li>
                 </div>        
                 <?php } ?>                   
