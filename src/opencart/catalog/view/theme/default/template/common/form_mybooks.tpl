@@ -50,7 +50,7 @@
 		                </div>
 	              	 </div> 
 	              	 
-	                  <div class="form-group">
+	                  <div class="form-group required">
 	                    <label class="col-sm-2 control-label" for="input-category"><span data-toggle="tooltip" title="<?php echo $help_category; ?>"><?php echo $entry_category; ?></span></label>
 	                    <div class="col-sm-10">
 	                      <input type="text" name="category" value="" placeholder="<?php echo $entry_category; ?>" id="input-category" class="form-control" />
@@ -65,81 +65,63 @@
 	                  </div>
                  	<?php } ?>
                   <?php if(!$get_product_id){ ?>
-                  <div class="form-group required">
-                    <label class="col-sm-2 control-label" for="input-color-page"><?php echo $entry_color_page; ?></label>
-                    <div class="col-sm-10">
-                      <input type="text" name="color_page" value="<?php echo $color_page; ?>" placeholder="<?php echo $entry_color_page; ?>" id="input-color-page" class="form-control" />
-                    </div>
-                  </div>
 
                   <div class="form-group required">
-                    <label class="col-sm-2 control-label" for="input-bw-page"><?php echo $entry_bw_page; ?></label>
-                    <div class="col-sm-10">
-                      <input type="text" name="bw_page" value="<?php echo $bw_page; ?>" placeholder="<?php echo $entry_bw_page; ?>" id="input-bw-page" class="form-control" />
-                    </div>
-
-                  </div>
-
-                  <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_design_cover; ?></label>        
-                        <div class="col-sm-10">                                
-                            <input  type="file" name="design_cover" value="<?php echo $design_cover; ?>" class="btn btn-primary" >
-                            <div class="text-danger">* Silahkan Download Cover Template Terlebih dahulu,hanya menerima format png,jpg,dan jpeg</div>
+                        <div class="col-sm-3">                                
+                            <input  type="file" name="design_cover"  class="btn btn-primary" >
 	                 		 <?php if ($error_design_cover) { ?>
 	                  			<div class="text-danger"><?php echo $error_design_cover; ?></div>
 	                 		 <?php } ?>
-                        </div>                                                                       
+                        </div>
+                        <div class="col-sm-7">* Silahkan Download Cover Template Terlebih dahulu,hanya menerima format png,jpg,dan jpeg</div>                                                                       
                    </div>
                    
-                  <div class="form-group">
+                  <div class="form-group required">
                         <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_image; ?></label>             
-                        <div class="col-sm-10">                                
-                            <input  type="file" name="image" value="<?php echo $image; ?>" class="btn btn-primary" >
-                            <div class="text-danger">* HANYA SAMPUL DEPAN SAJA,hanya menerima format png,jpg,dan jpeg</div>
+                        <div class="col-sm-3">                                
+                            <input  type="file" name="image"  class="btn btn-primary" >
+                            
 	                 		 <?php if ($error_extension_image) { ?>
 	                  			<div class="text-danger"><?php echo $error_extension_image; ?></div>
 	                 		 <?php } ?>
-                        </div>                                                                       
+                        </div>
+                        <div class="col-sm-7">* HANYA SAMPUL DEPAN SAJA,hanya menerima format png,jpg,dan jpeg</div>                                                                       
                    </div>  
 
-                   <div class="form-group">
+                   <div class="form-group required">
                         <label class="col-sm-2 control-label" for="input-book"><?php echo $entry_book; ?></label>             
-                        <div class="col-sm-10">                                
-                            <input  type="file" name="book" value="<?php echo $book; ?>" class="btn btn-primary" >
-                            <div class="text-danger">* Silahkan Download file template naskah terlebih dahulu, hanya menerima format PDF saja</div>
+                        <div class="col-sm-3">                                
+                            <input  type="file" name="book"  class="btn btn-primary" >
 	                 		 <?php if ($error_extension_book) { ?>
 	                  			<div class="text-danger"><?php echo $error_extension_book; ?></div>
 	                 		 <?php } ?>
-                        </div>                                                                       
+                        </div>       
+                        <div class="col-sm-7">* Silahkan Download file template naskah terlebih dahulu, hanya menerima format PDF saja</div>                                                                
                    </div>  
 
-                   <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-book"><?php echo $entry_sample_book; ?></label>            <div class="col-sm-10">                                
-                            <input  type="file" name="sample_script" value="<?php echo $sample_script; ?>" class="btn btn-primary">
-                            <div class="text-danger">* 5-10 halaman pertama naskah,fungsi sebagai 'tester' untuk calon pembeli, hanya menerima format PDF saja</div>
+                   <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="input-book"><?php echo $entry_sample_book; ?></label>            <div class="col-sm-3">                                
+                            <input  type="file" name="sample_script"  class="btn btn-primary">
+                            
 	                 		 <?php if ($error_sample_book) { ?>
 	                  			<div class="text-danger"><?php echo $error_sample_book; ?></div>
 	                 		 <?php } ?>
-                        </div>                                                                       
+                        </div>        
+                        <div class="col-sm-7">* 5-10 halaman pertama naskah,fungsi sebagai 'tester' untuk calon pembeli, hanya menerima format PDF saja</div>                                                               
                    </div>  
 
                    <?php }?>
                    <?php if($group_id!=2) { ?>
-	                  <div class="form-group">
-	                   <label class="col-sm-2 control-label" for="input-description<?php echo $language['language_id']; ?>"><?php echo $entry_description; ?></label>
-	                    <div class="col-sm-10">
-	                      <textarea name="product_description[<?php echo $language['language_id']; ?>][description]" rows="10"placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>
-	                    </div>
-	                  </div>
+	                  <div class="form-group required">
+                    <label class="col-sm-2 control-label" for="input-description<?php echo $language['language_id']; ?>"><?php echo $entry_description; ?></label>
+                    <div class="col-sm-10">
+                      <textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>
+                    </div>
+                  </div>
 	                <?php }?>
                   <?php if(!$get_product_id){ ?>
-                  <div class="form-group">
-	            		<label class="col-sm-2 control-label" for="input-price"><?php echo $entry_price; ?></label>
-	                    <div class="col-sm-10">
-	                      <input type="text" name="price" value="<?php echo $price; ?>" placeholder="<?php echo $entry_price; ?>" id="input-price" class="form-control" />
-	                    </div>        
-                  </div>
-
+                  
                    <div class="form-group required">
                             <label class="col-sm-2 control-label" for="input-titlebook"><?php echo $entry_paper_size; ?></label>
                             <div class="col-sm-10">
@@ -171,6 +153,46 @@
                                 </select>
                             </div>
                     </div>  
+
+                    <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="input-color-page"><?php echo $entry_color_page; ?></label>
+                      <div class="col-sm-10">
+                        <input type="text" name="color_page" value="<?php echo $color_page; ?>" placeholder="<?php echo $entry_color_page; ?>" id="input-color-page" class="form-control" />
+                      </div>
+                    </div>
+
+                    <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="input-bw-page"><?php echo $entry_bw_page; ?></label>
+                      <div class="col-sm-10">
+                        <input type="text" name="bw_page" value="<?php echo $bw_page; ?>" placeholder="<?php echo $entry_bw_page; ?>" id="input-bw-page" class="form-control" />
+                      </div>
+
+                    </div>
+
+                    <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="input-price"><?php echo $entry_price; ?></label>
+                      <div class="col-sm-10">
+                        <input type="text" name="price" value="<?php echo $price; ?>" placeholder="<?php echo $entry_price; ?>" id="input-price" class="form-control" />
+                      </div>        
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label" for="input-best-price"><?php echo $entry_best_price; ?></label>
+                      <div class="col-sm-10">
+                        <input type="text" name="best_price" value="<?php echo $price; ?>" placeholder="<?php echo $entry_best_price; ?>" id="input-best-price" class="form-control" readonly/>
+                      </div>        
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label" for="input-best-price"><?php echo $entry_price_royalty; ?></label>
+                      <div class="col-sm-10">
+                        <input type="text" name="price_royalty" value="<?php echo $price; ?>" placeholder="<?php echo $entry_price_royalty; ?>" id="input-price-royalty" class="form-control" readonly/>
+                      </div>        
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label" for="input-best-price"><?php echo $entry_pub_price; ?></label>
+                      <div class="col-sm-10">
+                        <input type="text" name="pub_price" value="<?php echo $price; ?>" placeholder="<?php echo $entry_pub_price; ?>" id="input-pub-price" class="form-control" readonly/>
+                      </div>        
+                    </div>
                    <?php }?>
                   <?php if($get_product_id && $group_id!=2){ ?>
                   		<div class="form-group">
@@ -228,38 +250,51 @@
 
     </div>
   </div>
-  <script type="text/javascript" src="catalog/view/javascript/tinymce/tinymce.min.js"></script>
-<script type="text/javascript">
-			tinymce.init({
-			        selector: "textarea",
-			        plugins: [
-			                "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
-			                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-			                "table contextmenu directionality emoticons template textcolor paste fullpage textcolor"
-			        ],
-			
-			        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
-			        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | inserttime preview | forecolor backcolor",
-			        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
-			        menubar: false,
-			        toolbar_items_size: 'small',
-			
-			        style_formats: [
-			                {title: 'Bold text', inline: 'b'},
-			                {title: 'Red text', inline: 'td', styles: {color: '#ff0000'}},
-			                {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
-			                {title: 'Example 1', inline: 'td', classes: 'example1'},
-			                {title: 'Example 2', inline: 'td', classes: 'example2'},
-			                {title: 'Table styles'},
-			                {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
-			        ],
-			
-			        templates: [
-			                {title: 'Test template 1', content: 'Test 1'},
-			                {title: 'Test template 2', content: 'Test 2'}
-			        ]
-			});
-</script>
+  <link rel="stylesheet" href="catalog/view/javascript/summernote/summernote.css" type="text/css" />
+  <link rel="stylesheet" href="catalog/view/javascript/summernote/summernote-bs2.css" type="text/css" />
+  <script type="text/javascript" src="catalog/view/javascript/summernote/summernote.js"></script>
+  <script type="text/javascript" src="catalog/view/javascript/summernote/summernote.min.js"></script>
+<script type="text/javascript"><!--
+
+$("#input-bw-page").on("change",function(){
+    var bw_page=$(this).val();
+    var color_page=$("#input-color-page").val();
+    var best_price=bw_page*200+color_page*250+5*bw_page+7.5*color_page;
+    var net=$("#input-price").val()-best_price;
+    var royalty=(net*0.6);
+    var pub=(net*0.4);
+    $("#input-best-price").val(best_price);
+    //$("#input-price-royalty").val(royalty);
+    //$("#input-pub-price").val(pub);
+});
+
+$("#input-color-page").on("change",function(){
+    var bw_page=$("#input-bw-page").val();
+    var color_page=$(this).val();
+    var best_price=bw_page*200+color_page*250+5*bw_page+7.5*color_page;
+    var net=$("#input-price").val()-best_price;
+    var royalty=(net*0.6);
+    var pub=(net*0.4);
+    $("#input-best-price").val(best_price);
+    //$("#input-price-royalty").val(royalty);
+    //$("#input-pub-price").val(pub);
+});
+$("#input-price").on("change",function(){
+    var bw_page=$("#input-bw-page").val();
+    var color_page=$("#input-color-page").val();
+    var best_price=(bw_page*200)+(color_page*250)+(5*bw_page)+(7.5*color_page);
+    var net=$(this).val()-best_price;
+    var royalty=(net*0.6);
+    var pub=(net*0.4);
+    //$("#input-best-price").val(best_price);
+    $("#input-price-royalty").val(royalty);
+    $("#input-pub-price").val(pub);
+});
+
+<?php foreach ($languages as $language) { ?>
+$('#input-description<?php echo $language['language_id']; ?>').summernote({height: 300});
+<?php } ?>
+//--></script> 
   <script type="text/javascript"><!--
 // Manufacturer
 $('input[name=\'manufacturer\']').autocomplete({

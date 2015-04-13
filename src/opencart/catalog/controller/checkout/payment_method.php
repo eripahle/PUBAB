@@ -3,7 +3,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 	public function index() {
 		$this->load->language('checkout/checkout');
 
-		if (isset($this->session->data['payment_address'])) {
+		//if (isset($this->session->data['payment_address'])) {
 			// Totals
 			$total_data = array();
 			$total = 0;
@@ -42,7 +42,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 				if ($this->config->get($result['code'] . '_status')) {
 					$this->load->model('payment/' . $result['code']);
 
-					$method = $this->{'model_payment_' . $result['code']}->getMethod($this->session->data['payment_address'], $total);
+					$method = $this->{'model_payment_' . $result['code']}->getMethod($this->session->data['shipping_address'], $total);
 
 					if ($method) {
 						if ($recurring) {
@@ -65,7 +65,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 			array_multisort($sort_order, SORT_ASC, $method_data);
 
 			$this->session->data['payment_methods'] = $method_data;
-		}
+		//}
 
 		$data['text_payment_method'] = $this->language->get('text_payment_method');
 		$data['text_comments'] = $this->language->get('text_comments');
@@ -132,7 +132,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 		$json = array();
 
 		// Validate if payment address has been set.
-		if (!isset($this->session->data['payment_address'])) {
+		if (!isset($this->session->data['shipping_address'])) {
 			$json['redirect'] = $this->url->link('checkout/checkout', '', 'SSL');
 		}
 

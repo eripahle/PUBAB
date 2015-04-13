@@ -894,6 +894,10 @@ class ControllerCommonMybooks extends Controller {
 		$data['entry_quantity'] = $this->language->get('entry_quantity');
 		$data['entry_stock_status'] = $this->language->get('entry_stock_status');
 		$data['entry_price'] = $this->language->get('entry_price');
+		$data['entry_price_request'] = $this->language->get('entry_price_request');
+		$data['entry_price_royalty'] = $this->language->get('entry_price_royalty');
+		$data['entry_best_price'] = $this->language->get('entry_best_price');
+		$data['entry_pub_price'] = $this->language->get('entry_pub_price');
 		$data['entry_tax_class'] = $this->language->get('entry_tax_class');
 		$data['entry_points'] = $this->language->get('entry_points');
 		$data['entry_option_points'] = $this->language->get('entry_option_points');

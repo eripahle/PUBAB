@@ -289,7 +289,7 @@
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-zone"><?php echo $entry_zone; ?></label>
             <div class="col-sm-10">
-              <select name="zone_id" id="input-zone" class="form-control">
+              <select name="zone_id" id="input-zone" class="form-control" onchange="$('select[name=\'city_id\']').load('index.php?route=account/register/city&zone_id=' + this.value);">
               </select>
               <?php if ($error_zone) { ?>
               <div class="text-danger"><?php echo $error_zone; ?></div>
@@ -300,7 +300,8 @@
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-city"><?php echo $entry_city; ?></label>
             <div class="col-sm-10">
-              <input type="text" name="city" value="<?php echo $city; ?>" placeholder="<?php echo $entry_city; ?>" id="input-city" class="form-control" />
+              <select name="city_id" id="input-zone" class="form-control">
+              </select>
               <?php if ($error_city) { ?>
               <div class="text-danger"><?php echo $error_city; ?></div>
               <?php } ?>
@@ -538,6 +539,8 @@
     <?php echo $column_right; ?></div>
 </div> 
 <script type="text/javascript">
+$('select[name=\'city_id\']').load('index.php?route=account/register/city&zone_id=<?php echo $zone_id; ?>&city_id=<?php echo $city_id; ?>');
+
 <!--
 // Sort the custom fields
 $('#account .form-group[data-sort]').detach().each(function() {

@@ -12,7 +12,7 @@
         <?php echo $text_register; ?></label>
     </div>
     <?php if ($checkout_guest) { ?>
-    <div class="radio">
+    <div class="radio" style="display:none">
       <label>
         <?php if ($account == 'guest') { ?>
         <input type="radio" name="account" value="guest" checked="checked" />

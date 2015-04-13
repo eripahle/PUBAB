@@ -161,14 +161,7 @@
         <label class="control-label" for="input-payment-address-2"><?php echo $entry_address_2; ?></label>
         <input type="text" name="address_2" value="" placeholder="<?php echo $entry_address_2; ?>" id="input-payment-address-2" class="form-control" />
       </div>
-      <div class="form-group required">
-        <label class="control-label" for="input-payment-city"><?php echo $entry_city; ?></label>
-        <input type="text" name="city" value="" placeholder="<?php echo $entry_city; ?>" id="input-payment-city" class="form-control" />
-      </div>
-      <div class="form-group required">
-        <label class="control-label" for="input-payment-postcode"><?php echo $entry_postcode; ?></label>
-        <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-payment-postcode" class="form-control" />
-      </div>
+      
       <div class="form-group required">
         <label class="control-label" for="input-payment-country"><?php echo $entry_country; ?></label>
         <select name="country_id" id="input-payment-country" class="form-control">
@@ -183,9 +176,19 @@
         </select>
       </div>
       <div class="form-group required">
-        <label class="control-label" for="input-payment-zone"><?php echo $entry_zone;; ?></label>
-        <select name="zone_id" id="input-payment-zone" class="form-control">
-        </select>
+        <label class="control-label" for="input-zone"><?php echo $entry_zone; ?></label>
+          <select name="zone_id" id="input-zone" class="form-control" onchange="$('select[name=\'city_id\']').load('index.php?route=checkout/register/city&zone_id=' + this.value + '');">
+          </select>
+      </div>
+
+      <div class="form-group required">
+        <label class="control-label" for="input-city"><?php echo $entry_city; ?></label>
+          <select name="city_id" id="input-zone" class="form-control">
+          </select>
+      </div>
+      <div class="form-group required">
+        <label class="control-label" for="input-payment-postcode"><?php echo $entry_postcode; ?></label>
+        <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-payment-postcode" class="form-control" />
       </div>
       <?php foreach ($custom_fields as $custom_field) { ?>
       <?php if ($custom_field['location'] == 'address') { ?>

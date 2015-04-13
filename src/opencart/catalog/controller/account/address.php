@@ -498,9 +498,9 @@ class ControllerAccountAddress extends Controller {
 			$this->error['address_1'] = $this->language->get('error_address_1');
 		}
 
-		if ((utf8_strlen(trim($this->request->post['city'])) < 2) || (utf8_strlen(trim($this->request->post['city'])) > 128)) {
+		/*if ((utf8_strlen(trim($this->request->post['city'])) < 2) || (utf8_strlen(trim($this->request->post['city'])) > 128)) {
 			$this->error['city'] = $this->language->get('error_city');
-		}
+		}*/
 
 		$this->load->model('localisation/country');
 
@@ -516,6 +516,10 @@ class ControllerAccountAddress extends Controller {
 
 		if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
 			$this->error['zone'] = $this->language->get('error_zone');
+		}
+
+		if (!isset($this->request->post['city_id']) || $this->request->post['city_id'] == '') {
+			$this->error['city'] = $this->language->get('error_city');
 		}
 
 		// Custom field validation
@@ -542,5 +546,27 @@ class ControllerAccountAddress extends Controller {
 		}
 
 		return !$this->error;
+	}
+
+	public function city() {
+		$output = '<option value="">' . $this->language->get('text_select') . '</option>';
+
+		$this->load->model('localisation/city');
+
+		$results = $this->model_localisation_city->getCitiesByZoneId($this->request->get['zone_id']);
+
+		foreach ($results as $result) {
+			$output .= '<option value="' . $result['name'] . '"';
+
+			if (isset($this->request->get['city_id']) && ($this->request->get['city_id'] == $result['city_id'])) {
+				$output .= ' selected="selected"';
+			}
+
+			$output .= '>' . $result['name'] . '</option>';
+		}
+
+		
+
+		$this->response->setOutput($output);
 	}
 }

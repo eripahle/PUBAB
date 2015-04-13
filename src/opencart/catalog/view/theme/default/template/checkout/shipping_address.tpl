@@ -54,18 +54,7 @@
         <input type="text" name="address_2" value="" placeholder="<?php echo $entry_address_2; ?>" id="input-shipping-address-2" class="form-control" />
       </div>
     </div>
-    <div class="form-group required">
-      <label class="col-sm-2 control-label" for="input-shipping-city"><?php echo $entry_city; ?></label>
-      <div class="col-sm-10">
-        <input type="text" name="city" value="" placeholder="<?php echo $entry_city; ?>" id="input-shipping-city" class="form-control" />
-      </div>
-    </div>
-    <div class="form-group required">
-      <label class="col-sm-2 control-label" for="input-shipping-postcode"><?php echo $entry_postcode; ?></label>
-      <div class="col-sm-10">
-        <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-shipping-postcode" class="form-control" />
-      </div>
-    </div>
+    
     <div class="form-group required">
       <label class="col-sm-2 control-label" for="input-shipping-country"><?php echo $entry_country; ?></label>
       <div class="col-sm-10">
@@ -82,10 +71,24 @@
       </div>
     </div>
     <div class="form-group required">
-      <label class="col-sm-2 control-label" for="input-shipping-zone"><?php echo $entry_zone; ?></label>
+      <label class="col-sm-2 control-label" for="input-zone"><?php echo $entry_zone; ?></label>
       <div class="col-sm-10">
-        <select name="zone_id" id="input-shipping-zone" class="form-control">
+        <select name="zone_id" id="input-zone" class="form-control" onchange="$('select[name=\'city_id\']').load('index.php?route=checkout/shipping_address/city&zone_id=' + this.value + '');">
         </select>
+      </div>
+    </div>
+
+    <div class="form-group required">
+      <label class="col-sm-2 control-label" for="input-city"><?php echo $entry_city; ?></label>
+      <div class="col-sm-10">
+        <select name="city_id" id="input-zone" class="form-control">
+        </select>
+      </div>
+    </div>
+    <div class="form-group required">
+      <label class="col-sm-2 control-label" for="input-shipping-postcode"><?php echo $entry_postcode; ?></label>
+      <div class="col-sm-10">
+        <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-shipping-postcode" class="form-control" />
       </div>
     </div>
     <?php foreach ($custom_fields as $custom_field) { ?>
@@ -232,6 +235,7 @@ $('#collapse-shipping-address .form-group[data-sort]').detach().each(function() 
 });
 //--></script>
 <script type="text/javascript"><!--
+
 $('#collapse-shipping-address button[id^=\'button-shipping-custom-field\']').on('click', function() {
 	var node = this;
 
@@ -339,4 +343,6 @@ $('#collapse-shipping-address select[name=\'country_id\']').on('change', functio
 });
 
 $('#collapse-shipping-address select[name=\'country_id\']').trigger('change');
+
+
 //--></script>

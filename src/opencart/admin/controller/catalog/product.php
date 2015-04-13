@@ -409,7 +409,7 @@ class ControllerCatalogProduct extends Controller {
 				'status3'     => ($result['status3']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'edit'       => $this->url->link('catalog/product/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $result['product_id'] . $url, 'SSL'),
 				'download_book'   => $books['draf'],
-				'download_image'   => $result['image']
+				'download_image'   => $result['design_cover']
 			);
 		}
 
