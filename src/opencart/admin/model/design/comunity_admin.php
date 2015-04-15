@@ -41,7 +41,7 @@ class ModelDesignComunityAdmin extends Model {
         }        
     }
 
-    public function editProduct($product_id, $data) {
+    public function editComunity($product_id, $data) {
         $this->event->trigger('pre.admin.product.edit', $data);
 
         $this->db->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int) $data['quantity'] . "', minimum = '" . (int) $data['minimum'] . "', subtract = '" . (int) $data['subtract'] . "', stock_status_id = '" . (int) $data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int) $data['manufacturer_id'] . "', shipping = '" . (int) $data['shipping'] . "', price = '" . (float) $data['price'] . "', points = '" . (int) $data['points'] . "', weight = '" . (float) $data['weight'] . "', weight_class_id = '" . (int) $data['weight_class_id'] . "', length = '" . (float) $data['length'] . "', width = '" . (float) $data['width'] . "', height = '" . (float) $data['height'] . "', length_class_id = '" . (int) $data['length_class_id'] . "', status = '" . (int) $data['status'] . "',status1 = '" . (int) $data['status1'] . "',status2 = '" . (int) $data['status2'] . "',status3 = '" . (int) $data['status3'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int) $data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int) $product_id . "'");
@@ -187,56 +187,8 @@ class ModelDesignComunityAdmin extends Model {
             foreach ($data['product_recurrings'] as $recurring) {
                 $this->db->query("INSERT INTO `" . DB_PREFIX . "product_recurring` SET `product_id` = " . (int) $product_id . ", customer_group_id = " . (int) $recurring['customer_group_id'] . ", `recurring_id` = " . (int) $recurring['recurring_id']);
             }
-        }
-
-//        $this->cache->delete('gallery');
-//
-//        $this->event->trigger('post.admin.product.edit', $gallery_id);
+        }   
     }
-
-    public function copyProduct($product_id) {
-        $query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE p.product_id = '" . (int) $product_id . "' AND pd.language_id = '" . (int) $this->config->get('config_language_id') . "'");
-
-        if ($query->num_rows) {
-            $data = array();
-
-            $data = $query->row;
-
-            $data['sku'] = '';
-            $data['upc'] = '';
-            $data['viewed'] = '0';
-            $data['keyword'] = '';
-            $data['status'] = '0';
-
-            $data = array_merge($data, array('product_attribute' => $this->getProductAttributes($product_id)));
-            $data = array_merge($data, array('product_description' => $this->getProductDescriptions($product_id)));
-            $data = array_merge($data, array('product_discount' => $this->getProductDiscounts($product_id)));
-            $data = array_merge($data, array('product_filter' => $this->getProductFilters($product_id)));
-            $data = array_merge($data, array('product_image' => $this->getProductImages($product_id)));
-            $data = array_merge($data, array('product_option' => $this->getProductOptions($product_id)));
-            $data = array_merge($data, array('product_related' => $this->getProductRelated($product_id)));
-            $data = array_merge($data, array('product_reward' => $this->getProductRewards($product_id)));
-            $data = array_merge($data, array('product_special' => $this->getProductSpecials($product_id)));
-            $data = array_merge($data, array('product_category' => $this->getProductCategories($product_id)));
-            $data = array_merge($data, array('product_download' => $this->getProductDownloads($product_id)));
-            $data = array_merge($data, array('product_layout' => $this->getProductLayouts($product_id)));
-            $data = array_merge($data, array('product_store' => $this->getProductStores($product_id)));
-            $data = array_merge($data, array('product_recurrings' => $this->getRecurrings($product_id)));
-
-            $this->addProduct($data);
-        }
-    }
-
-    public function deleteCalendar($calendar_event_id) {               
-        $this->db->query("DELETE FROM " . DB_PREFIX . "calendar_event WHERE calendar_event_id = " . $calendar_event_id . "");       
-    }
-
-    public function getProduct($product_id) {
-        $query = $this->db->query("SELECT DISTINCT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias WHERE query = 'product_id=" . (int) $product_id . "') AS keyword FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE p.product_id = '" . (int) $product_id . "' AND pd.language_id = '" . (int) $this->config->get('config_language_id') . "'");
-
-        return $query->row;
-    }
-
     public function getComunity() {
         $sql = "SELECT * FROM " . DB_PREFIX . "comunity";
 

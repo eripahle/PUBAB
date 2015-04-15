@@ -36,7 +36,11 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>                                    
+                                    <td style="width: 1px;" class="text-center">
+                                    <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>                                    
+                                    <td class="text-left">
+                                        <?php echo $entry_image; ?>
+                                        </td>                                    
                                     <td class="text-left">
                                         <?php echo $entry_title; ?>
                                         </td>                                    
@@ -50,14 +54,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if ($gallerys) { ?>
+                                <?php $data="../"; if ($gallerys) { ?>
                                 <?php foreach ($gallerys as $gallery) { ?>
-                                <tr>
+                                <tr>                                    
                                     <td class="text-center"><?php if (in_array($gallery['gallery_id'], $selected)) { ?>
                                         <input type="checkbox" name="selected[]" value="<?php echo $gallery['gallery_id']; ?>" checked="checked" />
                                         <?php } else { ?>
                                         <input type="checkbox" name="selected[]" value="<?php echo $gallery['gallery_id']; ?>" />
-                                        <?php } ?></td>                                    
+                                        <?php } ?></td>                                                          
+                                    <td><img src="<?php echo $data.$gallery['image']; ?>" width="120"></td>
                                     <td class="text-left"><?php echo $gallery['title']; ?></td>
                                     <td class="text-left"><?php echo $gallery['desc']; ?></td>                                                                                                           
                                     <td class="text-left"><?php echo $gallery['status']; ?></td>

@@ -1,19 +1,19 @@
 <?php
 
-class ControllerModuleGallery extends Controller {
+class ControllerModulePaymentApprovalAdmin extends Controller {
 
     private $error = array();
 
     public function index() {
-        $this->load->language('module/gallery');
+        $this->load->language('module/comunity_admin');
 
-        $this->load->model('design/gallery');
+        $this->load->model('design/comunity_admin');
 
         $this->getList();
     }
 
     protected function validate() {
-        if (!$this->user->hasPermission('modify', 'module/gallery')) {
+        if (!$this->user->hasPermission('modify', 'module/comunity_admin')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
 
@@ -33,57 +33,90 @@ class ControllerModuleGallery extends Controller {
     }
 
     public function add() {
-        $this->load->language('module/gallery');
+        $this->load->language('module/comunity_admin');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('design/gallery');
+        $this->load->model('design/comunity_admin');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST')) {// && $this->validateForm()) {
-            $this->model_design_gallery->addGallery($this->request->post, $this->request->files);
+            $this->model_design_comunity_admin->addComunity($this->request->post,$this->request->files);
             $this->session->data['success'] = $this->language->get('text_success');
             $url = '';
-            //$this->response->redirect($this->url->link('module/gallery', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('module/comunity_admin', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
         $this->getForm();
     }
 
     public function edit() {
-        $this->load->language('module/gallery');
+        $this->load->language('module/comunity_admin');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('design/gallery');
+        $this->load->model('design/comunity_admin');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_design_galleru->editGallery($this->request->get['gallery_id'], $this->request->post);
+            $this->model_design_comunity->editCounity($this->request->get['comunity_id'], $this->request->post);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
             $url = '';
-            $this->response->redirect($this->url->link('module/gallery', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+
+            if (isset($this->request->get['filter_name'])) {
+                $url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+            }
+
+            if (isset($this->request->get['filter_model'])) {
+                $url .= '&filter_model=' . urlencode(html_entity_decode($this->request->get['filter_model'], ENT_QUOTES, 'UTF-8'));
+            }
+
+            if (isset($this->request->get['filter_price'])) {
+                $url .= '&filter_price=' . $this->request->get['filter_price'];
+            }
+
+            if (isset($this->request->get['filter_quantity'])) {
+                $url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
+            }
+
+            if (isset($this->request->get['filter_status'])) {
+                $url .= '&filter_status=' . $this->request->get['filter_status'];
+            }
+
+            if (isset($this->request->get['sort'])) {
+                $url .= '&sort=' . $this->request->get['sort'];
+            }
+
+            if (isset($this->request->get['order'])) {
+                $url .= '&order=' . $this->request->get['order'];
+            }
+
+            if (isset($this->request->get['page'])) {
+                $url .= '&page=' . $this->request->get['page'];
+            }
+
+            $this->response->redirect($this->url->link('module/comunity_id', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
 
         $this->getForm();
     }
 
     public function delete() {
-        $this->load->language('module/gallery');
+        $this->load->language('module/comunity_admin');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('design/gallery');
+        $this->load->model('design/comunity_admin');
 
         if (isset($this->request->post['selected'])) { //&& $this->validateDelete()) {
-            foreach ($this->request->post['selected'] as $galerry_id) {
-                $this->model_design_gallery->deleteGallery($galerry_id);
+            foreach ($this->request->post['selected'] as $calendar_event_id) {
+                $this->model_design_comunity_admin->deleteCalendar($calendar_event_id);
             }
 
             $this->session->data['success'] = $this->language->get('text_success');
 
             $url = '';
 
-            $this->response->redirect($this->url->link('module/gallery', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('module/comunity_admin', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
 
         $this->getList();
@@ -91,14 +124,12 @@ class ControllerModuleGallery extends Controller {
 
     protected function getList() {
         $this->document->setTitle($this->language->get('heading_title'));
-        $data['heading_title_sub'] = $this->language->get('heading_title_sub');
-        $data['entry_title'] = $this->language->get('entry_title');
-        $data['entry_desc'] = $this->language->get('entry_desc');
+        $data['heading_title_sub'] = $this->language->get('heading_title_sub');                
+        $data['entry_name'] = $this->language->get('entry_name');
+        $data['entry_description'] = $this->language->get('entry_description');
         $data['entry_image'] = $this->language->get('entry_image');
-        $data['entry_status'] = $this->language->get('entry_status');
-        $data['entry_enable'] = $this->language->get('entry_enable');
-        $data['entry_disable'] = $this->language->get('entry_disable');
-
+        $data['entry_link'] = $this->language->get('entry_link');
+        
         if (isset($this->request->get['page'])) {
             $page = $this->request->get['page'];
         } else {
@@ -120,11 +151,11 @@ class ControllerModuleGallery extends Controller {
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('module/gallery', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('module/comunity_admin', 'token=' . $this->session->data['token'] . $url, 'SSL')
         );
 
-        $data['add'] = $this->url->link('module/gallery/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
-        $data['delete'] = $this->url->link('module/gallery/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $data['add'] = $this->url->link('module/comunity_admin/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $data['delete'] = $this->url->link('module/comunity_admin/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
         $data['products'] = array();
 
@@ -157,20 +188,20 @@ class ControllerModuleGallery extends Controller {
 
         $data['token'] = $this->session->data['token'];
 
-        $results = $this->model_design_gallery->getGallerys();
+        $results = $this->model_design_comunity_admin->getComunity();
         if ($results != null) {
-           foreach ($results as $result) {
-                $data['gallerys'][] = array(
-                    'gallery_id' => $result['gallery_id'],
-                    'title' => $result['title'],
-                    'desc' => $result['description'],
-                    'status' => $result['status'],
+            foreach ($results as $result) {
+                $data['comunitys'][] = array(
+                    'comunity_id' => $result['comunity_id'],
+                    'name' => $result['name'],
+                    'description' => $result['description'],
                     'image' => $result['image'],
-                    'edit' => $this->url->link('module/gallery/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $result['gallery_id'] . $url, 'SSL')
+                    'link' => $result['link'],
+                    'edit' => $this->url->link('module/comunity_admin/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $result['comunity_id'] . $url, 'SSL')
                 );
             }
-        }else{
-            $data['gallerys'][] = null;
+        } else {
+            $data['comunitys'][] = null;
         }
 
         if (isset($this->error['warning'])) {
@@ -205,7 +236,7 @@ class ControllerModuleGallery extends Controller {
 
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('module/gallery', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
+        $pagination->url = $this->url->link('module/comunity_admin', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
 
         $data['pagination'] = $pagination->render();
 
@@ -213,7 +244,7 @@ class ControllerModuleGallery extends Controller {
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('module/gallery_list.tpl', $data));
+        $this->response->setOutput($this->load->view('module/comunity_admin_list.tpl', $data));
     }
 
     protected function getForm() {
@@ -226,11 +257,20 @@ class ControllerModuleGallery extends Controller {
         $data['entry_enable'] = $this->language->get('entry_enable');
         $data['entry_disable'] = $this->language->get('entry_disable');
 
+        $data['entry_name'] = $this->language->get('entry_name');
+        $data['entry_description'] = $this->language->get('entry_description');
+        $data['entry_image'] = $this->language->get('entry_image');
+        $data['entry_link'] = $this->language->get('entry_link');
+
         $data['help_title'] = $this->language->get('help_title');
         $data['help_desc'] = $this->language->get('help_des');
         $data['help_image'] = $this->language->get('help_image');
         $data['help_status'] = $this->language->get('help_status');
+        $data['entry_description'] = $this->language->get('entry_description');
+        $data['entry_date'] = $this->language->get('entry_date');
 
+        $data['help_name'] = $this->language->get('help_name');
+        
         $data['button_save'] = $this->language->get('button_save');
 
         $data['image'] = $this->request->files;
@@ -274,29 +314,29 @@ class ControllerModuleGallery extends Controller {
         if (!isset($this->request->get['module_id'])) {
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('heading_title'),
-                'href' => $this->url->link('module/gallery', 'token=' . $this->session->data['token'], 'SSL')
+                'href' => $this->url->link('module/comunity_admin', 'token=' . $this->session->data['token'], 'SSL')
             );
         } else {
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('heading_title'),
-                'href' => $this->url->link('module/gallery', 'token=' . $this->session->data['token'] . '&module_id=' . $this->request->get['module_id'], 'SSL')
+                'href' => $this->url->link('module/comunity_admin', 'token=' . $this->session->data['token'] . '&module_id=' . $this->request->get['module_id'], 'SSL')
             );
         }
 
-        if (isset($this->request->post['title'])) {
-            $data['title'] = $this->request->post['title'];
+        if (isset($this->request->post['name'])) {
+            $data['name'] = $this->request->post['name'];
         } elseif (!empty($module_info)) {
-            $data['title'] = $module_info['title'];
+            $data['name'] = $module_info['name'];
         } else {
-            $data['title'] = '';
+            $data['name'] = '';
         }
 
-        if (isset($this->request->post['desc'])) {
-            $data['desc'] = $this->request->post['desc'];
+        if (isset($this->request->post['description'])) {
+            $data['description'] = $this->request->post['description'];
         } elseif (!empty($module_info)) {
-            $data['desc'] = $module_info['desc'];
+            $data['description'] = $module_info['description'];
         } else {
-            $data['desc'] = 5;
+            $data['description'] = '';
         }
 
         if (isset($this->request->file['image'])) {
@@ -307,7 +347,16 @@ class ControllerModuleGallery extends Controller {
             $data['image'] = 5;
         }
 
+        
+        if (isset($this->request->post['link'])) {
+            $data['link'] = $this->request->post['link'];
+        } elseif (!empty($module_info)) {
+            $data['link'] = $module_info['status'];
+        } else {
+            $data['link'] = '';
+        }
 
+        
         if (isset($this->request->post['status'])) {
             $data['status'] = $this->request->post['status'];
         } elseif (!empty($module_info)) {
@@ -318,9 +367,9 @@ class ControllerModuleGallery extends Controller {
 
         $url = '';
         if (!isset($this->request->get['gellery_id'])) {
-            $data['save'] = $this->url->link('module/gallery/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
+            $data['save'] = $this->url->link('module/comunity_admin/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
         } else {
-            $data['save'] = $this->url->link('module/gallery/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $this->request->get['gallery_id'] . $url, 'SSL');
+            $data['save'] = $this->url->link('module/comunity_admin/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $this->request->get['gallery_id'] . $url, 'SSL');
         }
 
 
@@ -329,11 +378,11 @@ class ControllerModuleGallery extends Controller {
         $data['footer'] = $this->load->controller('common/footer');
 
 
-        $this->response->setOutput($this->load->view('module/gallery_form.tpl', $data));
+        $this->response->setOutput($this->load->view('module/comunity_admin_form.tpl', $data));
     }
 
     protected function validateForm() {
-//		if (!$this->user->hasPermission('modify', 'module/gallery')) {
+//		if (!$this->user->hasPermission('modify', 'module/comunity_admin')) {
 //			$this->error['warning'] = $this->language->get('error_permission');
 //		}
 //		
@@ -341,7 +390,7 @@ class ControllerModuleGallery extends Controller {
     }
 
     protected function validateDelete() {
-        if (!$this->user->hasPermission('modify', 'module/gallery')) {
+        if (!$this->user->hasPermission('modify', 'module/comunity_admin')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
         return !$this->error;

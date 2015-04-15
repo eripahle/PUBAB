@@ -59,9 +59,13 @@ class ControllerCommonHeader extends Controller {
         $data['text_service']=$this->language->get('text_service');
         $data['text_editing_book']=$this->language->get('text_editing_book');
         $data['text_payment']=$this->language->get('text_payment');
+        $data['text_my_payment']=$this->language->get('text_my_paymnet');
 
         $data['publishbook']=$this->url->link('common/mybooks/add','', 'SSL');
-		$data['mybooks']=$this->url->link('common/mybooks','', 'SSL');
+        $data['upload_payment']=$this->url->link('common/payment_approval/add','', 'SSL');
+        $data['my_payment']=$this->url->link('common/payment_approval','', 'SSL');
+        
+		$data['mybooks']=$this->url->link('common/mybooks','', 'SSL');                
 		$data['list_edit_book']=$this->url->link('common/mybooks/getEditingList','', 'SSL');
 		$data['home'] = $this->url->link('common/home');
 		$data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
@@ -84,7 +88,8 @@ class ControllerCommonHeader extends Controller {
                 $data['services'] = $this->url->link('information/services','','SSL');
                 $data['editing_book'] = $this->url->link('information/listeditbook','','SSL');
                 
-                $data['upload_payment'] = $this->url->link('common/upload_payment','','SSL');
+                
+                //$data['upload_payment'] = $this->url->link('common/','','SSL');
 
 		$status = true;
 

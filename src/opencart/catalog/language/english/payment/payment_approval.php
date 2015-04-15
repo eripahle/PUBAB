@@ -1,42 +1,11 @@
 <?php
-// Heading
-$_['heading_title']    = 'Gallery Event';
-$_['heading_title_sub']    = 'Gallery Event view Managment';
+$_['heading_title']          = 'Payment Approval';
 
 // Text
-$_['text_module']      = 'Gallery event view managment';
-$_['text_success']     = 'Success: You have modified Gallery Event view module!';
-$_['text_edit']        = 'Edit Gallery Event view Module';
-$_['text_row_view']    = "Horizontal (Row)";
-$_['text_col_view']    = "Vertical (Column)";
-
-
-// Entry
-$_['entry_title']             = 'Title of Event';
-$_['entry_image']            = 'Image';
-$_['entry_desc']             = 'Description';
-$_['entry_status']           = 'Status';
-$_['entry_enable']          = 'Enable';
-$_['entry_disable']         = 'Disable';
-
-$_['help_title']             = 'Name or title of event';
-$_['help_image']            = 'Image or picture of event';
-$_['help_desc']             = 'Description';
-$_['help_status']           = 'Status';
-
-//Button
-$_['button_save']           = 'Save';
-
-// Error
-$_['error_permission'] = 'Warning: You do not have permission to modify Most Reviewed module!';
-$_['error_name']       = 'Module Name must be between 3 and 64 characters!';
-$_['error_width']      = 'Width required!';
-$_['error_height']     = 'Height required!';
-
-$_['text_success']           = 'Success: You have modified products!';
-$_['text_list']              = 'Product List';
-$_['text_add']               = 'Add Product';
-$_['text_edit']              = 'Edit Product';
+$_['text_success']           = 'Success: You have Send Payment approval!';
+$_['text_list']              = 'List Your Payment proof ';
+$_['text_add']               = 'Add Payment proof';
+$_['text_edit']              = 'Edit Payment proof';
 $_['text_plus']              = '+';
 $_['text_minus']             = '-';
 $_['text_default']           = 'Default';
@@ -44,21 +13,42 @@ $_['text_option']            = 'Option';
 $_['text_option_value']      = 'Option Value';
 $_['text_percent']           = 'Percentage';
 $_['text_amount']            = 'Fixed Amount';
+$_['text_disabled']			 = 'Process';
+$_['text_enabled']			 = 'Done';
+$_['text_agree']			 = 'Agree';
+$_['text_disagree']			 = 'Disagree';
+$_['text_no_results']		 = 'You do not have a Payment proof';
+$_['text_image']           = 'Image Upload';
+$_['text_invoice']           = 'Invoice Number';
+$_['text_status']          = 'Status Approvement';
+$_['text_action']                      = 'Action';
+$_['text_none']				 = 'None';
 
 // Column
-$_['column_name']            = 'Product Name';
-$_['column_model']           = 'Model';
-$_['column_image']           = 'Image';
-$_['column_price']           = 'Price';
-$_['column_quantity']        = 'Quantity';
-$_['column_status']          = 'Status';
-$_['column_status_author']   = 'Status Author';
-$_['column_status_editor']   = 'Status Editor';
-$_['column_status_management']  = 'Status Management';
-$_['column_action']          = 'Action';
+$_['column_image']           = 'Image Upload';
+$_['column_invoice']           = 'Invoice Number';
+$_['column_status']          = 'Status Approvement';
+$_['column_action']                      = 'Action';
+$_['text_none']				 = 'None';
+
+
 
 // Entry
-$_['entry_name']             = 'Product Name';
+$_['entry_image']           = 'Image Upload';
+$_['entry_invoice']           = 'Invoice Number';
+$_['entry_status']          = 'Status Approvement';
+$_['entry_action']                      = 'Action';
+$_['entry_none']				 = 'None';
+
+
+$_['entry_paper_size']       = 'Size';
+$_['entry_paper_type']       = 'Paper Type';
+$_['entry_book']       		 = 'Full Script';
+$_['entry_sample_book']      = 'Sample Script';
+$_['entry_color_page']       = 'Color Page';
+$_['entry_bw_page']       	 = 'Black & White Page';
+$_['entry_name']             = 'Title';
+$_['entry_author']           = 'Author';
 $_['entry_description']      = 'Description';
 $_['entry_meta_title'] 	     = 'Meta Tag Title';
 $_['entry_meta_keyword'] 	 = 'Meta Tag Keywords';
@@ -79,7 +69,11 @@ $_['entry_date_available']   = 'Date Available';
 $_['entry_quantity']         = 'Quantity';
 $_['entry_minimum']          = 'Minimum Quantity';
 $_['entry_stock_status']     = 'Out Of Stock Status';
-$_['entry_price']            = 'Price';
+$_['entry_price']            = 'Selling Price';
+$_['entry_price_request']    = 'Request Price';
+$_['entry_price_royalty']    = 'Your Royalty';
+$_['entry_best_price']       = 'Best Price';
+$_['entry_pub_price'] 		 = 'PUB Share';
 $_['entry_tax_class']        = 'Tax Class';
 $_['entry_points']           = 'Points';
 $_['entry_option_points']    = 'Points';
@@ -91,7 +85,8 @@ $_['entry_length_class']     = 'Length Class';
 $_['entry_length']           = 'Length';
 $_['entry_width']            = 'Width';
 $_['entry_height']           = 'Height';
-$_['entry_image']            = 'Image';
+$_['entry_design_cover']     = 'Upload Design Cover';
+$_['entry_new_image']        = 'New Cover';
 $_['entry_customer_group']   = 'Customer Group';
 $_['entry_date_start']       = 'Date Start';
 $_['entry_date_end']         = 'Date End';
@@ -102,10 +97,10 @@ $_['entry_text']             = 'Text';
 $_['entry_option']           = 'Option';
 $_['entry_option_value']     = 'Option Value';
 $_['entry_required']         = 'Required';
-$_['entry_status']           = 'Status';
+$_['entry_status']           = 'Status Jual';
 $_['entry_status_editor']    = 'Status Editor';
-$_['entry_status_author']    = 'Status Author';
-$_['entry_status_management']           = 'Status Management';
+$_['entry_status_author']    = 'Agreement Editing Book';
+$_['entry_status_management']= 'Status Management';
 $_['entry_sort_order']       = 'Sort Order';
 $_['entry_category']         = 'Categories';
 $_['entry_filter']           = 'Filters';
@@ -115,6 +110,8 @@ $_['entry_tag']          	 = 'Product Tags';
 $_['entry_reward']           = 'Reward Points';
 $_['entry_layout']           = 'Layout Override';
 $_['entry_recurring']        = 'Recurring Profile';
+$_['text_agreement']           = 'I have read and agree to the <a href="%s" class="agree"><b>%s</b></a>';
+
 
 // Help
 $_['help_keyword']           = 'Do not use spaces, instead replace spaces with - and make sure the keyword is globally unique.';
@@ -140,4 +137,14 @@ $_['error_permission']       = 'Warning: You do not have permission to modify pr
 $_['error_name']             = 'Product Name must be greater than 3 and less than 255 characters!';
 $_['error_meta_title']       = 'Meta Title must be greater than 3 and less than 255 characters!';
 $_['error_model']            = 'Product Model must be greater than 1 and less than 64 characters!';
+$_['error_author']           = 'Please Input Author!';
 $_['error_keyword']          = 'SEO keyword already in use!';
+$_['error_price']          	 = 'Price must be more than 0!';
+$_['error_color_page']       = 'Color Page must be more than 0!';
+$_['error_bw_page']          = 'Black and White Page must be more than 0!';
+$_['error_image']            = 'Please Upload Your Cover';
+$_['error_book']             = 'Please Upload Your Book';
+$_['error_extension_image']  = 'Extenseion Cover Must be .jpg/jpeg/png ';
+$_['error_extension_book']   = 'Extenseion Book Must be .doc/docx ';
+$_['error_sample_script']	 = 'Please upload!';
+$_['error_agree']			 = 'You must agree to the Privacy Policy!';

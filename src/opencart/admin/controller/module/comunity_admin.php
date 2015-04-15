@@ -56,7 +56,7 @@ class ControllerModuleComunityAdmin extends Controller {
         $this->load->model('design/comunity_admin');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
+            $this->model_design_comunity->editCounity($this->request->get['comunity_id'], $this->request->post);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -94,7 +94,7 @@ class ControllerModuleComunityAdmin extends Controller {
                 $url .= '&page=' . $this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('catalog/product', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('module/comunity_id', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
 
         $this->getForm();

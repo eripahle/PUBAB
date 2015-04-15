@@ -318,7 +318,7 @@ class ControllerCommonMybooks extends Controller {
 		);
 
 		$this->load->model('tool/image');
-        $customer_id=$this->customer->getId();
+                $customer_id=$this->customer->getId();
 		$product_total = $this->model_catalog_productbooks->getTotalProducts($filter_data,$customer_id);
 
 		$results = $this->model_catalog_productbooks->getProducts($filter_data,$customer_id);
