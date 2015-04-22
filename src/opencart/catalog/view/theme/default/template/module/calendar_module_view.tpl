@@ -11,8 +11,7 @@
         <script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script> -->       
         
     </head>
-    <body id="responsiveDemo">	        
-        <h3><?php echo $heading_title; ?></h3>
+    <body id="responsiveDemo">	                
         <hr />
         <div class="container">		
             <div class="row">

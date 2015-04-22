@@ -50,8 +50,8 @@
                                    
                   <td class="text-left"><?php echo $payment['status']; ?></td>
                   <td class="text-right">
-                    <a href="<?php echo $payment['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                    <a href="<?php echo "book/".$payment['download']; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_download; ?>" class="btn btn-primary"><i class="fa fa-download"></i></a>
+                    <a href="<?php echo $payment['delete']; ?>" data-toggle="tooltip" title="<?php echo $button_delete; ?>" class="btn btn-primary"><i class="fa fa-recycle"></i></a>
+                    <a href="<?php echo $payment['download']; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_download; ?>" class="btn btn-primary"><i class="fa fa-download"></i></a>
                   </td>
                 </tr>
                 <?php } ?>

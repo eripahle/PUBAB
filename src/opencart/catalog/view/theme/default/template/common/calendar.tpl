@@ -1,5 +1,11 @@
 <?php echo $header; ?>
 <div class="container">
+    <ul class="breadcrumb">
+    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+    <?php } ?>    
+  </ul>
+    <h3>Calendar Event Detail</h3>
     <div class="row">
         <?php echo $column_left; ?>
         <?php if ($column_left && $column_right) { ?>

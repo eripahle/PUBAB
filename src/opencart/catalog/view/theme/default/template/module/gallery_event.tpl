@@ -189,7 +189,7 @@
                 });
 
 
-            });            
+            });
         </script>
 
         <style type="text/css">
@@ -204,7 +204,14 @@
         </style>
     </head>
     <body>
-        <h1><a href="index.html">Gallery Event in PUBAPP - 2015</a></h1>                                
+        <ul class="breadcrumb">
+            <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+            <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            <?php } ?>
+        </ul>
+
+        <h3>Gallery Event in PUBAPP</h3>                                
+        <br>
         <div id="thumbs" class="navigation">
             <ul class="thumbs noscript">                    
                 <?php foreach ($gallerys as $gallerysingle) { ?>    
@@ -220,6 +227,6 @@
                 </div>        
                 <?php } ?>                   
             </ul>
-            </div>
+        </div>
     </body>    
 </html>

@@ -25,6 +25,12 @@
 </style>
 
 <body>    
+    <ul class="breadcrumb">
+    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+    <?php } ?>
+  </ul>
+    <br>
     <div id="list">
         <?php foreach ($testimonys as $testimony) { ?>		
         <p>
@@ -40,6 +46,9 @@
     <hr>
     <?php } ?>
     
-     <div id=paging align=left><?php echo $linkHalaman?></div> 
+     <div class="row">
+          <div class="col-sm-6 text-left"><?php echo $pagination; ?></div>
+          <div class="col-sm-6 text-right"><?php echo $results; ?></div>
+        </div>
     </div>
 </body>

@@ -1,4 +1,3 @@
-<h3><?php echo $heading_title; ?></h3>
 <style type="text/css">
     .float_l{float:left;}
     .float_r{float: right;}
@@ -24,6 +23,12 @@
 </style>
 
 <body>    
+    <ul class="breadcrumb">
+    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
+    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+    <?php } ?>
+    </ul>
+    <h3><?php echo $heading_title; ?></h3><br>
     <div id="list">
         <?php foreach ($comunitys as $comunity) { ?>		
         <p>
@@ -40,6 +45,9 @@
     <hr>
     <?php } ?>
     
-     <div id=paging align=left><?php echo $linkHalaman?></div> 
+     <div class="row">
+          <div class="col-sm-6 text-left"><?php echo $pagination; ?></div>
+          <div class="col-sm-6 text-right"><?php echo $results; ?></div>
+        </div>
     </div>
 </body>

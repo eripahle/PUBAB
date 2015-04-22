@@ -2,11 +2,8 @@
 
 class ModelModuleComunity extends Model {    
     private $batas;
-    public function getAllComunity($p) {           
-        $this->batas = 10;
-	$posisi = $p->cariPosisi($this->batas);	
-	
-        $sql = "SELECT * FROM " . DB_PREFIX . "comunity limit $posisi,$this->batas";
+    public function getAllComunity($p,$q) {                   	
+        $sql = "SELECT * FROM " . DB_PREFIX . "comunity limit $p,$q";
         $query = $this->db->query($sql);
         $testimonys = $query->rows;
         return $testimonys;
@@ -23,10 +20,5 @@ class ModelModuleComunity extends Model {
         $sql = "SELECT * FROM " . DB_PREFIX . "comunity";
         $query = $this->db->query($sql);        
         return $query->num_rows;
-    }
-    public function getJmlHalaman($p,$jmldata){
-        $query = $p->jumlahHalaman($jmldata, $this->batas);
-        return $query;
-    }
-    
+    }        
 }
