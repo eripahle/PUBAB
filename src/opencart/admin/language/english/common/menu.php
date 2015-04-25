@@ -102,4 +102,5 @@ $_['text_comunity']                    = 'Comunity managment';
 $_['text_gallery']                     = 'Gallery event managment';
 $_['text_calendar']                   = 'Calendar event managment';
 $_['text_editor']                   = 'Editor managment';
+$_['text_payment_approvement']                   = 'Payment Approvement';
 

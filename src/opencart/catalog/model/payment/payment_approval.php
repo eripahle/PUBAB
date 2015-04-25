@@ -807,12 +807,14 @@ class ModelPaymentPaymentApproval extends Model {
         $this->db->query("INSERT INTO " . DB_PREFIX . "payment SET customer_id = '" . $customer_id . "', 
 		    					image = '" . $this->db->escape($data2['lokasi_image_di_database']) . "', 
 		    					invoice = '" . $this->db->escape($data['invoice']) . "',
+                                                        status = 'Pending',    
 		    					date = '2015-06-01'
 		    					");
     }
 
     public function getPayments($filter_data, $customer_id) {
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "payment WHERE customer_id = '" . (int) $customer_id . "'");
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "payment WHERE customer_id = '" . (int) $customer_id . "'");        
+            
         return $query->rows;
     }
 

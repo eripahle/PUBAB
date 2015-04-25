@@ -110,6 +110,7 @@ class ControllerCommonMenu extends Controller {
                 $data['text_calendar'] = $this->language->get('text_calendar');
                 $data['text_managment'] = $this->language->get('text_managment');
                 $data['text_editor'] = $this->language->get('text_editor');
+                $data['text_payment_approvement'] = $this->language->get('text_payment_approvement');
 
 		$data['home'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL');
 		$data['affiliate'] = $this->url->link('marketing/affiliate', 'token=' . $this->session->data['token'], 'SSL');
@@ -155,6 +156,7 @@ class ControllerCommonMenu extends Controller {
                 $data['comunity'] = $this->url->link('module/comunity_admin', 'token=' . $this->session->data['token'], 'SSL');
                 $data['gallery'] = $this->url->link('module/gallery', 'token=' . $this->session->data['token'], 'SSL');
                 $data['calendar'] = $this->url->link('module/calendar_admin', 'token=' . $this->session->data['token'], 'SSL');
+                $data['payment_approvement_admin'] = $this->url->link('module/payment_approvement_admin', 'token=' . $this->session->data['token'], 'SSL');
                 
                 
 		$data['report_sale_order'] = $this->url->link('report/sale_order', 'token=' . $this->session->data['token'], 'SSL');
