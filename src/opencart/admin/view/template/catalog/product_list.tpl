@@ -103,22 +103,22 @@
                     <a href="<?php echo $sort_quantity; ?>"><?php echo $column_quantity; ?></a>
                     <?php } ?>
                   </td>
-                  <td class="text-left"><?php if ($sort == 'p.status') { ?>
-                    <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status_author; ?></a>
+                  <td class="text-left"><?php if ($sort == 'p.status_author') { ?>
+                    <a href="<?php echo $sort_status_author; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status_author; ?></a>
                     <?php } else { ?>
-                    <a href="<?php echo $sort_status; ?>"><?php echo $column_status_author; ?></a>
+                    <a href="<?php echo $sort_status_author; ?>"><?php echo $column_status_author; ?></a>
                     <?php } ?>
                   </td>
-                  <td class="text-left"><?php if ($sort == 'p.status') { ?>
-                    <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status_editor; ?></a>
+                  <td class="text-left"><?php if ($sort == 'p.status_editor') { ?>
+                    <a href="<?php echo $sort_status_editor; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status_editor; ?></a>
                     <?php } else { ?>
-                    <a href="<?php echo $sort_status; ?>"><?php echo $column_status_editor; ?></a>
+                    <a href="<?php echo $sort_status_editor; ?>"><?php echo $column_status_editor; ?></a>
                     <?php } ?>
                   </td>
-                  <td class="text-left"><?php if ($sort == 'p.status') { ?>
-                    <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status_management; ?></a>
+                  <td class="text-left"><?php if ($sort == 'p.status_management') { ?>
+                    <a href="<?php echo $sort_status_management; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status_management; ?></a>
                     <?php } else { ?>
-                    <a href="<?php echo $sort_status; ?>"><?php echo $column_status_management; ?></a>
+                    <a href="<?php echo $sort_status_management; ?>"><?php echo $column_status_management; ?></a>
                     <?php } ?>
                   </td>
                   <td class="text-left"><?php if ($sort == 'p.status') { ?>

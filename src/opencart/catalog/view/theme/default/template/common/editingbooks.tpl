@@ -171,7 +171,7 @@
   </div>
   <script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
-  var url = 'index.php?route=common/mybooks';
+  var url = 'index.php?route=common/mybooks/getEditingList';
 
   var filter_name = $('input[name=\'filter_name\']').val();
 

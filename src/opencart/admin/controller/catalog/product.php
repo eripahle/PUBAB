@@ -502,6 +502,10 @@ class ControllerCatalogProduct extends Controller {
 		$data['sort_price'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.price' . $url, 'SSL');
 		$data['sort_quantity'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.quantity' . $url, 'SSL');
 		$data['sort_status'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.status' . $url, 'SSL');
+		$data['sort_status_author'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.status1' . $url, 'SSL');
+		$data['sort_status_editor'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.status2' . $url, 'SSL');
+		$data['sort_status_management'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.status3' . $url, 'SSL');
+		
 		$data['sort_order'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.sort_order' . $url, 'SSL');
 
 		$url = '';

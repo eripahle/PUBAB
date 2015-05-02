@@ -29,6 +29,10 @@ class ModelCatalogProductbooks extends Model {
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
 			$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
 		}
+
+		if (isset($data['filter_tahun']) && !is_null($data['filter_tahun'])) {
+			$sql .= " AND YEAR(p.date_added) ='".(int)$data['filter_tahun']."'";
+		}
 		
 		$sql .= " GROUP BY p.product_id";
 
@@ -38,6 +42,10 @@ class ModelCatalogProductbooks extends Model {
 			'p.price',
 			'p.quantity',
 			'p.status',
+			'p.status1',
+			'p.status2',
+			'p.status3',
+			'p.date_added',
 			'p.sort_order'
 		);
 
@@ -92,7 +100,13 @@ class ModelCatalogProductbooks extends Model {
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
 			$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
 		}
-		
+		if (isset($data['filter_tahun']) && !is_null($data['filter_tahun'])) {
+			$sql .= "AND YEAR(p.date_added) = '".(int)$data['filter_tahun'] ."'";
+		}
+
+		if (isset($data['filter_bulan']) && !is_null($data['filter_bulan'])) {
+			$sql .= "AND MONTH(p.date_added) = '".(int)$data['filter_bulan'] ."'";
+		}
 		$sql .= " GROUP BY p.product_id";
 
 		$sort_data = array(
@@ -101,6 +115,10 @@ class ModelCatalogProductbooks extends Model {
 			'p.price',
 			'p.quantity',
 			'p.status',
+			'p.status1',
+			'p.status2',
+			'p.status3',
+			'p.date_added',
 			'p.sort_order'
 		);
 
@@ -353,6 +371,14 @@ class ModelCatalogProductbooks extends Model {
 			$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
 		}
 
+		if (isset($data['filter_tahun']) && !is_null($data['filter_tahun'])) {
+			$sql .= "AND YEAR(p.date_added) = '".(int)$data['filter_tahun'] ."'";
+		}
+
+		if (isset($data['filter_bulan']) && !is_null($data['filter_bulan'])) {
+			$sql .= "AND MONTH(p.date_added) = '".(int)$data['filter_bulan'] ."'";
+		}
+
 		$query = $this->db->query($sql);
 
 		return $query->row['total'];
@@ -381,6 +407,13 @@ class ModelCatalogProductbooks extends Model {
 
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
 			$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
+		}
+		if (isset($data['filter_tahun']) && !is_null($data['filter_tahun'])) {
+			$sql .= "AND YEAR(p.date_added) = '".(int)$data['filter_tahun'] ."'";
+		}
+
+		if (isset($data['filter_bulan']) && !is_null($data['filter_bulan'])) {
+			$sql .= "AND MONTH(p.date_added) = '".(int)$data['filter_bulan'] ."'";
 		}
 
 		$query = $this->db->query($sql);
@@ -482,5 +515,9 @@ class ModelCatalogProductbooks extends Model {
 		}
 		//return $book;
 		//return $query->rows;
+	}
+
+	public function getYear(){
+		return $this->db->query("SELECT distinct YEAR(date_added) AS tahun FROM " . DB_PREFIX . "product GROUP BY date_added ")->rows;
 	}
 }

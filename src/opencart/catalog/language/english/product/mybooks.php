@@ -1,5 +1,6 @@
 <?php
 $_['heading_title']          = 'My Books';
+$_['heading_title_list_edit']          = 'List My Editing';
 
 // Text
 $_['text_success']           = 'Success: You have modified products!';
@@ -22,6 +23,7 @@ $_['text_no_results']		 = 'You do not have a book';
 // Column
 $_['column_name']            = 'Title';
 $_['column_total_selling']   = 'Total Selling';
+$_['column_your_royalty']    = 'Your Royalty';
 $_['column_model']           = 'Model';
 $_['column_image']           = 'Cover';
 $_['column_price']           = 'Price';
@@ -37,6 +39,7 @@ $_['text_none']				 = 'None';
 $_['entry_paper_size']       = 'Size';
 $_['entry_paper_type']       = 'Paper Type';
 $_['entry_book']       		 = 'Full Script';
+$_['entry_tahun']       	 = 'Year';
 $_['entry_sample_book']      = 'Sample Script';
 $_['entry_color_page']       = 'Color Page';
 $_['entry_bw_page']       	 = 'Black & White Page';
@@ -65,7 +68,7 @@ $_['entry_stock_status']     = 'Out Of Stock Status';
 $_['entry_price']            = 'Selling Price';
 $_['entry_price_request']    = 'Request Price';
 $_['entry_price_royalty']    = 'Your Royalty';
-$_['entry_best_price']       = 'Best Price';
+$_['entry_best_price']       = 'Cost Production';
 $_['entry_pub_price'] 		 = 'PUB Share';
 $_['entry_tax_class']        = 'Tax Class';
 $_['entry_points']           = 'Points';
@@ -137,6 +140,7 @@ $_['error_price']          	 = 'Price must be more than 0!';
 $_['error_color_page']       = 'Color Page must be more than 0!';
 $_['error_bw_page']          = 'Black and White Page must be more than 0!';
 $_['error_image']            = 'Please Upload Your Cover';
+$_['error_design_cover']     = 'Please Upload Your Design Cover';
 $_['error_book']             = 'Please Upload Your Book';
 $_['error_extension_image']  = 'Extenseion Cover Must be .jpg/jpeg/png ';
 $_['error_extension_book']   = 'Extenseion Book Must be .doc/docx ';

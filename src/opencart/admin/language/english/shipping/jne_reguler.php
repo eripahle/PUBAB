@@ -3,6 +3,7 @@
 $_['heading_title']    = 'JNE REG';
 
 // Text
+$_['text_edit']		   = 'Edit Data JNE Reguler';
 $_['text_shipping']    = 'Shipping';
 $_['text_success']     = 'Success: You have modified JNE REG shipping!';
 

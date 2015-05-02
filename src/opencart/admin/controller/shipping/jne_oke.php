@@ -33,7 +33,7 @@ class ControllerShippingJNEOke extends Controller {
 		$data['button_cancel'] = $this->language->get('button_cancel');
 
 		$data['tab_general'] = $this->language->get('tab_general');
-
+		$data['text_edit']=$this->language->get('text_edit');
  		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
@@ -44,7 +44,7 @@ class ControllerShippingJNEOke extends Controller {
 
    		$data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => false
    		);
 
@@ -104,6 +104,8 @@ class ControllerShippingJNEOke extends Controller {
 		
 		$this->load->model('localisation/tax_class');
 				
+		$data['tax_classes'] = $this->model_localisation_tax_class->getTaxClasses();
+
 		$data['tax_classes'] = $this->model_localisation_tax_class->getTaxClasses();
 
 		$data['header'] = $this->load->controller('common/header');
