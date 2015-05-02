@@ -1,13 +1,13 @@
 <?php
 
-class ControllerModulePaymentApprovementAdmin extends Controller {
+class ControllerModuleEditorManagmentAdmin extends Controller {
 
     private $error = array();
 
     public function index() {
-        $this->load->language('module/payment_approvement_admin');
+        $this->load->language('module/editor_managment_admin');
 
-        $this->load->model('design/payment_approvement_admin');
+        $this->load->model('design/editor_managment_admin');
 
         $this->getList();
     }
@@ -33,30 +33,30 @@ class ControllerModulePaymentApprovementAdmin extends Controller {
     }
 
     public function add() {
-        $this->load->language('module/comunity_admin');
+        $this->load->language('module/editor_managment_admin');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('design/comunity_admin');
+        $this->load->model('design/editor_managment_admin');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST')) {// && $this->validateForm()) {
-            $this->model_design_comunity_admin->addComunity($this->request->post,$this->request->files);
+            $this->model_design_editor_managment_admin->addEditor($this->request->post,$this->request->files);
             $this->session->data['success'] = $this->language->get('text_success');
             $url = '';
-            $this->response->redirect($this->url->link('module/comunity_admin', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('module/editor_managment_admin', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
         $this->getForm();
     }
 
     public function edit() {
-        $this->load->language('module/payment_approvement_admin');
+        $this->load->language('module/editor_managment_admin');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('design/payment_approvement_admin');
+        $this->load->model('design/editor_managment_admin');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
-            $this->model_design_payment_approvement_admin->editPayment($this->request->get['payment_id'], $this->request->post);
+            $this->model_design_payment_approvement_admin->editEditor($this->request->get['editor_id'], $this->request->post);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -94,29 +94,29 @@ class ControllerModulePaymentApprovementAdmin extends Controller {
                 $url .= '&page=' . $this->request->get['page'];
             }
 
-            $this->response->redirect($this->url->link('module/payment_approvement_admin', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('module/editor_managment_id', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
 
         $this->getForm();
     }
 
     public function delete() {
-        $this->load->language('module/payment_approvement_admin');
+        $this->load->language('module/editor_managment_admin');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('design/payment_approvement_admin');
+        $this->load->model('design/editor_managment_admin');
 
         if (isset($this->request->post['selected'])) { //&& $this->validateDelete()) {
-            foreach ($this->request->post['selected'] as $calendar_event_id) {
-                $this->model_design_payment_approvement_admin->deletePayment($calendar_event_id);
+            foreach ($this->request->post['selected'] as $editor_id) {
+                $this->model_design_editor_managment_admin->deleteEditor($editor_id);
             }
 
             $this->session->data['success'] = $this->language->get('text_success');
 
             $url = '';
 
-            $this->response->redirect($this->url->link('module/payment_approvement_admin', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('module/editor_managment_admin', 'token=' . $this->session->data['token'] . $url, 'SSL'));
         }
 
         $this->getList();
@@ -127,10 +127,14 @@ class ControllerModulePaymentApprovementAdmin extends Controller {
         $data['heading_title_sub'] = $this->language->get('heading_title_sub');                
         $data['entry_image'] = $this->language->get('entry_image');
         $data['entry_status'] = $this->language->get('entry_status');
-        $data['entry_date'] = $this->language->get('entry_date');
-        $data['entry_invoice'] = $this->language->get('entry_invoice');
+        $data['entry_editor_id'] = $this->language->get('entry_editor_id');
+        $data['entry_editor_name'] = $this->language->get('entry_editor_name');
         $data['entry_customer_id'] = $this->language->get('entry_customer_id');
-        $data['entry_customer_name'] = $this->language->get('entry_customer_name');
+        $data['entry_firstname'] = $this->language->get('entry_firstname');
+        $data['entry_lastname'] = $this->language->get('entry_lastname');
+        $data['entry_email'] = $this->language->get('entry_email');
+        $data['entry_info'] = $this->language->get('entry_info');
+        $data['entry_telepon'] = $this->language->get('entry_telepon');
         
         if (isset($this->request->get['page'])) {
             $page = $this->request->get['page'];
@@ -153,11 +157,11 @@ class ControllerModulePaymentApprovementAdmin extends Controller {
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('module/payment_approvement_admin', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('module/editor_managment_admin', 'token=' . $this->session->data['token'] . $url, 'SSL')
         );
 
-        $data['add'] = $this->url->link('module/payment_approvement_admin/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
-        $data['delete'] = $this->url->link('module/payment_approvement_admin/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $data['add'] = $this->url->link('module/editor_managment_admin/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $data['delete'] = $this->url->link('module/editor_managment_admin/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
         $data['products'] = array();
 
@@ -168,15 +172,7 @@ class ControllerModulePaymentApprovementAdmin extends Controller {
         $data['text_no_results'] = $this->language->get('text_no_results');
         $data['text_confirm'] = $this->language->get('text_confirm');
 
-        $data['column_image'] = $this->language->get('column_image');
-        $data['column_name'] = $this->language->get('column_name');
-        $data['column_model'] = $this->language->get('column_model');
-        $data['column_price'] = $this->language->get('column_price');
-        $data['column_quantity'] = $this->language->get('column_quantity');
         $data['column_status'] = $this->language->get('column_status');
-        $data['column_status_author'] = $this->language->get('column_status_author');
-        $data['column_status_management'] = $this->language->get('column_status_management');
-        $data['column_status_editor'] = $this->language->get('column_status_editor');
         $data['column_action'] = $this->language->get('column_action');
 
         $data['entry_name'] = $this->language->get('entry_name');
@@ -190,23 +186,24 @@ class ControllerModulePaymentApprovementAdmin extends Controller {
 
         $data['token'] = $this->session->data['token'];
 
-        $results = $this->model_design_payment_approvement_admin->getPayments();
+        $results = $this->model_design_editor_managment_admin->getEditors();
         if ($results != null) {
             foreach ($results as $result) {
-                $data['payments'][] = array(
-                    'payment_id' => $result['payment_id'],
-                    'image' => $result['image'],
+                $data['editors'][] = array(
+                    'editor_id' => $result['editor_id'],
                     'customer_id' => $result['customer_id'],
-                    'customer_name' => $result['firstname'],                    
-                    'date' => $result['date'],
-                    'status' => $result['status'],
-                    'invoice' => $result['invoice'],
+                    'info' => $result['info'],
                     
-                    'edit' => $this->url->link('module/payment_approvement_admin/edit', 'token=' . $this->session->data['token'] . '&payment_id=' . $result['payment_id'] . $url, 'SSL')
+                    'nama' => $result['firstname'].' '.$result['lastname'],                    
+                    'image' => $result['image'],
+                    'email' => $result['email'],
+                    'telephone' => $result['telephone'],
+                    
+                    'edit' => $this->url->link('module/editor_managment_admin/edit', 'token=' . $this->session->data['token'] . '&editor_id=' . $result['editor_id'] . $url, 'SSL')
                 );
             }
         } else {
-            $data['payments'][] = null;
+            $data['editors'][] = null;
         }
 
         if (isset($this->error['warning'])) {
@@ -241,7 +238,7 @@ class ControllerModulePaymentApprovementAdmin extends Controller {
 
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('module/payment_approvement_admin', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
+        $pagination->url = $this->url->link('module/editor_managment_admin', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
 
         $data['pagination'] = $pagination->render();
 
@@ -249,24 +246,25 @@ class ControllerModulePaymentApprovementAdmin extends Controller {
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('module/payment_approvement_admin_list.tpl', $data));
+        $this->response->setOutput($this->load->view('module/editor_managment_admin_list.tpl', $data));
     }
 
     protected function getForm() {                
+        
+        $this->load->model('user/editor');
+        
         $this->document->setTitle($this->language->get('heading_title'));
-        $data['heading_title_sub'] = $this->language->get('heading_title_sub');
         $data['heading_title_sub'] = $this->language->get('heading_title_sub');                
         $data['entry_image'] = $this->language->get('entry_image');
         $data['entry_status'] = $this->language->get('entry_status');
-        $data['entry_date'] = $this->language->get('entry_date');
-        $data['entry_invoice'] = $this->language->get('entry_invoice');
+        $data['entry_editor_id'] = $this->language->get('entry_editor_id');
+        $data['entry_editor_name'] = $this->language->get('entry_editor_name');
         $data['entry_customer_id'] = $this->language->get('entry_customer_id');
-        $data['entry_customer_name'] = $this->language->get('entry_customer_name');
-        
-        $data['entry_name'] = $this->language->get('entry_name');
-        $data['entry_description'] = $this->language->get('entry_description');
-        $data['entry_image'] = $this->language->get('entry_image');
-        $data['entry_link'] = $this->language->get('entry_link');
+        $data['entry_firstname'] = $this->language->get('entry_firstname');
+        $data['entry_lastname'] = $this->language->get('entry_lastname');
+        $data['entry_email'] = $this->language->get('entry_email');
+        $data['entry_info'] = $this->language->get('entry_info');
+        $data['entry_telepon'] = $this->language->get('entry_telepon');
 
         $data['help_title'] = $this->language->get('help_title');
         $data['help_desc'] = $this->language->get('help_des');
@@ -281,10 +279,8 @@ class ControllerModulePaymentApprovementAdmin extends Controller {
 
         $data['image'] = $this->request->files;
                 
-        if (isset($this->request->get['payment_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {            
-                $this->load->model('design/payment_approvement_admin');
-		$payment_info = $this->model_design_payment_approvement_admin->getPayment($this->request->get['payment_id']);                
-	}
+        
+        $data['editors']=$this->model_user_editor->getEditorUnInsertedInfo();
         
         if (isset($this->error['warning'])) {
             $data['error_warning'] = $this->error['warning'];
@@ -325,60 +321,21 @@ class ControllerModulePaymentApprovementAdmin extends Controller {
         if (!isset($this->request->get['module_id'])) {
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('heading_title'),
-                'href' => $this->url->link('module/payment_approvement_admin', 'token=' . $this->session->data['token'], 'SSL')
+                'href' => $this->url->link('module/editor_managment_admin', 'token=' . $this->session->data['token'], 'SSL')
             );
         } else {
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('heading_title'),
-                'href' => $this->url->link('module/payment_approvement_admin', 'token=' . $this->session->data['token'] . '&module_id=' . $this->request->get['module_id'], 'SSL')
+                'href' => $this->url->link('module/editor_managment_admin', 'token=' . $this->session->data['token'] . '&module_id=' . $this->request->get['module_id'], 'SSL')
             );
         }
-
-        if (isset($this->request->post['payment_id'])) {
-            $data['payment_id'] = $this->request->post['payment_id'];
-        } else if (!empty($payment_info)) {
-            $data['payment_id'] = $payment_info[0]['payment_id'];
-        } else {
-            $data['payment_id'] = '';
-        }
-        
-        if (isset($this->request->post['customer_id'])) {
-            $data['customer_id'] = $this->request->post['customer_id'];
-        } else if (!empty($payment_info)) {
-            $data['customer_id'] = $payment_info[0]['customer_id'];
-        } else {
-            $data['customer_id'] = '';
-        }
-                
-        if (isset($this->request->post['customer_name'])) {
-            $data['customer_name'] = $this->request->post['customer_name'];
-        } else if (!empty($payment_info)) {
-            $data['customer_name'] = $payment_info[0]['firstname'];
-        } else {
-            $data['customer_name'] = '';
-        }
-
-        if (isset($this->request->post['invoice'])) {
-            $data['invoice'] = $this->request->post['invoice'];
-        } elseif (!empty($payment_info)) {
-            $data['invoice'] = $payment_info[0]['invoice'];
-        } else {
-            $data['invoice'] = '';
-        }
-        
-        if (isset($this->request->post['status'])) {
-            $data['status'] = $this->request->post['status'];
-        } elseif (!empty($payment_info)) {
-            $data['status'] = $payment_info[0]['status'];
-        } else {
-            $data['status'] = '';
-        }
+       
 
         $url = '';
-        if (!isset($this->request->get['payment_id'])) {
-            $data['save'] = $this->url->link('module/payment_approvement_admin/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        if (!isset($this->request->get['editor_id'])) {
+            $data['save'] = $this->url->link('module/editor_managment_admin/add', 'token=' . $this->session->data['token'] . $url, 'SSL');
         } else {
-            $data['save'] = $this->url->link('module/payment_approvement_admin/edit', 'token=' . $this->session->data['token'] . '&payment_id=' . $this->request->get['payment_id'] . $url, 'SSL');
+            $data['save'] = $this->url->link('module/editor_managment_admin/edit', 'token=' . $this->session->data['token'] . '&payment_id=' . $this->request->get['payment_id'] . $url, 'SSL');
         }
 
 
@@ -387,7 +344,7 @@ class ControllerModulePaymentApprovementAdmin extends Controller {
         $data['footer'] = $this->load->controller('common/footer');
 
 
-        $this->response->setOutput($this->load->view('module/payment_approvement_admin_form.tpl', $data));
+        $this->response->setOutput($this->load->view('module/editor_managment_admin_form.tpl', $data));
     }
 
     protected function validateForm() {

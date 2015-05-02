@@ -9,7 +9,7 @@ class ControllerModuleTestimoeditor extends Controller {
                 $data['viewAlleditor'] = $this->url->link('common/abouteditor', '', 'SSL');
                 
                 $data['testimonys']= $this->model_module_testimony->getLatestTestimony();
-                $data['abouteditors']= $this->model_module_abouteditor->getLatestTestimony();
+                $data['abouteditors']= $this->model_module_abouteditor->getLatestEditor();
                 
                 //$data['viewAll'] = $this->url->link('common/testimony', '', 'SSL');
                 

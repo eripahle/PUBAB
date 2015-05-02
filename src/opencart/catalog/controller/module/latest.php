@@ -61,7 +61,7 @@ class ControllerModuleLatest extends Controller {
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
-					'name'        => $result['name'],
+					'name'        => utf8_substr(strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8')), 0, 18) . '..',
 					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 30) . '..',
 					'price'       => $price,
 					'special'     => $special,

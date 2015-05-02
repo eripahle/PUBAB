@@ -3,7 +3,8 @@
 <div id="content">
     <div class="page-header">
         <div class="container-fluid">
-            <div class="pull-right">                
+            <div class="pull-right">
+                <a href="<?php echo $add; ?>" data-toggle="tooltip" title="<?php echo $button_add; ?>" class="btn btn-primary"><i class="fa fa-plus"></i></a>                
                 <button type="button" data-toggle="tooltip" title="<?php echo $button_delete; ?>" class="btn btn-danger" onclick="confirm('<?php echo $text_confirm; ?>') ? $('#form-product').submit() : false;"><i class="fa fa-trash-o"></i></button>
             </div>
             <h1><?php echo $heading_title; ?></h1>
@@ -38,41 +39,44 @@
                                     <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>                                    
                                     <td class="text-left">
                                         <?php echo $entry_customer_id; ?>
-                                        </td>                 
+                                    </td>                 
                                     <td class="text-left">
-                                        <?php echo $entry_customer_name; ?>
-                                        </td>                 
+                                        <?php echo $entry_editor_id; ?>
+                                    </td>             
+                                    <td class="text-left">
+                                        <?php echo $entry_editor_name; ?>
+                                    </td>                 
                                     <td class="text-left">
                                         <?php echo $entry_image; ?>
-                                        </td>                                    
+                                    </td>                                    
                                     <td class="text-left">                                                                                
-                                        <?php echo $entry_invoice; ?>
-                                        </td>                   
+                                        <?php echo $entry_info; ?>
+                                    </td>                   
                                     <td class="text-left">                                                                                
-                                        <?php echo $entry_date; ?>
-                                        </td>                                    
+                                        <?php echo $entry_email; ?>
+                                    </td>                                    
                                     <td class="text-left">                                        
-                                        <?php echo $entry_status; ?>
-                                        </td>
-                                    <td class="text-right"><?php echo $column_action; ?></td>
+                                        <?php echo $entry_telepon; ?>
+                                    </td>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if ($payments) { ?>
-                                <?php foreach ($payments as $payment) { ?>
+                                <?php if ($editors) { ?>
+                                <?php foreach ($editors as $editor) { ?>
                                 <tr>
-                                    <td class="text-center"><?php if (in_array($payment['payment_id'], $selected)) { ?>
-                                        <input type="checkbox" name="selected[]" value="<?php echo $payment['payment_id']; ?>" checked="checked" />
+                                    <td class="text-center"><?php if (in_array($editor['editor_id'], $selected)) { ?>
+                                        <input type="checkbox" name="selected[]" value="<?php echo $editor['editor_id']; ?>" checked="checked" />
                                         <?php } else { ?>
-                                        <input type="checkbox" name="selected[]" value="<?php echo $payment['payment_id']; ?>" />
+                                        <input type="checkbox" name="selected[]" value="<?php echo $editor['editor_id']; ?>" />
                                         <?php } ?></td>                                    
-                                    <td class="text-left"><?php echo $payment['customer_id']; ?></td>                                                                                                           
-                                    <td class="text-left"><?php echo $payment['customer_name']; ?></td>
-                                    <td class="text-left"><img src="../<?php echo $payment['image']?>" width="70"></td>
-                                    <td class="text-left"><?php echo $payment['invoice']; ?></td>                                    
-                                    <td class="text-left"><?php echo $payment['date']; ?></td>                                    
-                                    <td class="text-left"><?php echo $payment['status']; ?></td>                                        
-                                    <td class="text-right"><a href="<?php echo $payment['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                                    <td class="text-left"><?php echo $editor['customer_id']; ?></td>                                                                                                           
+                                    <td class="text-left"><?php echo $editor['editor_id']; ?></td>                                                                                                           
+                                    <td class="text-left"><?php echo $editor['nama']; ?></td>
+                                    <td class="text-left"><img src="../<?php echo $editor['image']?>" width="70"></td>
+                                    <td class="text-left"><?php echo $editor['info']; ?></td>                                    
+                                    <td class="text-left"><?php echo $editor['email']; ?></td>                                    
+                                    <td class="text-left"><?php echo $editor['telephone']; ?></td>                                                                                                                                                    
                                 </tr>
                                 <?php } ?>
                                 <?php } else { ?>

@@ -156,6 +156,7 @@ class ControllerCommonMenu extends Controller {
                 $data['comunity'] = $this->url->link('module/comunity_admin', 'token=' . $this->session->data['token'], 'SSL');
                 $data['gallery'] = $this->url->link('module/gallery', 'token=' . $this->session->data['token'], 'SSL');
                 $data['calendar'] = $this->url->link('module/calendar_admin', 'token=' . $this->session->data['token'], 'SSL');
+                $data['editor_managment_admin'] = $this->url->link('module/editor_managment_admin', 'token=' . $this->session->data['token'], 'SSL');
                 $data['payment_approvement_admin'] = $this->url->link('module/payment_approvement_admin', 'token=' . $this->session->data['token'], 'SSL');
                 
                 

@@ -59,36 +59,24 @@
                 </div>
             <td>                                
                 <div id="list">
-                    <p>
+                    <?php foreach ($abouteditors as $abouteditor) { ?>                                    
                     <table>
                         <tr>
                             <td>
                                 <div class="float_l">
-                                    <img src="image/gallery/event1.jpg" width="70px" />
+                                    <img src="<?php echo $abouteditor['image'];?>" width="70px" />
                                 </div>
                             <td>
                                 <div class="content">
-                                    <b>Name : Editor 1</b><br>
-                                    Desc : Percobaan testimony Lorem Ipsum Percobaan testimony Lorem Ipsum Percobaan testimony Lorem Ipsum Percobaan testimony Lorem Ipsum Percobaan testimony Lorem Ipsum Percobaan testimony Lorem Ipsum Percobaan testimony Lorem Ipsum <br>
+                                    <b>Name : <?php echo $abouteditor['firstname'].' '.$abouteditor['lastname'];?></b><br>
+                                    Desc : <?php echo $abouteditor['info']?><br>
                                 </div>      
                         <tr>
                     </table>
                     <div class="clear"></div>
                     </p>
+                    <?php } ?>
                     
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="float_l">
-                                    <img src="image/gallery/event1.jpg" width="70px" />
-                                </div>
-                            <td>
-                                <div class="content">
-                                    <b>Name : Editor 2</b><br>
-                                    Desc : Percobaan testimony Lorem Ipsum Percobaan testimony Lorem Ipsum Percobaan testimony Lorem Ipsum Percobaan testimony Lorem Ipsum Percobaan testimony Lorem Ipsum Percobaan testimony Lorem Ipsum Percobaan testimony Lorem Ipsum <br>
-                                </div>      
-                        <tr>
-                    </table>
                     <br>
                     <br>
                     <a href="<?php echo $viewAlleditor; ?>" >View All Editor Info</a>
