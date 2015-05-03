@@ -361,6 +361,10 @@ class ControllerCommonMybooks extends Controller {
 			$url .= '&filter_tahun=' . $this->request->get['filter_tahun'];
 		}
 
+		if (isset($this->request->get['filter_bulan'])) {
+			$url .= '&filter_bulan=' . $this->request->get['filter_bulan'];
+		}
+
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
 		}
@@ -398,6 +402,7 @@ class ControllerCommonMybooks extends Controller {
 			'filter_quantity' => $filter_quantity,
 			'filter_status'   => $filter_status,
 			'filter_tahun'    => $filter_tahun,
+			'filter_bulan'	  => $filter_bulan,
 			'sort'            => $sort,
 			'order'           => $order,
 			'start'           => ($page - 1) * $this->config->get('config_limit_admin'),
@@ -536,6 +541,14 @@ class ControllerCommonMybooks extends Controller {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
 
+		if (isset($this->request->get['filter_tahun'])) {
+			$url .= '&filter_tahun=' . $this->request->get['filter_tahun'];
+		}
+
+		if (isset($this->request->get['filter_bulan'])) {
+			$url .= '&filter_bulan=' . $this->request->get['filter_bulan'];
+		}
+
 		if ($order == 'ASC') {
 			$url .= '&order=DESC';
 		} else {
@@ -579,6 +592,14 @@ class ControllerCommonMybooks extends Controller {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
 
+		if (isset($this->request->get['filter_tahun'])) {
+			$url .= '&filter_tahun=' . $this->request->get['filter_tahun'];
+		}
+
+		if (isset($this->request->get['filter_bulan'])) {
+			$url .= '&filter_bulan=' . $this->request->get['filter_bulan'];
+		}
+
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
 		}
@@ -609,7 +630,7 @@ class ControllerCommonMybooks extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
-		$data['url_filter']='index.php?route=common/mybooks';
+		//$data['url_filter']='index.php?route=common/mybooks';
 
 		$this->response->setOutput($this->load->view('default/template/common/mybooks.tpl', $data));
 	}
@@ -890,6 +911,14 @@ class ControllerCommonMybooks extends Controller {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
 
+		if (isset($this->request->get['filter_tahun'])) {
+			$url .= '&filter_tahun=' . $this->request->get['filter_tahun'];
+		}
+
+		if (isset($this->request->get['filter_bulan'])) {
+			$url .= '&filter_bulan=' . $this->request->get['filter_bulan'];
+		}
+
 		if ($order == 'ASC') {
 			$url .= '&order=DESC';
 		} else {
@@ -932,6 +961,14 @@ class ControllerCommonMybooks extends Controller {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
 
+		if (isset($this->request->get['filter_tahun'])) {
+			$url .= '&filter_tahun=' . $this->request->get['filter_tahun'];
+		}
+
+		if (isset($this->request->get['filter_bulan'])) {
+			$url .= '&filter_bulan=' . $this->request->get['filter_bulan'];
+		}
+		
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
 		}

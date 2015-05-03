@@ -26,38 +26,84 @@
                 <label class="control-label" for="input-name"><?php echo $entry_name; ?></label>
                 <input type="text" name="filter_name" value="<?php echo $filter_name; ?>" placeholder="<?php echo $entry_name; ?>" id="input-name" class="form-control" />
               </div>
-              <div class="form-group">
-                <label class="control-label" for="input-year"><?php echo $entry_tahun; ?></label>
-                <select name="filter_tahun" id="input-category-class" class="form-control">
-                  <option value="*"></option>
-                  <?php foreach ($tahun as $tahuns) { ?>
-                  <?php if ($tahuns['tahun'] == $filter_tahun) { ?>
-                  <option value="<?php echo $tahuns['tahun']; ?>" selected="selected"><?php echo $tahuns['tahun']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $tahuns['tahun']; ?>"><?php echo $tahuns['tahun']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
-                </select>
-              </div>
-
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label class="control-label" for="input-year"><?php echo $entry_tahun; ?></label>
-                <select name="filter_tahun" id="input-category-class" class="form-control">
-                  <option value="*"></option>
-                  <?php foreach ($tahun as $tahuns) { ?>
-                  <?php if ($tahuns['tahun'] == $filter_tahun) { ?>
-                  <option value="<?php echo $tahuns['tahun']; ?>" selected="selected"><?php echo $tahuns['tahun']; ?></option>
-                  <?php } else { ?>
-                  <option value="<?php echo $tahuns['tahun']; ?>"><?php echo $tahuns['tahun']; ?></option>
-                  <?php } ?>
-                  <?php } ?>
-                </select>
-              </div>
               
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="control-label" for="input-year"><?php echo $entry_tahun; ?></label>
+                <select name="filter_tahun" id="input-category-class" class="form-control">
+                  <option value="*"></option>
+                  <?php $i=2015; for ($i;$i<=2030;$i++) { ?>
+                  <?php if ($i == $filter_tahun) { ?>
+                  <option value="<?php echo $i; ?>" selected="selected"><?php echo $i; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="control-label" for="input-month"><?php echo $entry_bulan; ?></label>
+                <select name="filter_bulan" id="input-category-class" class="form-control">
+                  <option value="*"></option>
+                  
+                  <?php if ($filter_bulan === '01') { ?>
+                  <option value="01" selected="selected">January</option>
+                  <?php } else { ?>
+                    <option value="01" >January</option>
+                  <?php } ?>
+                  <?php if("02"== $filter_bulan) { ?>
+                  <option value="02" selected="selected">February</option>
+                  <?php } else { ?>
+                  <option value="02" >February</option>
+                  <?php }if("03"== $filter_bulan) { ?>
+                  <option value="03" selected="selected">March</option>
+                  <?php } else{ ?>
+                    <option value="03" >March</option>
+                  <?php } if("04"== $filter_bulan) { ?>
+                  <option value="04" selected="selected">April</option>
+                  <?php } else{ ?>
+                    <option value="04" >April</option>
+                  <?php } if("05"== $filter_bulan) { ?>
+                  <option value="05" selected="selected">May</option>
+                  <?php } else { ?>
+                   <option value="05" >May</option>
+                  <?php }if("06"== $filter_bulan) { ?>
+                  <option value="06" selected="selected">June</option>
+                  <?php } else { ?>
+                    <option value="06" >June</option>
+                  <?php } if("07"== $filter_bulan) { ?>
+                  <option value="07" selected="selected">July</option>
+                  <?php } else{ ?>
+                    <option value="07" >July</option>
+                  <?php } if("08"== $filter_bulan) { ?>
+                  <option value="08" selected="selected">August</option>
+                  <?php } else { ?>
+                  <option value="08" >August</option>
+                  <?php }if("09"== $filter_bulan) { ?>
+                  <option value="09" selected="selected">September</option>
+                  <?php } else{ ?>
+                    <option value="09" >September</option>
+                  <?php } if("10"== $filter_bulan) { ?>
+                  <option value="10" selected="selected">October</option>
+                  <?php } else{ ?>
+                    <option value="10" >October</option>
+                  <?php } if("11"== $filter_bulan) { ?>
+                  <option value="11" selected="selected">November</option>
+                  <?php } else{ ?>
+                    <option value="11" >November</option>
+                  <?php } if("12"==$filter_bulan){ ?>
+                  <option value="12" selected="selected">December</option>
+                  <?php } else { ?>
+                  <option value="12" >December</option>
+                  <?php } ?>
+                 
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-2">
               <div class="form-group">
                 <label class="control-label" for="input-status"><?php echo $entry_status; ?></label>
                 <select name="filter_status" id="input-status" class="form-control">
@@ -77,6 +123,7 @@
               
               <button type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-search"></i> <?php echo $button_filter; ?></button>
             </div>
+
           </div>
         </div>
         <form action="<?php echo $delete; ?>" method="post" enctype="multipart/form-data" id="form-product">
@@ -207,6 +254,12 @@ $('#button-filter').on('click', function() {
 
   if (filter_tahun != '*') {
     url += '&filter_tahun=' + encodeURIComponent(filter_tahun);
+  }
+
+  var filter_bulan = $('select[name=\'filter_bulan\']').val();
+
+  if (filter_bulan != '*') {
+    url += '&filter_bulan=' + encodeURIComponent(filter_bulan);
   }
 
   location = url;

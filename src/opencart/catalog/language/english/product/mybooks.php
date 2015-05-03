@@ -40,6 +40,7 @@ $_['entry_paper_size']       = 'Size';
 $_['entry_paper_type']       = 'Paper Type';
 $_['entry_book']       		 = 'Full Script';
 $_['entry_tahun']       	 = 'Year';
+$_['entry_bulan']       	 = 'Month';
 $_['entry_sample_book']      = 'Sample Script';
 $_['entry_color_page']       = 'Color Page';
 $_['entry_bw_page']       	 = 'Black & White Page';

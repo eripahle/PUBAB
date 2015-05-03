@@ -33,6 +33,10 @@ class ModelCatalogProductbooks extends Model {
 		if (isset($data['filter_tahun']) && !is_null($data['filter_tahun'])) {
 			$sql .= " AND YEAR(p.date_added) ='".(int)$data['filter_tahun']."'";
 		}
+
+		if (isset($data['filter_bulan']) && !is_null($data['filter_bulan'])) {
+			$sql .= " AND MONTH(p.date_added) ='".(int)$data['filter_bulan']."'";
+		}
 		
 		$sql .= " GROUP BY p.product_id";
 
