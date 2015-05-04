@@ -1322,6 +1322,9 @@ class ControllerCommonMybooks extends Controller {
 			$data['image'] = '';
 		}*/
 
+		$data['price_royalty']=0;
+		$data['pub_price']=0;
+
 		$this->load->model('tool/image');
 
 		if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {
@@ -1422,6 +1425,8 @@ class ControllerCommonMybooks extends Controller {
 		} else {
 			$data['mpn'] = '';
 		}
+
+
 
 		if (isset($this->request->post['location'])) {
 			$data['location'] = $this->request->post['location'];
