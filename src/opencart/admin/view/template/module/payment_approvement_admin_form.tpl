@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-name"><?php echo $entry_invoice; ?></label>
+                        <label class="col-sm-2 control-label" for="input-name"><?php echo $entry_status; ?></label>
                         <div class="col-sm-10">
                             <input type="text" name="name" placeholder="" value="<?php echo $status;?>" id="input-name" class="form-control" />
                         </div>

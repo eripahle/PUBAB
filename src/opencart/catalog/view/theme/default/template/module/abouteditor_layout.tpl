@@ -28,7 +28,7 @@
         <?php foreach ($editors as $editor) { ?>		
         <p>
         <div class="float_l">
-            <img src="<?php echo $editor['image'];?>" width="70px" />
+            <img src="<?php echo $editor['image'];?>" width="150px" />
         </div>
         <div class="content">
             <b>Nama : <?php echo $editor['firstname'].' '.$editor['lastname'] ;?></b><br>

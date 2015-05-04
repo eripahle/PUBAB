@@ -57,11 +57,11 @@ class ControllerCommonHeader extends Controller {
         $data['text_howtobeeditor']=$this->language->get('text_howtobeeditor');
         $data['text_howtoshop']=$this->language->get('text_howtoshop');
         $data['text_service']=$this->language->get('text_service');
-        $data['text_editing_book']=$this->language->get('text_editing_book');
-        $data['text_payment']=$this->language->get('text_payment');
-        $data['text_my_payment']=$this->language->get('text_my_paymnet');
-
+        $data['text_editing_book']=$this->language->get('text_editing_book');       
         $data['publishbook']=$this->url->link('common/mybooks/add','', 'SSL');
+        
+        $data['text_payment']=$this->language->get('text_payment');
+        $data['text_my_payment']=$this->language->get('text_my_payment');
         $data['upload_payment']=$this->url->link('common/payment_approval/add','', 'SSL');
         $data['my_payment']=$this->url->link('common/payment_approval','', 'SSL');
         

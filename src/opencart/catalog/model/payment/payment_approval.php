@@ -808,7 +808,7 @@ class ModelPaymentPaymentApproval extends Model {
 		    					image = '" . $this->db->escape($data2['lokasi_image_di_database']) . "', 
 		    					invoice = '" . $this->db->escape($data['invoice']) . "',
                                                         status = 'Pending',    
-		    					date = '2015-06-01'
+		    					date = NOW()
 		    					");
     }
 

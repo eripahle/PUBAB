@@ -68,7 +68,7 @@
                                         <?php } ?></td>                                    
                                     <td class="text-left"><?php echo $payment['customer_id']; ?></td>                                                                                                           
                                     <td class="text-left"><?php echo $payment['customer_name']; ?></td>
-                                    <td class="text-left"><img src="../<?php echo $payment['image']?>" width="70"></td>
+                                    <td class="text-left"><img class="image" src="../<?php echo $payment['image']?>" width="70"></td>
                                     <td class="text-left"><?php echo $payment['invoice']; ?></td>                                    
                                     <td class="text-left"><?php echo $payment['date']; ?></td>                                    
                                     <td class="text-left"><?php echo $payment['status']; ?></td>                                        
