@@ -10,6 +10,7 @@ class Customer {
 	private $customer_group_id;
 	private $address_id;
 	private $editor_id;
+	private $designer_id;
 
 	public function __construct($registry) {
 		$this->config = $registry->get('config');
@@ -34,6 +35,11 @@ class Customer {
 				$editor_query =$this->db->query("SELECT * FROM ". DB_PREFIX ."editor WHERE customer_id = '" . (int)$this->session->data['customer_id'] . "' AND status='1'");
 				if($editor_query->num_rows){
 					$this->editor_id = $editor_query->row['editor_id'];
+				}
+
+				$designer_query =$this->db->query("SELECT * FROM ". DB_PREFIX ."design WHERE customer_id = '" . (int)$this->session->data['customer_id'] . "' AND status='1'");
+				if($designer_query->num_rows){
+					$this->designer_id = $designer_query->row['designer_id'];
 				}
 				$this->db->query("UPDATE " . DB_PREFIX . "customer SET cart = '" . $this->db->escape(isset($this->session->data['cart']) ? serialize($this->session->data['cart']) : '') . "', wishlist = '" . $this->db->escape(isset($this->session->data['wishlist']) ? serialize($this->session->data['wishlist']) : '') . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
 
@@ -129,6 +135,10 @@ class Customer {
 	
 	public function getEditorId() {
 		return $this->editor_id;
+	}
+
+	public function getDesignerId() {
+		return $this->designer_id;
 	}
 
 	public function getFirstName() {

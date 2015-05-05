@@ -26,6 +26,7 @@ $_['button_save']           = 'Save';
 $_['button_continue']       = 'Continue';
 $_['button_cart']           = 'Add to Cart';
 $_['button_edit_editor']    = 'Take for Editing';
+$_['button_edit_design']    = 'Take for Design';
 $_['button_cancel']         = 'Cancel';
 $_['button_compare']        = 'Compare this Product';
 $_['button_wishlist']       = 'Add to Wish List';

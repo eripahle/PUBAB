@@ -156,7 +156,7 @@ class ControllerProductProduct extends Controller {
 
 		$this->load->model('catalog/product');
 		$status='1';
-		if($this->customer->getGroupId()==2){
+		if($this->customer->getGroupId()==2 && $this->customer->getGroupId()==3){
 			$status='0';
 		}
 		
@@ -266,6 +266,7 @@ class ControllerProductProduct extends Controller {
 
 			$data['button_cart'] = $this->language->get('button_cart');
 			$data['button_edit_editor'] = $this->language->get('button_edit_editor');
+			$data['button_edit_design'] = $this->language->get('button_edit_design');
 			$data['button_wishlist'] = $this->language->get('button_wishlist');
 			$data['button_compare'] = $this->language->get('button_compare');
 			$data['button_upload'] = $this->language->get('button_upload');
@@ -469,6 +470,7 @@ class ControllerProductProduct extends Controller {
 			}
 
 			$data['get_book_for_edit']=$this->url->link('common/mybooks/getListBooks', '&product_id=' . $this->request->get['product_id'] . $url, 'SSL');
+			$data['get_book_for_design']=$this->url->link('common/mybooks/getListBooks', '&product_id=' . $this->request->get['product_id'] . $url, 'SSL');
 			
 			$data['tags'] = array();
 

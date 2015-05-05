@@ -11,6 +11,13 @@ class ModelCatalogProduct extends Model {
 		}
 	}
 
+	public function updateDesign($designer_id,$product_id){
+		$query=$this->db->query("UPDATE " . DB_PREFIX . "product SET designer_id = ".(int)$designer_id." WHERE product_id = '" . (int)$product_id . "'");
+		if($query){
+			return true;
+		}
+	}
+
 	public function getListEdit() {
 		$product_data = array();
 		$query =$this->db->query("SELECT * FROM ".DB_PREFIX."product p,".DB_PREFIX."product_description pd  WHERE p.product_id=pd.product_id AND p.editor_id='0' ORDER BY p.product_id ASC");
@@ -823,7 +830,7 @@ class ModelCatalogProduct extends Model {
 			if($data2['lokasi_cover']!=null && $data2['lokasi_design_cover']!=null){
 				$this->db->query("UPDATE ".DB_PREFIX."product set image='".$this->db->escape($data2['lokasi_cover'])."', design_cover='".$this->db->escape($data2['lokasi_design_cover'])."' WHERE product_id= '".$product_id."'");
 			}else{
-				$this->db->query("UPDATE ".DB_PREFIX."product set status_request_design='".$data2['request_design']."', desc_design='".$this->db->escape($data2['design_description'])."' WHERE product_id= '".$product_id."'");
+				$this->db->query("UPDATE ".DB_PREFIX."product set status_request_design='".$data['request_design']."', desc_design='".$this->db->escape($data['design_description'])."' WHERE product_id= '".$product_id."'");
 			}
 			
 			$this->db->query("INSERT INTO " . DB_PREFIX ."draf SET product_id='".(int)$product_id."' , 

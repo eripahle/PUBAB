@@ -4365,6 +4365,30 @@ class ControllerCommonMybooks extends Controller {
 		$this->response->setOutput($this->load->view('default/template/common/form_designbooks.tpl', $data));
 	}
 
+	public function getListBooks(){
+		$this->load->model('catalog/product');
+		$editor_id=$this->customer->getEditorId();
+		$query=$this->model_catalog_product->updateEditor($editor_id,$this->request->get['product_id']);
+		//$this->response->redirect($this->url->link('common/mybooks', ' ', 'SSL'));
+		if($query){
+			$this->response->redirect($this->url->link('common/mybooks/getEditingList','', 'SSL'));
+		}
+		
+		//$this->response->setOutput($this->load->view('default/template/common/mybooks/get.tpl', $data));
+	}
+
+	public function getDesignBooks(){
+		$this->load->model('catalog/product');
+		$designer_id=$this->customer->getDesignerId();
+		$query=$this->model_catalog_product->updateDesign($designer_id,$this->request->get['product_id']);
+		//$this->response->redirect($this->url->link('common/mybooks', ' ', 'SSL'));
+		if($query){
+			$this->response->redirect($this->url->link('common/mybooks/getEditingList','', 'SSL'));
+		}
+		
+		//$this->response->setOutput($this->load->view('default/template/common/mybooks/get.tpl', $data));
+	}
+
 	protected function checkValidRequestDrafBook() {
 	    $dot = '.';
 	    $allowed_ext_buku = array('doc', 'docx', 'pdf');
@@ -4472,7 +4496,7 @@ class ControllerCommonMybooks extends Controller {
 				$this->error['design_cover']=$this->language->get('error_design_cover');
 			}
 		}else{
-			if ((utf8_strlen($value['design_description']) < 3) ) {
+			if ($this->request->post['product_description']==null ) {
 				$this->error['design_description']= $this->language->get('error_design_description');
 			}
 		}

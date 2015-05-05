@@ -361,8 +361,14 @@
                  <a href="<?php echo $get_book_for_edit; ?>" <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $button_edit_editor; ?></button></a>
               </div>
              <?php } ?>
+
+             
         <?php } ?>
-        
+        <?php if($logged && $customer_group==3){ ?>
+             <div class="<?php echo $class; ?>">
+                 <a href="<?php echo $get_book_for_design; ?>" <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $button_edit_design; ?></button></a>
+              </div>
+        <?php } ?>
       </div>
       <?php if ($products) { ?>
       <h3><?php echo $text_related; ?></h3>
