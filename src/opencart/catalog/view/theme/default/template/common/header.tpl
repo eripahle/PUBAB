@@ -101,17 +101,20 @@
                         <li><a href="<?php echo $services; ?>"><?php echo $text_service; ?></a></li>
                         <?php } ?>
                         <?php if($logged){?>
-       <li><a href="<?php echo $howtoselfpublish; ?>"><?php echo $text_howtoselftpublish; ?></a></li>
-            <li><a href="<?php echo $howtobeeditor; ?>"><?php echo $text_howtobeeditor; ?></a></li>
-            <li><a href="<?php echo $howtoshop; ?>"><?php echo $text_howtoshop; ?></a></li>     
-          <li><a href="<?php echo $mybooks ?>"><?php echo $text_mybooks; ?></a></li>
-          <li><a href="<?php echo $publishbook ?>"><?php echo $text_publishbook; ?></a></li>
-          <li><a href="<?php echo $my_payment ?>"><?php echo $text_my_payment; ?></a></li>
-          <li><a href="<?php echo $upload_payment ?>"><?php echo $text_payment; ?></a></li>
-          <?php if($customer_group=='2'){ ?>
-                <li><a href="<?php echo $editing_book ?>"><?php echo $text_editing_book; ?></a></li>
-                 <li><a href="<?php echo $list_edit_book ?>"><?php echo $text_list_edit_book; ?></a></li>
-          <?php }?>
+                              <li><a href="<?php echo $howtoselfpublish; ?>"><?php echo $text_howtoselftpublish; ?></a></li>
+                              <li><a href="<?php echo $howtoshop; ?>"><?php echo $text_howtoshop; ?></a></li>     
+                              <li><a href="<?php echo $mybooks ?>"><?php echo $text_mybooks; ?></a></li>
+                              <li><a href="<?php echo $publishbook ?>"><?php echo $text_publishbook; ?></a></li>
+                              <li><a href="<?php echo $my_payment ?>"><?php echo $text_my_payment; ?></a></li>
+                              <li><a href="<?php echo $upload_payment ?>"><?php echo $text_payment; ?></a></li>
+                              <?php if($customer_group=='2'){ ?>
+                                     <li><a href="<?php echo $editing_book ?>"><?php echo $text_editing_book; ?></a></li>
+                                     <li><a href="<?php echo $list_edit_book ?>"><?php echo $text_list_edit_book; ?></a></li>
+                              <?php }?>
+                              <?php if($customer_group=='3'){ ?>
+                                     <li><a href="<?php echo $design_book ?>"><?php echo $text_design_book; ?></a></li>
+                                     <li><a href="<?php echo $list_design_book ?>"><?php echo $text_list_design_book; ?></a></li>
+                              <?php }?>
                         <?php } ?>
                         <?php foreach ($categories as $category) { ?>
                         <?php if ($category['children']) { ?>

@@ -196,7 +196,6 @@
                   <td class="text-left"><?php echo $product['your_royalty']; ?></td>
                   <td class="text-left">
                     <a href="<?php echo $product['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                    <a href="<?php echo "book/".$product['download']; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_download; ?>" class="btn btn-primary"><i class="fa fa-download"></i></a>
                   </td>
                 </tr>
                 <?php } ?>

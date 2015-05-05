@@ -51,13 +51,15 @@ class ControllerCommonHeader extends Controller {
 		$data['text_all'] = $this->language->get('text_all');
 		$data['text_mybooks']=$this->language->get('text_mybooks');
 		$data['text_list_edit_book']=$this->language->get('text_list_edit_book');
+		$data['text_list_design_book']=$this->language->get('text_list_design_book');
         $data['text_publishbook']=$this->language->get('text_publishbook');
         $data['text_home']=$this->language->get('text_home');
 		$data['text_howtoselftpublish']=$this->language->get('text_howtoselftpublish');
         $data['text_howtobeeditor']=$this->language->get('text_howtobeeditor');
         $data['text_howtoshop']=$this->language->get('text_howtoshop');
         $data['text_service']=$this->language->get('text_service');
-        $data['text_editing_book']=$this->language->get('text_editing_book');       
+        $data['text_editing_book']=$this->language->get('text_editing_book');     
+        $data['text_design_book']=$this->language->get('text_design_book');       
         $data['publishbook']=$this->url->link('common/mybooks/add','', 'SSL');
         
         $data['text_payment']=$this->language->get('text_payment');
@@ -67,6 +69,7 @@ class ControllerCommonHeader extends Controller {
         
 		$data['mybooks']=$this->url->link('common/mybooks','', 'SSL');                
 		$data['list_edit_book']=$this->url->link('common/mybooks/getEditingList','', 'SSL');
+		$data['list_design_book']=$this->url->link('common/mybooks/getDesignList','', 'SSL');
 		$data['home'] = $this->url->link('common/home');
 		$data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
 		$data['logged'] = $this->customer->isLogged();
@@ -83,10 +86,11 @@ class ControllerCommonHeader extends Controller {
 		$data['contact'] = $this->url->link('information/contact');
 		$data['telephone'] = $this->config->get('config_telephone');
 		$data['howtoselfpublish'] = $this->url->link('information/howtoselfpublish', '' , 'SSL');
-                $data['howtobeeditor'] = $this->url->link('information/howtobeeditor', '' , 'SSL');
-                $data['howtoshop'] = $this->url->link('information/howtoshop','','SSL');        
-                $data['services'] = $this->url->link('information/services','','SSL');
-                $data['editing_book'] = $this->url->link('information/listeditbook','','SSL');
+        $data['howtobeeditor'] = $this->url->link('information/howtobeeditor', '' , 'SSL');
+        $data['howtoshop'] = $this->url->link('information/howtoshop','','SSL');        
+        $data['services'] = $this->url->link('information/services','','SSL');
+        $data['editing_book'] = $this->url->link('information/listeditbook','','SSL');
+        $data['design_book'] = $this->url->link('information/listdesignbook','','SSL');
                 
                 
                 //$data['upload_payment'] = $this->url->link('common/','','SSL');
