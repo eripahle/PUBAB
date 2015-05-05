@@ -20,7 +20,7 @@ class ControllerCommonMybooks extends Controller {
     	if(!$this->customer->isLogged()){
 			$this->response->redirect($this->url->link('account/login', ' ', 'SSL'));
 		}
-		$customer_id=$this->customer->getGroupId();
+		$customer_id=$this->customer->getId();
 		$this->load->language('product/mybooks');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -365,6 +365,7 @@ class ControllerCommonMybooks extends Controller {
 			$filter_tahun = $this->request->get['filter_tahun'];
 		} else {
 			$filter_tahun = null;
+			$data['filter_tahun'] = null;
 		}
 
 		if (isset($this->request->get['filter_bulan'])) {
@@ -372,6 +373,7 @@ class ControllerCommonMybooks extends Controller {
 			$filter_bulan = $this->request->get['filter_bulan'];
 		} else {
 			$filter_bulan = null;
+			$data['filter_bulan']= null;
 		}
 
 		if (isset($this->request->get['filter_name'])) {
@@ -497,7 +499,7 @@ class ControllerCommonMybooks extends Controller {
 		);
 
 		$this->load->model('tool/image');
-        $customer_id=$this->customer->getGroupId();
+        $customer_id=$this->customer->getId();
 
         $data['tahun'] =  $this->model_catalog_productbooks->getYear();
 
@@ -745,6 +747,7 @@ class ControllerCommonMybooks extends Controller {
 			$filter_tahun = $this->request->get['filter_tahun'];
 		} else {
 			$filter_tahun = null;
+			$data['filter_tahun'] = null;
 		}
 
 		if (isset($this->request->get['filter_bulan'])) {
@@ -752,6 +755,7 @@ class ControllerCommonMybooks extends Controller {
 			$filter_bulan = $this->request->get['filter_bulan'];
 		} else {
 			$filter_bulan = null;
+			$data['filter_bulan']= null;
 		}
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
@@ -876,7 +880,7 @@ class ControllerCommonMybooks extends Controller {
 		);
 
 		$this->load->model('tool/image');
-        $customer_id=$this->customer->getGroupId();
+        $customer_id=$this->customer->getId();
         $editor_id=$this->customer->getEditorId();
         $data['tahun'] =  $this->model_catalog_productbooks->getYear();
 		$product_total = $this->model_catalog_productbooks->getTotalProductsEditor($filter_data,$customer_id,$editor_id);
@@ -1121,14 +1125,16 @@ class ControllerCommonMybooks extends Controller {
 			$data['filter_tahun'] = $this->request->get['filter_tahun'];
 			$filter_tahun = $this->request->get['filter_tahun'];
 		} else {
-			$filter_tahun = " ";
+			$filter_tahun = null;
+			$data['filter_tahun'] = null;
 		}
 
 		if (isset($this->request->get['filter_bulan'])) {
 			$data['filter_bulan']= $this->request->get['filter_bulan'];
 			$filter_bulan = $this->request->get['filter_bulan'];
 		} else {
-			$filter_bulan = " ";
+			$filter_bulan = null;
+			$data['filter_bulan']= null;
 		}
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
@@ -1253,12 +1259,17 @@ class ControllerCommonMybooks extends Controller {
 		);
 
 		$this->load->model('tool/image');
-        $customer_id=$this->customer->getGroupId();
-        $editor_id=$this->customer->getEditorId();
+        $designer_id=$this->customer->getDesignerId();
+        $data['designer_id']=$designer_id;
         $data['tahun'] =  $this->model_catalog_productbooks->getYear();
-		$product_total = $this->model_catalog_productbooks->getTotalProductsEditor($filter_data,$customer_id,$editor_id);
+		$product_total = $this->model_catalog_productbooks->getTotalProductsDesigner($filter_data,$designer_id);
 
-		$results = $this->model_catalog_productbooks->getProductsEditor($filter_data,$customer_id,$editor_id);
+		$results = $this->model_catalog_productbooks->getProductsDesigner($filter_data,$designer_id);
+		if(!isset($result)){
+			$data['result']="ada isinya";
+		}else{
+			$data['result']="ga ada isinya";
+		}
 
 		foreach ($results as $result) {
 			if (is_file(DIR_IMAGE . $result['image'])) {
@@ -1411,15 +1422,15 @@ class ControllerCommonMybooks extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['sort_name'] = $this->url->link('common/mybooks/getEditingList',  '&sort=pd.name' . $url, 'SSL');
-		$data['sort_model'] = $this->url->link('common/mybooks/getEditingList', '&sort=p.model' . $url, 'SSL');
-		$data['sort_price'] = $this->url->link('common/mybooks/getEditingList',  '&sort=p.price' . $url, 'SSL');
-		$data['sort_quantity'] = $this->url->link('common/mybooks/getEditingList', '&sort=p.quantity' . $url, 'SSL');
-		$data['sort_status'] = $this->url->link('common/mybooks/getEditingList',  '&sort=p.status' . $url, 'SSL');
-		$data['sort_status_author'] = $this->url->link('common/mybooks/getEditingList',  '&sort=p.status1' . $url, 'SSL');
-		$data['sort_status_editor'] = $this->url->link('common/mybooks/getEditingList',  '&sort=p.status2' . $url, 'SSL');
-		$data['sort_status_management'] = $this->url->link('common/mybooks/getEditingList',  '&sort=p.status3' . $url, 'SSL');
-		$data['sort_order'] = $this->url->link('common/mybooks/getEditingList',  '&sort=p.sort_order' . $url, 'SSL');
+		$data['sort_name'] = $this->url->link('common/mybooks/getDesignList',  '&sort=pd.name' . $url, 'SSL');
+		$data['sort_model'] = $this->url->link('common/mybooks/getDesignList', '&sort=p.model' . $url, 'SSL');
+		$data['sort_price'] = $this->url->link('common/mybooks/getDesignList',  '&sort=p.price' . $url, 'SSL');
+		$data['sort_quantity'] = $this->url->link('common/mybooks/getDesignList', '&sort=p.quantity' . $url, 'SSL');
+		$data['sort_status'] = $this->url->link('common/mybooks/getDesignList',  '&sort=p.status' . $url, 'SSL');
+		$data['sort_status_author'] = $this->url->link('common/mybooks/getDesignList',  '&sort=p.status1' . $url, 'SSL');
+		$data['sort_status_editor'] = $this->url->link('common/mybooks/getDesignList',  '&sort=p.status2' . $url, 'SSL');
+		$data['sort_status_management'] = $this->url->link('common/mybooks/getDesignList',  '&sort=p.status3' . $url, 'SSL');
+		$data['sort_order'] = $this->url->link('common/mybooks/getDesignList',  '&sort=p.sort_order' . $url, 'SSL');
 
 		$url = '';
 
@@ -4383,7 +4394,7 @@ class ControllerCommonMybooks extends Controller {
 		$query=$this->model_catalog_product->updateDesign($designer_id,$this->request->get['product_id']);
 		//$this->response->redirect($this->url->link('common/mybooks', ' ', 'SSL'));
 		if($query){
-			$this->response->redirect($this->url->link('common/mybooks/getEditingList','', 'SSL'));
+			$this->response->redirect($this->url->link('common/mybooks/getDesignList','', 'SSL'));
 		}
 		
 		//$this->response->setOutput($this->load->view('default/template/common/mybooks/get.tpl', $data));

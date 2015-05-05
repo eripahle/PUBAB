@@ -154,6 +154,78 @@ class ModelCatalogProductbooks extends Model {
 
 		return $query->rows;
 	}
+	public function getProductsDesigner($data = array(),$designer_id) {
+		$sql = "SELECT * FROM ". DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE p.designer_id='".(int)$designer_id."' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+
+		if (!empty($data['filter_name'])) {
+			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+		}
+
+		if (!empty($data['filter_model'])) {
+			$sql .= " AND p.model LIKE '" . $this->db->escape($data['filter_model']) . "%'";
+		}
+
+		if (isset($data['filter_price']) && !is_null($data['filter_price'])) {
+			$sql .= " AND p.price LIKE '" . $this->db->escape($data['filter_price']) . "%'";
+		}
+
+		if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
+			$sql .= " AND p.quantity = '" . (int)$data['filter_quantity'] . "'";
+		}
+
+		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
+			$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
+		}
+		if (isset($data['filter_tahun']) && !is_null($data['filter_tahun'])) {
+			$sql .= "AND YEAR(p.date_added) = '".(int)$data['filter_tahun'] ."'";
+		}
+
+		if (isset($data['filter_bulan']) && !is_null($data['filter_bulan'])) {
+			$sql .= "AND MONTH(p.date_added) = '".(int)$data['filter_bulan'] ."'";
+		}
+		$sql .= " GROUP BY p.product_id";
+
+		$sort_data = array(
+			'pd.name',
+			'p.model',
+			'p.price',
+			'p.quantity',
+			'p.status',
+			'p.status1',
+			'p.status2',
+			'p.status3',
+			'p.date_added',
+			'p.sort_order'
+		);
+
+		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+			$sql .= " ORDER BY " . $data['sort'];
+		} else {
+			$sql .= " ORDER BY pd.name";
+		}
+
+		if (isset($data['order']) && ($data['order'] == 'DESC')) {
+			$sql .= " DESC";
+		} else {
+			$sql .= " ASC";
+		}
+
+		if (isset($data['start']) || isset($data['limit'])) {
+			if ($data['start'] < 0) {
+				$data['start'] = 0;
+			}
+
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}
+
+			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->rows;
+	}
 
 	public function getProductsByCategoryId($category_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND p2c.category_id = '" . (int)$category_id . "' ORDER BY pd.name ASC");
@@ -392,6 +464,43 @@ class ModelCatalogProductbooks extends Model {
 		$sql = "SELECT COUNT(DISTINCT p.product_id) AS total FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id)";
 
 		$sql .= " WHERE p.editor_id='".(int)$editor_id."' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+
+		if (!empty($data['filter_name'])) {
+			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+		}
+
+		if (!empty($data['filter_model'])) {
+			$sql .= " AND p.model LIKE '" . $this->db->escape($data['filter_model']) . "%'";
+		}
+
+		if (isset($data['filter_price']) && !is_null($data['filter_price'])) {
+			$sql .= " AND p.price LIKE '" . $this->db->escape($data['filter_price']) . "%'";
+		}
+
+		if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
+			$sql .= " AND p.quantity = '" . (int)$data['filter_quantity'] . "'";
+		}
+
+		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
+			$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
+		}
+		if (isset($data['filter_tahun']) && !is_null($data['filter_tahun'])) {
+			$sql .= "AND YEAR(p.date_added) = '".(int)$data['filter_tahun'] ."'";
+		}
+
+		if (isset($data['filter_bulan']) && !is_null($data['filter_bulan'])) {
+			$sql .= "AND MONTH(p.date_added) = '".(int)$data['filter_bulan'] ."'";
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->row['total'];
+	}
+
+	public function getTotalProductsDesigner($data = array(),$designer_id) {
+		$sql = "SELECT COUNT(DISTINCT p.product_id) AS total FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id)";
+
+		$sql .= " WHERE p.designer_id='".(int)$designer_id."' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
 			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";

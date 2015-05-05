@@ -137,13 +137,7 @@
                     <?php } else { ?>
                     <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                     <?php } ?></td>
-                 
-                  <td class="text-left"><?php if ($sort == 'p.price') { ?>
-                    <a href="<?php echo $sort_price; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_price; ?></a>
-                    <?php } else { ?>
-                    <a href="<?php echo $sort_price; ?>"><?php echo $column_price; ?></a>
-                    <?php } ?></td>
-                 
+                  
                   <td class="text-left"><?php if ($sort == 'p.status_author') { ?>
                     <a href="<?php echo $sort_status_author; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status_author; ?></a>
                     <?php } else { ?>
@@ -165,7 +159,7 @@
                     <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
                     <?php } ?></td>
                    <td class="text-left"><?php echo $column_total_selling; ?></td>
-                   <td class="text-left"><?php echo $column_your_royalty; ?></td>
+                   
                   <td class="text-left"><?php echo $column_action; ?></td>
                 </tr>
               </thead>
@@ -181,19 +175,14 @@
                     <?php } ?></td>
                   <td class="text-left"><?php echo $product['name']; ?></td>
                  
-                  <td class="text-left"><?php if ($product['special']) { ?>
-                    <span style="text-decoration: line-through;"><?php echo $product['price']; ?></span><br/>
-                    <div class="text-danger"><?php echo $product['special']; ?></div>
-                    <?php } else { ?>
-                    <?php echo $product['price']; ?>
-                    <?php } ?></td>
+                  
                  
                   <td class="text-left"><?php echo $product['status1']; ?></td>
                   <td class="text-left"><?php echo $product['status2']; ?></td>
                   <td class="text-left"><?php echo $product['status3']; ?></td>
                   <td class="text-left"><?php echo $product['status']; ?></td>
                   <td class="text-left"><?php echo $product['totalSelling']; ?></td>
-                  <td class="text-left"><?php echo $product['your_royalty']; ?></td>
+                  
                   <td class="text-left">
                     <a href="<?php echo $product['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                     <a href="<?php echo "book/".$product['download']; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_download; ?>" class="btn btn-primary"><i class="fa fa-download"></i></a>
@@ -268,7 +257,7 @@ $('#button-filter').on('click', function() {
 $('input[name=\'filter_name\']').autocomplete({
   'source': function(request, response) {
     $.ajax({
-      url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request),
+      url: 'index.php?route=common/mybooks/autocomplete&filter_name=' +  encodeURIComponent(request),
       dataType: 'json',
       success: function(json) {
         response($.map(json, function(item) {
@@ -288,7 +277,7 @@ $('input[name=\'filter_name\']').autocomplete({
 $('input[name=\'filter_model\']').autocomplete({
   'source': function(request, response) {
     $.ajax({
-      url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_model=' +  encodeURIComponent(request),
+      url: 'index.php?route=common/mybooks/autocomplete&filter_model=' +  encodeURIComponent(request),
       dataType: 'json',
       success: function(json) {
         response($.map(json, function(item) {

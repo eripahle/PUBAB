@@ -156,7 +156,7 @@ class ControllerProductProduct extends Controller {
 
 		$this->load->model('catalog/product');
 		$status='1';
-		if($this->customer->getGroupId()==2 && $this->customer->getGroupId()==3){
+		if($this->customer->getGroupId()==2 || $this->customer->getGroupId()==3){
 			$status='0';
 		}
 		
@@ -470,7 +470,7 @@ class ControllerProductProduct extends Controller {
 			}
 
 			$data['get_book_for_edit']=$this->url->link('common/mybooks/getListBooks', '&product_id=' . $this->request->get['product_id'] . $url, 'SSL');
-			$data['get_book_for_design']=$this->url->link('common/mybooks/getListBooks', '&product_id=' . $this->request->get['product_id'] . $url, 'SSL');
+			$data['get_book_for_design']=$this->url->link('common/mybooks/getDesignBooks', '&product_id=' . $this->request->get['product_id'] . $url, 'SSL');
 			
 			$data['tags'] = array();
 

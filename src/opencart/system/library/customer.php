@@ -129,6 +129,7 @@ class Customer {
 		return $this->customer_id;
 	}
 
+	//untuk mendapatkan id dri customer
 	public function getId() {
 		return $this->customer_id;
 	}
@@ -165,6 +166,7 @@ class Customer {
 		return $this->newsletter;
 	}
 
+	//untuk mendapatkan id group apakah editor/designer/author
 	public function getGroupId() {
 		return $this->customer_group_id;
 	}

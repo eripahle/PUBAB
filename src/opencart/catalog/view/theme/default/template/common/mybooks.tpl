@@ -269,7 +269,7 @@ $('#button-filter').on('click', function() {
 $('input[name=\'filter_name\']').autocomplete({
   'source': function(request, response) {
     $.ajax({
-      url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request),
+      url: 'index.php?route=common/mybooks/autocomplete&filter_name=' +  encodeURIComponent(request),
       dataType: 'json',
       success: function(json) {
         response($.map(json, function(item) {
@@ -289,7 +289,7 @@ $('input[name=\'filter_name\']').autocomplete({
 $('input[name=\'filter_model\']').autocomplete({
   'source': function(request, response) {
     $.ajax({
-      url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_model=' +  encodeURIComponent(request),
+      url: 'index.php?route=common/mybooks/autocomplete&filter_model=' +  encodeURIComponent(request),
       dataType: 'json',
       success: function(json) {
         response($.map(json, function(item) {
