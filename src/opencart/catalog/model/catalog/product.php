@@ -795,11 +795,6 @@ class ModelCatalogProduct extends Model {
 	public function addProduct($data,$customer_id,$data2 = array ()) {
 		$this->event->trigger('pre.admin.product.add', $data);
 
-			//$sumber= $_FILES['image']['tmp_name'];
-			//$target=$_FILES['image']['name'];
-		    //$lokasi_cover="cover/".date("smhymd")."_".$target;
-		    //move_uploaded_file($sumber, DIR_IMAGE."/".$lokasi_cover);
-			
 		    $this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = 'book', sku = '" . $this->db->escape($data['sku']) . "', 
 		    					upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', 
 		    					jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', 
@@ -814,16 +809,15 @@ class ModelCatalogProduct extends Model {
 		    					length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', 
 		    					height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', 
 		    					status = '" . (int)$data['status'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', 
-		    					sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW(), 
-		    					image='".$this->db->escape($data2['lokasi_cover'])."', design_cover='".$this->db->escape($data2['lokasi_design_cover'])."' , customer_id=".$customer_id."");
+		    					sort_order = '" . (int)$data['sort_order'] . "', date_added = NOW(), customer_id=".$customer_id."");
 
 			$product_id = $this->db->getLastId();
-		//	$this->db->query("UPDATE ". DB_PREFIX ."product SET image='".$lokasi_cover."',customer_id=".(int)$data['customer_id']." WHERE product_id=".(int)$product_id."");
-		    //$sumber_book= $_FILES['book']['tmp_name'];
-			//$target_book=$_FILES['book']['name'];
-		    //$lokasi_book="file/".date("smhymd")."_".$target_book;
-		    //move_uploaded_file($sumber_book, DIR_BOOK."/".$lokasi_book);
-
+			if($data2['lokasi_cover']!=null && $data2['lokasi_design_cover']!=null){
+				$this->db->query("UPDATE ".DB_PREFIX."product set image='".$this->db->escape($data2['lokasi_cover'])."', design_cover='".$this->db->escape($data2['lokasi_design_cover'])."' WHERE product_id= '".$product_id."'");
+			}else{
+				$this->db->query("UPDATE ".DB_PREFIX."product set status_request_design='".$data2['request_design']."', desc_design='".$this->db->escape($data2['design_description'])."' WHERE product_id= '".$product_id."'");
+			}
+			
 			$this->db->query("INSERT INTO " . DB_PREFIX ."draf SET product_id='".(int)$product_id."' , 
 							draf='".$this->db->escape($data2['lokasi_book'])."', sample_script='".$this->db->escape($data2['lokasi_sample'])."' , tanggal_upload= '".date("Y-m-d")."'" );
 

@@ -29,7 +29,9 @@
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-product" class="form-horizontal">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#tab-general" data-toggle="tab"><?php echo $tab_general; ?></a></li>
+              <?php if(!$get_product_id){ ?>
               <li><a href="#tab-design" data-toggle="tab"><?php echo $tab_design; ?></a></li>
+              <?php } ?>
             </ul>
           <div class="tab-content">
               <div class="tab-pane active" id="tab-general">
@@ -70,8 +72,6 @@
                         </div>
                       </div>
                     </div>
-                  
-                  
                   
                    <div class="form-group required">
                         <label class="col-sm-2 control-label" for="input-book"><?php echo $entry_book; ?></label>             
@@ -121,6 +121,9 @@
                                     <?php } ?>
                                     <?php } ?>
                                 </select>
+                                <?php if ($error_paper_size) { ?>
+                          <div class="text-danger"><?php echo $error_paper_size; ?></div>
+                       <?php } ?>
                             </div>
                     </div>
 
@@ -137,6 +140,9 @@
                                     <?php } ?>
                                     <?php } ?>
                                 </select>
+                                <?php if ($error_paper_type) { ?>
+                          <div class="text-danger"><?php echo $error_paper_type; ?></div>
+                       <?php } ?>
                             </div>
                     </div>  
 
@@ -166,6 +172,9 @@
                       <label class="col-sm-2 control-label" for="input-price"><?php echo $entry_price; ?></label>
                       <div class="col-sm-10">
                         <input type="text" name="price" value="<?php echo $price; ?>" placeholder="<?php echo $entry_price; ?>" id="input-price" class="form-control" />
+                        <?php if ($error_price) { ?>
+                          <div class="text-danger"><?php echo $error_price; ?></div>
+                       <?php } ?>
                       </div>        
                     </div>
                     <div class="form-group">
@@ -207,7 +216,7 @@
               <div class="tab-pane" id="tab-design">
                 <?php if(!$get_product_id){ ?>
 
-                  <div class="form-group required">
+                  <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_design_cover; ?></label>        
                         <div class="col-sm-3">                                
                             <input  type="file" name="design_cover"  class="btn btn-primary" >
@@ -215,11 +224,11 @@
                           <div class="text-danger"><?php echo $error_design_cover; ?></div>
                        <?php } ?>
                         </div>
-                        <div class="col-sm-7">* Silahkan Download Cover Template Terlebih dahulu,hanya menerima format png,jpg,dan jpeg</div>                                                                       
-                   </div>
-                   
-                  <div class="form-group required">
-                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_image; ?></label>             
+                        <div class="col-sm-7">* Silahkan Download Cover Template Terlebih dahulu,hanya menerima format png,jpg,dan jpeg</div>                
+                  </div>
+
+                   <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_request_design; ?></label>             
                         <div class="col-sm-3">                                
                             <input  type="file" name="image"  class="btn btn-primary" >
                             
@@ -228,16 +237,42 @@
                        <?php } ?>
                         </div>
                         <div class="col-sm-7">* HANYA SAMPUL DEPAN SAJA,hanya menerima format png,jpg,dan jpeg</div>                                                                       
+                   </div>
+
+                   <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_request_design; ?></label>             
+                        <div class="col-sm-3">
+                          <select name="request_design" id="input-category-class" class="form-control">
+                            <?php if($request_design==1) { ?>
+                                  <option value="1" selected="selected">Yes</option>
+                            <?php }else { ?>
+                                  <option value="1">Yes</option>
+                            <?php } ?>
+                            <?php if($request_design==0) { ?>
+                                  <option value="0" selected="selected">No</option>
+                            <?php }else { ?>
+                                  <option value="0">No</option>
+                            <?php } ?>
+                              
+                          </select>
+                        </div>                                                                       
+                   </div>
+                   <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_request_design; ?></label>             
+                        <div class="col-sm-10">
+                            <textarea name="design_description" rows="5" placeholder="<?php echo $desc_request_design; ?>" class="form-control"></textarea>
+                            <?php if ($error_design_description) { ?>
+                          <div class="text-danger"><?php echo $error_design_description; ?></div>
+                       <?php } ?>
+                        </div>                                                                      
                    </div>  
                    <?php } ?>
 
-              </div>
-                       
+              </div>         
           </div>
       </form>
           
       </div>
-
     </div>
   </div>
   <link rel="stylesheet" href="catalog/view/javascript/summernote/summernote.css" type="text/css" />

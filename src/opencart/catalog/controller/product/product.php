@@ -413,7 +413,17 @@ class ControllerProductProduct extends Controller {
 			$results = $this->model_catalog_product->getProductRelated($this->request->get['product_id']);
 			$this->load->model('catalog/productbooks');
 			$books=$this->model_catalog_productbooks->getSampleScript($this->request->get['product_id']);
-			$data['download']=$books['sample_script'];
+			if($books==true){
+				if(!file_exists("book/".$books['draf'])){
+						$data['download']='index.html';
+				}else{
+					$data['download']=$books['sample_script'];
+				}
+			}else{
+				$data['download']='index.html';
+			}
+			
+			
 			foreach ($results as $result) {
 				if ($result['image']) {
 					$image = $this->model_tool_image->resize($result['image'], $this->config->get('config_image_related_width'), $this->config->get('config_image_related_height'));

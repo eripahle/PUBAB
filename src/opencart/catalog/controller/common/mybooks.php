@@ -42,17 +42,27 @@ class ControllerCommonMybooks extends Controller {
 			$lokasi_sample="file/".md5(mt_rand())."_".$file_name_sample;
 			move_uploaded_file($this->request->files['sample_script']['tmp_name'], DIR_BOOK."/".$lokasi_sample);
 
-			$file_name_image = $this->request->files['image']['name'];
-	        //$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
-	        $file_size_image = $this->request->files['image']['size'];
-	        $lokasi_cover="cover/".md5(mt_rand())."_".$file_name_image;
-	        move_uploaded_file($this->request->files['image']['tmp_name'], DIR_IMAGE."/".$lokasi_cover);
+			if(!empty($this->request->files['image']['name'])){
+				$file_name_image = $this->request->files['image']['name'];
+		        //$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
+		        $file_size_image = $this->request->files['image']['size'];
+		        $lokasi_cover="cover/".md5(mt_rand())."_".$file_name_image;
+		        move_uploaded_file($this->request->files['image']['tmp_name'], DIR_IMAGE."/".$lokasi_cover);
+			}else{
+				$lokasi_cover=null;
+			}
+			
+			if(!empty($this->request->files['design_cover']['name'])){
+				$file_name_design_cover = $this->request->files['design_cover']['name'];
+	        	//$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
+	        	$file_size_design_cover = $this->request->files['design_cover']['size'];
+	       		$lokasi_design_cover="cover/".md5(mt_rand())."_".$file_name_design_cover;
+	       		move_uploaded_file($this->request->files['design_cover']['tmp_name'], DIR_IMAGE."/".$lokasi_design_cover);
+			}else{
+				$lokasi_design_cover=null;
+			}
 
-	        $file_name_design_cover = $this->request->files['design_cover']['name'];
-	        //$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
-	        $file_size_design_cover = $this->request->files['design_cover']['size'];
-	        $lokasi_design_cover="cover/".md5(mt_rand())."_".$file_name_design_cover;
-	        move_uploaded_file($this->request->files['design_cover']['tmp_name'], DIR_IMAGE."/".$lokasi_design_cover);
+	        
 	        
 	        $data2 = array(
 				'lokasi_cover'	 		=> $lokasi_cover,
@@ -439,6 +449,15 @@ class ControllerCommonMybooks extends Controller {
 
 			$this->load->model('catalog/productbooks');
 			$books=$this->model_catalog_productbooks->getBooks($result['product_id']);
+			if($books==true){
+				if(!file_exists("book/".$books['draf'])){
+						$download='index.html';
+				}else{
+					$download=$books['draf'];
+				}
+			}else{
+				$download='index.html';
+			}
 			$this->load->model('sale/order');
 			$totalSelling=$this->model_sale_order->getTotalByProduct($result['product_id']);
 			$data['products'][] = array(
@@ -455,7 +474,7 @@ class ControllerCommonMybooks extends Controller {
 				'status3'    => ($result['status3']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'edit'       => $this->url->link('common/mybooks/editMyBooks', '&product_id=' . $result['product_id'] . $url, 'SSL'),
 				//'download'   => $this->url->link('catalog/product/downloadBooks', '&product_id=' . $result['product_id'] . $url, 'SSL')
-				'download'   => $books['draf'],
+				'download'   => $download,
 				'totalSelling' =>$totalSelling,
 				'your_royalty' =>$totalSelling*$result['royalty']
 			);
@@ -808,6 +827,15 @@ class ControllerCommonMybooks extends Controller {
 
 			$this->load->model('catalog/productbooks');
 			$books=$this->model_catalog_productbooks->getBooks($result['product_id']);
+			if($books==true){
+				if(!file_exists("book/".$books['draf'])){
+						$download='index.html';
+				}else{
+					$download=$books['draf'];
+				}
+			}else{
+				$download='index.html';
+			}
 			$this->load->model('sale/order');
 			$totalSelling=$this->model_sale_order->getTotalByProduct($result['product_id']);
 			$data['products'][] = array(
@@ -824,7 +852,7 @@ class ControllerCommonMybooks extends Controller {
 				'status3'    => ($result['status3']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'edit'       => $this->url->link('common/mybooks/editListBooks', '&product_id=' . $result['product_id'] . $url, 'SSL'),
 				//'download'   => $this->url->link('catalog/product/downloadBooks', '&product_id=' . $result['product_id'] . $url, 'SSL')
-				'download'   => $books['draf'],
+				'download'   => $download,
 				'totalSelling'=>$totalSelling,
 				'your_royalty'=>$totalSelling*$result['royalty']
 				//'href'       => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
@@ -1024,7 +1052,8 @@ class ControllerCommonMybooks extends Controller {
 		$data['text_percent'] = $this->language->get('text_percent');
 		$data['text_amount'] = $this->language->get('text_amount');
 
-		
+		$data['entry_desc_request_design']=$this->language->get('entry_desc_request_design');
+		$data['desc_request_design']=$this->language->get('desc_request_design');
 		$data['entry_sample_book']=$this->language->get('entry_sample_book');
 		$data['entry_book'] = $this->language->get('entry_book');
 		$data['entry_author'] = $this->language->get('entry_author');
@@ -1094,6 +1123,7 @@ class ControllerCommonMybooks extends Controller {
 		$data['entry_bw_page'] = $this->language->get('entry_bw_page');
 		$data['entry_paper_size'] = $this->language->get('entry_paper_size');
 		$data['entry_paper_type'] = $this->language->get('entry_paper_type');
+		$data['entry_request_design'] = $this->language->get('entry_request_design');
 		$data['text_none'] = $this->language->get('text_none');
 
 		$data['help_keyword'] = $this->language->get('help_keyword');
@@ -1146,6 +1176,18 @@ class ControllerCommonMybooks extends Controller {
 			$data['error_warning'] = '';
 		} 
 
+		if (isset($this->error['paper_size'])) {
+			$data['error_paper_size'] = $this->error['paper_size'];
+		} else {
+			$data['error_paper_size'] = '';
+		} 
+
+		if (isset($this->error['paper_type'])) {
+			$data['error_paper_type'] = $this->error['paper_type'];
+		} else {
+			$data['error_paper_type'] = '';
+		} 
+
 		if (isset($this->error['image'])) {
 			$data['error_image'] = $this->error['image'];
 		} else {
@@ -1170,8 +1212,8 @@ class ControllerCommonMybooks extends Controller {
 			$data['error_book'] = '';
 		}
 
-		if (isset($this->error['book'])) {
-			$data['error_sample_book'] = $this->error['book'];
+		if (isset($this->error['sample_book'])) {
+			$data['error_sample_book'] = $this->error['sample_book'];
 		} else {
 			$data['error_sample_book'] = '';
 		}
@@ -1228,6 +1270,18 @@ class ControllerCommonMybooks extends Controller {
 			$data['error_bw_page'] = $this->error['bw_page'];
 		} else {
 			$data['error_bw_page'] = '';
+		}
+
+		if (isset($this->error['price'])) {
+			$data['error_price'] = $this->error['price'];
+		} else {
+			$data['error_price'] = '';
+		}
+
+		if (isset($this->error['design_description'])) {
+			$data['error_design_description'] = $this->error['design_description'];
+		} else {
+			$data['error_design_description'] = '';
 		}
 		
 		$url = '';
@@ -1914,6 +1968,18 @@ class ControllerCommonMybooks extends Controller {
 			$data['paper_type'] = $this->request->post['paper_type'];
 		} else {
 			$data['paper_type'] = 0;
+		}
+
+		if (isset($this->request->post['request_design'])) {
+			$data['request_design'] = $this->request->post['request_design'];
+		} else {
+			$data['request_design'] = 0;
+		}
+
+		if (isset($this->request->post['design_description'])) {
+			$data['design_description'] = $this->request->post['design_description'];
+		} else {
+			$data['design_description'] =null;
 		}
 
 		if ($this->config->get('config_account_id')) {
@@ -2989,22 +3055,33 @@ class ControllerCommonMybooks extends Controller {
 				$this->error['name'][$language_id] = $this->language->get('error_name');
 			}
 		}
+		if($this->request->post['request_design']==0){
+			if(!$this->checkValidRequestDrafimage()){
+				$this->error['image']=$this->language->get('error_extension_image');
+			}
+			if(empty($this->request->files['image']['name'])){
+				$this->error['image']=$this->language->get('error_image');
+			}
 
-		if(!$this->checkValidRequestDrafimage()){
-			$this->error['image']=$this->language->get('error_extension_image');
+			if(empty($this->request->files['design_cover']['name'])){
+				$this->error['design_cover']=$this->language->get('error_design_cover');
+			}
+		}else{
+			if ((utf8_strlen($value['design_description']) < 3) ) {
+				$this->error['design_description']= $this->language->get('error_design_description');
+			}
 		}
+		
 
 		if(!$this->checkValidRequestDrafBook()){
 			$this->error['book']=$this->language->get('error_extension_book');
 		}
 
-		if(empty($this->request->files['image']['name'])){
-			$this->error['image']=$this->language->get('error_image');
+		if(!$this->checkValidRequestSampleBook()){
+			$this->error['sample_book']=$this->language->get('error_extension_book');
 		}
 
-		if(empty($this->request->files['design_cover']['name'])){
-			$this->error['design_cover']=$this->language->get('error_design_cover');
-		}
+		
 
 		if(empty($this->request->files['book']['name'])){
 			$this->error['book']=$this->language->get('error_book');
@@ -3015,12 +3092,20 @@ class ControllerCommonMybooks extends Controller {
 		}
 		
 
-		if ($this->request->post['price']< 0 ){
+		if ($this->request->post['price']< 0 || empty($this->request->post['price'])||$this->request->post['price']==null ){
 			$this->error['price'] = $this->language->get('error_price');
 		}
 
 		if ($this->request->post['author']==null ){
 			$this->error['author'] = $this->language->get('error_author');
+		}
+
+		if (empty($this->request->post['paper_size'])){
+			$this->error['paper_size'] = $this->language->get('error_paper_size');
+		}
+
+		if (empty($this->request->post['paper_type'])){
+			$this->error['paper_type'] = $this->language->get('error_paper_type');
 		}
 
 		if ($this->request->post['color_page']< 0 || $this->request->post['color_page']==null ){

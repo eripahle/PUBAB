@@ -34,8 +34,11 @@ $_['column_status_editor']   = 'Approval By Editor';
 $_['column_status_management']  = 'Approval By Management';
 $_['column_action']          = 'Action';
 $_['text_none']				 = 'None';
+$_['desc_request_design']    = 'Entry your Description Request Design if you choose yes on request design';
 
 // Entry
+$_['entry_request_design']   = 'Request Design';
+$_['entry_desc_request_design'] = 'Description Design';
 $_['entry_paper_size']       = 'Size';
 $_['entry_paper_type']       = 'Paper Type';
 $_['entry_book']       		 = 'Full Script';
@@ -143,7 +146,11 @@ $_['error_bw_page']          = 'Black and White Page must be more than 0!';
 $_['error_image']            = 'Please Upload Your Cover';
 $_['error_design_cover']     = 'Please Upload Your Design Cover';
 $_['error_book']             = 'Please Upload Your Book';
+$_['error_sample_book']             = 'Please Upload Your Sample Book';
 $_['error_extension_image']  = 'Extenseion Cover Must be .jpg/jpeg/png ';
 $_['error_extension_book']   = 'Extenseion Book Must be .doc/docx ';
 $_['error_sample_script']	 = 'Please upload!';
 $_['error_agree']			 = 'You must agree to the Privacy Policy!';
+$_['error_paper_size']       = 'Please, Choose One of paper size';
+$_['error_paper_type']       = 'Please, Choose One of paper type';
+$_['error_design_description']='Please Input Your Design Description ';
