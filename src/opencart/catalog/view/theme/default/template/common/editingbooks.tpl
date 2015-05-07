@@ -148,16 +148,6 @@
                     <?php } else { ?>
                     <a href="<?php echo $sort_status_editor; ?>"><?php echo $column_status_editor; ?></a>
                     <?php } ?></td>
-                    <td class="text-left"><?php if ($sort == 'p.status_management') { ?>
-                    <a href="<?php echo $sort_status_management; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status_management; ?></a>
-                    <?php } else { ?>
-                    <a href="<?php echo $sort_status_management; ?>"><?php echo $column_status_management; ?></a>
-                    <?php } ?></td>
-                    <td class="text-left"><?php if ($sort == 'p.status') { ?>
-                    <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
-                    <?php } else { ?>
-                    <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
-                    <?php } ?></td>
                    <td class="text-left"><?php echo $column_total_selling; ?></td>
                    
                   <td class="text-left"><?php echo $column_action; ?></td>
@@ -179,8 +169,6 @@
                  
                   <td class="text-left"><?php echo $product['status1']; ?></td>
                   <td class="text-left"><?php echo $product['status2']; ?></td>
-                  <td class="text-left"><?php echo $product['status3']; ?></td>
-                  <td class="text-left"><?php echo $product['status']; ?></td>
                   <td class="text-left"><?php echo $product['totalSelling']; ?></td>
                   
                   <td class="text-left">

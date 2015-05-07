@@ -129,6 +129,7 @@ class ControllerCommonMybooks extends Controller {
 		$this->load->model('catalog/productbooks');
 		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
 			
+			//edit untuk masalah buku yang di lakukan oleh editor dan author jika tdk setuju terhadap hasil editan
 			if(!empty($this->request->files['book_edit']['name'])){
 				if($this->checkValidRequestDrafBookEditor()){
 					//hapus buku sebelumnya
@@ -150,7 +151,33 @@ class ControllerCommonMybooks extends Controller {
 				$statusEditing=true;
 				$lokasi_book=null;
 			}
-			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post,$lokasi_book,$statusEditing);
+			if(!empty($this->request->files['image']['name'])){
+				$file_name_image = $this->request->files['image']['name'];
+		        //$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
+		        $file_size_image = $this->request->files['image']['size'];
+		        $lokasi_cover="cover/".md5(mt_rand())."_".$file_name_image;
+		        move_uploaded_file($this->request->files['image']['tmp_name'], DIR_IMAGE."/".$lokasi_cover);
+			}else{
+				$lokasi_cover=null;
+			}
+			
+			if(!empty($this->request->files['design_cover']['name'])){
+				$file_name_design_cover = $this->request->files['design_cover']['name'];
+	        	//$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
+	        	$file_size_design_cover = $this->request->files['design_cover']['size'];
+	       		$lokasi_design_cover="cover/".md5(mt_rand())."_".$file_name_design_cover;
+	       		move_uploaded_file($this->request->files['design_cover']['tmp_name'], DIR_IMAGE."/".$lokasi_design_cover);
+			}else{
+				$lokasi_design_cover=null;
+			}
+			$data2 = array(
+				'lokasi_cover'	 		=> $lokasi_cover,
+				'lokasi_book'	  		=> $lokasi_book,
+				'lokasi_design_cover'	=> $lokasi_design_cover,
+				'lokasi_sample'			=> null
+				
+			);
+			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post,$data2,$statusEditing);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -227,7 +254,16 @@ class ControllerCommonMybooks extends Controller {
 			}else{
 				$lokasi_design_cover=null;
 			}
-			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post,$lokasi_book,$statusEditing);
+			$status_editing==false;
+			$data2 = array(
+				'lokasi_cover'	 		=> $lokasi_cover,
+				'lokasi_book'	  		=> null,
+				'lokasi_design_cover'	=> $lokasi_design_cover,
+				'lokasi_sample'			=> null
+				
+			);
+
+			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post,$data2,$statusEditing);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -265,7 +301,7 @@ class ControllerCommonMybooks extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 			
-			$this->response->redirect($this->url->link('common/mybooks/getEditingList', ' ', 'SSL'));
+			$this->response->redirect($this->url->link('common/mybooks/getDesignList', ' ', 'SSL'));
 			
 			
 		}
@@ -305,7 +341,16 @@ class ControllerCommonMybooks extends Controller {
 				$statusEditing=true;
 				$lokasi_book=null;
 			}
-			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post,$lokasi_book,$statusEditing);
+
+			$data2 = array(
+				'lokasi_cover'	 		=> null,
+				'lokasi_book'	  		=> $lokasi_book,
+				'lokasi_design_cover'	=> null,
+				'lokasi_sample'			=> null
+				
+			);
+
+			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post,$data2,$statusEditing);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -1265,11 +1310,7 @@ class ControllerCommonMybooks extends Controller {
 		$product_total = $this->model_catalog_productbooks->getTotalProductsDesigner($filter_data,$designer_id);
 
 		$results = $this->model_catalog_productbooks->getProductsDesigner($filter_data,$designer_id);
-		if(!isset($result)){
-			$data['result']="ada isinya";
-		}else{
-			$data['result']="ga ada isinya";
-		}
+		
 
 		foreach ($results as $result) {
 			if (is_file(DIR_IMAGE . $result['image'])) {
@@ -1319,6 +1360,7 @@ class ControllerCommonMybooks extends Controller {
 				//'download'   => $this->url->link('catalog/product/downloadBooks', '&product_id=' . $result['product_id'] . $url, 'SSL')
 				'download'   => $download,
 				'totalSelling'=>$totalSelling,
+				'desc_design' =>$result['desc_design'],
 				'your_royalty'=>$totalSelling*$result['royalty']
 				//'href'       => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
 			);
@@ -1344,7 +1386,10 @@ class ControllerCommonMybooks extends Controller {
 		$data['column_action'] = $this->language->get('column_action');
 		$data['column_total_selling'] = $this->language->get('column_total_selling');
 		$data['column_your_royalty'] = $this->language->get('column_your_royalty');
+		$data['column_desc_design'] = $this->language->get('column_desc_design');
 
+		$data['entry_design_cover'] = $this->language->get('entry_design_cover');
+		$data['entry_new_image'] = $this->language->get('entry_new_image');
 		$data['entry_tahun'] = $this->language->get('entry_tahun');
 		$data['entry_bulan'] = $this->language->get('entry_bulan');
 		$data['entry_name'] = $this->language->get('entry_name');
@@ -1824,22 +1869,7 @@ class ControllerCommonMybooks extends Controller {
 			$data['product_description'] = array();
 		}
 
-		/*if (isset($this->request->post['image'])) {
-			$data['image'] = $this->request->post['image'];
-		} elseif (!empty($product_info)) {
-			$data['image'] = $product_info['image'];
-		} else {
-			$data['image'] = '';
-		}*/
-
-		/*if (isset($this->request->files['image'])) {
-			$fileimage = basename(html_entity_decode($this->request->files['image']['name'], ENT_QUOTES, 'UTF-8'));
-			$file_image = "cover/".$fileimage . '.' . md5(mt_rand());
-			move_uploaded_file($this->request->files['image']['tmp_name'], DIR_IMAGE . $file_image);
-			$data['image'] = $file_image;
-		} else {
-			$data['image'] = '';
-		}*/
+		
 
 		$data['price_royalty']=0;
 		$data['pub_price']=0;
@@ -1864,21 +1894,25 @@ class ControllerCommonMybooks extends Controller {
 			$data['model'] = 'buku';
 		}
 
-		if (isset($this->request->files['book'])) {
-			$filebook = basename(html_entity_decode($this->request->files['book']['name'], ENT_QUOTES, 'UTF-8'));
-			$file = "file/".$filebook . '.' . md5(mt_rand());
-			move_uploaded_file($this->request->files['book']['tmp_name'], DIR_BOOK. $file);
-			$data['book']=$file;
-		} else {
-			$data['book'] = '';
-		}
-
+		
 		if (isset($this->request->post['author'])) {
 			$data['author'] = $this->request->post['author'];
 		} elseif (!empty($product_info)) {
 			$data['author'] = $product_info['author'];
 		} else {
 			$data['author'] = '';
+		}
+
+		if (isset($this->request->post['status1'])) {
+			$data['status1'] = $this->request->post['status1'];
+		} elseif (!empty($product_info)) {
+			$data['status1'] = $product_info['status1'];
+		} else {
+			$data['status1'] = '';
+		}
+
+		if(!empty($product_info)){
+			$data['status_edit']=$product_info['status2'];
 		}
 
 		if (isset($this->request->post['color_page'])) {
@@ -2438,7 +2472,7 @@ class ControllerCommonMybooks extends Controller {
 		if (isset($this->request->post['request_design'])) {
 			$data['request_design'] = $this->request->post['request_design'];
 		} else {
-			$data['request_design'] = 0;
+			$data['request_design'] = "";
 		}
 
 		if (isset($this->request->post['design_description'])) {
@@ -3705,7 +3739,7 @@ class ControllerCommonMybooks extends Controller {
 		} else {
 			$data['get_product_id']=true;
 			$data['group_id'] =$this->customer->getGroupId();
-			$data['action'] = $this->url->link('common/mybooks/editListBooks',  '&product_id=' . $this->request->get['product_id'] . $url, 'SSL');
+			$data['action'] = $this->url->link('common/mybooks/editDesignBooks',  '&product_id=' . $this->request->get['product_id'] . $url, 'SSL');
 		}
 
 		$data['cancel'] = $this->url->link('common/mybooks/getDesignList', ' ', 'SSL');
@@ -4451,8 +4485,7 @@ class ControllerCommonMybooks extends Controller {
 	    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
 	    $file_size_buku = $this->request->files['book_edit']['size'];
 	      
-		$lokasi_book="file/".date("smhymd")."_".$file_name_buku;
-
+		
 	    if (in_array(strtolower(substr(strrchr($file_name_buku, '.'), 1)), $allowed_ext_buku)
 	    	){
 	   		// if (in_array($file_ext_buku, $allowed_ext_buku) === true) {

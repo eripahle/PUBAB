@@ -201,7 +201,7 @@
                           <option value="0"><?php echo $text_none; ?></option>
                           <?php foreach ($paper_size as $paper_size) { ?>
                           <?php if ($paper_size['paper_size_id'] == $paper_size_id) { ?>
-                          <option value="<?php echo $paper_size_id['paper_size_id']; ?>" selected="selected"><?php echo $paper_size['size']; ?></option>
+                          <option value="<?php echo $paper_size['paper_size_id']; ?>" selected="selected"><?php echo $paper_size['size']; ?></option>
                           <?php } else { ?>
                           <option value="<?php echo $paper_size['paper_size_id']; ?>"><?php echo $paper_size['size']; ?></option>
                           <?php } ?>
@@ -217,7 +217,7 @@
                           <option value="0"><?php echo $text_none; ?></option>
                           <?php foreach ($paper_type as $paper_type) { ?>
                           <?php if ($paper_type['paper_type_id'] == $paper_type_id) { ?>
-                          <option value="<?php echo $paper_type_id['paper_type_id']; ?>" selected="selected"><?php echo $paper_type['type']; ?></option>
+                          <option value="<?php echo $paper_type['paper_type_id']; ?>" selected="selected"><?php echo $paper_type['type']; ?></option>
                           <?php } else { ?>
                           <option value="<?php echo $paper_type['paper_type_id']; ?>"><?php echo $paper_type['type']; ?></option>
                           <?php } ?>
@@ -438,13 +438,17 @@
                 <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status_author; ?></label>
                 <div class="col-sm-10">
                   <select name="status1" id="input-status1" class="form-control">
-                    <?php if ($status1) { ?>
+                    <?php if ($status1==1) { ?>
                     <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-                    <option value="0"><?php echo $text_disabled; ?></option>
                     <?php } else { ?>
                     <option value="1"><?php echo $text_enabled; ?></option>
-                    <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
                     <?php } ?>
+                    <?php if ($status1==0) { ?>
+                    <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                    <?php } else { ?>
+                    <option value="0"><?php echo $text_disabled; ?></option>
+                    <?php } ?>
+                     
                   </select>
                 </div>
               </div>

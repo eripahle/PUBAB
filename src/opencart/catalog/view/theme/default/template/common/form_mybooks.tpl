@@ -72,7 +72,7 @@
                         </div>
                       </div>
                     </div>
-                  
+                  <?php if($status!=1){ ?>
                    <div class="form-group required">
                         <label class="col-sm-2 control-label" for="input-book"><?php echo $entry_book; ?></label>             
                         <div class="col-sm-3">                                
@@ -84,7 +84,8 @@
                        <div class="text">Ukuran file harus kurang dari 20 Mb</div>
                         </div>       
                         <div class="col-sm-7">* Silahkan Download file template naskah terlebih dahulu, hanya menerima format doc,docx saja</div>                                                                
-                   </div>  
+                   </div> 
+                   <?php }?> 
                    
                    <?php if(!$get_product_id){ ?>
 
@@ -199,17 +200,20 @@
                       </div>        
                     </div>
                    <?php }?>
-                  <?php if($get_product_id){ ?>
+                  <?php if($get_product_id && $status_edit==1){ ?>
                       <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status_author; ?></label>
                         <div class="col-sm-10">
                           <select name="status1" id="input-status1" class="form-control">
-                            <?php if ($status1) { ?>
+                            <?php if ($status1==1) { ?>
                             <option value="1" selected="selected"><?php echo $text_agree; ?></option>
-                            <option value="0"><?php echo $text_disagree; ?></option>
                             <?php } else { ?>
                             <option value="1"><?php echo $text_agree; ?></option>
+                            <?php } ?>
+                            <?php if ($status1==0) { ?>
                             <option value="0" selected="selected"><?php echo $text_disagree; ?></option>
+                            <?php } else { ?>
+                            <option value="0"><?php echo $text_disagree; ?></option>
                             <?php } ?>
                           </select>
                         </div>
@@ -219,37 +223,34 @@
               <div class="tab-pane" id="tab-design">
                 <?php if(!$get_product_id){ ?>
                  <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_request_design; ?></label>             
+                        <label class="col-sm-2 control-label" for="input-request-design"><?php echo $entry_request_design; ?></label>             
                         <div class="col-sm-3">
-                          <select name="request_design" id="input-category-class" class="form-control">
+                          <select name="request_design" id="input-request-design" class="form-control">
+                             <option value="-1"selected="selected">-Select-</option>
                             <?php if($request_design==1) { ?>
                                   <option value="1" selected="selected">Yes</option>
                             <?php }else { ?>
                                   <option value="1">Yes</option>
                             <?php } ?>
-                            <?php if($request_design==0) { ?>
-                                  <option value="0" selected="selected">No</option>
-                            <?php }else { ?>
                                   <option value="0">No</option>
-                            <?php } ?>
                               
                           </select>
                         </div>                                                                       
                    </div>
-                   <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_request_design; ?></label>             
+                   <div class="form-group" id="input-desc-design">
+                        <label class="col-sm-2 control-label" for="input-desc-design"><?php echo $entry_request_design; ?></label>    
                         <div class="col-sm-10">
-                            <textarea name="design_description" rows="5" placeholder="<?php echo $desc_request_design; ?>" class="form-control"></textarea>
+                            <textarea name="design_description" rows="5" placeholder="<?php echo $desc_request_design; ?>" class="form-control" id="input-desc-design"></textarea>
                             <?php if ($error_design_description) { ?>
                           <div class="text-danger"><?php echo $error_design_description; ?></div>
                        <?php } ?>
                         </div>                                                                      
                    </div> 
 
-                  <div class="form-group">
+                  <div class="form-group" id="input-cover">
                         <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_design_cover; ?></label>        
                         <div class="col-sm-3">                                
-                            <input  type="file" name="design_cover"  class="btn btn-primary" >
+                            <input  type="file" name="design_cover"  class="btn btn-primary" id="input-image" >
                        <?php if ($error_design_cover) { ?>
                           <div class="text-danger"><?php echo $error_design_cover; ?></div>
                        <?php } ?>
@@ -258,10 +259,10 @@
                         <div class="col-sm-7">* Silahkan Download Cover Template Terlebih dahulu,hanya menerima format png,jpg,dan jpeg</div>                
                   </div>
 
-                   <div class="form-group">
+                   <div class="form-group" id="input-cover2">
                         <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_new_image; ?></label>             
                         <div class="col-sm-3">                                
-                            <input  type="file" name="image"  class="btn btn-primary" >
+                            <input  type="file" name="image"  class="btn btn-primary" id="input-image">
                             
                        <?php if ($error_extension_image) { ?>
                           <div class="text-danger"><?php echo $error_extension_image; ?></div>
@@ -285,7 +286,31 @@
   <link rel="stylesheet" href="catalog/view/javascript/summernote/summernote-bs2.css" type="text/css" />
   <script type="text/javascript" src="catalog/view/javascript/summernote/summernote.js"></script>
   <script type="text/javascript" src="catalog/view/javascript/summernote/summernote.min.js"></script>
+  
 <script type="text/javascript"><!--
+$(document).ready(function(){
+      $("#input-desc-design").hide();
+      $("#input-cover").hide();
+      $("#input-cover2").hide();
+  
+});
+$("#input-request-design").on("change",function(){
+    
+    if($("#input-request-design").val()==1){
+      $("#input-desc-design").show();
+      $("#input-cover").hide();
+      $("#input-cover2").hide();
+    }else if($("#input-request-design").val()==-1){
+      $("#input-desc-design").hide();
+      $("#input-cover").hide();
+      $("#input-cover2").hide();
+    }else{
+      $("#input-cover").show();
+      $("#input-cover2").show();
+      $("#input-desc-design").hide();
+    }
+    
+});
 
 $("#input-bw-page").on("change",function(){
     var bw_page=$(this).val();

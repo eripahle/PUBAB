@@ -137,35 +137,9 @@
                     <?php } else { ?>
                     <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                     <?php } ?></td>
-                 
-                  <td class="text-left"><?php if ($sort == 'p.price') { ?>
-                    <a href="<?php echo $sort_price; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_price; ?></a>
-                    <?php } else { ?>
-                    <a href="<?php echo $sort_price; ?>"><?php echo $column_price; ?></a>
-                    <?php } ?></td>
-                 
-                  <td class="text-left"><?php if ($sort == 'p.status_author') { ?>
-                    <a href="<?php echo $sort_status_author; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status_author; ?></a>
-                    <?php } else { ?>
-                    <a href="<?php echo $sort_status_author; ?>"><?php echo $column_status_author; ?></a>
-                    <?php } ?></td>
-                     <td class="text-left"><?php if ($sort == 'p.status_editor') { ?>
-                    <a href="<?php echo $sort_status_editor; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status_editor; ?></a>
-                    <?php } else { ?>
-                    <a href="<?php echo $sort_status_editor; ?>"><?php echo $column_status_editor; ?></a>
-                    <?php } ?></td>
-                    <td class="text-left"><?php if ($sort == 'p.status_management') { ?>
-                    <a href="<?php echo $sort_status_management; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status_management; ?></a>
-                    <?php } else { ?>
-                    <a href="<?php echo $sort_status_management; ?>"><?php echo $column_status_management; ?></a>
-                    <?php } ?></td>
-                    <td class="text-left"><?php if ($sort == 'p.status') { ?>
-                    <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
-                    <?php } else { ?>
-                    <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
-                    <?php } ?></td>
+                 <td class="text-left"><?php echo $column_desc_design; ?></td>
                    <td class="text-left"><?php echo $column_total_selling; ?></td>
-                   <td class="text-left"><?php echo $column_your_royalty; ?></td>
+                  
                   <td class="text-left"><?php echo $column_action; ?></td>
                 </tr>
               </thead>
@@ -180,20 +154,10 @@
                     <span class="img-thumbnail list"><i class="fa fa-camera fa-2x"></i></span>
                     <?php } ?></td>
                   <td class="text-left"><?php echo $product['name']; ?></td>
-                 
-                  <td class="text-left"><?php if ($product['special']) { ?>
-                    <span style="text-decoration: line-through;"><?php echo $product['price']; ?></span><br/>
-                    <div class="text-danger"><?php echo $product['special']; ?></div>
-                    <?php } else { ?>
-                    <?php echo $product['price']; ?>
-                    <?php } ?></td>
-                 
-                  <td class="text-left"><?php echo $product['status1']; ?></td>
-                  <td class="text-left"><?php echo $product['status2']; ?></td>
-                  <td class="text-left"><?php echo $product['status3']; ?></td>
-                  <td class="text-left"><?php echo $product['status']; ?></td>
+                  <td class="text-left"><?php echo $product['desc_design']; ?></td>
+                  
                   <td class="text-left"><?php echo $product['totalSelling']; ?></td>
-                  <td class="text-left"><?php echo $product['your_royalty']; ?></td>
+                  
                   <td class="text-left">
                     <a href="<?php echo $product['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                   </td>

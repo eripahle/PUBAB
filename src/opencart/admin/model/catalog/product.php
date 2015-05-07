@@ -132,13 +132,24 @@ class ModelCatalogProduct extends Model {
 		return $product_id;
 	}
 
-	public function editProduct($product_id, $data) {
+	public function editProduct($product_id, $data,$data2 = array()) {
 		$this->event->trigger('pre.admin.product.edit', $data);
 
 		$this->db->query("UPDATE " . DB_PREFIX . "product SET customer_id=".(int)$data['customer_id']." , editor_id=".(int)$data['editor_id']." , model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', upc = '" . $this->db->escape($data['upc']) . "', ean = '" . $this->db->escape($data['ean']) . "', jan = '" . $this->db->escape($data['jan']) . "', isbn = '" . $this->db->escape($data['isbn']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', location = '" . $this->db->escape($data['location']) . "', quantity = '" . (int)$data['quantity'] . "', minimum = '" . (int)$data['minimum'] . "', subtract = '" . (int)$data['subtract'] . "', stock_status_id = '" . (int)$data['stock_status_id'] . "', date_available = '" . $this->db->escape($data['date_available']) . "', manufacturer_id = '" . (int)$data['manufacturer_id'] . "', shipping = '" . (int)$data['shipping'] . "', price = '" . (float)$data['price'] . "', points = '" . (int)$data['points'] . "', weight = '" . (float)$data['weight'] . "', weight_class_id = '" . (int)$data['weight_class_id'] . "', length = '" . (float)$data['length'] . "', width = '" . (float)$data['width'] . "', height = '" . (float)$data['height'] . "', length_class_id = '" . (int)$data['length_class_id'] . "', status = '" . (int)$data['status'] . "',status1 = '" . (int)$data['status1'] . "',status2 = '" . (int)$data['status2'] . "',status3 = '" . (int)$data['status3'] . "', tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', sort_order = '" . (int)$data['sort_order'] . "', date_modified = NOW() WHERE product_id = '" . (int)$product_id . "'");
 
 		if (isset($data['image'])) {
 			$this->db->query("UPDATE " . DB_PREFIX . "product SET image = '" . $this->db->escape($data['image']) . "' WHERE product_id = '" . (int)$product_id . "'");
+		}
+		if($data2['lokasi_design_cover']!=null){
+				$this->db->query("UPDATE ".DB_PREFIX."product set design_cover='".$this->db->escape($data2['lokasi_design_cover'])."' WHERE product_id= '".$product_id."'");
+		}
+
+		if($data2['lokasi_book']!=null){
+			$this->db->query("UPDATE " . DB_PREFIX ."draf SET draf='".$this->db->escape($data2['lokasi_book'])."', tanggal_upload= '".date("Y-m-d")."' WHERE product_id=".(int)$product_id."" );
+		}
+
+		if($data2['lokasi_book']!=null){
+			$this->db->query("UPDATE " . DB_PREFIX ."draf SET draf='".$this->db->escape($data2['lokasi_book'])."', tanggal_upload= '".date("Y-m-d")."' WHERE product_id=".(int)$product_id."" );
 		}
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_description WHERE product_id = '" . (int)$product_id . "'");
@@ -717,7 +728,8 @@ class ModelCatalogProduct extends Model {
 		if(isset($query)){
 			foreach ($query->rows as $result) {
 				return $book= array(
-					'draf'             => $result['draf']
+					'draf'             => $result['draf'],
+					'sample_script'	   => $result['sample_script']
 				);
 			}
 		}else{

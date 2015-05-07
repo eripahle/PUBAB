@@ -11,6 +11,28 @@ class ControllerCatalogProduct extends Controller {
 
 		$this->getList();
 	}
+
+	protected function checkValidRequestDrafBookEditor() {
+	    $dot = '.';
+	    $allowed_ext_buku = array('doc', 'docx');
+	    $file_name_buku = $this->request->files['book_edit']['name'];
+	    $file_name_sample = $this->request->files['sample_script']['name'];
+	    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
+	    $file_size_buku = $this->request->files['book_edit']['size'];
+	      
+		
+	    if (in_array(strtolower(substr(strrchr($file_name_buku, '.'), 1)), $allowed_ext_buku)
+	    	){
+	   		// if (in_array($file_ext_buku, $allowed_ext_buku) === true) {
+	        if ($file_size_buku < 20480) {
+	            return TRUE;
+	        } else {
+	            return FALSE;
+	        }
+	    } else {
+	        return FALSE;
+	    }
+	}
       
     public function add() {
 		$this->load->language('catalog/product');
@@ -100,7 +122,64 @@ class ControllerCatalogProduct extends Controller {
 		$this->load->model('catalog/product');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
+			if(!empty($this->request->files['book']['name'])){
+				if($this->checkValidRequestDrafBookEditor()){
+					//hapus buku sebelumnya
+					$books=$this->model_catalog_product->getBooks($this->request->get['product_id']);
+					if(file_exists("book/".$books['draf'])){
+						unlink("book/".$books['draf']);
+					}
+					$dot = '.';
+				    $file_name_buku = $this->request->files['book']['name'];
+				    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
+				    $file_size_buku = $this->request->files['book']['size'];
+				      
+					$lokasi_book="file/".date("smhymd")."_".$file_name_buku;
+					move_uploaded_file($this->request->files['book']['tmp_name'], DIR_BOOK."/".$lokasi_book);
+				}
+				
+			}else{
+				$lokasi_book=null;
+			}
+
+			if(!empty($this->request->files['sample_script']['name'])){
+				if($this->checkValidRequestDrafBookEditor()){
+					//hapus buku sebelumnya
+					$books=$this->model_catalog_product->getBooks($this->request->get['product_id']);
+					if(file_exists("book/".$books['draf'])){
+						unlink("book/".$books['draf']);
+					}
+					$dot = '.';
+				    $file_name_buku = $this->request->files['sample_script']['name'];
+				    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
+				    $file_size_buku = $this->request->files['sample_script']['size'];
+				      
+					$lokasi_book="file/".date("smhymd")."_".$file_name_buku;
+					move_uploaded_file($this->request->files['sample_script']['tmp_name'], DIR_BOOK."/".$lokasi_book);
+				}
+				
+			}else{
+				$lokasi_book=null;
+			}
+			
+			if(!empty($this->request->files['design_cover']['name'])){
+				$file_name_design_cover = $this->request->files['design_cover']['name'];
+	        	//$file_ext_image = strtolower(end(explode($dot, $file_name_image)));
+	        	$file_size_design_cover = $this->request->files['design_cover']['size'];
+	       		$lokasi_design_cover="cover/".md5(mt_rand())."_".$file_name_design_cover;
+	       		move_uploaded_file($this->request->files['design_cover']['tmp_name'], DIR_IMAGE."/".$lokasi_design_cover);
+			}else{
+				$lokasi_design_cover=null;
+			}
+
+			$data2 = array(
+				'sample_script'	 		=> $sample_script,
+				'lokasi_book'	  		=> $lokasi_book,
+				'lokasi_design_cover'	=> $lokasi_design_cover
+				
+			);
+
+			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post,$data2);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -252,7 +331,6 @@ class ControllerCatalogProduct extends Controller {
 		$this->getList();
 	}
               
-
 	protected function getList() {
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
@@ -863,6 +941,14 @@ class ControllerCatalogProduct extends Controller {
 			$data['color_page'] = $product_info['color_page'];
 		} else {
 			$data['color_page'] = '';
+		}
+
+		if (isset($this->request->post['bw_page'])) {
+			$data['bw_page'] = $this->request->post['bw_page'];
+		} elseif (!empty($product_info)) {
+			$data['bw_page'] = $product_info['bw_page'];
+		} else {
+			$data['bw_page'] = '';
 		}
 
 		if (isset($this->request->post['bw_page'])) {

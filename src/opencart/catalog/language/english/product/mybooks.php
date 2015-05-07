@@ -23,6 +23,7 @@ $_['text_no_results']		 = 'You do not have a book';
 // Column
 $_['column_name']            = 'Title';
 $_['column_total_selling']   = 'Total Selling';
+$_['column_desc_design']     = 'Description Design';
 $_['column_your_royalty']    = 'Your Royalty';
 $_['column_model']           = 'Model';
 $_['column_image']           = 'Cover';

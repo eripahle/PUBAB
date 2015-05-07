@@ -33,28 +33,25 @@
                        <?php if ($error_design_cover) { ?>
                           <div class="text-danger"><?php echo $error_design_cover; ?></div>
                        <?php } ?>
+                       <div class="text">Ukuran file tidak lebih dari 5 Mb</div>
                         </div>
                         <div class="col-sm-7">* Silahkan Download Cover Template Terlebih dahulu,hanya menerima format png,jpg,dan jpeg</div>                
                   </div>
 
                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_request_design; ?></label>             
+                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_new_image; ?></label>             
                         <div class="col-sm-3">                                
                             <input  type="file" name="image"  class="btn btn-primary" >
                             
                        <?php if ($error_extension_image) { ?>
                           <div class="text-danger"><?php echo $error_extension_image; ?></div>
                        <?php } ?>
+                       <div class="text">Ukuran file tidak lebih dari 1 Mb</div>
                         </div>
                         <div class="col-sm-7">* HANYA SAMPUL DEPAN SAJA,hanya menerima format png,jpg,dan jpeg</div>                                                                       
                    </div>
 
-                   <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_request_design; ?></label>             
-                        <div class="col-sm-10">
-                            <textarea name="design_description" rows="5" placeholder="<?php echo $desc_request_design; ?>" class="form-control" readonly="true"></textarea>
-                        </div>                                                                      
-                   </div>
+                   
                   <?php } ?>
                   
         	<div class="buttons">

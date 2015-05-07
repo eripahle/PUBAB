@@ -195,7 +195,8 @@ class ModelCatalogProductbooks extends Model {
 			'p.status2',
 			'p.status3',
 			'p.date_added',
-			'p.sort_order'
+			'p.sort_order',
+			'p.desc_design'
 		);
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {

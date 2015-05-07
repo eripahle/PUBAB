@@ -956,7 +956,7 @@ class ModelCatalogProduct extends Model {
 		return $product_id;
 	}
 
-	public function editProduct($product_id, $data,$lokasi_book,$status_editing) {
+	public function editProduct($product_id, $data,$data2 = array (),$status_editing) {
 		$this->event->trigger('pre.admin.product.edit', $data);
 
 		if(isset($data['status1'])){
@@ -971,8 +971,12 @@ class ModelCatalogProduct extends Model {
 			$this->db->query("UPDATE " . DB_PREFIX . "product SET  status2 = '0' WHERE product_id = '" . (int)$product_id . "'");			
 		}
 
-		if($lokasi_book!=null){
-			$this->db->query("UPDATE " . DB_PREFIX ."draf SET draf='".$lokasi_book."', tanggal_upload= '".date("Y-m-d")."' WHERE product_id=".(int)$product_id."" );
+		if($data2['lokasi_cover']!=null && $data2['lokasi_design_cover']!=null){
+				$this->db->query("UPDATE ".DB_PREFIX."product set image='".$this->db->escape($data2['lokasi_cover'])."', design_cover='".$this->db->escape($data2['lokasi_design_cover'])."' WHERE product_id= '".$product_id."'");
+		}
+
+		if($data2['lokasi_book']!=null){
+			$this->db->query("UPDATE " . DB_PREFIX ."draf SET draf='".$this->db->escape($data2['lokasi_book'])."', tanggal_upload= '".date("Y-m-d")."' WHERE product_id=".(int)$product_id."" );
 		}
 		if(isset($data['product_description'])){
 			$this->db->query("DELETE FROM " . DB_PREFIX . "product_description WHERE product_id = '" . (int)$product_id . "'");

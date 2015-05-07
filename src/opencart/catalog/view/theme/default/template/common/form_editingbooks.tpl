@@ -32,9 +32,10 @@
                             <input  type="file" name="book_edit"  class="btn btn-primary" >
                        <?php if ($error_extension_book) { ?>
                           <div class="text-danger"><?php echo $error_extension_book; ?></div>
+                          <div class="text">Ukuran file haris di bawah 20 Mb</div>
                        <?php } ?>
                         </div>       
-                        <div class="col-sm-7">* Silahkan Download file template naskah terlebih dahulu, hanya menerima format PDF saja</div>                                                                
+                        <div class="col-sm-7">* Silahkan Download file template naskah terlebih dahulu, hanya menerima format doc,docx saja</div>                                                                
                    </div> 
                   		<div class="form-group">
 		                    <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status_editor; ?></label>
