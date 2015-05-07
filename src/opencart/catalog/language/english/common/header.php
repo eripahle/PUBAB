@@ -27,4 +27,5 @@ $_['text_list_edit_book'] = "List My Editing";
 $_['text_list_design_book'] = "List My Design";
 $_['text_payment'] = 'Upload Payment';
 $_['text_my_payment'] = 'My Payment';
+$_['customer_name']     ='Hi, %s %s';
 

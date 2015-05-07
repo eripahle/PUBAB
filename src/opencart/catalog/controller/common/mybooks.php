@@ -4402,7 +4402,7 @@ class ControllerCommonMybooks extends Controller {
 
 	protected function checkValidRequestDrafBook() {
 	    $dot = '.';
-	    $allowed_ext_buku = array('doc', 'docx', 'pdf');
+	    $allowed_ext_buku = array('doc', 'docx');
 	    $file_name_buku = $this->request->files['book']['name'];
 	    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
 	    $file_size_buku = $this->request->files['book']['size'];
@@ -4411,7 +4411,7 @@ class ControllerCommonMybooks extends Controller {
 
 	    if (in_array(strtolower(substr(strrchr($file_name_buku, '.'), 1)), $allowed_ext_buku)){
 	   		// if (in_array($file_ext_buku, $allowed_ext_buku) === true) {
-	        if ($file_size_buku < 1044070000) {
+	        if ($file_size_buku < 20480) {
 	            return TRUE;
 	        } else {
 	            return FALSE;
@@ -4423,7 +4423,7 @@ class ControllerCommonMybooks extends Controller {
 
 	protected function checkValidRequestSampleBook(){
 		$dot = '.';
-	    $allowed_ext_buku = array('doc', 'docx', 'pdf');
+	    $allowed_ext_buku = array('doc', 'docx');
 	    //$file_name_buku = $this->request->files['book']['name'];
 	    $file_name_sample = $this->request->files['sample_script']['name'];
 	    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
@@ -4433,7 +4433,7 @@ class ControllerCommonMybooks extends Controller {
 
 	    if (in_array(strtolower(substr(strrchr($file_name_sample, '.'), 1)), $allowed_ext_buku)){
 	   		// if (in_array($file_ext_buku, $allowed_ext_buku) === true) {
-	        if ($file_size_buku < 1044070000) {
+	        if ($file_size_buku < 1024) {
 	            return TRUE;
 	        } else {
 	            return FALSE;
@@ -4445,7 +4445,7 @@ class ControllerCommonMybooks extends Controller {
 
 	protected function checkValidRequestDrafBookEditor() {
 	    $dot = '.';
-	    $allowed_ext_buku = array('doc', 'docx', 'pdf');
+	    $allowed_ext_buku = array('doc', 'docx');
 	    $file_name_buku = $this->request->files['book_edit']['name'];
 	    $file_name_sample = $this->request->files['sample_script']['name'];
 	    //$file_ext_buku = strtolower(substr(strrchr($file_name_buku,'.'),1), $file_name_buku);
@@ -4456,7 +4456,7 @@ class ControllerCommonMybooks extends Controller {
 	    if (in_array(strtolower(substr(strrchr($file_name_buku, '.'), 1)), $allowed_ext_buku)
 	    	){
 	   		// if (in_array($file_ext_buku, $allowed_ext_buku) === true) {
-	        if ($file_size_buku < 1044070000) {
+	        if ($file_size_buku < 20480) {
 	            return TRUE;
 	        } else {
 	            return FALSE;
@@ -4478,7 +4478,7 @@ class ControllerCommonMybooks extends Controller {
 	        if (in_array(strtolower(substr(strrchr($file_name_image, '.'), 1)), $allowed_ext_image)
 	        	&& in_array(strtolower(substr(strrchr($file_name_cover, '.'), 1)), $allowed_ext_image)){
 	        //if (in_array($file_ext_image, $allowed_ext_image) === true) {
-	            if ($file_size_image < 1044070000) {
+	            if ($file_size_image < 5120 && file_name_cover < 1024 ) {
 	   	                return TRUE;
 	            } else {
 	                return FALSE;

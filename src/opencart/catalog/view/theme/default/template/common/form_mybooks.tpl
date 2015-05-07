@@ -79,9 +79,11 @@
                             <input  type="file" name="book"  class="btn btn-primary" >
                        <?php if ($error_extension_book) { ?>
                           <div class="text-danger"><?php echo $error_extension_book; ?></div>
+                          
                        <?php } ?>
+                       <div class="text">Ukuran file harus kurang dari 20 Mb</div>
                         </div>       
-                        <div class="col-sm-7">* Silahkan Download file template naskah terlebih dahulu, hanya menerima format PDF saja</div>                                                                
+                        <div class="col-sm-7">* Silahkan Download file template naskah terlebih dahulu, hanya menerima format doc,docx saja</div>                                                                
                    </div>  
                    
                    <?php if(!$get_product_id){ ?>
@@ -93,8 +95,9 @@
                        <?php if ($error_sample_book) { ?>
                           <div class="text-danger"><?php echo $error_sample_book; ?></div>
                        <?php } ?>
+                       <div class="text">Ukuran file harus kurang dari 1 Mb</div>
                         </div>        
-                        <div class="col-sm-7">* 5-10 halaman pertama naskah,fungsi sebagai 'tester' untuk calon pembeli, hanya menerima format PDF saja</div>                                                               
+                        <div class="col-sm-7">* 5-10 halaman pertama naskah,fungsi sebagai 'tester' untuk calon pembeli, hanya menerima format doc,docx saja</div>                                                               
                    </div>  
 
                    <?php }?>
@@ -215,31 +218,7 @@
               </div> 
               <div class="tab-pane" id="tab-design">
                 <?php if(!$get_product_id){ ?>
-
-                  <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_design_cover; ?></label>        
-                        <div class="col-sm-3">                                
-                            <input  type="file" name="design_cover"  class="btn btn-primary" >
-                       <?php if ($error_design_cover) { ?>
-                          <div class="text-danger"><?php echo $error_design_cover; ?></div>
-                       <?php } ?>
-                        </div>
-                        <div class="col-sm-7">* Silahkan Download Cover Template Terlebih dahulu,hanya menerima format png,jpg,dan jpeg</div>                
-                  </div>
-
-                   <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_request_design; ?></label>             
-                        <div class="col-sm-3">                                
-                            <input  type="file" name="image"  class="btn btn-primary" >
-                            
-                       <?php if ($error_extension_image) { ?>
-                          <div class="text-danger"><?php echo $error_extension_image; ?></div>
-                       <?php } ?>
-                        </div>
-                        <div class="col-sm-7">* HANYA SAMPUL DEPAN SAJA,hanya menerima format png,jpg,dan jpeg</div>                                                                       
-                   </div>
-
-                   <div class="form-group">
+                 <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_request_design; ?></label>             
                         <div class="col-sm-3">
                           <select name="request_design" id="input-category-class" class="form-control">
@@ -265,7 +244,34 @@
                           <div class="text-danger"><?php echo $error_design_description; ?></div>
                        <?php } ?>
                         </div>                                                                      
-                   </div>  
+                   </div> 
+
+                  <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_design_cover; ?></label>        
+                        <div class="col-sm-3">                                
+                            <input  type="file" name="design_cover"  class="btn btn-primary" >
+                       <?php if ($error_design_cover) { ?>
+                          <div class="text-danger"><?php echo $error_design_cover; ?></div>
+                       <?php } ?>
+                       <div class="text">Ukuran file harus kurang dari 5 Mb</div>
+                        </div>
+                        <div class="col-sm-7">* Silahkan Download Cover Template Terlebih dahulu,hanya menerima format png,jpg,dan jpeg</div>                
+                  </div>
+
+                   <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_new_image; ?></label>             
+                        <div class="col-sm-3">                                
+                            <input  type="file" name="image"  class="btn btn-primary" >
+                            
+                       <?php if ($error_extension_image) { ?>
+                          <div class="text-danger"><?php echo $error_extension_image; ?></div>
+                       <?php } ?>
+                       <div class="text">Ukuran file harus kurang dari 1 Mb</div>
+                        </div>
+                        <div class="col-sm-7">* HANYA SAMPUL DEPAN SAJA,hanya menerima format png,jpg,dan jpeg</div>                                                                       
+                   </div>
+
+                   
                    <?php } ?>
 
               </div>         

@@ -91,6 +91,7 @@ class ControllerCommonHeader extends Controller {
         $data['services'] = $this->url->link('information/services','','SSL');
         $data['editing_book'] = $this->url->link('information/listeditbook','','SSL');
         $data['design_book'] = $this->url->link('information/listdesignbook','','SSL');
+        $data['customer_name']=sprintf($this->language->get('customer_name'), $this->customer->getFirstName(),$this->customer->getLastName());
                 
                 
                 //$data['upload_payment'] = $this->url->link('common/','','SSL');

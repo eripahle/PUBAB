@@ -294,6 +294,7 @@
               <?php if ($error_zone) { ?>
               <div class="text-danger"><?php echo $error_zone; ?></div>
               <?php } ?>
+
             </div>
           </div>
 
@@ -305,6 +306,7 @@
               <?php if ($error_city) { ?>
               <div class="text-danger"><?php echo $error_city; ?></div>
               <?php } ?>
+               <div class="text">Sesuaikan Dengan Kecamatan di KTP</div>
             </div>
           </div>
           <div class="form-group required">
@@ -314,6 +316,7 @@
               <?php if ($error_postcode) { ?>
               <div class="text-danger"><?php echo $error_postcode; ?></div>
               <?php } ?>
+               <div class="text">Sesuaikan Dengan post code Kecamatan yang di pilih</div>
             </div>
           </div>
           
@@ -480,6 +483,7 @@
               <?php if ($error_password) { ?>
               <div class="text-danger"><?php echo $error_password; ?></div>
               <?php } ?>
+              <div class="text">Harus lebih dari 6 karakter dan kurang dari 20 karakter</div>
             </div>
           </div>
           <div class="form-group required">

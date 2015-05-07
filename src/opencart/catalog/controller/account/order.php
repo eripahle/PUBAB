@@ -39,7 +39,7 @@ class ControllerAccountOrder extends Controller {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_empty'] = $this->language->get('text_empty');
-
+		$data['column_invoice_id'] = $this->language->get('column_invoice_id');
 		$data['column_order_id'] = $this->language->get('column_order_id');
 		$data['column_status'] = $this->language->get('column_status');
 		$data['column_date_added'] = $this->language->get('column_date_added');
@@ -67,9 +67,17 @@ class ControllerAccountOrder extends Controller {
 		foreach ($results as $result) {
 			$product_total = $this->model_account_order->getTotalOrderProductsByOrderId($result['order_id']);
 			$voucher_total = $this->model_account_order->getTotalOrderVouchersByOrderId($result['order_id']);
+			$order_info = $this->model_account_order->getOrder($result['order_id']);
+			if($order_info){
+				if ($order_info['invoice_no']) {
+					$invoice_no = $order_info['invoice_prefix'] . $order_info['invoice_no'];
+				} else {
+					$invoice_no= '';
+				}
+			}
 
 			$data['orders'][] = array(
-				'order_id'   => $result['order_id'],
+				'invoice_no'   => $invoice_no,
 				'name'       => $result['firstname'] . ' ' . $result['lastname'],
 				'status'     => $result['status'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),

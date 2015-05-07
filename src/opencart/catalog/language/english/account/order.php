@@ -21,6 +21,7 @@ $_['text_error']            = 'The order you requested could not be found!';
 
 // Column
 $_['column_order_id']       = 'Order ID';
+$_['column_invoice_id']       = 'No Invoice';
 $_['column_product']        = 'No. of Products';
 $_['column_customer']       = 'Customer';
 $_['column_name']           = 'Product Name';

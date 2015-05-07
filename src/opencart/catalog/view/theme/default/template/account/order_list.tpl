@@ -20,7 +20,7 @@
         <table class="table table-bordered table-hover">
           <thead>
             <tr>
-              <td class="text-right"><?php echo $column_order_id; ?></td>
+              <td class="text-right"><?php echo $column_invoice_id; ?></td>
               <td class="text-left"><?php echo $column_status; ?></td>
               <td class="text-left"><?php echo $column_date_added; ?></td>
               <td class="text-right"><?php echo $column_product; ?></td>
@@ -32,7 +32,7 @@
           <tbody>
             <?php foreach ($orders as $order) { ?>
             <tr>
-              <td class="text-right">#<?php echo $order['order_id']; ?></td>
+              <td class="text-right"><?php echo $order['invoice_no']; ?></td>
               <td class="text-left"><?php echo $order['status']; ?></td>
               <td class="text-left"><?php echo $order['date_added']; ?></td>
               <td class="text-right"><?php echo $order['products']; ?></td>
