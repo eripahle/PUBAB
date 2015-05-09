@@ -1,4 +1,5 @@
-<h3><?php echo $heading_title; ?></h3>
+ 
+<nav id="menu" class="navbar" style="padding-left: 10px; size: 100%; padding-right: 5px;"><h3 style="color: white;"><?php echo $heading_title; ?></h3></nav>
 <div class="row">
   <?php foreach ($products as $product) { ?>
   <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
