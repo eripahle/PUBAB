@@ -48,7 +48,7 @@ class ControllerModulePaymentApprovementAdmin extends Controller {
         $this->getForm();
     }
 
-    public function edit() {
+    public function edit() {     
         $this->load->language('module/payment_approvement_admin');
 
         $this->document->setTitle($this->language->get('heading_title'));
@@ -123,6 +123,7 @@ class ControllerModulePaymentApprovementAdmin extends Controller {
     }
 
     protected function getList() {
+            
         $this->document->setTitle($this->language->get('heading_title'));
         $data['heading_title_sub'] = $this->language->get('heading_title_sub');                
         $data['entry_image'] = $this->language->get('entry_image');
@@ -252,7 +253,9 @@ class ControllerModulePaymentApprovementAdmin extends Controller {
         $this->response->setOutput($this->load->view('module/payment_approvement_admin_list.tpl', $data));
     }
 
-    protected function getForm() {                
+    protected function getForm() {   
+        $this->load->model('localisation/order_status');
+        $data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
         $this->document->setTitle($this->language->get('heading_title'));
         $data['heading_title_sub'] = $this->language->get('heading_title_sub');
         $data['heading_title_sub'] = $this->language->get('heading_title_sub');                

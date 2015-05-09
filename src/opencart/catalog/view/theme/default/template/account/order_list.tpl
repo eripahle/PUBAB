@@ -26,7 +26,7 @@
               <td class="text-right"><?php echo $column_product; ?></td>
               <td class="text-left"><?php echo $column_customer; ?></td>
               <td class="text-right"><?php echo $column_total; ?></td>
-              <td></td>
+              <td colspan="2">Action</td>
             </tr>
           </thead>
           <tbody>
@@ -38,7 +38,12 @@
               <td class="text-right"><?php echo $order['products']; ?></td>
               <td class="text-left"><?php echo $order['name']; ?></td>
               <td class="text-right"><?php echo $order['total']; ?></td>
-              <td class="text-right"><a href="<?php echo $order['href']; ?>" data-toggle="tooltip" title="<?php echo $button_view; ?>" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
+              <td class="text-right">
+              <?php if($order['stat']){ ?>              
+              <a href="<?php echo $order['upload']; ?>" data-toggle="tooltip" title="<?php echo $button_upload; ?>" class="btn btn-primary"><i class="fa fa-upload"></i></a></td>
+             <?php } ?>
+              <td class="text-right">
+                <a href="<?php echo $order['href']; ?>" data-toggle="tooltip" title="<?php echo $button_view; ?>" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
             </tr>
             <?php } ?>
           </tbody>

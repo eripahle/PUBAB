@@ -50,7 +50,9 @@
                                    
                   <td class="text-left"><?php echo $payment['status']; ?></td>
                   <td class="text-right">
-                    <a href="<?php echo $payment['delete']; ?>" data-toggle="tooltip" title="<?php echo $button_delete; ?>" class="btn btn-primary"><i class="fa fa-recycle"></i></a>
+                  <?php if($payment['stat']){?>                  
+                        <a href="<?php echo $payment['delete']; ?>" data-toggle="tooltip" title="<?php echo $button_delete; ?>" class="btn btn-primary"><i class="fa fa-recycle"></i></a>
+                  <?php } ?>                                                            
                     <a href="<?php echo $payment['download']; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_download; ?>" class="btn btn-primary"><i class="fa fa-download"></i></a>
                   </td>
                 </tr>

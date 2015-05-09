@@ -49,7 +49,8 @@ class ControllerAccountOrder extends Controller {
 
 		$data['button_view'] = $this->language->get('button_view');
 		$data['button_continue'] = $this->language->get('button_continue');
-
+                $data['button_upload'] = 'Upload Payment';
+                
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
 		} else {
@@ -83,8 +84,12 @@ class ControllerAccountOrder extends Controller {
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'products'   => ($product_total + $voucher_total),
 				'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
-				'href'       => $this->url->link('account/order/info', 'order_id=' . $result['order_id'], 'SSL'),
+                                'upload'    => $this->url->link('common/payment_approval/add','invoice_no='.$invoice_no ,'SSL'),
+				'href'       => $this->url->link('account/order/info', 'order_id=' . $result['order_id'], 'SSL'),                                                             
+                                'stat'  => $this->check($result['status']),
 			);
+                        
+                        
 		}
 
 		$pagination = new Pagination();
@@ -112,8 +117,15 @@ class ControllerAccountOrder extends Controller {
 			$this->response->setOutput($this->load->view('default/template/account/order_list.tpl', $data));
 		}
 	}
+        protected function check($data){
+            if($data=='Pending'){
+                return true;
+            }else{
+                return false;
+            }
+        }
 
-	public function info() {
+        public function info() {
 		$this->load->language('account/order');
 
 		if (isset($this->request->get['order_id'])) {
@@ -189,6 +201,7 @@ class ControllerAccountOrder extends Controller {
 			$data['button_reorder'] = $this->language->get('button_reorder');
 			$data['button_return'] = $this->language->get('button_return');
 			$data['button_continue'] = $this->language->get('button_continue');
+                        $data['button_upload'] = 'Upload Payment';
 
 			if (isset($this->session->data['error'])) {
 				$data['error_warning'] = $this->session->data['error'];

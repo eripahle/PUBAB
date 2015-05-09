@@ -42,11 +42,19 @@
                         <div class="col-sm-10">
                             <input type="text" name="name" placeholder="" value="<?php echo $invoice;?>" readonly id="input-name" class="form-control" />
                         </div>
-                    </div>
+                    </div>                    
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-name"><?php echo $entry_status; ?></label>
                         <div class="col-sm-10">
-                            <input type="text" name="name" placeholder="" value="<?php echo $status;?>" id="input-name" class="form-control" />
+                            <select name="name" id="input-order-status" class="form-control">
+                                <?php foreach ($order_statuses as $order_status) { ?>
+                                <?php if ($order_status['order_status_id'] == $order_status_id) { ?>
+                                <option value="<?php echo $order_status['name']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
+                                <?php } else { ?>
+                                <option value="<?php echo $order_status['name']; ?>"><?php echo $order_status['name']; ?></option>
+                                <?php } ?>
+                                <?php } ?>
+                            </select>                            
                         </div>
                     </div>
                 </form>

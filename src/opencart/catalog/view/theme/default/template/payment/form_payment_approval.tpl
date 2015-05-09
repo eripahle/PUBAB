@@ -28,7 +28,7 @@
                         <div class="form-group required">
                             <label class="col-sm-2 control-label" for="input-author"><?php echo $entry_invoice; ?></label>
                             <div class="col-sm-10">
-                                <input type="text" name="invoice" placeholder="<?php echo $entry_invoice; ?>" id="input-author" class="form-control" />
+                                <input type="text" value="<?php echo $invoice_no;?>" readonly name="invoice" placeholder="<?php echo $entry_invoice; ?>" id="input-author" class="form-control" />
                             </div>
                         </div> 	              	                                               
                         
