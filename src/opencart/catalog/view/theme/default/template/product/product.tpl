@@ -130,7 +130,7 @@
         <?php } else { ?>
         <?php $class = 'col-sm-4'; ?>
         <?php } ?>
-        <?php if($statusProduct==true) { ?>
+        <?php if($statusSell==true) { ?>
           <div class="<?php echo $class; ?>">
             <div class="btn-group">
               <button type="button" data-toggle="tooltip" class="btn btn-default" title="<?php echo $button_wishlist; ?>" onclick="wishlist.add('<?php echo $product_id; ?>');"><i class="fa fa-heart"></i></button>
@@ -138,8 +138,10 @@
             </div>
             <h1><?php echo $heading_title; ?></h1>
             <h4><?php echo $text_author; ?></h4>
-            <h5><?php echo $text_type; ?></h4>
-            <h5><?php echo $text_size; ?></h4>
+            <h4><?php echo $text_type; ?></h4>
+            <h4><?php echo $text_size; ?></h4>
+            <h4><?php echo $total_page; ?></h4>
+            
             
             <?php if ($price) { ?>
             <ul class="list-unstyled">
@@ -345,13 +347,13 @@
             <?php } ?>
           </div>
         <?php } else{ ?>
-             <?php if($logged && $customer_group==2){ ?>
+             <?php if($logged && $customer_group==2 && $statusProduct!=true){ ?>
              <div class="<?php echo $class; ?>">
                  <a href="<?php echo $get_book_for_edit; ?>" <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $button_edit_editor; ?></button></a>
               </div>
              <?php } ?>
 
-             <?php if($logged && $customer_group==3){ ?>
+             <?php if($logged && $customer_group==3 && $statusDesign!=true){ ?>
                  <div class="<?php echo $class; ?>">
                      <a href="<?php echo $get_book_for_design; ?>" <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $button_edit_design; ?></button></a>
                 </div>

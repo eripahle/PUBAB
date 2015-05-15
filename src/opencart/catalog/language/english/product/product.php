@@ -2,6 +2,7 @@
 // Text
 $_['text_size']                = 'Size Book : %s';
 $_['text_type']                = 'Paper Type : %s';
+$_['total_page']              = 'Total Page : %s';
 $_['text_search']              = 'Search';
 $_['text_author']              = 'Author : %s ';
 $_['text_brand']               = 'Brand';

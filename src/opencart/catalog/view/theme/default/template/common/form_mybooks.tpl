@@ -317,8 +317,8 @@ $("#input-bw-page").on("change",function(){
     var color_page=$("#input-color-page").val();
     var best_price=(color_page*200)+(bw_page*100)+(0.1*((color_page*200)+(bw_page*100)));
     var net=$("#input-price").val()-best_price;
-    var royalty=(net*0.6);
-    var pub=(net*0.4);
+    var royalty=(net*0.5);
+    var pub=(net*0.5);
     $("#input-best-price").val(best_price);
     //$("#input-price-royalty").val(royalty);
     //$("#input-pub-price").val(pub);
@@ -329,8 +329,8 @@ $("#input-color-page").on("change",function(){
     var color_page=$(this).val();
     var best_price=(color_page*200)+(bw_page*100)+(0.1*((color_page*200)+(bw_page*100)));
     var net=$("#input-price").val()-best_price;
-    var royalty=(net*0.6);
-    var pub=(net*0.4);
+    var royalty=(net*0.5);
+    var pub=(net*0.5);
     $("#input-best-price").val(best_price);
     //$("#input-price-royalty").val(royalty);
     //$("#input-pub-price").val(pub);
@@ -340,8 +340,8 @@ $("#input-price").on("change",function(){
     var color_page=$("#input-color-page").val();
     var best_price=(color_page*200)+(bw_page*100)+(0.1*((color_page*200)+(bw_page*100)));
     var net=$(this).val()-best_price;
-    var royalty=(net*0.6);
-    var pub=(net*0.4);
+    var royalty=(net*0.5);
+    var pub=(net*0.5);
     //$("#input-best-price").val(best_price);
     $("#input-price-royalty").val(royalty);
     $("#input-pub-price").val(pub);

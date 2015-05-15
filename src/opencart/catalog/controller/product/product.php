@@ -163,6 +163,8 @@ class ControllerProductProduct extends Controller {
 		$product_info = $this->model_catalog_product->getProductEdit($product_id,$status);
 		//status untuk mengetahui salah satu product apakah sudah ada editor atau belum
 		$data['statusProduct']=$this->model_catalog_product->cekBookHasBeenEdit($product_id);
+		$data['statusSell']=$this->model_catalog_product->cekBookHasBeenSell($product_id);
+		$data['statusDesign']=$this->model_catalog_product->cekBookHasBeenDesign($product_id);
 
 		if ($product_info) {
 			$url = '';
@@ -237,6 +239,7 @@ class ControllerProductProduct extends Controller {
 
 			$data['text_download']=$this->language->get('text_download');
 			$data['text_type'] = sprintf($this->language->get('text_type'), $type_info['type']);
+			$data['total_page'] = sprintf($this->language->get('total_page'), $product_info['bw_page']+$product_info['color_page']);
 			$data['text_size'] = sprintf($this->language->get('text_size'), $size_info['size']);
 			$data['text_author'] = sprintf($this->language->get('text_author'), $product_info['author']);
 			$data['text_select'] = $this->language->get('text_select');
