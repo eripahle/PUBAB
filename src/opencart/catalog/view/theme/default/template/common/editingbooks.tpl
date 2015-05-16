@@ -148,6 +148,7 @@
                     <?php } else { ?>
                     <a href="<?php echo $sort_status_editor; ?>"><?php echo $column_status_editor; ?></a>
                     <?php } ?></td>
+                    <td class="text-left"><?php echo $column_message; ?></td>
                    <td class="text-left"><?php echo $column_total_selling; ?></td>
                    
                   <td class="text-left"><?php echo $column_action; ?></td>
@@ -169,11 +170,14 @@
                  
                   <td class="text-left"><?php echo $product['status1']; ?></td>
                   <td class="text-left"><?php echo $product['status2']; ?></td>
+                   <td class="text-left"><?php echo $product['message']; ?></td>
                   <td class="text-left"><?php echo $product['totalSelling']; ?></td>
                   
                   <td class="text-left">
-                    <a href="<?php echo $product['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                    <a href="<?php echo "book/".$product['download']; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_download; ?>" class="btn btn-primary"><i class="fa fa-download"></i></a>
+                    <?php if($product['sell']!=1){ ?>
+                        <a href="<?php echo $product['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                        <a href="<?php echo "book/".$product['download']; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_download; ?>" class="btn btn-primary"><i class="fa fa-download"></i></a>
+                    <?php } ?>
                   </td>
                 </tr>
                 <?php } ?>

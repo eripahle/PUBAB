@@ -987,11 +987,25 @@ class ModelCatalogProduct extends Model {
 		$this->event->trigger('pre.admin.product.edit', $data);
 
 		if(isset($data['status1'])){
-			$this->db->query("UPDATE " . DB_PREFIX . "product SET  status1 = '" . (float)$data['status1'] . "' WHERE product_id = '" . (int)$product_id . "'");			
+			if($data['status1']==0){
+				if(isset($data['message_author'])){
+					$message=$data['message_author'];
+				}else {
+					$message=null;
+				}
+				$this->db->query("UPDATE " . DB_PREFIX . "product SET message_author='".$message."' , status2='0', status1 = '" . (float)$data['status1'] . "' WHERE product_id = '" . (int)$product_id . "'");			
+			}else{
+				$this->db->query("UPDATE " . DB_PREFIX . "product SET  status1 = '" . (float)$data['status1'] . "' WHERE product_id = '" . (int)$product_id . "'");			
+			}
 		}
 		
 		if(isset($data['status2'])){
-			$this->db->query("UPDATE " . DB_PREFIX . "product SET  status2 = '" . (float)$data['status2'] . "' WHERE product_id = '" . (int)$product_id . "'");			
+			if(isset($data['message_editor'])){
+				$message=$data['message_editor'];
+			}else {
+				$message=null;
+			}
+			$this->db->query("UPDATE " . DB_PREFIX . "product SET  message_editor='".$message. "', status2 = '" . (float)$data['status2'] . "' WHERE product_id = '" . (int)$product_id . "'");			
 		}
 
 		if($status_editing==false){

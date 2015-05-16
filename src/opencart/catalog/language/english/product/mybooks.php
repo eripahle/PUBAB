@@ -21,6 +21,7 @@ $_['text_disagree']			 = 'Disagree';
 $_['text_no_results']		 = 'You do not have a book';
 
 // Column
+$_['column_message']            = 'Message By Author';
 $_['column_name']            = 'Title';
 $_['column_total_selling']   = 'Total Selling';
 $_['column_desc_design']     = 'Description Design';
@@ -36,8 +37,12 @@ $_['column_status_management']  = 'Approval By Management';
 $_['column_action']          = 'Action';
 $_['text_none']				 = 'None';
 $_['desc_request_design']    = 'Entry your Description Request Design if you choose yes on request design';
+$_['desc_message']    		 = '(Optional) Entry Message to Author';
+$_['desc_message_author']    = '(Optional) Enter Message to Editor';
 
 // Entry
+$_['entry_message_author']          = 'Message to Editor';
+$_['entry_message']          = 'Message to Author';
 $_['entry_request_design']   = 'Request Design';
 $_['entry_desc_request_design'] = 'Description Design';
 $_['entry_paper_size']       = 'Size';

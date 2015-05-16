@@ -36,19 +36,26 @@
                        <?php } ?>
                         </div>       
                         <div class="col-sm-7">* Silahkan Download file template naskah terlebih dahulu, hanya menerima format doc,docx saja</div>                                                                
-                   </div> 
-                  		<div class="form-group">
-		                    <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status_editor; ?></label>
+                   </div>
+                   <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status_editor; ?></label>
+                        <div class="col-sm-10">
+                          <select name="status2" id="input-status2" class="form-control">
+                            <option value="-1" selected="selected">Select</option>
+                            <?php if ($status2==1) { ?>
+                            <option value="1" selected="selected"><?php echo $text_agree; ?></option>
+                            <?php } else { ?>
+                            <option value="1"><?php echo $text_agree; ?></option>
+                            <?php } ?>
+                            <option value="0"><?php echo $text_disagree; ?></option>
+                          </select>
+                        </div>
+                    </div> 
+                  		
+		                <div class="form-group">
+		                    <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_message; ?></label>
 		                    <div class="col-sm-10">
-		                      <select name="status2" id="input-status2" class="form-control">
-		                        <?php if ($status2) { ?>
-		                        <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-		                        <option value="0"><?php echo $text_disabled; ?></option>
-		                        <?php } else { ?>
-		                        <option value="1"><?php echo $text_enabled; ?></option>
-		                        <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-		                        <?php } ?>
-		                      </select>
+		                      <textarea name="message_editor" placeholder="<?php echo $desc_message; ?>" class="form-control" rows="5"></textarea>
 		                    </div>
 		                </div>
                   <?php } ?>

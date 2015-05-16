@@ -980,7 +980,9 @@ class ControllerCommonMybooks extends Controller {
 				//'download'   => $this->url->link('catalog/product/downloadBooks', '&product_id=' . $result['product_id'] . $url, 'SSL')
 				'download'   => $download,
 				'totalSelling'=>$totalSelling,
-				'your_royalty'=>$totalSelling*$result['royalty']
+				'your_royalty'=>$totalSelling*$result['royalty'],
+				'message'	 =>$result['message_author'],
+				'sell'       =>$result['status']
 				//'href'       => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
 			);
 		}
@@ -993,6 +995,7 @@ class ControllerCommonMybooks extends Controller {
 		$data['text_confirm'] = $this->language->get('text_confirm');
 		$data['text_no_results']=$this->language->get('text_no_results');
 
+		$data['column_message'] = $this->language->get('column_message');
 		$data['column_image'] = $this->language->get('column_image');
 		$data['column_name'] = $this->language->get('column_name');
 		$data['column_model'] = $this->language->get('column_model');
@@ -1562,6 +1565,8 @@ class ControllerCommonMybooks extends Controller {
 		$data['text_percent'] = $this->language->get('text_percent');
 		$data['text_amount'] = $this->language->get('text_amount');
 
+		$data['desc_message_author']=$this->language->get('desc_message_author');
+		$data['entry_message_author']=$this->language->get('entry_message_author');
 		$data['entry_desc_request_design']=$this->language->get('entry_desc_request_design');
 		$data['desc_request_design']=$this->language->get('desc_request_design');
 		$data['entry_sample_book']=$this->language->get('entry_sample_book');
@@ -2537,7 +2542,8 @@ class ControllerCommonMybooks extends Controller {
 		$data['text_percent'] = $this->language->get('text_percent');
 		$data['text_amount'] = $this->language->get('text_amount');
 
-		
+		$data['desc_message']=$this->language->get('desc_message');
+		$data['entry_message']=$this->language->get('entry_message');
 		$data['entry_sample_book']=$this->language->get('entry_sample_book');
 		$data['entry_book'] = $this->language->get('entry_book');
 		$data['entry_author'] = $this->language->get('entry_author');

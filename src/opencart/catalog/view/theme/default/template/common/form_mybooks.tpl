@@ -72,7 +72,7 @@
                         </div>
                       </div>
                     </div>
-                  <?php if($status!=1){ ?>
+                  <?php if(!$get_product_id){ ?>
                    <div class="form-group required">
                         <label class="col-sm-2 control-label" for="input-book"><?php echo $entry_book; ?></label>             
                         <div class="col-sm-3">                                
@@ -200,24 +200,40 @@
                       </div>        
                     </div>
                    <?php }?>
-                  <?php if($get_product_id && $status_edit==1){ ?>
+                  <?php if($get_product_id && $status_edit==1 && $status!=1){ ?>
                       <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status_author; ?></label>
                         <div class="col-sm-10">
                           <select name="status1" id="input-status1" class="form-control">
+                            <option value="-1" selected="selected">Select</option>
                             <?php if ($status1==1) { ?>
                             <option value="1" selected="selected"><?php echo $text_agree; ?></option>
                             <?php } else { ?>
                             <option value="1"><?php echo $text_agree; ?></option>
                             <?php } ?>
-                            <?php if ($status1==0) { ?>
-                            <option value="0" selected="selected"><?php echo $text_disagree; ?></option>
-                            <?php } else { ?>
                             <option value="0"><?php echo $text_disagree; ?></option>
-                            <?php } ?>
                           </select>
                         </div>
                     </div>
+                    <div class="form-group required" id="revisi-buku">
+                        <label class="col-sm-2 control-label" for="input-book"><?php echo $entry_book; ?></label>             
+                        <div class="col-sm-3">                                
+                            <input  type="file" name="book"  class="btn btn-primary" >
+                       <?php if ($error_extension_book) { ?>
+                          <div class="text-danger"><?php echo $error_extension_book; ?></div>
+                          
+                       <?php } ?>
+                       <div class="text">Ukuran file harus kurang dari 20 Mb</div>
+                        </div>       
+                        <div class="col-sm-7">* Silahkan Download file template naskah terlebih dahulu, hanya menerima format doc,docx saja</div>                                                                
+                   </div>
+
+                   <div class="form-group" id="message">
+                        <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_message_author; ?></label>
+                        <div class="col-sm-10">
+                          <textarea name="message_author" placeholder="<?php echo $desc_message_author; ?>" class="form-control" rows="5" ></textarea>
+                        </div>
+                    </div> 
                   <?php } ?>
               </div> 
               <div class="tab-pane" id="tab-design">
@@ -292,8 +308,21 @@ $(document).ready(function(){
       $("#input-desc-design").hide();
       $("#input-cover").hide();
       $("#input-cover2").hide();
-  
+      $("#revisi-buku").hide();
+      $("#message").hide();
 });
+$("#input-status1").on("change",function(){
+    
+    if($("#input-status1").val()==1 || $("#input-status1").val()==-1){
+      $("#revisi-buku").hide();
+       $("#message").hide();
+    }else{
+      $("#revisi-buku").show();
+       $("#message").show();
+    }
+    
+});
+
 $("#input-request-design").on("change",function(){
     
     if($("#input-request-design").val()==1){
